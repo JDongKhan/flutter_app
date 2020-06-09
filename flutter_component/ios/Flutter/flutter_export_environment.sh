@@ -1,8 +1,8 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
 export "FLUTTER_ROOT=/Users/jd/Documents/sdk/flutter/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/jd/Documents/Project/flutter/flutter_component"
-export "FLUTTER_TARGET=/Users/jd/Documents/Project/flutter/flutter_component/lib/main.dart"
+export "FLUTTER_APPLICATION_PATH=/Users/jd/Documents/GitHub/flutter_app/flutter_component"
+export "FLUTTER_TARGET=/Users/jd/Documents/GitHub/flutter_app/flutter_component/lib/main.dart"
 export "FLUTTER_BUILD_DIR=build"
 export "SYMROOT=${SOURCE_ROOT}/../build/ios"
 export "OTHER_LDFLAGS=$(inherited) -framework Flutter"
