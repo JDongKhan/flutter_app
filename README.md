@@ -109,3 +109,102 @@
   flutter_staggered_grid_view: ^0.3.0
 
 ```
+
+
+### 过程问题：
+
+1、BottomNavigationBar 超过4个底部控制颜色变白：https://www.jianshu.com/p/946f1e476ca5
+
+2、BottomNavigationBar不能保存状态的问题：https://www.cnblogs.com/hupo376787/p/10624636.html
+
+3、shrinkWrap 解决gridview不能在customScrollView显示的问题
+
+4、
+
+因误操作user方法又返回了user对象导致报了下面的错误，定位了好久
+
+```
+User get user {
+    if (_user != null) {
+      return user;
+    }
+    _user =  User.fromJson(SpUtil.getObject("pp_user"));
+    return _user;
+  }
+```
+
+
+
+```
+════════ Exception caught by widgets library ═══════════════════════════════════════════════════════
+The following StackOverflowError was thrown building JDDrawer(dirty, dependencies: [MediaQuery, _InheritedProviderScope<JDGlobal>], state: _JDDrawerState#1f0fd):
+Stack Overflow
+
+The relevant error-causing widget was: 
+  JDDrawer file:///Users/jd/Documents/Project/flutter/flutter_component/lib/page/scaffold/jd_scaffold_page.dart:36:29
+When the exception was thrown, this was the stack: 
+#0      JDGlobal.user (package:flutter_component/init/jd_global.dart:23:3)
+#1      JDGlobal.user (package:flutter_component/init/jd_global.dart:25:14)
+#2      JDGlobal.user (package:flutter_component/init/jd_global.dart:25:14)
+#3      JDGlobal.user (package:flutter_component/init/jd_global.dart:25:14)
+#4      JDGlobal.user (package:flutter_component/init/jd_global.dart:25:14)
+...
+════════════════════════════════════════════════════════════════════════════════════════════════════
+Reloaded 17 of 1161 libraries in 1,473ms.
+
+```
+
+
+5、网络请求增加mock功能
+
+6、保存相册 报Swift问题 ，增加use_frameworks!即可
+
+7、InkWell 下面的Container设置color会导致水波纹无效
+
+8、android studio  GradleException报错    死命的更新就行了
+
+9、NestedScrollView导致其body的tabbarview的多个list同步滚动的解决方案  https://www.jianshu.com/p/ab473fb8ceb0
+
+10、Listview addRepaintBoundaryies  RepaintBoundary
+
+11、context.dependOnInheritedWidgetOfExactType :InnerWidget数据变化会导致使用者也跟着变 和  context.getElementForInheritedWidgetOfExactType<ShareDataWidget>().widget则不会
+
+12、package版本冲突使用
+
+```yaml
+dependencies:
+  some_package:
+  other_package:
+dependency_overrides:
+  url_launcher: '0.4.3'
+```
+
+android
+
+```groovy
+configurations.all {
+    resolutionStrategy {
+        force 'com.google.guava:guava:23.0-android'
+    }
+}
+```
+
+13、别忘了修改packages/flutter_tools_gradle/flutter.gradle里面的配置
+
+14、打包Android时，设置多个ndk后会包下面的错误
+
+```
+                                                                       
+* What went wrong:                                                      
+Execution failed for task ':app:packageXiaomiRelease'.                  
+> Several variant outputs are configured to use the same file name "jd_1.0.0_xiaomi.apk", filters : FilterData{type=ABI, value=x86_64}:FilterData{type=ABI, value=armeabi-v7a}:FilterData{type=ABI, value=arm64-v8a}
+                    
+```
+
+15、
+
+```
+做双击退出的时候调用Navigator.pop(context)会出现黑屏，需要调用SystemNavigator.pop()才能完全退出。
+```
+
+16、hero组件在tab下多次使用造成重复，建议少用
