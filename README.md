@@ -6,6 +6,21 @@
 ![demo png](https://github.com/JDongKhan/flutter_app/blob/master/4.gif "demo")
 
 
+### 现有功能
+
+1、登录
+2、注册
+3、欢迎页
+4、启动广告页
+5、首页
+6、抽屉页
+7、二维码
+8、瀑布流
+9、基本组件demo模块
+10、会员首页
+11、设置页面
+
+
 
 ### 使用的第三方库
 

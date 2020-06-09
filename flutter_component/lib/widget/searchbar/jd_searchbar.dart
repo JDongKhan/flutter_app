@@ -42,7 +42,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        SizedBox(width: 10.0,),
+        const SizedBox(width: 10.0,),
         Icon(Icons.search,color: Colors.grey,),
         Expanded(
           child: Container(
@@ -68,7 +68,9 @@ class _JDSearchBarState extends State<JDSearchBar> {
           color: Colors.grey,
           iconSize: 18.0,
           onPressed: () {
+            widget.text = '';
             _controller.clear();
+            setState(() {});
           },
         ),
 
