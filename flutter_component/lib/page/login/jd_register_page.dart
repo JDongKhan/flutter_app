@@ -35,7 +35,14 @@ class _JDRegisterPageState extends State<JDRegisterPage> {
           ),
           SafeArea(//安全区，主要兼容屏幕
             child: _buildRegester(),
-          )
+          ),
+          SafeArea(
+            child: Container(
+              child: IconButton(onPressed: () {
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            ),
+          ),
         ]
       ),
     );

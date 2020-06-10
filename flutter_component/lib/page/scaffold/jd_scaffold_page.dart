@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
 import 'package:flutter_component/models/models.dart';
 import 'package:flutter_component/network/jd_request.dart';
@@ -106,7 +107,25 @@ class JDScaffoldPageState extends State<JDScaffoldPage> with SingleTickerProvide
   @override
   Widget build(BuildContext context) {
     initScreenUtil(context);
-    return Scaffold(
+    return WillPopScope(
+      onWillPop: () async => showDialog(context: context,
+          builder: (c) => AlertDialog(
+            title: const Text('你确定退出吗？'),
+            actions: <Widget>[
+              RaisedButton(
+                child: const Text('退出'),
+                onPressed: () {
+                    SystemNavigator.pop();
+                },
+              ),
+              RaisedButton(
+                child: const Text('取消'),
+                onPressed: () => Navigator.of(context).pop(false),
+              )
+            ],
+          ),
+      ),
+      child: Scaffold(
         key: _scaffoldKey,
         drawer: _drawer, //抽屉
         body: TabBarView(
@@ -124,6 +143,7 @@ class JDScaffoldPageState extends State<JDScaffoldPage> with SingleTickerProvide
           unselectedItemColor:Colors.red,
           onTap: _onItemTapped,
         ),
+      ),
     );
   }
 

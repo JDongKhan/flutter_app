@@ -40,6 +40,14 @@ class _JDLoginPageState extends State<JDLoginPage> {
           SafeArea(//安全区，主要兼容屏幕
             child: _buildLogin(),
           ),
+          SafeArea(
+            child: Container(
+              child: IconButton(onPressed: () {
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,)),
+            ),
+          ),
+
         ],
       ),
     );
