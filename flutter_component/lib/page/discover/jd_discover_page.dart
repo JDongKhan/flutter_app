@@ -11,6 +11,23 @@ class JDDiscoverPage  extends StatefulWidget {
 
 class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStateMixin,AutomaticKeepAliveClientMixin {
 
+  /*************************** module *************************/
+
+  final module_list = <Map<String,String>>[{
+    "title" : "Component List",
+    "router" : "/component_list",
+  }, {
+    "title" : "State",
+    "router" : "/demo.funcation.state",
+  }, {
+    "title" : "Data Transfer",
+    "router" : "/data",
+  },{
+    "title" : "Demo",
+    "router" : "/demo_list",
+  }
+  ];
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   var _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -65,7 +82,7 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
 //
 //  //此种方法可传参
 //    Navigator.of(context).push(
-//      new MaterialPageRoute(
+//      new CupertinoPageRoute(
 //        builder: (context) {
 //          return new NetworkPage();
 //        },

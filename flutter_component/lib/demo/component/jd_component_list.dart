@@ -12,6 +12,90 @@ class _JDComponentListPageState extends State<JDComponentListPage>  {
 
 
 
+
+  /*************************** demo.component *************************/
+
+  final component_list = <Map<String,String>>[
+    //基础组件
+    {
+      "title" : "Text",
+      "router" : "/text",
+    },  {
+      "title" : "Button",
+      "router" : "/button",
+    }, {
+      "title" : "Image",
+      "router" : "/image",
+    }, {
+      "title" : "CheckBox",
+      "router" : "/checkbox",
+    }, {
+      "title" : "TextField",
+      "router" : "/textfield",
+    }, {
+      "title" : "LinearProgressIndicator",
+      "router" : "/linearprogressindicator",
+    },
+
+//布局组件
+    {
+      "title" : "RowColumn",
+      "router" : "/rowcolumn",
+    }, {
+      "title" : "Flex",
+      "router" : "/flex",
+    }, {
+      "title" : "WrapFlow",
+      "router" : "/wrapflow",
+    },{
+      "title" : "StackPositioned",
+      "router" : "/stackpositioned",
+    }, {
+      "title" : "Align",
+      "router" : "/align",
+    }, {
+      "title" : "Expanded",
+      "router" : "/expanded",
+    },
+
+//容器组件
+    {
+      "title" : "Padding",
+      "router" : "/padding",
+    },{
+      "title" : "ConstrainedBox",
+      "router" : "/constrainedbox",
+    },{
+      "title" : "DecoratedBox",
+      "router" : "/decoratedbox",
+    },{
+      "title" : "TransformPage",
+      "router" : "/transform",
+    },{
+      "title" : "Container",
+      "router" : "/container",
+    },
+
+//滚动组件
+    {
+      "title" : "SingleChildScrollView",
+      "router" : "/singlechildscrollview",
+    },{
+      "title" : "ListView",
+      "router" : "/listview",
+    },{
+      "title" : "GridView",
+      "router" : "/gridview",
+    }, {
+      "title" : "CustomScrollView",
+      "router" : "/customscrollview",
+    },{
+      "title" : "NestedScrollView",
+      "router" : "/nestedscrollview_list"
+    }
+
+  ];
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override

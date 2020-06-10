@@ -114,8 +114,9 @@ class MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: JDSplashPage(),
-      routes: routes,
-      onUnknownRoute: (settings) => MaterialPageRoute<dynamic>(builder: (context) => JDNotFindPage()),
+//      routes: routes,
+      onGenerateRoute: Router.generateRoute,
+//      onUnknownRoute: (settings) => MaterialPageRoute<dynamic>(builder: (context) => JDNotFindPage()),
 //      onGenerateRoute: (RouteSettings settings){
 //        return MaterialPageRoute(builder: (context){
 //          String routeName = settings.name;

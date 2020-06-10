@@ -22,7 +22,7 @@ class JDRoutePage extends StatelessWidget {
 
 //            var result = await Navigator.push(
 //              context,
-//              MaterialPageRoute(
+//              CupertinoPageRoute(
 //                builder: (context) {
 //                  return JDNextRoute(
 //                    // 路由参数

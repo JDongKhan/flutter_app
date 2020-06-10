@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_component/default/jd_notfind.dart';
 import 'package:flutter_component/demo/component/jd_component_list.dart';
 import 'package:flutter_component/demo/component/expanded/jd_expanded.dart';
 import 'package:flutter_component/demo/component/nestedscrollview/jd_nestedscrollview.dart';
@@ -44,11 +46,7 @@ import 'package:flutter_component/demo/thirdpary/image/jd_imageview.dart';
 import 'package:flutter_component/demo/thirdpary/jd_thirdparty_list.dart';
 import 'package:flutter_component/demo/thirdpary/webview/jd_webview.dart';
 
-//final Map<String, Widget> routes = <String, Widget> {
-//  '/text': TextPage(),
-//};
-
-final routes = <String, WidgetBuilder> {
+final Map<String, WidgetBuilder> routes = <String, WidgetBuilder> {
   //基础类
   '/component_list': (BuildContext context) => JDComponentListPage(),
   '/text': (BuildContext context) => JDTextPage(),
@@ -80,21 +78,21 @@ final routes = <String, WidgetBuilder> {
   '/listview': (BuildContext context) => JDListViewPage(),
   '/gridview': (BuildContext context) => JDGridViewPage(),
   '/customscrollview': (BuildContext context) => JDCustomScrollViewPage(),
-  '/nestedscrollview':(context) => JDNestedScrollViewPage(),
-  '/nestedscrollview_list':(context) => JDNestedScrollViewListPage(),
+  '/nestedscrollview':(BuildContext context) => JDNestedScrollViewPage(),
+  '/nestedscrollview_list':(BuildContext context) => JDNestedScrollViewListPage(),
 
   //其他
   '/demo.funcation.state': (BuildContext context) => JDStateListPage(),
   //数据传递
-  '/data': (context) => JDDataTransferIndexPage(),
-  '/inheritedwidget':(context) => JDInheritedWdgetPage(),
-  '/notification':(context) => JDNotificationPage(),
-  '/eventbus':(context) => JDEventBusPage(),
-  '/stream':(context) => JDStreamPage(),
+  '/data': (BuildContext context) => JDDataTransferIndexPage(),
+  '/inheritedwidget':(BuildContext context) => JDInheritedWdgetPage(),
+  '/notification':(BuildContext context) => JDNotificationPage(),
+  '/eventbus':(BuildContext context) => JDEventBusPage(),
+  '/stream':(BuildContext context) => JDStreamPage(),
 
-  //thirdpary
-  '/webview': (context) => JDWebViewPage(),
-  '/image': (context) => JDImageViewPage(),
+  //三方
+  '/webview': (BuildContext context) => JDWebViewPage(),
+  '/image': (BuildContext context) => JDImageViewPage(),
 
   '/demo_list': (BuildContext context) => JDDemoListPage(),
   '/login': (BuildContext context) => JDLoginPage(),
@@ -102,168 +100,17 @@ final routes = <String, WidgetBuilder> {
   '/home': (BuildContext context) => JDHomePage(),
   '/tabbar': (BuildContext context) => JDTabbarPage(),
   '/buy_car': (BuildContext context) => JDBuyCarPage(),
-  '/pickImage':(context) => JDPickImagePage(),
-  '/camera':(context) => CameraExampleHome(),
-  '/thirdparty_list':(context) => JDThirdpartyListPage(),
+  '/pickImage':(BuildContext context) => JDPickImagePage(),
+  '/camera':(BuildContext context) => CameraExampleHome(),
+  '/thirdparty_list':(BuildContext context) => JDThirdpartyListPage(),
 
 };
 
-
-
-/*************************** module *************************/
-
-final module_list = <Map<String,String>>[{
-  "title" : "Component List",
-  "router" : "/component_list",
-}, {
-  "title" : "State",
-  "router" : "/demo.funcation.state",
-}, {
-  "title" : "Data Transfer",
-  "router" : "/data",
-},{
-  "title" : "Demo",
-  "router" : "/demo_list",
+class Router {
+  static Route<dynamic> generateRoute(RouteSettings settings) {
+    final WidgetBuilder builder = routes[settings.name];
+    return CupertinoPageRoute<dynamic>(
+      builder: builder ?? (BuildContext context) => JDNotFindPage(),
+    );
+  }
 }
-];
-
-/*************************** datalist *************************/
-final data_list = <Map<String,String>>[{
-  "title" : "InheritedWidget",
-  "router" : "/inheritedwidget",
-}, {
-  "title" : "Notification",
-  "router" : "/notification",
-}, {
-  "title" : "EventBus",
-  "router" : "/eventbus",
-},{
-  "title" : "Stream",
-  "router" : "/stream",
-}
-];
-
-/*************************** demo.thirdpary *************************/
-final thirdpary_list = <Map<String,String>>[{
-  "title" : "WebView",
-  "router" : "/webview",
-}, {
-  "title" : "Image",
-  "router" : "/image",
-}, {
-  "title" : "Camera",
-  "router" : "/camera",
-}, {
-  "title" : "EventBus",
-  "router" : "/eventbus",
-},{
-  "title" : "Stream",
-  "router" : "/stream",
-}
-];
-
-/*************************** demo *************************/
-
-final demo_list = <Map<String,String>>[{
-  "title" : "Login",
-  "router" : "/login",
-},{
-  "title" : "Scaffold",
-  "router" : "/scaffold",
-},{
-"title" : "Tabbar",
-"router" : "/tabbar",
-}, {
-  "title" : "购物车",
-  "router" : "/buy_car",
-}, {
-  "title" : "拍照",
-  "router" : "/pickImage",
-}, {
-  "title" : "第三方组件",
-  "router" : "/thirdparty_list",
-}
-];
-
-/*************************** demo.component *************************/
-
-final component_list = <Map<String,String>>[
-  //基础组件
-{
-  "title" : "Text",
-  "router" : "/text",
-},  {
-  "title" : "Button",
-  "router" : "/button",
-}, {
-  "title" : "Image",
-  "router" : "/image",
-}, {
-  "title" : "CheckBox",
-  "router" : "/checkbox",
-}, {
-  "title" : "TextField",
-  "router" : "/textfield",
-}, {
-  "title" : "LinearProgressIndicator",
-  "router" : "/linearprogressindicator",
-},
-
-//布局组件
-{
-  "title" : "RowColumn",
-  "router" : "/rowcolumn",
-}, {
-  "title" : "Flex",
-  "router" : "/flex",
-}, {
-  "title" : "WrapFlow",
-  "router" : "/wrapflow",
-},{
-  "title" : "StackPositioned",
-  "router" : "/stackpositioned",
-}, {
-  "title" : "Align",
-  "router" : "/align",
-}, {
-"title" : "Expanded",
-"router" : "/expanded",
-},
-
-//容器组件
-{
-  "title" : "Padding",
-  "router" : "/padding",
-},{
-    "title" : "ConstrainedBox",
-    "router" : "/constrainedbox",
-},{
-    "title" : "DecoratedBox",
-    "router" : "/decoratedbox",
-},{
-    "title" : "TransformPage",
-    "router" : "/transform",
-},{
-    "title" : "Container",
-    "router" : "/container",
-},
-
-//滚动组件
-{
-    "title" : "SingleChildScrollView",
-    "router" : "/singlechildscrollview",
-},{
-    "title" : "ListView",
-    "router" : "/listview",
-},{
-  "title" : "GridView",
-  "router" : "/gridview",
-}, {
-  "title" : "CustomScrollView",
-  "router" : "/customscrollview",
-},{
-  "title" : "NestedScrollView",
-  "router" : "/nestedscrollview_list"
-}
-
-];

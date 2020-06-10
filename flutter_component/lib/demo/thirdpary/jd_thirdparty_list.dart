@@ -16,6 +16,26 @@ class JDThirdpartyListPage extends StatefulWidget {
 }
 
 class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
+
+  /*************************** demo.thirdpary *************************/
+  final thirdpary_list = <Map<String,String>>[{
+    "title" : "WebView",
+    "router" : "/webview",
+  }, {
+    "title" : "Image",
+    "router" : "/image",
+  }, {
+    "title" : "Camera",
+    "router" : "/camera",
+  }, {
+    "title" : "EventBus",
+    "router" : "/eventbus",
+  },{
+    "title" : "Stream",
+    "router" : "/stream",
+  }
+  ];
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {

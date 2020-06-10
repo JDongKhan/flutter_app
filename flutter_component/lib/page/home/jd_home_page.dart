@@ -31,7 +31,7 @@ class _JDHomePageState extends State<JDHomePage> with SingleTickerProviderStateM
       ),
     }, {
       'title' : '案例',
-      'page' : JDBusinessPage()
+      'page' :  JDBusinessPage('home')
     },{
       'title' : '严选',
       'page' : JDDiscoverPage()

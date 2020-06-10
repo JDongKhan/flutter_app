@@ -1,14 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/widget/webview/web_scaffold.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'jd_object_utils.dart';
 
-/**
- *
- * @author jd
- *
- */
+/// @author jd
 
 class JDNavigationUtil  {
 
@@ -19,10 +16,7 @@ class JDNavigationUtil  {
   static JDNavigationUtil _instance;
 
   static JDNavigationUtil _getInstance() {
-    if (_instance == null) {
-      _instance = new JDNavigationUtil._internal();
-    }
-    return _instance;
+      return _instance = _instance ??  JDNavigationUtil._internal();
   }
 
   final GlobalKey<NavigatorState> navigatorKey = new GlobalKey<NavigatorState>();
@@ -35,8 +29,8 @@ class JDNavigationUtil  {
   }
 
   Future<dynamic> _push(Widget page){
-    return navigatorKey.currentState.push(MaterialPageRoute(
-        builder: (context) {
+    return navigatorKey.currentState.push(CupertinoPageRoute<dynamic>(
+        builder: (BuildContext context) {
           return page;
         }
     ));
@@ -49,8 +43,8 @@ class JDNavigationUtil  {
   }
 
   Future<dynamic> _pushReplacement(Widget page){
-    return navigatorKey.currentState.pushReplacement(MaterialPageRoute(
-        builder: (context) {
+    return navigatorKey.currentState.pushReplacement(CupertinoPageRoute<dynamic>(
+        builder: (BuildContext context) {
           return page;
         }
     ));
@@ -67,8 +61,8 @@ class JDNavigationUtil  {
        launchInBrowser(url, title: title ?? titleId);
     } else {
       navigatorKey.currentState.push(
-           MaterialPageRoute<void>(
-              builder: (ctx) => new WebScaffold(
+          CupertinoPageRoute<void>(
+              builder: (BuildContext ctx) => WebScaffold(
                 title: title,
                 titleId: titleId,
                 url: url,

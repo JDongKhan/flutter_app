@@ -17,6 +17,22 @@ class JDDataTransferIndexPage extends StatefulWidget {
 
 class _JDDataTransferIndexPageState extends State<JDDataTransferIndexPage> {
 
+  /*************************** datalist *************************/
+  final data_list = <Map<String,String>>[{
+    "title" : "InheritedWidget",
+    "router" : "/inheritedwidget",
+  }, {
+    "title" : "Notification",
+    "router" : "/notification",
+  }, {
+    "title" : "EventBus",
+    "router" : "/eventbus",
+  },{
+    "title" : "Stream",
+    "router" : "/stream",
+  }
+  ];
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   Widget _buildSuggestions() {

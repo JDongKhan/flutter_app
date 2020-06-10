@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/demo/funcation//state/jd_tapbox_a.dart';
 import 'package:flutter_component/demo/funcation//state/jd_tapbox_b.dart';
@@ -70,7 +71,7 @@ class _JDStateListPageState extends State<JDStateListPage> {
   void _pushSaved(String title, Widget widget) async {
   //此种方法可传参
     Future map =  Navigator.of(context).push(
-      new MaterialPageRoute<dynamic>(
+      CupertinoPageRoute<dynamic>(
         builder: (context) {
           return widget;
         },

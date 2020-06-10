@@ -50,7 +50,7 @@ class JDScaffoldPageState extends State<JDScaffoldPage> with SingleTickerProvide
     _tabs.add({
       'title' : '业务',
       'icon' : Icons.business,
-      'page' : JDBusinessPage()
+      'page' : JDBusinessPage('subhome')
     });
 
     _tabs.add({

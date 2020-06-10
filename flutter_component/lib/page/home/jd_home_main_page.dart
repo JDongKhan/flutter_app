@@ -16,11 +16,7 @@ import 'package:flutter_component/widget/searchbar/jd_searchbar.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:provider/provider.dart';
 
-/**
- *
- * @author jd
- *
- */
+/// jd
 
 class JDHomeMainPage extends StatefulWidget {
   @override
@@ -43,11 +39,11 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
 
   void _loadData() {
     //请求banner
-    JDRequest.home().then((value) => {
+    JDRequest.home().then((dynamic value) => {
       context.read<HomeViewModel>().saveBanner(value)
     });
     //请求列表
-    JDRequest.homeList().then((value) => {
+    JDRequest.homeList().then((dynamic value) => {
       context.read<HomeViewModel>().saveList(value)
     });
   }
@@ -57,9 +53,9 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
     _refreshController.refreshCompleted();
   }
 
-  void _onLoading() async {
+  void _onLoading() {
     //请求列表
-    JDRequest.homeList().then((value) {
+    JDRequest.homeList().then((dynamic value) {
       if (value == null) {
         _refreshController.loadNoData();
       } else {
@@ -69,10 +65,10 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
     });
   }
 
-  void _click() async {
-    var result = await showSearch(context: context, delegate: JDHomeSearchBarDelegate());
+   Future<dynamic> _click() async {
+    final String result = await showSearch(context: context, delegate: JDHomeSearchBarDelegate());
     setState(() {
-      _searchText = result as String;
+      _searchText = result;
     });
   }
 
@@ -91,6 +87,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: Stack(
           children: <Widget>[
@@ -124,7 +121,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
           : FloatingActionButton(
         child: Icon(Icons.keyboard_arrow_up),
         onPressed: () {
-          _scrollController.animateTo(0.0, duration: Duration(milliseconds: 500), curve: Curves.ease);
+          _scrollController.animateTo(0.0, duration: const Duration(milliseconds: 500), curve: Curves.ease);
         },
       ),// This trailing comma makes auto-formatting nicer for build methods.
     );
@@ -145,11 +142,11 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
   }
 
   Widget _buildSwiper() {
-    HomeModel homeModel = context.watch<HomeViewModel>().homeModel;
-    if (homeModel?.banner == null || homeModel.banner.length == 0) {
+    final HomeModel homeModel = context.watch<HomeViewModel>().homeModel;
+    if (homeModel?.banner == null || homeModel.banner.isEmpty) {
       return Container();
     }
-    var banner = homeModel?.banner;
+    final List banner = homeModel?.banner;
 
     return Container(
       width: MediaQuery.of(context).size.width,
@@ -160,7 +157,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
           itemColor: Colors.red,
           itemActiveColor: Colors.blue
         ),
-        itemBuilder: (context,index) {
+        itemBuilder: (BuildContext context,int index) {
             return Image.asset(
                 JDAssetBundle.getImgPath(banner[index]['image'].toString()));
         },
@@ -196,7 +193,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
         return Container(
           alignment: Alignment.center,
           child: Tab(
-            icon: Icon(JDIcons.mappingForKey(menuGrid[index]['icon'].toString())),
+            icon: Icon(mappingForKey(menuGrid[index]['icon'].toString())),
             text: '${menuGrid[index]['title']}',
           ),
         );
@@ -224,11 +221,11 @@ class _JDHomeMainPageState extends State<JDHomeMainPage> with AutomaticKeepAlive
 
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-          (context,index) {
+          (BuildContext context,int index) {
             Map itm =  homeModelList.list[index];
             return Container(
-              color: Color(0xEEEEEEEE),
-              padding: EdgeInsets.all(10),
+              color: const Color(0xEEEEEEEE),
+              padding: const EdgeInsets.all(10),
               child: Container(
                 color: Colors.white,
                 child: ListTile(

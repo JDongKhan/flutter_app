@@ -10,6 +10,30 @@ class JDDemoListPage extends StatefulWidget {
 
 class _JDDemoListPageState extends State<JDDemoListPage>  {
 
+
+  /*************************** demo *************************/
+
+  final demo_list = <Map<String,String>>[{
+    "title" : "Login",
+    "router" : "/login",
+  },{
+    "title" : "Scaffold",
+    "router" : "/scaffold",
+  },{
+    "title" : "Tabbar",
+    "router" : "/tabbar",
+  }, {
+    "title" : "购物车",
+    "router" : "/buy_car",
+  }, {
+    "title" : "拍照",
+    "router" : "/pickImage",
+  }, {
+    "title" : "第三方组件",
+    "router" : "/thirdparty_list",
+  }
+  ];
+
   final _biggerFont = const TextStyle(fontSize: 18.0);
 
   @override
