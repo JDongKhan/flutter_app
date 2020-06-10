@@ -29,16 +29,14 @@ class JDFutureBuilder<T> extends FutureBuilder<T> {
             if (error != null) {
               return error(context, snapshot.error);
             } else {
-              return  Center(
-                child: InkWell(
-                  onTap: (){
-                    if(onError != null) {
-                      onError();
-                    }
-                  },
-                  child: const Text('网络请求失败，点击刷新'),
-                ),
-              );
+              return InkWell(
+                    onTap: (){
+                      if(onError != null) {
+                        onError();
+                      }
+                    },
+                    child: Container(alignment: Alignment.center, child: const Text('网络请求失败，点击刷新')),
+                  );
             }
           } else if (complete != null) {
             return complete(context, snapshot.data);

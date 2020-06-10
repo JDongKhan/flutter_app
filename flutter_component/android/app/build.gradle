@@ -44,18 +44,18 @@ android {
 
     defaultConfig {
         ndk {
-            abiFilters "armeabi-v7a"
+            abiFilters "x86", "armeabi-v7a"
         }
     }
 
-    productFlavors {
-        yingyongbao {}
-        xiaomi {}
-    }
-
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-    }
+//    productFlavors {
+//        yingyongbao {}
+//        xiaomi {}
+//    }
+//
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
+//    }
 
     //签名
     signingConfigs {
@@ -84,11 +84,11 @@ android {
             signingConfig signingConfigs.release
 
             // 自定义打包输出配置
-            applicationVariants.all { variant ->
-                variant.outputs.all { output ->
-                    outputFileName = "jd_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
-                }
-            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    outputFileName = "jd_${defaultConfig.versionName}_${variant.productFlavors[0].name}.apk"
+//                }
+//            }
 
         }
     }

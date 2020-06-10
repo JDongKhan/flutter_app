@@ -24,8 +24,9 @@ public class MainActivity extends FlutterActivity {
       PackageManager pm = context.getPackageManager();
 
       ApplicationInfo appInfo = pm.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
-      return appInfo.metaData.getString("UMENG_CHANNEL");
-
+      if (appInfo.metaData != null) {
+        return appInfo.metaData.getString("UMENG_CHANNEL");
+      }
     } catch (PackageManager.NameNotFoundException e) {
       e.printStackTrace();
     }
