@@ -7,18 +7,20 @@ import 'package:flutter/material.dart';
  */
 
 class JDSearchBar extends StatefulWidget {
+
+  JDSearchBar({this.onTap,this.text});
+
   GestureTapCallback onTap;
   String text;
-  JDSearchBar({this.onTap,this.text});
 
   @override
   State createState() => _JDSearchBarState();
 }
 
 class _JDSearchBarState extends State<JDSearchBar> {
-  final _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
 
-  FocusNode _focusNode = FocusNode(canRequestFocus: false);
+  final FocusNode _focusNode = FocusNode(canRequestFocus: false);
 
   @override
   void initState() {
@@ -30,7 +32,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
           height: 60.0,
           color: Theme.of(context).primaryColor,
           child: Padding(
-            padding: EdgeInsets.all(6),
+            padding: const EdgeInsets.all(6),
             child: Card(
               child: _buildSearchWidget(),
             ),
@@ -53,7 +55,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
               focusNode: _focusNode,
               decoration: InputDecoration(
   //                            contentPadding: EdgeInsets.all(0),
-                hintText: widget.text == null ? '查找' : widget.text ,
+                hintText: widget.text ?? '查找' ,
                 border: InputBorder.none,
               ),
               onTap: () {

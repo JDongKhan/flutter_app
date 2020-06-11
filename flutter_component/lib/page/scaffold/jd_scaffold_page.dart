@@ -131,6 +131,7 @@ class JDScaffoldPageState extends State<JDScaffoldPage> with SingleTickerProvide
         body: TabBarView(
 //          index: _selectedIndex,
           controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
           children: _tabs.map((e) {
             return e['page'] as Widget;
           }).toList(),

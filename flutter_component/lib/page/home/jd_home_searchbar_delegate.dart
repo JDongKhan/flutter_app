@@ -54,7 +54,7 @@ class JDHomeSearchBarDelegate extends SearchDelegate<String> {
   Widget buildSuggestions(BuildContext context) {
    return ListView.builder(
        itemCount: 3,
-       itemBuilder: (context,index) => ListTile(
+       itemBuilder: (BuildContext context,int index) => ListTile(
          title: InkWell(
            onTap: () {
              close(context, dataSource[index]);
