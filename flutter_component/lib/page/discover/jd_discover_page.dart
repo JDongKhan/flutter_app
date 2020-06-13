@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/demo/router/jd_route.dart';
 import 'package:flutter_component/page/scaffold/jd_scaffold_page.dart';
@@ -144,16 +145,20 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
           PopupMenuButton<String>(
             color: Colors.white,
             icon: Icon(Icons.more_horiz,color: Colors.white,),
-            onSelected:(item) {
-              print(item);
+            onSelected:(String item) {
+              if (item == 'download') {
+                _download();
+              } else {
+                _share();
+              }
             },
-            itemBuilder: (context) => <PopupMenuItem<String>> [
+            itemBuilder: (BuildContext context) => <PopupMenuItem<String>> [
               //菜单项
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'friend',
                 child: Text('分享到朋友圈'),
               ),
-              PopupMenuItem<String>(
+              const PopupMenuItem<String>(
                 value: 'download',
                 child: Text('下载到本地'),
               ),
@@ -163,6 +168,58 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
       ),
       body: _buildSuggestions(), // This trailing comma makes auto-formatting nicer for build methods.
     );
+  }
+
+  void _share(){
+    showCupertinoModalPopup(
+        context: context,
+        builder: (BuildContext context) {
+          return CupertinoActionSheet(
+            title: const Text('提示'),
+            message: const Text('是否继续分享？'),
+            actions: <Widget>[
+              CupertinoActionSheetAction(
+                child: const Text('确定'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                isDefaultAction: true,
+              ),
+              CupertinoActionSheetAction(
+                child: const Text('取消'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                isDestructiveAction: true,
+              ),
+            ],
+          );
+        }
+    );
+  }
+
+  void _download() {
+    showModalBottomSheet(context: context, builder: (BuildContext context){
+      return Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.photo_camera),
+            title: const Text('Camera'),
+            onTap: () {
+                  Navigator.of(context).pop();
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.photo_library),
+            title: const Text('Gallery'),
+            onTap: () {
+
+            },
+          ),
+        ],
+      );
+    });
   }
 
   @override

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 /**
  *
@@ -48,8 +49,12 @@ class JDFutureBuilder<T> extends FutureBuilder<T> {
             child: loading,
           );
         }
-        return const Center(
-          child:  CupertinoActivityIndicator(),
+        return Center(
+          child:  SpinKitWave(
+            color: Colors.red[100],
+            size: 50.0,
+//            controller: AnimationController(vsync: this, duration: const Duration(milliseconds: 1200)),
+          ),
         );
       });
 

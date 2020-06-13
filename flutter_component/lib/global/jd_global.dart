@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:flutter_component/models/user.dart';
 import 'package:flutter_component/utils/jd_screen_utils.dart';
 import 'package:flutter_component/utils/jd_storage_utils.dart';
@@ -8,6 +9,10 @@ import 'package:flutter/widgets.dart';
 import 'package:path_provider/path_provider.dart';
 
 class JDGlobal extends ChangeNotifier {
+
+  JDGlobal() {
+    _loadUser();
+  }
 
   /// 临时目录 eg: cookie
   static Directory temporaryDirectory;
@@ -31,10 +36,14 @@ class JDGlobal extends ChangeNotifier {
     //初始化
     StorageUtil.getInstance();
     temporaryDirectory = await getTemporaryDirectory();
-  }
+    //初始化bugly
+//    FlutterBugly.init(androidAppId: "your android app id",iOSAppId: "your iOS app id");
 
-  JDGlobal() {
-    _loadUser();
+//    FlutterBugly.setUserId("user id");
+//    FlutterBugly.putUserData(key: "key", value: "value");
+//    int tag = 9527;
+//    FlutterBugly.setUserTag(tag);
+//
   }
 
   User _user;
