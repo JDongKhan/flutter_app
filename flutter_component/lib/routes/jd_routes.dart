@@ -37,6 +37,7 @@ import 'package:flutter_component/demo/funcation/camera/jd_pickImage.dart';
 import 'package:flutter_component/demo/funcation/state/jd_state_list.dart';
 
 import 'package:flutter_component/demo/jd_demo_list.dart';
+import 'package:flutter_component/demo/thirdpary/player/jd_player.dart';
 import 'package:flutter_component/page/login/jd_login_page.dart';
 import 'package:flutter_component/page/scaffold/jd_scaffold_page.dart';
 import 'package:flutter_component/page/home/jd_home_page.dart';
@@ -93,6 +94,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder> {
   //三方
   '/webview': (BuildContext context) => JDWebViewPage(),
   '/image': (BuildContext context) => JDImageViewPage(),
+//  '/player': (BuildContext context) => JDPlayer(),
 
   '/demo_list': (BuildContext context) => JDDemoListPage(),
   '/login': (BuildContext context) => JDLoginPage(),

@@ -12,6 +12,14 @@ buildscript {
     }
 }
 
+//def flutterProjectRoot = rootProject.projectDir.parentFile.toPath()
+//def plugins = new Properties()
+//def pluginsFile = new File(flutterProjectRoot.toFile(), '.flutter-plugins')
+//if (pluginsFile.exists()) {
+//    pluginsFile.withReader('UTF-8') { reader -> plugins.load(reader) }
+//}
+
+
 allprojects {
     repositories {
         maven { url 'https://maven.aliyun.com/repository/google' }
@@ -19,6 +27,10 @@ allprojects {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url "http://download.flutter.io" }
+
+//        flatDir {
+//            dirs "${plugins.get("flutter_tencentplayer_plus")}android/libs"
+//        }
     }
 }
 

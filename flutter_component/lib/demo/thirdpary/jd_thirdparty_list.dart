@@ -28,6 +28,9 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
     "title" : "Camera",
     "router" : "/camera",
   }, {
+    "title" : "Player",
+    "router" : "/player",
+  },{
     "title" : "EventBus",
     "router" : "/eventbus",
   },{
