@@ -1,37 +1,37 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_component/demo/router/jd_route.dart';
 import 'package:flutter_component/page/scaffold/jd_scaffold_page.dart';
 import 'package:flutter_component/utils/jd_navigation_util.dart';
-import 'package:flutter_component/routes/jd_routes.dart';
 
-class JDDiscoverPage  extends StatefulWidget {
+class JDDiscoverPage extends StatefulWidget {
   @override
   State createState() => _JDDiscoverPageState();
 }
 
-class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStateMixin,AutomaticKeepAliveClientMixin {
-
-  /*************************** module *************************/
-
-  final module_list = <Map<String,String>>[{
-    "title" : "Component List",
-    "router" : "/component_list",
-  }, {
-    "title" : "State",
-    "router" : "/demo.funcation.state",
-  }, {
-    "title" : "Data Transfer",
-    "router" : "/data",
-  },{
-    "title" : "Demo",
-    "router" : "/demo_list",
-  }
+class _JDDiscoverPageState extends State<JDDiscoverPage>
+    with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+  final List<Map<String, String>> module_list = <Map<String, String>>[
+    {
+      'title': 'Component List',
+      'router': '/component_list',
+    },
+    {
+      'title': 'State',
+      'router': '/demo.funcation.state',
+    },
+    {
+      'title': 'Data Transfer',
+      'router': '/data',
+    },
+    {
+      'title': 'Demo',
+      'router': '/demo_list',
+    }
   ];
 
-  final _biggerFont = const TextStyle(fontSize: 18.0);
+  final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
-  var _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
@@ -39,43 +39,43 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
   }
 
   Widget _buildSuggestions() {
-
     //下划线widget预定义以供复用。
-    Widget divider1=Divider(color: Colors.blue,);
-    Widget divider2=Divider(color: Colors.green);
-
-    return new ListView.separated(
-        itemCount: module_list.length,
-        padding: const EdgeInsets.all(16.0),
-        itemBuilder: (context, i) {
-          return _buildRow(module_list[i]);
-        },
-        //分割器构造器
-        separatorBuilder: (BuildContext context, int index) {
-          return index%2==0?divider1:divider2;
-        },
+    final Widget divider1 = Divider(
+      color: Colors.blue,
     );
-  }
+    final Widget divider2 = Divider(color: Colors.green);
 
-  Widget _buildRow(Map<String,String> map) {
-    String text = map["title"];
-    return new ListTile(
-      contentPadding: EdgeInsets.all(10.0),
-      title: new Text(
-        text,
-        style: _biggerFont,
-      ),
-      leading: new Image.asset("assets/images/head.png"),
-      onTap: () {
-        _pushSaved(text,map["router"]);
+    return ListView.separated(
+      itemCount: module_list.length,
+      padding: const EdgeInsets.all(16.0),
+      itemBuilder: (BuildContext context, int i) {
+        return _buildRow(module_list[i]);
+      },
+      //分割器构造器
+      separatorBuilder: (BuildContext context, int index) {
+        return index % 2 == 0 ? divider1 : divider2;
       },
     );
   }
 
+  Widget _buildRow(Map<String, String> map) {
+    final String text = map['title'];
+    return ListTile(
+      contentPadding: const EdgeInsets.all(10.0),
+      title: Text(
+        text,
+        style: _biggerFont,
+      ),
+      leading: Image.asset('assets/images/head.png'),
+      onTap: () {
+        _pushSaved(text, map['router']);
+      },
+    );
+  }
 
   void _pushSaved(String title, String router) async {
     // Navigator.pushNamed(context, router);
-    var map =  JDNavigationUtil.pushNamed(router,arguments: {"title" : title});
+    var map = JDNavigationUtil.pushNamed(router, arguments: {'title': title});
     //带有返回值
 //    var map = await Navigator.of(context).pushNamed(router, arguments: {"title" : title});
     print(map);
@@ -93,9 +93,9 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
 //    Navigator.of(context).pushNamed(router);
   }
 
-
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
@@ -105,36 +105,35 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        elevation: 1,//隐藏底部阴影
+        elevation: 1, //隐藏底部阴影
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(
-            '发现',
-          style: TextStyle(
-            color: Colors.white
-          ),
+          '发现',
+          style: TextStyle(color: Colors.white),
         ),
         leading: IconButton(
-          icon: Icon(Icons.home,color: Colors.white,),
-          onPressed: (){
-            JDScaffoldPage.of(context).switchTabbarIndex(0);
-          }),
+            icon: Icon(
+              Icons.home,
+              color: Colors.white,
+            ),
+            onPressed: () {
+              JDScaffoldPage.of(context).switchTabbarIndex(0);
+            }),
         backgroundColor: Colors.green,
         centerTitle: true,
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.share,color: Colors.white),
-            onPressed: (){
+            icon: Icon(Icons.share, color: Colors.white),
+            onPressed: () {
               final snackBar = SnackBar(
-                content: Text("我是提示文本"),
+                content: const Text("我是提示文本"),
                 backgroundColor: Colors.green,
-                duration: Duration(milliseconds: 5000),
+                duration: const Duration(milliseconds: 5000),
                 action: SnackBarAction(
                   textColor: Colors.white,
                   label: '取消',
-                  onPressed: (){
-
-                  },
+                  onPressed: () {},
                 ),
               );
               _scaffoldKey.currentState.showSnackBar(snackBar);
@@ -144,15 +143,18 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
           //菜单按钮
           PopupMenuButton<String>(
             color: Colors.white,
-            icon: Icon(Icons.more_horiz,color: Colors.white,),
-            onSelected:(String item) {
+            icon: Icon(
+              Icons.more_horiz,
+              color: Colors.white,
+            ),
+            onSelected: (String item) {
               if (item == 'download') {
                 _download();
               } else {
                 _share();
               }
             },
-            itemBuilder: (BuildContext context) => <PopupMenuItem<String>> [
+            itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
               //菜单项
               const PopupMenuItem<String>(
                 value: 'friend',
@@ -166,11 +168,12 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
           )
         ],
       ),
-      body: _buildSuggestions(), // This trailing comma makes auto-formatting nicer for build methods.
+      body:
+          _buildSuggestions(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
-  void _share(){
+  void _share() {
     showCupertinoModalPopup(
         context: context,
         builder: (BuildContext context) {
@@ -194,32 +197,31 @@ class _JDDiscoverPageState extends State<JDDiscoverPage> with TickerProviderStat
               ),
             ],
           );
-        }
-    );
+        });
   }
 
   void _download() {
-    showModalBottomSheet(context: context, builder: (BuildContext context){
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.photo_camera),
-            title: const Text('Camera'),
-            onTap: () {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) {
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: Icon(Icons.photo_camera),
+                title: const Text('Camera'),
+                onTap: () {
                   Navigator.of(context).pop();
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.photo_library),
-            title: const Text('Gallery'),
-            onTap: () {
-
-            },
-          ),
-        ],
-      );
-    });
+                },
+              ),
+              ListTile(
+                leading: Icon(Icons.photo_library),
+                title: const Text('Gallery'),
+                onTap: () {},
+              ),
+            ],
+          );
+        });
   }
 
   @override

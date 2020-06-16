@@ -22,6 +22,13 @@ dependencies:
   flutter:
     sdk: flutter
 
+
+  #保存图片
+  albumsaver:
+    git:
+      url: https://github.com/JDongKhan/flutter_plugin.git
+      path: album_saver
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   # 图标库
@@ -43,8 +50,6 @@ dependencies:
   path_provider: ^1.6.9
   #二维码
   qr_flutter: ^3.1.0
-  #保存图片
-  image_gallery_saver: ^1.2.2
   #获取权限
   permission_handler: ^3.0.1
   #webview

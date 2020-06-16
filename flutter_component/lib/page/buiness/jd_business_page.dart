@@ -6,11 +6,7 @@ import 'package:flutter_component/style/jd_push_animation.dart';
 import 'package:flutter_component/widget/async/jd_futurebuilder.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
-/**
- *
- * @author jd
- *
- */
+/// @author jd
 
 class JDBusinessPage extends StatefulWidget {
   const JDBusinessPage(this.source);
