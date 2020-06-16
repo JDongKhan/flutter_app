@@ -1,12 +1,9 @@
-
-
 /// 接口的code没有返回为true的异常
-class NotSuccessException implements Exception {
-  String message;
 
-  NotSuccessException.fromRespData(String message) {
-    this.message = message;
-  }
+class NotSuccessException implements Exception {
+  NotSuccessException.fromRespData(this.message);
+
+  String message;
 
   @override
   String toString() {

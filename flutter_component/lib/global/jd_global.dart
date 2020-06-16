@@ -1,15 +1,13 @@
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bugly/flutter_bugly.dart';
-import 'package:flutter_component/models/user.dart';
-import 'package:flutter_component/utils/jd_screen_utils.dart';
-import 'package:flutter_component/utils/jd_storage_utils.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_component/models/user.dart';
+import 'package:flutter_component/utils/jd_storage_utils.dart';
 import 'package:path_provider/path_provider.dart';
 
 class JDGlobal extends ChangeNotifier {
-
   JDGlobal() {
     _loadUser();
   }
@@ -31,6 +29,7 @@ class JDGlobal extends ChangeNotifier {
       SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
     }
   }
+
   //初始化全局信息
   static Future delayInit() async {
     //初始化
@@ -51,16 +50,16 @@ class JDGlobal extends ChangeNotifier {
     if (_user != null) {
       return _user;
     }
-    _user =  User.fromJson(StorageUtil.getObject("pp_user"));
+    _user = User.fromJson(StorageUtil.getObject("pp_user"));
     return _user;
   }
 
   void _loadUser() {
-    _user =  User.fromJson(StorageUtil.getObject("pp_user"));
+    _user = User.fromJson(StorageUtil.getObject("pp_user"));
   }
 
   void saveUser(User user) {
-    this._user = user;
+    _user = user;
     StorageUtil.putObject('pp_user', user);
     notifyListeners();
   }
@@ -71,7 +70,5 @@ class JDGlobal extends ChangeNotifier {
     notifyListeners();
   }
 
-
-  bool get isLogin => this._user != null && this._user.account != null;
-
+  bool get isLogin => _user != null && _user.account != null;
 }

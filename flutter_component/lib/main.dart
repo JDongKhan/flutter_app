@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
-import 'package:flutter_component/default/jd_notfind.dart';
 import 'package:flutter_component/page/jd_splash_page.dart';
+import 'package:flutter_component/routes/jd_routes.dart';
 import 'package:flutter_component/style/jd_colors.dart';
 import 'package:flutter_component/utils/jd_navigation_util.dart';
-import 'package:flutter_component/routes/jd_routes.dart';
 import 'package:provider/provider.dart';
+
 import 'global/jd_global.dart';
 import 'global/jd_theme.dart';
 
@@ -36,26 +36,25 @@ void main() {
 //
 //  };
 
-  FlutterBugly.postCatchedException((){
+  FlutterBugly.postCatchedException(() {
     //初始化
     JDGlobal.init(() {
       runApp(
         MultiProvider(
           providers: [
             ChangeNotifierProvider<JDGlobal>(
-              create: (context)=>JDGlobal(),
+              create: (context) => JDGlobal(),
             ),
-
             ChangeNotifierProvider<JDTheme>(
               create: (context) => JDTheme(),
             ),
-
           ],
           child: MyApp(),
         ),
       );
     });
-
+  }, handler: (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
   });
 
 //  runApp(
@@ -85,20 +84,15 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-
   @override
   void initState() {
     super.initState();
     _initListener();
   }
 
+  void _initListener() {}
 
-  void _initListener() {
-  }
-
-  void _loadLocale() {
-
-  }
+  void _loadLocale() {}
 
   @override
   Widget build(BuildContext context) {
@@ -134,4 +128,3 @@ class MyAppState extends State<MyApp> {
     );
   }
 }
-

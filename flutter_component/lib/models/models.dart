@@ -1,11 +1,4 @@
-import 'package:flutter/widgets.dart';
-
 class LanguageModel {
-  String titleId;
-  String languageCode;
-  String countryCode;
-  bool isSelected;
-
   LanguageModel(this.titleId, this.languageCode, this.countryCode,
       {this.isSelected: false});
 
@@ -22,9 +15,14 @@ class LanguageModel {
         'isSelected': isSelected,
       };
 
+  String titleId;
+  String languageCode;
+  String countryCode;
+  bool isSelected;
+
   @override
   String toString() {
-    StringBuffer sb = new StringBuffer('{');
+    StringBuffer sb = StringBuffer('{');
     sb.write("\"titleId\":\"$titleId\"");
     sb.write(",\"languageCode\":\"$languageCode\"");
     sb.write(",\"countryCode\":\"$countryCode\"");
@@ -34,13 +32,7 @@ class LanguageModel {
 }
 
 class VersionModel {
-  String title;
-  String content;
-  String url;
-  String version;
-  bool force;
-
-  VersionModel({this.title, this.content, this.url, this.version,this.force});
+  VersionModel({this.title, this.content, this.url, this.version, this.force});
 
   VersionModel.fromJson(Map<String, dynamic> json)
       : title = json['title'] as String,
@@ -66,5 +58,10 @@ class VersionModel {
     sb.write('}');
     return sb.toString();
   }
-}
 
+  String title;
+  String content;
+  String url;
+  String version;
+  bool force;
+}

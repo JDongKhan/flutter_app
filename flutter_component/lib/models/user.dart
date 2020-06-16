@@ -1,33 +1,18 @@
-
 class User {
-  String avatarUrl;
-  String account;
-  String role;
-  String name;
-  String company;
-  String blog;
-  String location;
-  String email;
-  String bio;
-  int followers;
-  int following;
-  String createdAt;
-  String updatedAt;
-
   User(
       {this.avatarUrl,
-        this.account,
-        this.role,
-        this.name,
-        this.company,
-        this.blog,
-        this.location,
-        this.email,
-        this.bio,
-        this.followers,
-        this.following,
-        this.createdAt,
-        this.updatedAt});
+      this.account,
+      this.role,
+      this.name,
+      this.company,
+      this.blog,
+      this.location,
+      this.email,
+      this.bio,
+      this.followers,
+      this.following,
+      this.createdAt,
+      this.updatedAt});
 
   User.fromJson(Map json) {
     if (json == null) {
@@ -49,20 +34,34 @@ class User {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['avatar_url'] = this.avatarUrl;
-    data['account'] = this.account;
-    data['role'] = this.role;
-    data['name'] = this.name;
-    data['company'] = this.company;
-    data['blog'] = this.blog;
-    data['location'] = this.location;
-    data['email'] = this.email;
-    data['bio'] = this.bio;
-    data['followers'] = this.followers;
-    data['following'] = this.following;
-    data['created_at'] = this.createdAt;
-    data['updated_at'] = this.updatedAt;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['avatar_url'] = avatarUrl;
+    data['account'] = account;
+    data['role'] = role;
+    data['name'] = name;
+    data['company'] = company;
+    data['blog'] = blog;
+    data['location'] = location;
+    data['email'] = email;
+    data['bio'] = bio;
+    data['followers'] = followers;
+    data['following'] = following;
+    data['created_at'] = createdAt;
+    data['updated_at'] = updatedAt;
     return data;
   }
+
+  String avatarUrl;
+  String account;
+  String role;
+  String name;
+  String company;
+  String blog;
+  String location;
+  String email;
+  String bio;
+  int followers;
+  int following;
+  String createdAt;
+  String updatedAt;
 }

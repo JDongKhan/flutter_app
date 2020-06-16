@@ -1,7 +1,4 @@
 class HomeModel {
-  List banner;
-  List menuGrid;
-
   HomeModel();
 
   HomeModel.fromJson(Map json) {
@@ -10,11 +7,11 @@ class HomeModel {
     menuGrid = json["menuGrid"] as List;
   }
 
+  List banner;
+  List menuGrid;
 }
 
 class HomeModelList {
-  List list;
-
   HomeModelList();
 
   HomeModelList.fromJson(List json) {
@@ -30,5 +27,5 @@ class HomeModelList {
     this.list?.addAll(list);
   }
 
+  List list;
 }
-

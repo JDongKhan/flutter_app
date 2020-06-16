@@ -1,24 +1,15 @@
 /// @author jd
 
 class JDImage {
-  String sId;
-  String createdAt;
-  String desc;
-  String publishedAt;
-  String type;
-  String url;
-  bool used;
-  String who;
-
   JDImage(
       {this.sId,
-        this.createdAt,
-        this.desc,
-        this.publishedAt,
-        this.type,
-        this.url,
-        this.used,
-        this.who});
+      this.createdAt,
+      this.desc,
+      this.publishedAt,
+      this.type,
+      this.url,
+      this.used,
+      this.who});
 
   JDImage.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -32,15 +23,24 @@ class JDImage {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['createdAt'] = this.createdAt;
-    data['desc'] = this.desc;
-    data['publishedAt'] = this.publishedAt;
-    data['type'] = this.type;
-    data['url'] = this.url;
-    data['used'] = this.used;
-    data['who'] = this.who;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['createdAt'] = createdAt;
+    data['desc'] = desc;
+    data['publishedAt'] = publishedAt;
+    data['type'] = type;
+    data['url'] = url;
+    data['used'] = used;
+    data['who'] = who;
     return data;
   }
+
+  String sId;
+  String createdAt;
+  String desc;
+  String publishedAt;
+  String type;
+  String url;
+  bool used;
+  String who;
 }

@@ -1,54 +1,49 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_component/models/home_model.dart';
 import 'package:flutter_component/models/image_model.dart';
-import 'package:flutter_component/models/user.dart';
 import 'package:flutter_component/models/models.dart';
+import 'package:flutter_component/models/user.dart';
 import 'package:flutter_component/utils/network/jd_network_utils.dart';
 
 //模拟网络请求数据
 class JDRequest {
-
 //获取版本信息
- static Future<VersionModel> getUpgradeInfo() {
-    return Future.delayed(new Duration(milliseconds: 300), () {
-      return new VersionModel(
+  static Future<VersionModel> getUpgradeInfo() {
+    return Future<VersionModel>.delayed(const Duration(milliseconds: 300), () {
+      return VersionModel(
         title: '有新版本v0.1.0，去更新吧！',
         content: '',
-        url:
-            'https://appdownload.html',
+        url: 'https://appdownload.html',
         version: '1.0.1',
-        force:false,
+        force: false,
       );
     });
   }
 
+  static Future<User> login(String account, String password) async {
+    Response r = await JDNetwork.post("http://baidu.com//user/login.do",
+        queryParameters: <String, dynamic>{
+          'account': account,
+          'password': password
+        },
+        mock: true);
+    return User.fromJson(r.data as Map<dynamic, dynamic>);
+  }
 
- static Future<User> login(String account,String password) async {
-   Response r = await JDNetwork.post(
-       "http://baidu.com//user/login.do",
-       queryParameters: <String,dynamic>{'account':account,'password':password},
-       mock: true
-       );
-   return  User.fromJson(r.data as Map<dynamic,dynamic>);
- }
+  static Future<HomeModel> home() async {
+    Response r = await JDNetwork.get("http://baidu.com//home.do", mock: true);
+    return HomeModel.fromJson(r.data as Map<dynamic, dynamic>);
+  }
 
- static Future<HomeModel> home() async {
-   Response r = await JDNetwork.get("http://baidu.com//home.do",mock: true);
-   return  HomeModel.fromJson(r.data as Map<dynamic,dynamic>);
- }
+  static Future<HomeModelList> homeList() async {
+    Response r =
+        await JDNetwork.get("http://baidu.com//home_list.do", mock: true);
+    return HomeModelList.fromJson(r.data as List<dynamic>);
+  }
 
- static Future<HomeModelList> homeList() async {
-   Response r = await JDNetwork.get("http://baidu.com//home_list.do",mock: true);
-   return  HomeModelList.fromJson(r.data as List<dynamic>);
- }
-
-
- static Future<List<JDImage>> imageList() async {
-   Response r = await JDNetwork.get('http://gank.io/api/random/data/福利/100');
-   List list = r.data['results'];
-   return  list.map((e) => JDImage.fromJson(e)).toList();
- }
-
+  static Future<List<JDImage>> imageList() async {
+    Response r = await JDNetwork.get('http://gank.io/api/random/data/福利/100');
+    List list = r.data['results'];
+    return list.map((e) => JDImage.fromJson(e)).toList();
+  }
 }
