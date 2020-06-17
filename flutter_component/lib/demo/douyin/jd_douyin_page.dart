@@ -25,6 +25,7 @@ class _JDDouyinPageState extends State<JDDouyinPage>
         children: <Widget>[
           _buildBackground(),
           _buildPage(),
+          _buildTopMenu(),
         ],
       ),
     );
@@ -37,14 +38,29 @@ class _JDDouyinPageState extends State<JDDouyinPage>
   }
 
   Widget _buildPage() {
+    return TabBarView(
+      controller: _tabController,
+      children: <Widget>[
+        Container(
+          color: Colors.red,
+          child: const Center(
+            child: Text(
+              '需要登录',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
+        _buildPlayPage(),
+      ],
+    );
+  }
+
+  Widget _buildPlayPage() {
     return Swiper(
         scrollDirection: Axis.vertical,
         itemCount: 2,
         itemBuilder: (BuildContext context, int index) {
-          if (index % 2 == 0) {
-            return _buildPage1();
-          }
-          return _buildPage2();
+          return _buildPage1();
         });
   }
 
@@ -55,18 +71,11 @@ class _JDDouyinPageState extends State<JDDouyinPage>
         child: Stack(
           children: <Widget>[
             _buildPlayer(),
-            _buildTopMenu(),
             _buildRightMenu(),
             _buildBottom(),
           ],
         ),
       ),
-    );
-  }
-
-  Widget _buildPage2() {
-    return Container(
-      color: Colors.blue,
     );
   }
 
@@ -82,27 +91,29 @@ class _JDDouyinPageState extends State<JDDouyinPage>
   }
 
   Widget _buildTopMenu() {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              width: 80,
-            ),
-            _buildTabbar(),
-            Container(
-              child: IconButton(
-                icon: Icon(
-                  Icons.search,
-                  color: Colors.white,
-                ),
-                onPressed: () {},
+    return SafeArea(
+      child: Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                width: 80,
               ),
-            ),
-          ],
-        )
-      ],
+              _buildTabbar(),
+              Container(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {},
+                ),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 
@@ -111,6 +122,7 @@ class _JDDouyinPageState extends State<JDDouyinPage>
       width: 200,
       child: TabBar(
         controller: _tabController,
+        indicatorColor: Colors.white,
         tabs: const <Widget>[
           Tab(
             child: Text(
@@ -136,14 +148,17 @@ class _JDDouyinPageState extends State<JDDouyinPage>
         width: 80,
         height: 300,
         child: Column(
-          children: const <Widget>[
+          children: <Widget>[
             IconButton(
               icon: Icon(
                 Icons.add,
                 color: Colors.white,
               ),
+              onPressed: () {
+                print('add');
+              },
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10),
             ),
             IconButton(
@@ -151,8 +166,11 @@ class _JDDouyinPageState extends State<JDDouyinPage>
                 Icons.favorite,
                 color: Colors.white,
               ),
+              onPressed: () {
+                print('favorite');
+              },
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10),
             ),
             IconButton(
@@ -160,8 +178,11 @@ class _JDDouyinPageState extends State<JDDouyinPage>
                 Icons.comment,
                 color: Colors.white,
               ),
+              onPressed: () {
+                print('comment');
+              },
             ),
-            Padding(
+            const Padding(
               padding: EdgeInsets.only(top: 10),
             ),
             IconButton(
@@ -169,6 +190,9 @@ class _JDDouyinPageState extends State<JDDouyinPage>
                 Icons.share,
                 color: Colors.white,
               ),
+              onPressed: () {
+                print('share');
+              },
             ),
           ],
         ),
