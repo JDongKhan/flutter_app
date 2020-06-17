@@ -13,7 +13,7 @@ import 'jd_retry_interceptor.dart';
 /// @author jd
 
 class JDNetwork {
-  static bool retryEnable = true;
+  static bool retryEnable = false;
 
   factory JDNetwork() => _getInstance();
 
@@ -26,9 +26,8 @@ class JDNetwork {
     _dio.interceptors
       ..add(JDNetworkMockInterceptor())
       ..add(JDErrorInterceptor())
-      ..add(DioCacheManager(CacheConfig(baseUrl: 'http://www.google.cn'))
-          .interceptor as Interceptor)
-      ..add(LogInterceptor())
+      ..add(DioCacheManager(CacheConfig()).interceptor as Interceptor)
+      ..add(LogInterceptor(requestBody: true, responseBody: true))
       ..add(CookieManager(
           PersistCookieJar(dir: JDGlobal.temporaryDirectory.path)));
 

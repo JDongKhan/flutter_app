@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:flutter_component/page/jd_splash_page.dart';
 import 'package:flutter_component/routes/jd_routes.dart';
@@ -53,8 +52,6 @@ void main() {
         ),
       );
     });
-  }, handler: (FlutterErrorDetails details) {
-    FlutterError.dumpErrorToConsole(details);
   });
 
 //  runApp(
