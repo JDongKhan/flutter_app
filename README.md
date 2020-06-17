@@ -4,6 +4,7 @@
 ![demo png](https://github.com/JDongKhan/flutter_app/blob/master/2.gif "demo")
 ![demo png](https://github.com/JDongKhan/flutter_app/blob/master/3.gif "demo")
 ![demo png](https://github.com/JDongKhan/flutter_app/blob/master/4.gif "demo")
+![demo png](https://github.com/JDongKhan/flutter_app/blob/master/5.gif "demo")
 
 
 ### 现有功能
