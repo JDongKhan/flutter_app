@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
@@ -11,32 +10,21 @@ import 'package:path/path.dart' as path;
  *
  */
 
-
-class JDNetworkCacheInterceptor extends Interceptor {
-
+class JDNetworkMockInterceptor extends Interceptor {
   @override
   Future<dynamic> onRequest(RequestOptions options) async {
-    if (options.extra['mock'] == true ) {
-      final String jsonPath = 'assets/jsons/${path.basenameWithoutExtension(options.path)}.json';
-      final String jsonString  = await JDAssetBundle.loadString(jsonPath);
+    if (options.extra['mock'] == true) {
+      final String jsonPath =
+          'assets/jsons/${path.basenameWithoutExtension(options.path)}.json';
+      final String jsonString = await JDAssetBundle.loadString(jsonPath);
       dynamic json = jsonDecode(jsonString);
       await Future<dynamic>.delayed(const Duration(milliseconds: 1000));
       return Response<dynamic>(
           data: json,
           headers: Headers(),
           extra: options.extra,
-          statusCode:200);
+          statusCode: 200);
     }
     return options;
-  }
-
-  @override
-  Future onResponse(Response response) async {
-     return response;
-  }
-
-  @override
-  Future onError(DioError err) async {
-    return err;
   }
 }

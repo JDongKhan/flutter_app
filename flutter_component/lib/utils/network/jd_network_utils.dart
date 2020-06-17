@@ -1,20 +1,19 @@
-import 'dart:io';
+import 'package:connectivity/connectivity.dart';
 import 'package:cookie_jar/cookie_jar.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_component/global/jd_global.dart';
-import 'package:flutter_component/utils/network/jd_network_cache.dart';
+import 'package:flutter_component/utils/network/jd_error_interceptor.dart';
+import 'package:flutter_component/utils/network/jd_mock_interceptor.dart';
 
-/**
- *
- * @author jd
- *
- */
+import 'jd_connectivity_request_retrier.dart';
+import 'jd_retry_interceptor.dart';
+
+/// @author jd
 
 class JDNetwork {
+  static bool retryEnable = true;
 
   factory JDNetwork() => _getInstance();
 
@@ -25,12 +24,27 @@ class JDNetwork {
     );
     _dio = Dio(options);
     _dio.interceptors
-      ..add(JDNetworkCacheInterceptor())
-      ..add(DioCacheManager(CacheConfig(baseUrl: "http://www.google.cn"))
+      ..add(JDNetworkMockInterceptor())
+      ..add(JDErrorInterceptor())
+      ..add(DioCacheManager(CacheConfig(baseUrl: 'http://www.google.cn'))
           .interceptor as Interceptor)
+      ..add(LogInterceptor())
       ..add(CookieManager(
           PersistCookieJar(dir: JDGlobal.temporaryDirectory.path)));
 
+    //重试逻辑
+    if (retryEnable) {
+      _dio.interceptors.add(
+        JDRetryOnConnectionChangeInterceptor(
+          requestRetrier: JDDioConnectivityRequestRetrier(
+            dio: _dio,
+            connectivity: Connectivity(),
+          ),
+        ),
+      );
+    }
+
+    // 在调试模式下需要抓包调试，所以我们使用代理，并禁用HTTPS证书校验
 //    if (!kReleaseMode) {
 //      (_dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
 //          (client) {
@@ -56,7 +70,8 @@ class JDNetwork {
   static Future<Response<dynamic>> get(String url,
       {Options options, bool cache = false, bool mock = false}) async {
     options = options ?? Options();
-    options.extra.addAll(<String, dynamic>{'noCache': cache, 'mock': mock && _mock });
+    options.extra
+        .addAll(<String, dynamic>{'noCache': cache, 'mock': mock && _mock});
     return await JDNetwork._getInstance()
         ._dio
         .get<dynamic>(url, options: options);
