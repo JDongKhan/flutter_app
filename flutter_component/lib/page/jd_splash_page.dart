@@ -1,15 +1,11 @@
-import 'dart:math';
-
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flukit/flukit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/page/scaffold/jd_scaffold_page.dart';
 import 'package:flutter_component/style/jd_colors.dart';
 import 'package:flutter_component/utils/jd_object_utils.dart';
 import 'package:flutter_component/utils/jd_timer_utils.dart';
 import 'package:flutter_component/utils/jd_utils.dart';
-
-
+import 'package:flutter_swiper/flutter_swiper.dart';
 
 class JDSplashPage extends StatefulWidget {
   @override
@@ -21,7 +17,7 @@ class JDSplashPage extends StatefulWidget {
 class _JDSplashPageState extends State<JDSplashPage> {
   TimerUtil _timerUtil;
 
-   final List<String> _guideList = <String>[
+  final List<String> _guideList = <String>[
     JDAssetBundle.getImgPath('guide1'),
     JDAssetBundle.getImgPath('guide2'),
     JDAssetBundle.getImgPath('guide3'),
@@ -112,20 +108,18 @@ class _JDSplashPageState extends State<JDSplashPage> {
 
   Widget _buildSwiperWidage() {
     return Offstage(
-          offstage: showAd,
-          child:  Container(
-            color: Colors.cyan,
-            child: ObjectUtil.isEmpty(_bannerList) ? Container() : Swiper(
-                autoStart: false,
-                circular: false,
-                indicator: CircleSwiperIndicator(
-                  radius: 4.0,
-                  padding: const EdgeInsets.only(bottom: 30.0),
-                  itemColor: Colors.black26,
-                ),
-                children: _bannerList),
-          )
-      );
+        offstage: showAd,
+        child: Container(
+          color: Colors.cyan,
+          child: ObjectUtil.isEmpty(_bannerList)
+              ? Container()
+              : Swiper(
+                  pagination: const SwiperPagination(),
+                  itemCount: _bannerList.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return _bannerList[index];
+                  }),
+        ));
   }
 
   Widget _buildAdWidget() {
@@ -144,21 +138,21 @@ class _JDSplashPageState extends State<JDSplashPage> {
               fit: BoxFit.fill,
               height: double.infinity,
             ),
-
             Container(
               alignment: Alignment.center,
               child: CachedNetworkImage(
                 width: double.infinity,
                 height: double.infinity,
                 fit: BoxFit.fill,
-                imageUrl: 'http://ww1.sinaimg.cn/large/7a8aed7bgw1ewc4irf4syj20go0ltdjk.jpg',
-                placeholder: (context, url) =>  Image.asset(
+                imageUrl:
+                    'http://ww1.sinaimg.cn/large/7a8aed7bgw1ewc4irf4syj20go0ltdjk.jpg',
+                placeholder: (context, url) => Image.asset(
                   JDAssetBundle.getImgPath('splash_bg'),
                   width: double.infinity,
                   fit: BoxFit.fill,
                   height: double.infinity,
                 ),
-                errorWidget: (context, url, dynamic error) =>  Image.asset(
+                errorWidget: (context, url, dynamic error) => Image.asset(
                   JDAssetBundle.getImgPath('splash_bg'),
                   width: double.infinity,
                   fit: BoxFit.fill,
@@ -166,7 +160,6 @@ class _JDSplashPageState extends State<JDSplashPage> {
                 ),
               ),
             ),
-
             Container(
               alignment: Alignment.bottomRight,
               margin: const EdgeInsets.all(20.0),
@@ -182,18 +175,17 @@ class _JDSplashPageState extends State<JDSplashPage> {
                     ),
                     decoration: BoxDecoration(
                         color: const Color(0x66000000),
-                        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
-                        border: Border.all(
-                            width: 0.33, color: JDColors.divider))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(4.0)),
+                        border:
+                            Border.all(width: 0.33, color: JDColors.divider))),
               ),
             )
-
           ],
         ),
       ),
     );
   }
-
 
   @override
   Widget build(BuildContext context) {

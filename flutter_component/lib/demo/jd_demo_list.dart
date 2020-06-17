@@ -1,37 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_component/routes/jd_routes.dart';
 
 class JDDemoListPage extends StatefulWidget {
-
   @override
   State createState() => _JDDemoListPageState();
-
 }
 
-class _JDDemoListPageState extends State<JDDemoListPage>  {
-
-
+class _JDDemoListPageState extends State<JDDemoListPage> {
   /*************************** demo *************************/
 
-  final demo_list = <Map<String,String>>[{
-    "title" : "Login",
-    "router" : "/login",
-  },{
-    "title" : "Scaffold",
-    "router" : "/scaffold",
-  },{
-    "title" : "Tabbar",
-    "router" : "/tabbar",
-  }, {
-    "title" : "购物车",
-    "router" : "/buy_car",
-  }, {
-    "title" : "拍照",
-    "router" : "/pickImage",
-  }, {
-    "title" : "第三方组件",
-    "router" : "/thirdparty_list",
-  }
+  final demo_list = <Map<String, String>>[
+    {
+      "title": "Login",
+      "router": "/login",
+    },
+    {
+      "title": "Scaffold",
+      "router": "/scaffold",
+    },
+    {
+      "title": "Tabbar",
+      "router": "/tabbar",
+    },
+    {
+      "title": "抖音",
+      "router": "/douyin",
+    },
+    {
+      "title": "购物车",
+      "router": "/buy_car",
+    },
+    {
+      "title": "拍照",
+      "router": "/pickImage",
+    },
+    {
+      "title": "第三方组件",
+      "router": "/thirdparty_list",
+    }
   ];
 
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -48,13 +53,12 @@ class _JDDemoListPageState extends State<JDDemoListPage>  {
         itemBuilder: (context, i) {
           // 在每一列之前，添加一个1像素高的分隔线widget
           if (i.isOdd) return new Divider();
-          final  index = i ~/ 2;
+          final index = i ~/ 2;
           return _buildRow(demo_list[index]);
-        }
-    );
+        });
   }
 
-  Widget _buildRow(Map<String,String> map) {
+  Widget _buildRow(Map<String, String> map) {
     String text = map["title"];
     return new ListTile(
       contentPadding: EdgeInsets.all(10.0),
@@ -64,19 +68,18 @@ class _JDDemoListPageState extends State<JDDemoListPage>  {
       ),
       leading: new Image.asset("assets/images/head.png"),
       onTap: () {
-        _pushSaved(text,map["router"]);
+        _pushSaved(text, map["router"]);
       },
     );
   }
 
-
   void _pushSaved(String title, String router) async {
     // Navigator.pushNamed(context, router);
     //带有返回值
-    var map = await Navigator.of(context).pushNamed(router, arguments: {"title" : title});
+    var map = await Navigator.of(context)
+        .pushNamed(router, arguments: {"title": title});
     print(map);
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -84,8 +84,6 @@ dependencies:
   share: ^0.6.4+1
   # 状态管理
   provider: ^4.1.2
-  #组件库
-  flukit: 1.0.2
   #html
   flutter_html: ^ 1.0.0
   #链式编程
