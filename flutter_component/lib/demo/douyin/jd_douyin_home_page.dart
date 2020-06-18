@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_component/utils/jd_navigation_util.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+
+import 'jd_doiyin_people_detail_page.dart';
 
 /// @author jd
 
@@ -159,7 +162,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                 color: Colors.white,
               ),
               onPressed: () {
-                print('add');
+                JDNavigationUtil.push(JDDouyinPeopleDetailPage());
               },
             ),
             const Padding(
