@@ -11,7 +11,7 @@ class JDDouyinPage extends StatefulWidget {
 
 class _JDDouyinPageState extends State<JDDouyinPage>
     with SingleTickerProviderStateMixin {
-  final List<Map<String, dynamic>> _tabs = List<Map<String, dynamic>>();
+  final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[];
   TabController _tabController;
   int _selectedIndex = 0;
 
@@ -79,12 +79,12 @@ class _JDDouyinPageState extends State<JDDouyinPage>
     return BottomNavigationBar(
       // 底部导航
       items: _tabs
-          .map((e) => BottomNavigationBarItem(
+          .map((Map<String, dynamic> e) => BottomNavigationBarItem(
               icon: Icon(
-                e["icon"] as IconData,
+                e['icon'] as IconData,
               ),
               title: Text(
-                e["title"].toString(),
+                e['title'].toString(),
               )))
           .toList(),
       currentIndex: _selectedIndex,
