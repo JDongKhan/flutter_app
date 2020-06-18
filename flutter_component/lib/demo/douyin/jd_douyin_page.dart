@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
+
+import 'jd_douyin_home_page.dart';
 
 /// @author jd
 
@@ -10,12 +11,42 @@ class JDDouyinPage extends StatefulWidget {
 
 class _JDDouyinPageState extends State<JDDouyinPage>
     with SingleTickerProviderStateMixin {
+  final List<Map<String, dynamic>> _tabs = List<Map<String, dynamic>>();
   TabController _tabController;
+  int _selectedIndex = 0;
 
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 2, vsync: this);
+    //初始化工具
+    //initScreenUtil(context);
+    _tabs.add({'title': '首页', 'icon': Icons.home, 'page': JDDouYinHomePage()});
+
+    _tabs.add({
+      'title': '南京',
+      'icon': Icons.business,
+      'page': Container(
+        color: Colors.blue,
+      )
+    });
+
+    _tabs.add({
+      'title': '消息',
+      'icon': Icons.camera,
+      'page': Container(
+        color: Colors.green,
+      )
+    });
+
+    _tabs.add({
+      'title': '我的',
+      'icon': Icons.account_circle,
+      'page': Container(
+        color: Colors.greenAccent,
+      )
+    });
+
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
 
   @override
@@ -23,233 +54,56 @@ class _JDDouyinPageState extends State<JDDouyinPage>
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          _buildBackground(),
-          _buildPage(),
-          _buildTopMenu(),
+          _buildTabBarView(),
+          Container(
+            alignment: Alignment.bottomCenter,
+            child: _bottomNavigationBar(),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildBackground() {
-    return Container(
-      color: Colors.black,
-    );
-  }
-
-  Widget _buildPage() {
+  Widget _buildTabBarView() {
     return TabBarView(
+//          index: _selectedIndex,
       controller: _tabController,
-      children: <Widget>[
-        Container(
-          color: Colors.red,
-          child: const Center(
-            child: Text(
-              '需要登录',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        _buildPlayPage(),
-      ],
+      physics: const NeverScrollableScrollPhysics(),
+      children: _tabs.map((e) {
+        return e['page'] as Widget;
+      }).toList(),
     );
   }
 
-  Widget _buildPlayPage() {
-    return Swiper(
-        scrollDirection: Axis.vertical,
-        itemCount: 2,
-        itemBuilder: (BuildContext context, int index) {
-          return _buildPage1();
-        });
-  }
-
-  Widget _buildPage1() {
-    return Container(
-      color: Colors.black,
-      child: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            _buildPlayer(),
-            _buildRightMenu(),
-            _buildBottom(),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPlayer() {
-    return Container(
-      child: const Center(
-        child: Text(
-          '我是播放器',
-          style: TextStyle(color: Colors.white),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTopMenu() {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 80,
-              ),
-              _buildTabbar(),
-              Container(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabbar() {
-    return Container(
-      width: 200,
-      child: TabBar(
-        controller: _tabController,
-        indicatorColor: Colors.white,
-        tabs: const <Widget>[
-          Tab(
-            child: Text(
-              '关注',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          Tab(
-            child: Text(
-              '推荐',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildRightMenu() {
-    return Container(
-      alignment: Alignment.centerRight,
-      child: Container(
-        width: 80,
-        height: 300,
-        child: Column(
-          children: <Widget>[
-            IconButton(
+  Widget _bottomNavigationBar() {
+    return BottomNavigationBar(
+      // 底部导航
+      items: _tabs
+          .map((e) => BottomNavigationBarItem(
               icon: Icon(
-                Icons.add,
-                color: Colors.white,
+                e["icon"] as IconData,
               ),
-              onPressed: () {
-                print('add');
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                print('favorite');
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.comment,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                print('comment');
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.share,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                print('share');
-              },
-            ),
-          ],
-        ),
-      ),
+              title: Text(
+                e["title"].toString(),
+              )))
+          .toList(),
+      currentIndex: _selectedIndex,
+      type: BottomNavigationBarType.fixed,
+      backgroundColor: Colors.transparent,
+      selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey[350],
+      onTap: _onItemTapped,
     );
   }
 
-  Widget _buildBottom() {
-    return Container(
-      alignment: Alignment.bottomCenter,
-      child: Container(
-        height: 120,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: EdgeInsets.only(left: 10),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      '@JD',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10, top: 10),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(left: 10, top: 10),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      '@浙有正能量创作的原创',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              width: 50,
-              alignment: Alignment.bottomRight,
-              child: IconButton(
-                icon: Icon(
-                  Icons.play_circle_filled,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+  void _onItemTapped(int index) {
+    switchTabbarIndex(index);
+  }
+
+  void switchTabbarIndex(int selectedIndex) {
+    _tabController.index = selectedIndex;
+    setState(() {
+      _selectedIndex = selectedIndex;
+    });
   }
 }
