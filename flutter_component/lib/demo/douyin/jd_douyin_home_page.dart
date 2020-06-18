@@ -216,25 +216,25 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
               child: Column(
                 children: <Widget>[
                   Container(
-                    padding: EdgeInsets.only(left: 10),
+                    padding: const EdgeInsets.only(left: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
+                    child: const Text(
                       '@JD',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, top: 10),
+                    padding: const EdgeInsets.only(left: 10, top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
+                    child: const Text(
                       '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 10, top: 10),
+                    padding: const EdgeInsets.only(left: 10, top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
+                    child: const Text(
                       '@浙有正能量创作的原创',
                       style: TextStyle(color: Colors.white),
                     ),
