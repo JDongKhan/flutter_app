@@ -11,6 +11,7 @@ import 'package:flutter_component/demo/component/customscrollview/jd_customscrol
 import 'package:flutter_component/demo/component/decoratedbox/jd_decoratedbox.dart';
 import 'package:flutter_component/demo/component/expanded/jd_expanded.dart';
 import 'package:flutter_component/demo/component/flex/jd_flex.dart';
+import 'package:flutter_component/demo/component/flow/jd_flow_page.dart';
 import 'package:flutter_component/demo/component/gridview/jd_gridview.dart';
 import 'package:flutter_component/demo/component/image/jd_image.dart';
 import 'package:flutter_component/demo/component/jd_component_list.dart';
@@ -59,6 +60,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/rowcolumn': (BuildContext context) => JDRowColumnPage(),
   '/flex': (BuildContext context) => JDFlexPage(),
   '/wrapflow': (BuildContext context) => JDWrapFlowPage(),
+  '/flow': (BuildContext context) => JDFlowPage(),
   '/stackpositioned': (BuildContext context) => JDStackPositionedPage(),
   '/align': (BuildContext context) => JDAlignPage(),
   '/expanded': (context) => JDExpandedPage(),
