@@ -85,6 +85,8 @@ dependencies:
   share: ^0.6.4+1
   # 状态管理
   provider: ^4.1.2
+  #fish_redux
+  fish_redux: ^0.3.4
   #html
   flutter_html: ^ 1.0.0
   #链式编程
@@ -127,7 +129,7 @@ flutter:
   assets:
     - assets/jsons/
     - assets/images/
-    - assets/images/splash_bg.png
+    - assets/images/3.0x/
 
   # To add assets to your application, add an assets section, like this:
   # assets:

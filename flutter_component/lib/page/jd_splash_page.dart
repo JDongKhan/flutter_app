@@ -133,7 +133,7 @@ class _JDSplashPageState extends State<JDSplashPage> {
         child: Stack(
           children: <Widget>[
             Image.asset(
-              JDAssetBundle.getImgPath('splash_bg'),
+              'assets/images/splash_bg.png',
               width: double.infinity,
               fit: BoxFit.fill,
               height: double.infinity,
@@ -147,13 +147,13 @@ class _JDSplashPageState extends State<JDSplashPage> {
                 imageUrl:
                     'http://ww1.sinaimg.cn/large/7a8aed7bgw1ewc4irf4syj20go0ltdjk.jpg',
                 placeholder: (context, url) => Image.asset(
-                  JDAssetBundle.getImgPath('splash_bg'),
+                  'assets/images/splash_bg.png',
                   width: double.infinity,
                   fit: BoxFit.fill,
                   height: double.infinity,
                 ),
                 errorWidget: (context, url, dynamic error) => Image.asset(
-                  JDAssetBundle.getImgPath('splash_bg'),
+                  'assets/images/splash_bg.png',
                   width: double.infinity,
                   fit: BoxFit.fill,
                   height: double.infinity,

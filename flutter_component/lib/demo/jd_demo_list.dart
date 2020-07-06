@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_component/demo/fishredux/OnePage/page.dart';
 
 class JDDemoListPage extends StatefulWidget {
   @override
@@ -8,7 +10,7 @@ class JDDemoListPage extends StatefulWidget {
 class _JDDemoListPageState extends State<JDDemoListPage> {
   /*************************** demo *************************/
 
-  final demo_list = <Map<String, String>>[
+  final demo_list = <Map<String, dynamic>>[
     {
       "title": "Login",
       "router": "/login",
@@ -36,6 +38,10 @@ class _JDDemoListPageState extends State<JDDemoListPage> {
     {
       "title": "第三方组件",
       "router": "/thirdparty_list",
+    },
+    {
+      "title": "fishredux",
+      "page": OnePagePage().buildPage({}),
     }
   ];
 
@@ -58,8 +64,8 @@ class _JDDemoListPageState extends State<JDDemoListPage> {
         });
   }
 
-  Widget _buildRow(Map<String, String> map) {
-    String text = map["title"];
+  Widget _buildRow(Map<String, dynamic> map) {
+    String text = map["title"] as String;
     return new ListTile(
       contentPadding: EdgeInsets.all(10.0),
       title: new Text(
@@ -68,12 +74,19 @@ class _JDDemoListPageState extends State<JDDemoListPage> {
       ),
       leading: new Image.asset("assets/images/head.png"),
       onTap: () {
-        _pushSaved(text, map["router"]);
+        _pushSaved(text, map["router"], map["page"] as Widget);
       },
     );
   }
 
-  void _pushSaved(String title, String router) async {
+  void _pushSaved(String title, String router, Widget page) async {
+    if (page != null) {
+      var map = await Navigator.of(context).push(CupertinoPageRoute(
+        builder: (BuildContext context) => page,
+      ));
+      print(map);
+      return;
+    }
     // Navigator.pushNamed(context, router);
     //带有返回值
     var map = await Navigator.of(context)
