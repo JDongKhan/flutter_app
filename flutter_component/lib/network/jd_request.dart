@@ -44,6 +44,6 @@ class JDRequest {
   static Future<List<JDImage>> imageList() async {
     Response r = await JDNetwork.get('http://gank.io/api/random/data/福利/100');
     List list = r.data['results'];
-    return list.map((e) => JDImage.fromJson(e)).toList();
+    return list?.map((e) => JDImage.fromJson(e)).toList();
   }
 }

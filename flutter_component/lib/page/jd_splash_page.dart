@@ -32,6 +32,7 @@ class _JDSplashPageState extends State<JDSplashPage> {
   @override
   void initState() {
     super.initState();
+//    (context as Element).markNeedsBuild();
 //    showAd = Random().nextBool();
     if (!showAd) {
       _initBannerData();

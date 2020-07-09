@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/demo/fishredux/OnePage/page.dart';
 
+import 'bottom_drag_widget/bottom_drag_demo.dart';
+
 class JDDemoListPage extends StatefulWidget {
   @override
   State createState() => _JDDemoListPageState();
@@ -42,6 +44,10 @@ class _JDDemoListPageState extends State<JDDemoListPage> {
     {
       "title": "fishredux",
       "page": OnePagePage().buildPage({}),
+    },
+    {
+      "title": "BottomDragDemo",
+      "page": BottomDragDemo(),
     }
   ];
 
