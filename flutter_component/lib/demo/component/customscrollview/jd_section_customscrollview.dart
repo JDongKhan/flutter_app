@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_component/widget/sectionview/jd_sectionview.dart';
 
 /// @author jd
 
@@ -8,13 +9,11 @@ class JDSectionTableView extends StatefulWidget {
 }
 
 class _JDSectionTableViewState extends State<JDSectionTableView> {
-  final ScrollController _controller = ScrollController();
-
   final List items = [];
   @override
   void initState() {
     super.initState();
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 50; i++) {
       List item = [];
       for (int j = 0; j < 10; j++) {
         item.add('$j');
@@ -32,57 +31,54 @@ class _JDSectionTableViewState extends State<JDSectionTableView> {
       appBar: AppBar(
         title: const Text('SectionTableView'),
       ),
-      body: CustomScrollView(
-        controller: _controller,
-        slivers: _sections(),
+      body: JDSectionView(
+        header: Container(
+          key: GlobalKey(),
+          color: Colors.blue,
+          height: 100,
+        ),
+        numberOfSectionInSectionView: _numberOfSectionInSectionView,
+        numberOfRowsInSection: _numberOfRowsInSection,
+        viewForHeaderInSection: _viewForHeaderInSection,
+        viewForFooterInSection: _viewForFooterInSection,
+        cellForRowAtInSection: _cellForRowAtInSection,
       ),
     );
   }
 
-  List<Widget> _sections() {
-    List<Widget> widgets = [];
-    items.forEach((element) {
-      //section
-      Widget section = _buidlSection(element);
-      widgets.add(section);
-      List subItems = element['items'];
-      //rows
-      Widget rows = _buildRows(subItems);
-      widgets.add(rows);
-    });
-    return widgets;
+  int _numberOfSectionInSectionView() {
+    return items.length;
   }
 
-  Widget _buidlSection(Map section) {
-    return SliverToBoxAdapter(
-      child: Container(
-        height: 40,
-        color: Colors.black12,
-        padding: const EdgeInsets.only(left: 20),
-        alignment: Alignment.centerLeft,
-        child: Text(section['key']),
-      ),
+  int _numberOfRowsInSection(int section) {
+    Map map = items[section];
+    List array = map['items'];
+    return array.length;
+  }
+
+  Widget _viewForHeaderInSection(int section) {
+    Map map = items[section];
+    return Container(
+      color: Colors.black12,
+      padding: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
+      child: Text(map['key']),
     );
   }
 
-  Widget _buildRows(List items) {
-    return SliverList(
-      delegate: SliverChildBuilderDelegate(
-        (BuildContext context, int index) {
-          String title = items[index];
-          return Container(
-            color: const Color(0xEEEEEEEE),
-            padding: const EdgeInsets.all(10),
-            child: Container(
-              color: Colors.white,
-              child: ListTile(
-                title: Text(title),
-              ),
-            ),
-          );
-        },
-        childCount: items.length,
-      ),
+  Widget _viewForFooterInSection(int section) {
+    return Container(
+      color: Colors.red,
+      padding: EdgeInsets.only(left: 20),
+      child: Text('A'),
+    );
+  }
+
+  Widget _cellForRowAtInSection(int section, int row) {
+    Map map = items[section];
+    List array = map['items'];
+    return Container(
+      padding: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
+      child: Text(array[row]),
     );
   }
 }
