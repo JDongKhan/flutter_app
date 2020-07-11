@@ -22,13 +22,17 @@ class _JDMemberHomePageState extends State<JDMemberHomePage> {
   Widget _buildBackHome() {
     return Column(
       children: <Widget>[
-        Container(
-          height: 200,
-          color: Colors.red,
-          alignment: Alignment.center,
-          child: const Text('个人介绍'),
+        Flexible(
+          flex: 4,
+          child: Container(
+            height: 200,
+            color: Colors.red,
+            alignment: Alignment.center,
+            child: const Text('个人介绍'),
+          ),
         ),
-        Expanded(
+        Flexible(
+          flex: 12,
           child: _buildBackHomeList(),
         )
       ],
