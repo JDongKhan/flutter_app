@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
  */
 
 class JDImageViewPage extends StatefulWidget {
-
   final String title = "jd_imageview";
 
   @override
@@ -16,7 +15,6 @@ class JDImageViewPage extends StatefulWidget {
 }
 
 class _JDImageViewPageState extends State<JDImageViewPage> {
-
   String netUrl1 =
       "https://upload-images.jianshu.io/upload_images/13222938-74a4dc4115d76790.png";
   String netUrl2 =
@@ -31,7 +29,6 @@ class _JDImageViewPageState extends State<JDImageViewPage> {
     _loadLocalUrl1();
     _initAsync2();
   }
-
 
   void _loadNetUrl1() async {
     var barHeight = kToolbarHeight;
@@ -48,7 +45,6 @@ class _JDImageViewPageState extends State<JDImageViewPage> {
 //    setState(() {});
   }
 
-
   void _loadCachedNetworkImage() async {
     Image image = new Image(image: new CachedNetworkImageProvider(netUrl2));
 //    Rect rect = await WidgetUtil.getImageWH(image: image);
@@ -61,7 +57,6 @@ class _JDImageViewPageState extends State<JDImageViewPage> {
 //    Image imageNetwork = new Image.network("url");
 //    Image imageMemory = new Image.memory(null);
   }
-
 
   void _initAsync2() {
 //    WidgetUtil.getImageWHE(url: netUrlE).then((Rect rect) {
@@ -80,11 +75,8 @@ class _JDImageViewPageState extends State<JDImageViewPage> {
           title: Text(widget.title),
         ),
         body: Center(
-          child: Column(
-              children: <Widget>[
-              ]
-          ),
+          child: Column(children: <Widget>[]),
         ) // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        );
   }
 }

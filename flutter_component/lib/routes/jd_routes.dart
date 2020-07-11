@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_component/default/jd_notfind.dart';
 import 'package:flutter_component/demo/buycar/jd_buycar_page.dart';
+import 'package:flutter_component/demo/camera/jd_camera.dart';
+import 'package:flutter_component/demo/camera/jd_pickImage.dart';
 import 'package:flutter_component/demo/component/align/jd_align.dart';
 import 'package:flutter_component/demo/component/button/jd_button.dart';
 import 'package:flutter_component/demo/component/checkbox/jd_checkbox.dart';
@@ -33,8 +35,6 @@ import 'package:flutter_component/demo/databtransfer/jd_inherited_widget.dart';
 import 'package:flutter_component/demo/databtransfer/jd_notification.dart';
 import 'package:flutter_component/demo/databtransfer/jd_stream.dart';
 import 'package:flutter_component/demo/douyin/jd_douyin_page.dart';
-import 'package:flutter_component/demo/funcation/camera/jd_camera.dart';
-import 'package:flutter_component/demo/funcation/camera/jd_pickImage.dart';
 import 'package:flutter_component/demo/funcation/state/jd_state_list.dart';
 import 'package:flutter_component/demo/jd_demo_list.dart';
 import 'package:flutter_component/demo/tab/jd_tabbar.dart';
@@ -93,7 +93,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
 
   //三方
   '/webview': (BuildContext context) => JDWebViewPage(),
-  '/image': (BuildContext context) => JDImageViewPage(),
+  '/imageView': (BuildContext context) => JDImageViewPage(),
 //  '/player': (BuildContext context) => JDPlayer(),
 
   '/demo_list': (BuildContext context) => JDDemoListPage(),

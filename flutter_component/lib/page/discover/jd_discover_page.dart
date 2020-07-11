@@ -1,5 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
+import 'package:flutter_component/demo/fishredux/OnePage/page.dart';
+import 'package:flutter_component/demo/funcation/state/jd_tapbox_a.dart';
+import 'package:flutter_component/demo/funcation/state/jd_tapbox_b.dart';
+import 'package:flutter_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_component/page/scaffold/jd_scaffold_page.dart';
 import 'package:flutter_component/utils/jd_navigation_util.dart';
 
@@ -10,26 +15,193 @@ class JDDiscoverPage extends StatefulWidget {
 
 class _JDDiscoverPageState extends State<JDDiscoverPage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
-  final List<Map<String, String>> module_list = <Map<String, String>>[
+  int _currentIndex = 0;
+
+  final List<Map<String, dynamic>> module_list = <Map<String, dynamic>>[
     {
-      'title': 'Component List',
-      'router': '/component_list',
+      'title': '组件列表',
+      'items': [
+        //基础组件
+        {
+          'title': 'Text',
+          'router': '/text',
+        },
+        {
+          'title': 'Button',
+          'router': '/button',
+        },
+        {
+          'title': 'Image',
+          'router': '/image',
+        },
+        {
+          'title': 'CheckBox',
+          'router': '/checkbox',
+        },
+        {
+          "title": "TextField",
+          "router": "/textfield",
+        },
+        {
+          "title": "LinearProgressIndicator",
+          "router": "/linearprogressindicator",
+        },
+
+        //布局组件
+        {
+          "title": "RowColumn",
+          "router": "/rowcolumn",
+        },
+        {
+          "title": "Flex",
+          "router": "/flex",
+        },
+        {
+          "title": "WrapFlow",
+          "router": "/wrapflow",
+        },
+        {
+          "title": "Flow",
+          "router": "/flow",
+        },
+        {
+          "title": "StackPositioned",
+          "router": "/stackpositioned",
+        },
+        {
+          "title": "Align",
+          "router": "/align",
+        },
+        {
+          "title": "Expanded",
+          "router": "/expanded",
+        },
+
+        //容器组件
+        {
+          "title": "Padding",
+          "router": "/padding",
+        },
+        {
+          "title": "ConstrainedBox",
+          "router": "/constrainedbox",
+        },
+        {
+          "title": "DecoratedBox",
+          "router": "/decoratedbox",
+        },
+        {
+          "title": "TransformPage",
+          "router": "/transform",
+        },
+        {
+          "title": "Container",
+          "router": "/container",
+        },
+
+        //滚动组件
+        {
+          "title": "SingleChildScrollView",
+          "router": "/singlechildscrollview",
+        },
+        {
+          "title": "ListView",
+          "router": "/listview",
+        },
+        {
+          "title": "GridView",
+          "router": "/gridview",
+        },
+        {
+          "title": "CustomScrollView",
+          "router": "/customscrollview",
+        },
+        {
+          "title": "NestedScrollView",
+          "router": "/nestedscrollview_list",
+        }
+      ],
     },
     {
       'title': 'State',
-      'router': '/demo.funcation.state',
+      'items': [
+        {
+          'title': '状态1',
+          'page': JDTapboxA(),
+        },
+        {
+          'title': '状态2',
+          'page': JDParentWidgetB(),
+        },
+        {
+          'title': '状态3',
+          'page': JDParentWidgetC(),
+        }
+      ],
     },
     {
-      'title': 'Data Transfer',
-      'router': '/data',
+      'title': 'DataTransfer',
+      'items': [
+        {
+          "title": "InheritedWidget",
+          "router": "/inheritedwidget",
+        },
+        {
+          "title": "Notification",
+          "router": "/notification",
+        },
+        {
+          "title": "EventBus",
+          "router": "/eventbus",
+        },
+        {
+          "title": "Stream",
+          "router": "/stream",
+        }
+      ],
     },
     {
       'title': 'Demo',
-      'router': '/demo_list',
+      'items': [
+        {
+          "title": "Login",
+          "router": "/login",
+        },
+        {
+          "title": "Scaffold",
+          "router": "/scaffold",
+        },
+        {
+          "title": "Tabbar",
+          "router": "/tabbar",
+        },
+        {
+          "title": "抖音",
+          "router": "/douyin",
+        },
+        {
+          "title": "购物车",
+          "router": "/buy_car",
+        },
+        {
+          "title": "拍照",
+          "router": "/pickImage",
+        },
+        {
+          "title": "第三方组件",
+          "router": "/thirdparty_list",
+        },
+        {
+          "title": "fishredux",
+          "page": OnePagePage().buildPage({}),
+        },
+        {
+          "title": "BottomDragDemo",
+          "page": BottomDragDemo(),
+        }
+      ],
     }
   ];
-
-  final TextStyle _biggerFont = const TextStyle(fontSize: 18.0);
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -38,42 +210,106 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
     super.initState();
   }
 
-  Widget _buildSuggestions() {
+  Widget _buildLeftMenu() {
     //下划线widget预定义以供复用。
     final Widget divider1 = Divider(
+      height: 1,
       color: Colors.blue,
     );
-    final Widget divider2 = Divider(color: Colors.green);
-
-    return ListView.separated(
-      itemCount: module_list.length,
-      padding: const EdgeInsets.all(16.0),
-      itemBuilder: (BuildContext context, int i) {
-        return _buildRow(module_list[i]);
-      },
-      //分割器构造器
-      separatorBuilder: (BuildContext context, int index) {
-        return index % 2 == 0 ? divider1 : divider2;
-      },
-    );
-  }
-
-  Widget _buildRow(Map<String, String> map) {
-    final String text = map['title'];
-    return ListTile(
-      contentPadding: const EdgeInsets.all(10.0),
-      title: Text(
-        text,
-        style: _biggerFont,
+    return Container(
+      width: 100,
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        itemCount: module_list.length,
+        padding: const EdgeInsets.all(0),
+        itemBuilder: (BuildContext context, int i) {
+          return _buildRow(module_list[i], i);
+        },
+        //分割器构造器
+        separatorBuilder: (BuildContext context, int index) {
+          return divider1;
+        },
       ),
-      leading: Image.asset('assets/images/head.png'),
+    );
+  }
+
+  Widget _buildRightMenu() {
+    Map map = module_list[_currentIndex];
+    List currentList = map['items'];
+    return Container(
+      color: Colors.grey[100],
+      child: ListView.separated(
+        physics: const BouncingScrollPhysics(
+            parent: AlwaysScrollableScrollPhysics()),
+        itemCount: currentList?.length,
+        padding: const EdgeInsets.all(0),
+        itemBuilder: (BuildContext context, int i) {
+          Map item = currentList[i];
+          String text = item['title'];
+          return InkWell(
+            child: Container(
+              alignment: Alignment.centerLeft,
+              height: 40,
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                text,
+                style: const TextStyle(fontSize: 14.0),
+              ),
+            ),
+            onTap: () {
+              _pushSaved(text, item['router'], item['page']);
+            },
+          );
+        },
+        //分割器构造器
+        separatorBuilder: (BuildContext context, int index) {
+          return Divider(
+            height: 1,
+            color: Colors.blue,
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildSuggestions() {
+    return Row(
+      children: <Widget>[
+        _buildLeftMenu(),
+        Expanded(
+          child: _buildRightMenu(),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRow(Map<String, dynamic> map, int index) {
+    final String text = map['title'];
+    return InkWell(
+      child: Container(
+        color: index == _currentIndex ? Colors.grey[100] : Colors.white,
+        alignment: Alignment.centerLeft,
+        height: 40,
+        padding: const EdgeInsets.only(left: 10),
+        child: Text(
+          text,
+          style: const TextStyle(fontSize: 14.0),
+        ),
+      ),
       onTap: () {
-        _pushSaved(text, map['router']);
+        setState(() {
+          _currentIndex = index;
+        });
       },
     );
   }
 
-  void _pushSaved(String title, String router) async {
+  void _pushSaved(String title, String router, Widget page) async {
+    if (page != null) {
+      JDNavigationUtil.push(page);
+      return;
+    }
     // Navigator.pushNamed(context, router);
     var map = JDNavigationUtil.pushNamed(router, arguments: {'title': title});
     //带有返回值
