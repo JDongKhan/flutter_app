@@ -89,6 +89,8 @@ class _JDMyPageState extends State<JDMyPage>
       ),
       elevation: 2,
       pinned: true,
+//      floating: true,
+//      snap: true,
       backgroundColor: Colors.orange,
       flexibleSpace: FlexibleSpaceBar(
         //视差效果

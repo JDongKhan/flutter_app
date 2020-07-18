@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_component/demo/component/customscrollview/jd_section_customscrollview.dart';
 import 'package:flutter_component/utils/jd_navigation_util.dart';
 
+import 'jd_customscrollview2.dart';
+
 /**
  *
  * @author jd
@@ -54,7 +56,7 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
           SliverAppBar(
             actions: <Widget>[
               FlatButton(
-                child: Text('SectionTableView'),
+                child: const Text('SectionTableView'),
                 onPressed: () {
                   JDNavigationUtil.push(JDSectionTableView());
                 },
@@ -65,7 +67,7 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
             flexibleSpace: FlexibleSpaceBar(
               title: const Text('Demo'),
               background: Image.asset(
-                "assets/images/head.png",
+                'assets/images/head.png',
                 fit: BoxFit.cover,
               ),
             ),
@@ -73,21 +75,26 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
 
           SliverPadding(
             padding: const EdgeInsets.all(8.0),
-            sliver: new SliverGrid(
+            sliver: SliverGrid(
               //Grid
-              gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, //Grid按两列显示
                 mainAxisSpacing: 10.0,
                 crossAxisSpacing: 10.0,
                 childAspectRatio: 4.0,
               ),
-              delegate: new SliverChildBuilderDelegate(
+              delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
                   //创建子widget
-                  return new Container(
-                    alignment: Alignment.center,
-                    color: Colors.cyan[100 * (index % 9)],
-                    child: new Text('grid item $index'),
+                  return InkWell(
+                    onTap: () {
+                      _tap(index);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      color: Colors.cyan[100 * (index % 9)],
+                      child: Text('grid item $index'),
+                    ),
                   );
                 },
                 childCount: 60,
@@ -95,21 +102,27 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
             ),
           ),
           //List
-          new SliverFixedExtentList(
+          SliverFixedExtentList(
             itemExtent: 50.0,
-            delegate: new SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
+            delegate:
+                SliverChildBuilderDelegate((BuildContext context, int index) {
               //创建列表项
-              return new Container(
+              return Container(
                 alignment: Alignment.center,
                 color: Colors.lightBlue[100 * (index % 9)],
-                child: new Text('list item $index'),
+                child: Text('list item $index'),
               );
             }, childCount: 50 //50个列表项
-                ),
+                    ),
           ),
         ],
       ),
     );
+  }
+
+  void _tap(int index) {
+    if (index == 0) {
+      JDNavigationUtil.push(JDCustomScrollView2Demo());
+    }
   }
 }
