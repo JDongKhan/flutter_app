@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_component/widget/searchbar/jd_searchbar.dart';
 import 'package:flutter_component/widget/sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
 
 /// @author jd
 
-class JDNestedScrollViewPageDemo extends StatefulWidget {
+class JDNestedScrollView4Demo extends StatefulWidget {
   @override
-  _JDNestedScrollViewPageDemoState createState() =>
-      _JDNestedScrollViewPageDemoState();
+  _JDNestedScrollView4DemoState createState() =>
+      _JDNestedScrollView4DemoState();
 }
 
-class _JDNestedScrollViewPageDemoState
-    extends State<JDNestedScrollViewPageDemo> {
+class _JDNestedScrollView4DemoState extends State<JDNestedScrollView4Demo> {
   List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
     {
       'title': '热点',
@@ -45,40 +45,7 @@ class _JDNestedScrollViewPageDemoState
     return DefaultTabController(
       length: _tabs.length,
       child: Scaffold(
-//        appBar: AppBar(
-//          elevation: 08, //相当于bar下面的阴影值
-//          title: _widget_barSearch(),
-//          actions: <Widget>[
-//            IconButton(
-//              icon: Icon(Icons.business),
-//            )
-//          ],
-//        ),
         body: _buildScaffoldBody(context),
-      ),
-    );
-  }
-
-  //顶部搜索框
-  Widget _widget_barSearch() {
-    return Container(
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: FlatButton.icon(
-              onPressed: null,
-              icon: Icon(Icons.search, size: 18.0),
-              label: const Text(
-                '输入搜索内容',
-                style: TextStyle(fontSize: 14.0),
-              ),
-            ),
-          ),
-        ],
-      ),
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        borderRadius: const BorderRadius.all(Radius.circular(4.0)),
       ),
     );
   }
@@ -106,10 +73,16 @@ class _JDNestedScrollViewPageDemoState
             ///所以我就用了SliverPersistentHeader来实现这个效果，SliverAppBar的bottom中只放TabBar顶部的布局
             sliver: SliverAppBar(
               forceElevated: innerBoxIsScrolled,
-              title: const Text('Test'),
+              title: _widget_barSearch(),
               centerTitle: true,
               pinned: true,
+              elevation: 0,
               expandedHeight: 250,
+              actions: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.business),
+                )
+              ],
 
               ///TabBar顶部收缩的部分
               flexibleSpace: Stack(
@@ -130,6 +103,17 @@ class _JDNestedScrollViewPageDemoState
       },
       body: TabBarView(
         children: _tabs.map((e) => _listItem(_tabs.indexOf(e))).toList(),
+      ),
+    );
+  }
+
+  /************************** 导航 **************************/
+  //顶部搜索框
+  Widget _widget_barSearch() {
+    return Container(
+      child: JDSearchBar(
+        text: '搜索你想要的',
+        onTap: () {},
       ),
     );
   }
@@ -186,6 +170,8 @@ class _JDNestedScrollViewPageDemoState
     );
   }
 
+  /************************** tabbar **************************/
+
   Widget _tabBar() {
     return Container(
       color: Colors.white,
@@ -196,12 +182,15 @@ class _JDNestedScrollViewPageDemoState
     );
   }
 
+  /************************** content **************************/
+
   Widget _listItem(int index) {
     return Container(
       color: Colors.grey[100],
       margin: const EdgeInsets.only(top: 80),
+      key: PageStorageKey<int>(index),
       child: ListView.separated(
-        key: PageStorageKey<int>(index),
+        padding: const EdgeInsets.all(0), //目的让内容对齐，不留空隙
         itemBuilder: (BuildContext context, int index) {
           return Container(
             height: 60,

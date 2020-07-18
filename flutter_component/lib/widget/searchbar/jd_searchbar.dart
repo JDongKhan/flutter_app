@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
  */
 
 class JDSearchBar extends StatefulWidget {
-
-  JDSearchBar({this.onTap,this.text});
+  JDSearchBar({this.onTap, this.text});
 
   GestureTapCallback onTap;
   String text;
@@ -26,16 +25,17 @@ class _JDSearchBarState extends State<JDSearchBar> {
   void initState() {
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
-          height: 60.0,
-          color: Theme.of(context).primaryColor,
-          child: Padding(
-            padding: const EdgeInsets.all(6),
-            child: Card(
-              child: _buildSearchWidget(),
-            ),
+      height: 60.0,
+      color: Colors.transparent,
+      child: Padding(
+        padding: const EdgeInsets.all(6),
+        child: Card(
+          child: _buildSearchWidget(),
+        ),
       ),
     );
   }
@@ -44,8 +44,13 @@ class _JDSearchBarState extends State<JDSearchBar> {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: <Widget>[
-        const SizedBox(width: 10.0,),
-        Icon(Icons.search,color: Colors.grey,),
+        const SizedBox(
+          width: 10.0,
+        ),
+        Icon(
+          Icons.search,
+          color: Colors.grey,
+        ),
         Expanded(
           child: Container(
             alignment: Alignment.center,
@@ -54,8 +59,8 @@ class _JDSearchBarState extends State<JDSearchBar> {
               controller: _controller,
               focusNode: _focusNode,
               decoration: InputDecoration(
-  //                            contentPadding: EdgeInsets.all(0),
-                hintText: widget.text ?? '查找' ,
+                //                            contentPadding: EdgeInsets.all(0),
+                hintText: widget.text ?? '查找',
                 border: InputBorder.none,
               ),
               onTap: () {
@@ -75,9 +80,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
             setState(() {});
           },
         ),
-
       ],
     );
   }
-
 }
