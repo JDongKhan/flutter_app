@@ -108,7 +108,7 @@ final Map<String, WidgetBuilder> routes = <String, WidgetBuilder>{
   '/thirdparty_list': (BuildContext context) => JDThirdpartyListPage(),
 };
 
-class Router {
+class JDRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     final WidgetBuilder builder = routes[settings.name];
     return CupertinoPageRoute<dynamic>(

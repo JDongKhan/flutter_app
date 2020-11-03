@@ -33,15 +33,14 @@ class JDCartModel extends ChangeNotifier {
 }
 
 class JDBuyCarPage extends StatefulWidget {
-
   final String title = "providerroute";
 
   @override
   State createState() => _JDBuyCarPageState();
 }
 
-class _JDBuyCarPageState extends State<JDBuyCarPage> with SingleTickerProviderStateMixin {
-
+class _JDBuyCarPageState extends State<JDBuyCarPage>
+    with SingleTickerProviderStateMixin {
   GlobalKey _shopKey = GlobalKey();
   Offset _endOffset;
   AnimationController _controller;
@@ -50,12 +49,14 @@ class _JDBuyCarPageState extends State<JDBuyCarPage> with SingleTickerProviderSt
   @override
   void initState() {
     super.initState();
-    _controller = AnimationController(duration: Duration(milliseconds: 800),vsync: this);
-    _animation = Tween(begin: 0.0,end: 1.0).animate(_controller);
+    _controller =
+        AnimationController(duration: Duration(milliseconds: 800), value: 0);
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_controller);
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-       RenderBox renderObj =  _shopKey.currentContext.findRenderObject() as RenderBox;
-       _endOffset =  renderObj.localToGlobal(Offset.zero);
+      RenderBox renderObj =
+          _shopKey.currentContext.findRenderObject() as RenderBox;
+      _endOffset = renderObj.localToGlobal(Offset.zero);
     });
   }
 
@@ -72,20 +73,18 @@ class _JDBuyCarPageState extends State<JDBuyCarPage> with SingleTickerProviderSt
               Expanded(
                 child: _buildListItem(),
               ),
-
               Container(
                 height: 1,
                 color: Colors.grey.withOpacity(0.5),
               ),
               _buildShopCarBottomView()
             ],
-          )  ,
-        )
-    );
+          ),
+        ));
   }
 
   Widget _buildShopCarBottomView() {
-    return   Container(
+    return Container(
       height: 60,
       color: Colors.white,
       child: Row(
@@ -101,9 +100,9 @@ class _JDBuyCarPageState extends State<JDBuyCarPage> with SingleTickerProviderSt
             padding: EdgeInsets.only(left: 20),
             child: Builder(
               builder: (context) {
-                var cart=JDChangeNotifierProvider.of<JDCartModel>(context);
+                var cart = JDChangeNotifierProvider.of<JDCartModel>(context);
                 return Text("总价: ${cart.totalPrice}");
-                },
+              },
             ),
           )
         ],
@@ -112,24 +111,23 @@ class _JDBuyCarPageState extends State<JDBuyCarPage> with SingleTickerProviderSt
   }
 
   Widget _buildListItem() {
-      return ListView.builder(itemBuilder: (context,int index) {
-        return  ListTile(
-          title: Text("我是商品名称${index}"),
-          trailing: Builder(
-            builder: (context) {
-              return IconButton(
-                icon: Icon(Icons.add_circle),
-                onPressed: () {
-                  RenderBox box = context.findRenderObject() as RenderBox;
-                  _endOffset = box.localToGlobal(Offset.zero);
-                  JDChangeNotifierProvider.of<JDCartModel>(context).add(JDItem(20.0, 1));
-                },
-              );
-            },
-          ),
-        );
-      });
+    return ListView.builder(itemBuilder: (context, int index) {
+      return ListTile(
+        title: Text("我是商品名称${index}"),
+        trailing: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: Icon(Icons.add_circle),
+              onPressed: () {
+                RenderBox box = context.findRenderObject() as RenderBox;
+                _endOffset = box.localToGlobal(Offset.zero);
+                JDChangeNotifierProvider.of<JDCartModel>(context)
+                    .add(JDItem(20.0, 1));
+              },
+            );
+          },
+        ),
+      );
+    });
   }
-
-
 }

@@ -42,14 +42,14 @@ class _JDBusinessPageState extends State<JDBusinessPage>
           itemCount: list.length,
           crossAxisSpacing: 1.0,
           itemBuilder: (BuildContext context, int index) =>
-              _buildImageItem(list.elementAt(index)),
+              _buildImageItem(list.elementAt(index), index),
           staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
         );
       },
     );
   }
 
-  Widget _buildImageItem(JDImage images) {
+  Widget _buildImageItem(JDImage images, int index) {
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -63,7 +63,7 @@ class _JDBusinessPageState extends State<JDBusinessPage>
         );
       },
       child: Hero(
-        tag: '${widget.source}-${images.url}',
+        tag: '${widget.source}-${index}-${images.url}',
         child: CachedNetworkImage(imageUrl: images.url),
       ),
     );

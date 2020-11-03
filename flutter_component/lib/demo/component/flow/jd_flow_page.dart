@@ -36,9 +36,7 @@ class _JDFlowPageState extends State<JDFlowPage>
   void initState() {
     super.initState();
     _ctrlAnimationPopMenu = AnimationController(
-      duration: const Duration(milliseconds: 250),
-      vsync: this,
-    );
+        duration: const Duration(milliseconds: 250), value: 0);
   }
 
   Widget _flowMenuItem(IconData icon) {

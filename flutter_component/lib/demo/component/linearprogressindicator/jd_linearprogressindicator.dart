@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
 class JDLinearProgressIndicatorPage extends StatefulWidget {
-
   final String title = "LinearProgress";
 
   @override
   State createState() => _JDLinearProgressIndicatorPageState();
-
 }
 
-class _JDLinearProgressIndicatorPageState extends State<JDLinearProgressIndicatorPage> with SingleTickerProviderStateMixin {
-
+class _JDLinearProgressIndicatorPageState
+    extends State<JDLinearProgressIndicatorPage>
+    with SingleTickerProviderStateMixin {
   AnimationController _animationController;
 
   @override
   void initState() {
     //动画执行时间3秒
-    _animationController = new AnimationController(vsync: this, duration: Duration(seconds: 3));
+    _animationController =
+        new AnimationController(value: 0, duration: Duration(seconds: 3));
     _animationController.forward();
-    _animationController.addListener(() => setState((){}));
+    _animationController.addListener(() => setState(() {}));
     super.initState();
   }
 
@@ -31,7 +31,6 @@ class _JDLinearProgressIndicatorPageState extends State<JDLinearProgressIndicato
         body: Center(
           child: Column(
             children: <Widget>[
-
               SizedBox(height: 20),
               // 模糊进度条(会执行一个动画)
               LinearProgressIndicator(
@@ -112,12 +111,9 @@ class _JDLinearProgressIndicatorPageState extends State<JDLinearProgressIndicato
                   value: _animationController.value,
                 ),
               ),
-
             ],
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        );
   }
-
-
 }

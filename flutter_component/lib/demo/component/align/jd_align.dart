@@ -7,16 +7,13 @@ import 'package:flutter/material.dart';
  */
 
 class JDAlignPage extends StatefulWidget {
-
   final String title = "Align";
 
   @override
   State createState() => _JDAlignPageState();
-
 }
 
 class _JDAlignPageState extends State<JDAlignPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,19 +27,19 @@ class _JDAlignPageState extends State<JDAlignPage> {
                 height: 120.0,
                 width: 120.0,
                 color: Colors.blue[50],
-                child: Align(
+                child: const Align(
                   alignment: Alignment.topRight,
                   child: FlutterLogo(
                     size: 60,
                   ),
                 ),
               ),
-
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 color: Colors.blue[50],
-                child: Align(
+                child: const Align(
                   widthFactor: 2,
                   heightFactor: 2,
                   alignment: Alignment.topRight,
@@ -51,23 +48,23 @@ class _JDAlignPageState extends State<JDAlignPage> {
                   ),
                 ),
               ),
-
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 color: Colors.blue[50],
                 child: Align(
                   widthFactor: 2,
                   heightFactor: 2,
-                  alignment: Alignment(2,-1),
+                  alignment: Alignment(2, -1),
                   child: FlutterLogo(
                     size: 60,
                   ),
                 ),
               ),
-
-              SizedBox(height: 20,),
-
+              SizedBox(
+                height: 20,
+              ),
               Container(
                 height: 120.0,
                 width: 120.0,
@@ -79,10 +76,9 @@ class _JDAlignPageState extends State<JDAlignPage> {
                   ),
                 ),
               )
-
             ],
           ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        );
   }
 }

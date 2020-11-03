@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 
 import 'global/jd_global.dart';
 import 'global/jd_theme.dart';
+import 'routes/jd_routes.dart';
 
 //void collectLog(String line){
 //   //收集日志
@@ -112,7 +113,7 @@ class MyAppState extends State<MyApp> {
       ),
       home: JDSplashPage(),
 //      routes: routes,
-      onGenerateRoute: Router.generateRoute,
+      onGenerateRoute: JDRouter.generateRoute,
 //      onUnknownRoute: (settings) => MaterialPageRoute<dynamic>(builder: (context) => JDNotFindPage()),
 //      onGenerateRoute: (RouteSettings settings){
 //        return MaterialPageRoute(builder: (context){

@@ -15,7 +15,7 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BottomDrag'),
+        title: const Text('BottomDrag'),
       ),
       body: BottomDragWidget(
           body: Container(

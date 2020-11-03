@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'dot_painter.dart';
 import 'circle_painter.dart';
+import 'dot_painter.dart';
 import 'model.dart';
 
 typedef LikeCallback = void Function(bool isLike);
@@ -50,11 +50,10 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller =
-        new AnimationController(duration: widget.duration, vsync: this)
-          ..addListener(() {
-            setState(() {});
-          });
+    _controller = new AnimationController(duration: widget.duration, value: 0)
+      ..addListener(() {
+        setState(() {});
+      });
     _initAllAmimations();
   }
 

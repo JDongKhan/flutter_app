@@ -213,19 +213,20 @@ class _JDMyQRcodePageState extends State<JDMyQRcodePage> {
   }
 
   Future<Uint8List> _capturePng() async {
-    Map<PermissionGroup, PermissionStatus> permissions =
-        await PermissionHandler().requestPermissions([PermissionGroup.camera]);
-    final PermissionStatus permission =
-        await PermissionHandler().checkPermissionStatus(PermissionGroup.photos);
-    if (permission == PermissionStatus.denied) {
+    var status = await Permission.camera.status;
+    var status1 = await Permission.photos.status;
+    if (status.isDenied) {
       //无权限
-      bool isOpened = await PermissionHandler().openAppSettings();
+      openAppSettings();
       print('没有权限');
       return null;
     }
-    //添加保存照片到相册的权限
-    PermissionHandler()
-        .requestPermissions(<PermissionGroup>[PermissionGroup.storage]);
+
+    // You can request multiple permissions at once.
+    Map<Permission, PermissionStatus> statuses = await [
+      Permission.camera,
+      Permission.storage,
+    ].request();
 
     //生成图片
     try {

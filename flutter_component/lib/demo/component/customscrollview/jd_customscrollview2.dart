@@ -62,7 +62,7 @@ class _JDCustomScrollView2DemoState extends State<JDCustomScrollView2Demo> {
     return SliverAppBar(
       expandedHeight: 250,
       centerTitle: true,
-      title: Text(
+      title: const Text(
         '我的',
         style: TextStyle(color: Colors.white),
       ),

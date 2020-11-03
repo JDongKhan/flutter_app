@@ -68,8 +68,8 @@ class _JDSectionTableViewState extends State<JDSectionTableView> {
   Widget _viewForFooterInSection(int section) {
     return Container(
       color: Colors.red,
-      padding: EdgeInsets.only(left: 20),
-      child: Text('A'),
+      padding: const EdgeInsets.only(left: 20),
+      child: const Text('A'),
     );
   }
 
@@ -77,7 +77,7 @@ class _JDSectionTableViewState extends State<JDSectionTableView> {
     Map map = items[section];
     List array = map['items'];
     return Container(
-      padding: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
+      padding: const EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 10),
       child: Text(array[row]),
     );
   }

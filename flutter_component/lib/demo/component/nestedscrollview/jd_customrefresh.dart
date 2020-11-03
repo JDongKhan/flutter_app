@@ -10,7 +10,6 @@ import 'package:flutter/rendering.dart';
  */
 
 class CustomRefreshWidget extends SingleChildRenderObjectWidget {
-
   const CustomRefreshWidget({Key key, Widget child})
       : super(key: key, child: child);
 
@@ -18,7 +17,6 @@ class CustomRefreshWidget extends SingleChildRenderObjectWidget {
   RenderObject createRenderObject(BuildContext context) {
     return SimpleRefreshSliver();
   }
-
 }
 
 /// 一个简单的下拉刷新 Widget
@@ -41,13 +39,13 @@ class SimpleRefreshSliver extends RenderSliverSingleBoxAdapter {
     }
     assert(childExtent != null);
     final double paintedChildSize =
-    calculatePaintOffset(constraints, from: 0.0, to: childExtent);
+        calculatePaintOffset(constraints, from: 0.0, to: childExtent);
 
     assert(paintedChildSize.isFinite);
     assert(paintedChildSize >= 0.0);
     final bool active = constraints.overlap < 0.0;
     final double overscrolledExtent =
-    constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
+        constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
     double layoutExtent = child.size.height;
     print("overscrolledExtent:${overscrolledExtent - layoutExtent}");
     child.layout(
@@ -63,10 +61,18 @@ class SimpleRefreshSliver extends RenderSliverSingleBoxAdapter {
     if (active) {
       geometry = SliverGeometry(
         scrollExtent: layoutExtent,
+
         /// 绘制起始位置
         paintOrigin: min(overscrolledExtent - layoutExtent, 0),
-        paintExtent: max(max(child.size.height, layoutExtent) ,0.0,),
-        maxPaintExtent: max(max(child.size.height, layoutExtent) ,0.0,),
+        paintExtent: max(
+          max(child.size.height, layoutExtent),
+          0.0,
+        ),
+        maxPaintExtent: max(
+          max(child.size.height, layoutExtent),
+          0.0,
+        ),
+
         /// 布局占位
         layoutExtent: min(overscrolledExtent, layoutExtent),
       );
