@@ -1,7 +1,7 @@
 PODS:
   - albumsaver (0.0.1):
     - Flutter
-  - Bugly (2.5.5)
+  - Bugly (2.5.71)
   - camera (0.0.1):
     - Flutter
   - connectivity (0.0.1):
@@ -192,7 +192,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   albumsaver: 32a103f5396d64d7a96330c5e86f552d411a6df1
-  Bugly: eded937bbb1f731cacf689c2d934ddbd9ab34f83
+  Bugly: fd066c75c4a0eca1440f9b6a84bd37d51bfc85ac
   camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   connectivity_for_web: 2b8584556930d4bd490d82b836bcf45067ce345b
@@ -232,4 +232,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: af900197edf962456225a552665715e6d42236a7
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.10.0
