@@ -1,0 +1,37 @@
+{
+  "banner": [
+    {
+      "image": "bg_enterprise_real_name"
+    },
+    {
+      "image": "bg_personal_real_name"
+    }
+  ],
+  "menuGrid": [
+    {
+     "icon": "accessibility",
+      "title": "品牌设计"
+    }, {
+      "icon": "airport_shuttle",
+      "title": "营销推广"
+    }, {
+      "icon": "airport_shuttle",
+      "title": "IT/软件"
+    },{
+      "icon": "assessment",
+      "title": "知识产权"
+    },{
+      "icon": "assignment",
+      "title": "工商财税"
+    },{
+      "icon": "assignment_ind",
+      "title": "国际服务"
+    },{
+      "icon": "book",
+      "title": "电商服务"
+    },{
+      "icon": "branding_watermark",
+      "title": "游戏服务"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "id": 3,
+  "title": "Hello Guys!",
+  "content": "content",
+  "tags": "tag",
+  "user_type": "@enum:admin,app_user,normal",
+  "user": "jd",
+  "published": true
+}
