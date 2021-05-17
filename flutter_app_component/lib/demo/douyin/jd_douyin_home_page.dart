@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/douyin/like_gesture_widget.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
@@ -28,7 +29,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
       body: Stack(
         children: <Widget>[
           _buildBackground(),
-          _buildPage(),
+          LikeGestureWidget(child: _buildPage()),
           _buildTopMenu(),
         ],
       ),

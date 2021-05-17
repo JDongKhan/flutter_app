@@ -65,17 +65,28 @@ class _JDMemberHomePageState extends State<JDMemberHomePage> {
               child: _buildBackHome(),
             ),
           ),
-          DraggableScrollableSheet(
-            expand: true,
-            initialChildSize: 0.2,
-            minChildSize: 0.2,
-            maxChildSize: 0.8,
-            builder: (BuildContext context, ScrollController scrollController) {
-              return Container(
-                color: Colors.blue[100],
-                child: _buildDragList(scrollController),
-              );
+          NotificationListener<DraggableScrollableNotification>(
+            onNotification: (notification) {
+              print('#####################');
+              print('minExtent = ${notification.minExtent}');
+              print('maxExtent = ${notification.maxExtent}');
+              print('initialExtent = ${notification.initialExtent}');
+              print('extent = ${notification.extent}');
+              return true;
             },
+            child: DraggableScrollableSheet(
+              expand: true,
+              initialChildSize: 0.2,
+              minChildSize: 0.2,
+              maxChildSize: 0.8,
+              builder:
+                  (BuildContext context, ScrollController scrollController) {
+                return Container(
+                  color: Colors.blue[100],
+                  child: _buildDragList(scrollController),
+                );
+              },
+            ),
           )
         ],
       ),

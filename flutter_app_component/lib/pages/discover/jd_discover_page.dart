@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
 import 'package:flutter_app_component/demo/component/customPainter/jd_custompainter.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
+import 'package:flutter_app_component/demo/dash/dash_demo.dart';
+import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
+import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
 import 'package:flutter_app_component/demo/renderbox/jd_renderbox_demo.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
 import 'package:flutter_app_component/pages/scaffold/jd_scaffold_page.dart';
@@ -229,6 +232,18 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'title': 'RenderBoxDemo',
           'page': JDRenderShiftedBoxDemo(),
         },
+        {
+          'title': 'DropdownMenuDemoPage',
+          'page': JDDropdownMenuDemoPage(),
+        },
+        {
+          'title': 'PopDemoPage',
+          'page': JDPopDemoPage(),
+        },
+        {
+          'title': 'DashDemo',
+          'page': DashDemo(),
+        }
       ],
     }
   ];

@@ -37,7 +37,7 @@ class JDNetwork {
       ..add(JDNetworkMockInterceptor())
       ..add(JDErrorInterceptor())
       ..add(DioCacheManager(CacheConfig()).interceptor as Interceptor)
-      ..add(LogInterceptor(requestBody: true, responseBody: true));
+      ..add(LogInterceptor(requestBody: true, responseBody: true,error: true,));
     //iOS和Android才支持本地目录
     if ((defaultTargetPlatform == TargetPlatform.iOS) ||
         (defaultTargetPlatform == TargetPlatform.android)) {

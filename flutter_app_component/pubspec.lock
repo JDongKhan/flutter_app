@@ -21,7 +21,7 @@ packages:
       name: args
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   async:
     dependency: transitive
     description:
@@ -313,7 +313,7 @@ packages:
       name: flutter_bugly
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.1"
+    version: "0.3.2+1"
   flutter_cache_manager:
     dependency: transitive
     description:
@@ -327,7 +327,7 @@ packages:
       name: flutter_easyrefresh
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.8"
+    version: "2.2.1"
   flutter_html:
     dependency: "direct main"
     description:
@@ -426,7 +426,7 @@ packages:
       name: gzx_dropdown_menu
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "2.1.0"
+    version: "3.1.0"
   html:
     dependency: transitive
     description:
@@ -601,14 +601,14 @@ packages:
       name: path_drawing
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.5.0-nullsafety.0"
+    version: "0.5.0"
   path_parsing:
     dependency: transitive
     description:
       name: path_parsing
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.0-nullsafety.0"
+    version: "0.2.0"
   path_provider:
     dependency: transitive
     description:
@@ -671,7 +671,7 @@ packages:
       name: petitparser
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "4.0.2"
+    version: "4.1.0"
   photo_view:
     dependency: "direct main"
     description:
@@ -693,6 +693,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.0.3"
+  popup_window:
+    dependency: "direct main"
+    description:
+      name: popup_window
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.1.1"
   process:
     dependency: transitive
     description:
@@ -1040,7 +1047,7 @@ packages:
       name: xml
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "5.0.2"
+    version: "5.1.0"
   yaml:
     dependency: transitive
     description:
@@ -1050,4 +1057,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.24.0-7.0"
+  flutter: ">=1.24.0"

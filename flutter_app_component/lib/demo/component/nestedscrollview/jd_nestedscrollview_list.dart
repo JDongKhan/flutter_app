@@ -7,6 +7,7 @@ import 'jd_nestedscrollview_2.dart';
 import 'jd_nestedscrollview_3.dart';
 import 'jd_nestedscrollview_4.dart';
 import 'jd_nestedscrollview_5.dart';
+import 'sliver_list_demo_page.dart';
 
 /**
  *
@@ -30,6 +31,7 @@ class _JDNestedScrollViewListPageState
     {"title": "普通的-3", "page": LoadMoreDemo()},
     {"title": "普通的-4", "page": JDNestedScrollView4Demo()},
     {"title": "普通的-5", "page": JDNestedScrollView5Demo()},
+    {"title": "普通的-6", "page": SliverListDemoPage()},
   ];
 
   @override

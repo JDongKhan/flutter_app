@@ -27,7 +27,9 @@ dependencies:
     sdk: flutter
 
   #下拉菜单
-  gzx_dropdown_menu : any
+  gzx_dropdown_menu: ^3.1.0
+  #popwindow
+  popup_window: ^1.1.1
 
   jd_core:
     path: ../jd_core
