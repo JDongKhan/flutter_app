@@ -1,12 +1,10 @@
-
-
 # flutter_app
 
-|      |      |
-| ---- | ---- |
-|   ![demo png](1.gif "demo")   |   ![demo png](2.gif "demo")   |
-|   ![demo png](3.gif "demo")   |   ![demo png](4.gif "demo")   |
-|   ![demo png](5.gif "demo")   |      |
+![demo png](1.gif "demo")
+![demo png](2.gif "demo")
+![demo png](3.gif "demo")
+![demo png](4.gif "demo")
+![demo png](5.gif "demo")
 
 
 
