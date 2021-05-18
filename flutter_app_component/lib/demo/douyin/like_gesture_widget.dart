@@ -30,21 +30,35 @@ class _LikeGestureWidgetState extends State<LikeGestureWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       key: _key,
-      onTapDown: (detail) {
+      behavior: HitTestBehavior.opaque,
+      onDoubleTapDown: (detail) {
         setState(() {
-          int currentMilliSeconds = DateTime.now().millisecondsSinceEpoch;
-          int diff = currentMilliSeconds - lastMilliSeconds;
-          if (diff < 500) {
-            icons.add(_convertPosition(detail.globalPosition));
-            widget.onAddFavorite?.call();
-          } else {
-            widget.onSingleTap?.call();
-          }
+          icons.add(_convertPosition(detail.globalPosition));
+          widget.onAddFavorite?.call();
         });
       },
-      onTapUp: (detail) {
-        lastMilliSeconds = DateTime.now().millisecondsSinceEpoch;
+      onDoubleTap: () {},
+      onTap: () {
+        widget.onSingleTap?.call();
       },
+      // onTapDown: (detail) {
+      //   setState(() {
+      //     int currentMilliSeconds = DateTime.now().millisecondsSinceEpoch;
+      //     int diff = currentMilliSeconds - lastMilliSeconds;
+      //     if (diff < 500) {
+      //       icons.add(_convertPosition(detail.globalPosition));
+      //       widget.onAddFavorite?.call();
+      //     } else if (lastMilliSeconds != -1) {
+      //       widget.onSingleTap?.call();
+      //     }
+      //   });
+      // },
+      // onTapUp: (detail) {
+      //   lastMilliSeconds = DateTime.now().millisecondsSinceEpoch;
+      //   Future.delayed(const Duration(milliseconds: 500), () {
+      //     lastMilliSeconds = -1;
+      //   });
+      // },
       child: Stack(
         children: <Widget>[
           widget.child,

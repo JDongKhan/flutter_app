@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/animal/animal_1.dart';
+import 'package:flutter_app_component/demo/animal/run_balls.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
+import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
 import 'package:flutter_app_component/demo/component/customPainter/jd_custompainter.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
 import 'package:flutter_app_component/demo/dash/dash_demo.dart';
@@ -140,6 +143,28 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'ReorderableListView',
           'page': JDReorderableListView(),
+        }
+      ],
+    },
+    {
+      'title': 'Animal',
+      'items': [
+        {
+          'title': 'Animal 1',
+          'page': JDAnimal1(),
+        },
+        {
+          'title': 'RunBall',
+          'page': RunBall(),
+        }
+      ],
+    },
+    {
+      'title': 'Canvas',
+      'items': [
+        {
+          'title': 'ClockDemoPage',
+          'page': ClockDemoPage(),
         }
       ],
     },

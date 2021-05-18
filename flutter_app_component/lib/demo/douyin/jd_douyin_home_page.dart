@@ -29,7 +29,15 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
       body: Stack(
         children: <Widget>[
           _buildBackground(),
-          LikeGestureWidget(child: _buildPage()),
+          LikeGestureWidget(
+            onAddFavorite: () {
+              print('我在双击');
+            },
+            onSingleTap: () {
+              print('我在单击');
+            },
+            child: _buildPage(),
+          ),
           _buildTopMenu(),
         ],
       ),
@@ -139,11 +147,18 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
   }
 
   Widget _buildPlayer() {
-    return Container(
-      child: const Center(
-        child: Text(
-          '我是播放器',
-          style: TextStyle(color: Colors.white),
+    return GestureDetector(
+      onTap: () {
+        print('假装我是播放器');
+      },
+      child: Container(
+        height: double.infinity,
+        width: double.infinity,
+        child: const Center(
+          child: Text(
+            '我是播放器',
+            style: TextStyle(color: Colors.white),
+          ),
         ),
       ),
     );
