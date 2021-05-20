@@ -4,7 +4,9 @@ import 'package:flutter_app_component/demo/animal/animal_1.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
 import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
+import 'package:flutter_app_component/demo/canvas/timeline_page.dart';
 import 'package:flutter_app_component/demo/component/customPainter/jd_custompainter.dart';
+import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
 import 'package:flutter_app_component/demo/dash/dash_demo.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
@@ -88,7 +90,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'title': 'Expanded',
           'router': '/expanded',
         },
-
+        {
+          'title': 'PageViewPage',
+          'page': PageViewPage(),
+        },
         //容器组件
         {
           'title': 'Padding',
@@ -165,6 +170,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'ClockDemoPage',
           'page': ClockDemoPage(),
+        },
+        {
+          'title': 'TimeLinePage',
+          'page': TimeLinePage(),
         }
       ],
     },

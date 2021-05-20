@@ -148,6 +148,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
 
   Widget _buildPlayer() {
     return GestureDetector(
+      behavior: HitTestBehavior.opaque,
       onTap: () {
         print('假装我是播放器');
       },

@@ -30,6 +30,8 @@ dependencies:
   gzx_dropdown_menu: ^3.1.0
   #popwindow
   popup_window: ^1.1.1
+  #网络状态
+  connectivity: ^0.4.9+2
 
   jd_core:
     path: ../jd_core
@@ -87,7 +89,7 @@ dependencies:
   widget_chain: ^0.1.0
   #升级
   flutter_app_upgrade: ^1.0.2
-
+  flutter_slidable: any
 
   camera: ^0.5.8+2
 #  video_player: '>=0.10.11+1 <2.0.0'

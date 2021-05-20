@@ -1,10 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/global/jd_appuserinfo.dart';
 import 'package:flutter_app_component/pages/qrcode/jd_my_qrcode_page.dart';
+import 'package:flutter_app_component/view_model/widget/provider_widget.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/widget//blurRect/jd_blurrect.dart';
 import 'package:provider/provider.dart';
+
+import 'viewmodel/cityinfo_view_model.dart';
 
 /**
  *
@@ -62,7 +66,23 @@ class _JDDrawerState extends State<JDDrawer>
                 _buildHeader(),
                 _buildMenuList(),
               ],
-            )
+            ),
+            //天气
+            Positioned(
+              bottom: 20,
+              left: 20,
+              height: 60,
+              width: 80,
+              child: ProviderWidget<CityInfoViewModel>(
+                model: CityInfoViewModel(),
+                onModelReady: (CityInfoViewModel model) {
+                  model.initData();
+                },
+                builder: (BuildContext c, CityInfoViewModel model) {
+                  return Text('城市:${model.cityName}-天气:${model.weather}}');
+                },
+              ),
+            ),
           ],
         ),
       ),
