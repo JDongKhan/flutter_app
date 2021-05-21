@@ -1,5 +1,4 @@
 import 'package:flutter/widgets.dart';
-import 'package:jd_core/utils/jd_toast_utils.dart';
 
 /// @author jd
 
@@ -24,7 +23,6 @@ abstract class ViewModel with ChangeNotifier {
 
   set viewState(ViewState viewState) {
     _viewState = viewState;
-    notifyListeners();
   }
 
   /// 出错时的message
@@ -51,16 +49,16 @@ abstract class ViewModel with ChangeNotifier {
     viewState = value ? ViewState.busy : ViewState.idle;
   }
 
-  void setEmpty() {
+  void setEmpty({bool listeners = true}) {
     _errorMessage = null;
     viewState = ViewState.empty;
-    notifyListeners();
+    if (listeners) notifyListeners();
   }
 
-  void setError(String message) {
+  void setError(String message, {bool listeners = true}) {
     _errorMessage = message;
     viewState = ViewState.error;
-    notifyListeners();
+    if (listeners) notifyListeners();
   }
 
   void setIdle() {
@@ -68,25 +66,25 @@ abstract class ViewModel with ChangeNotifier {
     viewState = ViewState.idle;
   }
 
-  void setUnAuthorized({String toast = '未登录'}) {
+  void setUnAuthorized({String toast = '未登录', bool listeners = true}) {
     _errorMessage = toast;
     viewState = ViewState.unAuthorized;
   }
 
-  void setNoNet({String toast = '网络连接异常'}) {
+  void setNoNet({String toast = '网络连接异常', bool listeners = true}) {
     _errorMessage = toast;
     viewState = ViewState.noNet;
   }
 
-  void setComplete() {
+  void setComplete({bool listeners = true}) {
     _errorMessage = null;
     viewState = ViewState.complete;
-    notifyListeners();
+    if (listeners) notifyListeners();
   }
 
   showToast(String toast) {
     if (toast != null && toast.isNotEmpty) {
-      JDToast.toast(toast);
+      // JDToast.toast(toast);
     }
   }
 
@@ -109,5 +107,5 @@ abstract class ViewModel with ChangeNotifier {
   }
 
   /// 第一次进入页面loading skeleton
-  Future initData();
+  Future initData({bool listeners = true});
 }

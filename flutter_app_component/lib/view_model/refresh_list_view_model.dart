@@ -21,7 +21,7 @@ abstract class RefreshListViewModel<T> extends ListViewModel<T> {
   RefreshController get refreshController => _refreshController;
 
   /// 下拉刷新
-  Future<List<T>> refresh({bool init = false}) async {
+  Future<List<T>> refresh({bool init = false, bool listeners = true}) async {
     //firstInit = init;
     try {
       currentPageNum = 0;
@@ -33,7 +33,7 @@ abstract class RefreshListViewModel<T> extends ListViewModel<T> {
         setBusy(false);
       }
       if (data == null || data.isEmpty) {
-        setEmpty();
+        setEmpty(listeners: listeners);
       } else {
         list.addAll(data);
         refreshController.refreshCompleted();
@@ -44,6 +44,7 @@ abstract class RefreshListViewModel<T> extends ListViewModel<T> {
           refreshController.loadComplete();
         }
         onCompleted(data);
+        setComplete(listeners: listeners);
       }
       return data;
     } catch (e, s) {

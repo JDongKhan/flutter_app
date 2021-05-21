@@ -7,27 +7,27 @@ import 'view_model.dart';
 abstract class SingleViewModel<T> extends ViewModel {
   T data;
 
-  Future<T> initData() async {
+  Future<T> initData({bool listeners = true}) async {
     setBusy(true);
-    await fetchData(fetch: true);
+    await fetchData(fetch: true, listeners: listeners);
   }
 
-  Future<T> fetchData({bool fetch = false}) async {
+  Future<T> fetchData({bool fetch = false, bool listeners = true}) async {
     try {
       T temp = await loadData();
       if (fetch) {
         setBusy(false);
       }
       if (temp == null) {
-        setEmpty();
+        setEmpty(listeners: listeners);
       } else {
         data = temp;
-        setComplete();
         onCompleted(temp);
+        setComplete(listeners: listeners);
       }
       return data;
     } catch (e, s) {
-      setError('请求异常');
+      setError('请求异常', listeners: listeners);
       debugPrint('error--->\n' + e.toString());
     }
   }
