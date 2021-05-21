@@ -1,4 +1,4 @@
-import 'package:flutter_app_component/view_model/view_model.dart';
+import 'view_model.dart';
 
 /// @author jd
 
@@ -10,13 +10,13 @@ abstract class ListViewModel<T> extends ViewModel {
   bool firstInit = true;
 
   /// 第一次进入页面loading skeleton
-  initData() async {
+  initData({bool listeners = true}) async {
     setBusy(true);
-    await refresh(init: true);
+    await refresh(init: true, listeners: listeners);
   }
 
   // 下拉刷新
-  Future<List<T>> refresh({bool init = false}) async {
+  Future<List<T>> refresh({bool init = false, bool listeners = true}) async {
     //firstInit = init;
     try {
       List<T> data = await loadData();
@@ -26,15 +26,15 @@ abstract class ListViewModel<T> extends ViewModel {
         setBusy(false);
       }
       if (data.isEmpty) {
-        setEmpty();
+        setEmpty(listeners: listeners);
       } else {
         list = data;
         onCompleted(data);
-        setComplete();
+        setComplete(listeners: listeners);
       }
       return data;
     } catch (e, s) {
-      setError('请求异常');
+      setError('请求异常', listeners: listeners);
       print(e);
     }
   }
