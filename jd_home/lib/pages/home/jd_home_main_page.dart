@@ -12,7 +12,6 @@ import 'package:jd_core/widget//loading/jd_loading.dart';
 import 'package:jd_core/widget//sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
 import 'package:jd_core/widget/searchbar/jd_searchbar.dart';
 import 'package:jd_home/models/home_model.dart';
-import 'package:jd_home/pages/demo/jd_home_demo.dart';
 import 'package:jd_home/pages/home/detail/jd_home_Info_detail_page.dart';
 import 'package:jd_home/pages/home/detail/jd_home_main_detail_page.dart';
 import 'package:jd_home/pages/home/jd_home_searchbar_delegate.dart';
@@ -407,7 +406,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
 
   Widget _buildTyle2Cell(Map itm) {
     return Container(
-      padding: EdgeInsets.only(top: jd_setWidth(6), bottom: jd_setHeight(11)),
+      padding: EdgeInsets.only(top: jd_getWidth(6), bottom: jd_getHeight(11)),
       alignment: Alignment.centerLeft,
       child: const JDExpandableText(
         '我要测试是十四师是死是活我要死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活',

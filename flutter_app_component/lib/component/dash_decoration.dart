@@ -13,7 +13,7 @@ class DashDecoration extends Decoration {
   final Radius radius;
   final double strokeWidth;
 
-  DashDecoration(
+  const DashDecoration(
       {this.gradient,
       this.color,
       this.step = 2,
@@ -30,7 +30,7 @@ class DashDecoration extends Decoration {
 class DashBoxPainter extends BoxPainter {
   final DashDecoration _decoration;
 
-  DashBoxPainter(this._decoration);
+  const DashBoxPainter(this._decoration);
 
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {

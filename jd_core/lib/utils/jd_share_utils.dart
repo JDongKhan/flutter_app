@@ -54,25 +54,25 @@ void showShareBottomSheet(BuildContext context) {
         children: <Widget>[
           Container(
             alignment: Alignment.bottomLeft,
-            height: jd_setWidth(59),
-            padding: EdgeInsets.only(left: jd_setWidth(42)),
+            height: jd_getWidth(59),
+            padding: EdgeInsets.only(left: jd_getWidth(42)),
             child: Text(
               '分享',
               style: TextStyle(
-                fontSize: jd_setSp(32),
+                fontSize: jd_getSp(32),
                 color: Colors.black,
               ),
             ),
           ),
           Container(
-            height: jd_setWidth(206),
+            height: jd_getWidth(206),
             padding:
-                EdgeInsets.only(top: jd_setWidth(33), left: jd_setWidth(33)),
+                EdgeInsets.only(top: jd_getWidth(33), left: jd_getWidth(33)),
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
               border: Border(
                 bottom: BorderSide(
-                  width: jd_setWidth(.7),
+                  width: jd_getWidth(.7),
                   color: currentTheme.dividerColor,
                 ),
               ),
@@ -80,9 +80,9 @@ void showShareBottomSheet(BuildContext context) {
             child: girdView,
           ),
           Container(
-            height: jd_setWidth(206),
+            height: jd_getWidth(206),
             padding:
-                EdgeInsets.only(top: jd_setWidth(33), left: jd_setWidth(33)),
+                EdgeInsets.only(top: jd_getWidth(33), left: jd_getWidth(33)),
             alignment: Alignment.topLeft,
             child: Row(
               children: const <Widget>[
@@ -96,12 +96,12 @@ void showShareBottomSheet(BuildContext context) {
             },
             child: Container(
               width: jd_screenWidth(),
-              height: jd_setWidth(125),
+              height: jd_getWidth(125),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    width: jd_setWidth(10),
+                    width: jd_getWidth(10),
                     color: currentTheme.backgroundColor,
                   ),
                 ),
@@ -109,7 +109,7 @@ void showShareBottomSheet(BuildContext context) {
               child: Text(
                 '取消',
                 style: TextStyle(
-                  fontSize: jd_setSp(36),
+                  fontSize: jd_getSp(36),
                   color: Colors.black,
                 ),
               ),

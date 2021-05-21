@@ -26,21 +26,21 @@ double jd_screenHeight() {
   return ScreenUtil.screenHeight;
 }
 
-double jd_setSp(double fontSize) {
+double jd_getSp(double fontSize) {
   return ScreenUtil().setSp(fontSize);
 }
 
 /// 设置宽度
-double jd_setWidth(double width) {
+double jd_getWidth(double width) {
   return ScreenUtil().setWidth(width);
 }
 
 /// 设置宽度
-double jd_setHeight(double height) {
+double jd_getHeight(double height) {
   return ScreenUtil().setHeight(height);
 }
 
 /// 设置字体尺寸
-double jd_setFontSize(double fontSize) {
+double jd_getFontSize(double fontSize) {
   return ScreenUtil().setSp(fontSize);
 }

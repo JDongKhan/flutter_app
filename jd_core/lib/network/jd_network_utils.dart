@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:connectivity/connectivity.dart';
 import 'package:cookie_jar/cookie_jar.dart';
 import 'package:dio/dio.dart';
@@ -21,6 +23,14 @@ class JDNetworkResponse {
   dynamic data;
 }
 
+_parseAndDecode(String response) {
+  return jsonDecode(response);
+}
+
+parseJson(String text) {
+  return compute(_parseAndDecode, text);
+}
+
 class JDNetwork {
   JDNetwork._() {
     final BaseOptions options = BaseOptions(
@@ -37,14 +47,18 @@ class JDNetwork {
       ..add(JDNetworkMockInterceptor())
       ..add(JDErrorInterceptor())
       ..add(DioCacheManager(CacheConfig()).interceptor as Interceptor)
-      ..add(LogInterceptor(requestBody: true, responseBody: true,error: true,));
+      ..add(LogInterceptor(
+        requestBody: true,
+        responseBody: true,
+        error: true,
+      ));
     //iOS和Android才支持本地目录
     if ((defaultTargetPlatform == TargetPlatform.iOS) ||
         (defaultTargetPlatform == TargetPlatform.android)) {
       _dio.interceptors.add(CookieManager(
           PersistCookieJar(dir: JDAppInfo.temporaryDirectory.path)));
     }
-
+    (_dio.transformer as DefaultTransformer).jsonDecodeCallback = parseJson;
     //重试逻辑
     if (retryEnable) {
       _dio.interceptors.add(

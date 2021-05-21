@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 //缩放路由动画
 class JDScaleRouter<T> extends PageRouteBuilder<T> {
   JDScaleRouter(
-      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn})
+      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn,RouteSettings routeSettings})
       : super(
+          settings: routeSettings,
           pageBuilder: (BuildContext context, Animation<dynamic> animation,
                   Animation<dynamic> secondaryAnimation) =>
               child,
@@ -26,8 +27,9 @@ class JDScaleRouter<T> extends PageRouteBuilder<T> {
 //渐变透明路由动画
 class JDFadeRouter<T> extends PageRouteBuilder<T> {
   JDFadeRouter(
-      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn})
+      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn,RouteSettings routeSettings})
       : super(
+            settings: routeSettings,
             pageBuilder: (BuildContext context, Animation<dynamic> animation,
                     Animation<dynamic> secondaryAnimation) =>
                 child,
@@ -104,9 +106,10 @@ class JDRight2LeftRouter<T> extends PageRouteBuilder<T> {
 //左--->右
 class JDLeft2RightRouter<T> extends PageRouteBuilder<T> {
   JDLeft2RightRouter(
-      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn})
+      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn,RouteSettings routeSettings})
       : assert(true),
         super(
+            settings: routeSettings,
             transitionDuration: Duration(milliseconds: durationMs),
             pageBuilder: (BuildContext ctx, Animation<dynamic> a1,
                 Animation<dynamic> a2) {
@@ -135,8 +138,9 @@ class JDLeft2RightRouter<T> extends PageRouteBuilder<T> {
 //上--->下
 class JDTop2BottomRouter<T> extends PageRouteBuilder<T> {
   JDTop2BottomRouter(
-      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn})
+      {this.child, this.durationMs = 500, this.curve = Curves.fastOutSlowIn,RouteSettings routeSettings})
       : super(
+            settings: routeSettings,
             transitionDuration: Duration(milliseconds: durationMs),
             pageBuilder: (BuildContext ctx, Animation<dynamic> a1, Animation<dynamic> a2) {
               return child;
@@ -226,12 +230,12 @@ class JDScaleFadeRotateRouter<T> extends PageRouteBuilder<T> {
 
 //无动画
 class JDNoAnimRouter<T> extends PageRouteBuilder<T> {
-  JDNoAnimRouter({this.child})
+  JDNoAnimRouter({Widget child,RouteSettings routeSettings})
       : super(
+            settings: routeSettings,
             opaque: false,
             pageBuilder: (BuildContext context, Animation<dynamic> animation, Animation<dynamic> secondaryAnimation) => child,
             transitionDuration: const Duration(milliseconds: 0),
             transitionsBuilder:
                 (BuildContext context, Animation<dynamic> animation, Animation<dynamic> secondaryAnimation,Widget child) => child);
-  final Widget child;
 }
