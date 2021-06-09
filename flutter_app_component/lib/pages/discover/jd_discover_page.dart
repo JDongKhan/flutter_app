@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/bubble_widget.dart';
+import 'package:flutter_app_component/component/mask_widget.dart';
 import 'package:flutter_app_component/demo/animal/animal_1.dart';
 import 'package:flutter_app_component/demo/animal/animal_list.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
@@ -297,6 +299,48 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      MarkUtils.showMark(context, [
+        MarkEntry(
+          widget: BubbleWidget(
+            child: Text(
+              '我是第一个',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          left: 100,
+          top: 100,
+        ),
+        MarkEntry(
+          widget: BubbleWidget(
+            position: BubbleArrowDirection.right,
+            child: Text(
+              '我是第二个',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          left: 250,
+          top: 100,
+        ),
+        MarkEntry(
+          widget: BubbleWidget(
+            position: BubbleArrowDirection.left,
+            child: Text(
+              '我是第三个',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          left: 10,
+          top: 200,
+        ),
+      ]);
+    });
   }
 
   Widget _buildLeftMenu() {
