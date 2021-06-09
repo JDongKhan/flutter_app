@@ -35,6 +35,7 @@ import 'package:flutter_app_component/demo/databtransfer/jd_notification.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_stream.dart';
 import 'package:flutter_app_component/demo/douyin/jd_douyin_page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_state_list.dart';
+import 'package:flutter_app_component/demo/style_card/stacked_card_demo.dart';
 import 'package:flutter_app_component/demo/tab/jd_tabbar.dart';
 import 'package:flutter_app_component/demo/thirdpary/image/jd_imageview.dart';
 import 'package:flutter_app_component/demo/thirdpary/jd_thirdparty_list.dart';
@@ -91,6 +92,7 @@ final Map<String, Widget> _routes = <String, Widget>{
   //三方
   '/webview': JDWebViewPage(),
   '/imageView': JDImageViewPage(),
+  '/stacked_card': StackedCardDemo(),
 //  '/player':  JDPlayer(),
 
   '/login': JDLoginPage(),

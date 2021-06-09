@@ -1,5 +1,5 @@
-import 'package:flutter_app_component/view_model/single_view_model.dart';
 import 'package:jd_core/jd_core.dart';
+import 'package:jd_core/view_model/single_view_model.dart';
 
 /// @author jd
 

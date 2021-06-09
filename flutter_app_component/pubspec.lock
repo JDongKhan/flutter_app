@@ -873,6 +873,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.10.0"
+  stacked_card_carousel:
+    dependency: "direct main"
+    description:
+      name: stacked_card_carousel
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.2+1"
   stream_channel:
     dependency: transitive
     description:

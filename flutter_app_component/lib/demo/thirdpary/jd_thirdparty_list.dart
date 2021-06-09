@@ -39,6 +39,10 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
     {
       "title": "Stream",
       "router": "/stream",
+    },
+    {
+      'title': 'StackedCard',
+      'router': '/stacked_card',
     }
   ];
 

@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/global/jd_appuserinfo.dart';
 import 'package:flutter_app_component/pages/qrcode/jd_my_qrcode_page.dart';
-import 'package:flutter_app_component/view_model/widget/provider_widget.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
+import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:jd_core/widget//blurRect/jd_blurrect.dart';
 import 'package:provider/provider.dart';
 

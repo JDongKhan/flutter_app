@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/renderbox/comp/jd_renderconstrainedbox.dart';
-import 'package:flutter_app_component/demo/renderbox/comp/jd_rendershiftedbox.dart';
+
+import 'comp/jd_renderconstrainedbox.dart';
+import 'comp/jd_rendershiftedbox.dart';
 
 /*
 * 1、当我们使用这种方式自定义控件的时候，至少需要自定义一个widget和一个renderobject.通常，我们的Widget可以继承下面三种类

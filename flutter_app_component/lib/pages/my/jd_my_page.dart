@@ -1,4 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/pages/logistics/logistics_page.dart';
+import 'package:flutter_app_component/pages/logistics/widget/ace_stepper.dart';
 import 'package:flutter_app_component/pages/setting/jd_setting_page.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
@@ -286,7 +290,15 @@ class _JDMyPageState extends State<JDMyPage>
 
   Widget _getItem(Map<String, dynamic> item) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        if (item['title'] == '查询') {
+          bool v = Random().nextInt(100) % 2 == 0;
+          JDNavigationUtil.push(ACEStepperPage(
+            type:
+                v == true ? ACEStepperType.vertical : ACEStepperType.horizontal,
+          ));
+        }
+      },
       child: Tab(
         icon: Icon(item['icon'] as IconData),
         text: item['title'].toString(),
