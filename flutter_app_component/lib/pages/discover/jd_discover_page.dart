@@ -7,7 +7,11 @@ import 'package:flutter_app_component/demo/animal/animal_list.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
 import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
+import 'package:flutter_app_component/demo/canvas/paragraph/paragraph_page.dart';
+import 'package:flutter_app_component/demo/canvas/pie/ace_pie_page.dart';
+import 'package:flutter_app_component/demo/canvas/progress/ace_progress_page.dart';
 import 'package:flutter_app_component/demo/canvas/timeline_page.dart';
+import 'package:flutter_app_component/demo/component/draggable/draggable_grid_page.dart';
 import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
@@ -152,6 +156,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'ReorderableListView',
           'page': JDReorderableListView(),
+        },
+        {
+          'title': 'DraggableGridPage',
+          'page': DraggableGridPage(),
         }
       ],
     },
@@ -182,6 +190,18 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'TimeLinePage',
           'page': TimeLinePage(),
+        },
+        {
+          'title': 'PiePage',
+          'page': ACEPiePage(),
+        },
+        {
+          'title': 'ProgressPage',
+          'page': ACEProgressPage(),
+        },
+        {
+          'title': 'ParagraphPage',
+          'page': ParagraphPage(),
         }
       ],
     },

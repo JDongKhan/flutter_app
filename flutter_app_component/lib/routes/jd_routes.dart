@@ -23,7 +23,7 @@ import 'package:flutter_app_component/demo/component/padding/jd_padding.dart';
 import 'package:flutter_app_component/demo/component/row_column/jd_row_column.dart';
 import 'package:flutter_app_component/demo/component/singlechildscrollView/jd_singlechildscrollView.dart';
 import 'package:flutter_app_component/demo/component/stack_positioned/jd_stack_positioned.dart';
-import 'package:flutter_app_component/demo/component/tabbar/jd_tabbar.dart';
+import 'package:flutter_app_component/demo/component/tabbar/jd_tabbar_page.dart';
 import 'package:flutter_app_component/demo/component/text/jd_text.dart';
 import 'package:flutter_app_component/demo/component/textfield/jd_textfield.dart';
 import 'package:flutter_app_component/demo/component/transform/jd_transform.dart';
