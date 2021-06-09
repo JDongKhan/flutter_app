@@ -35,7 +35,7 @@ dependencies:
   #toask
   fluttertoast: ^7.0.2
   # 屏幕适配
-  flutter_screenutil: ^2.3.1
+  flutter_screenutil: ^5.0.0+2
   #进度指示器
   flutter_spinkit: ^4.1.2
   # 状态管理

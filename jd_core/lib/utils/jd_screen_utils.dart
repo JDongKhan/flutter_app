@@ -14,16 +14,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
     ScreenUtil().scaleHeight // 实际高度的dp与设计稿px的比例
 */
 
-void initScreenUtil(BuildContext context) {
-  ScreenUtil.init(context, width: 750, height: 1334);
-}
-
 double jd_screenWidth() {
-  return ScreenUtil.screenWidth;
+  return ScreenUtil().screenWidth;
 }
 
 double jd_screenHeight() {
-  return ScreenUtil.screenHeight;
+  return ScreenUtil().screenHeight;
 }
 
 double jd_getSp(double fontSize) {

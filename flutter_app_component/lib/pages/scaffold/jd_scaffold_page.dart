@@ -7,7 +7,6 @@ import 'package:flutter_app_component/pages/leftdrawer/jd_left_drawer.dart';
 import 'package:flutter_app_component/pages/my/jd_my_page.dart';
 import 'package:flutter_app_component/service/jd_request.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
-import 'package:jd_core/utils/jd_screen_utils.dart';
 import 'package:jd_home/pages/home/jd_home_page.dart';
 
 /**
@@ -94,7 +93,6 @@ class JDScaffoldPageState extends State<JDScaffoldPage>
 
   @override
   Widget build(BuildContext context) {
-    initScreenUtil(context);
     return WillPopScope(
       onWillPop: () async => showDialog(
         context: context,
