@@ -12,7 +12,7 @@ void collectLog(String line) {
   //收集日志
 }
 void reportErrorAndLog(FlutterErrorDetails details) {
-  //上报错误和日志逻辑
+  // 上报错误和日志逻辑
   // print(details);
 }
 

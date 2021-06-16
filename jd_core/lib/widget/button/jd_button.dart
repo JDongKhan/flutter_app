@@ -7,11 +7,11 @@ class JDButton extends StatelessWidget {
     Key key,
     this.action,
     this.icon,
-    this.title,
     this.text,
     this.backgroundImage,
     this.width,
     this.height,
+    this.middlePadding = 2.0,
     this.padding = const EdgeInsets.all(5),
     this.margin = const EdgeInsets.all(0),
     this.backgroundColor = Colors.blue,
@@ -19,8 +19,8 @@ class JDButton extends StatelessWidget {
   }) : super(key: key);
 
   final Icon icon;
+  final double middlePadding;
   final action;
-  final String title;
   final Text text;
   final String backgroundImage;
   final AxisDirection imageDirection;
@@ -41,7 +41,7 @@ class JDButton extends StatelessWidget {
 
     Widget textWidget = text;
 
-    const double _kpPadding = 2;
+    double _kpPadding = this.middlePadding;
     const double _bPadding = 2;
     Widget layoutWidget;
     List<Widget> childList = [];
@@ -50,7 +50,7 @@ class JDButton extends StatelessWidget {
       if (text != null) {
         childList.add(Container(
           child: textWidget,
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: 0,
             right: 0,
             top: _kpPadding,
@@ -66,7 +66,7 @@ class JDButton extends StatelessWidget {
       if (text != null) {
         childList.add(Container(
           child: textWidget,
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: 0,
             right: 0,
             top: _bPadding,
@@ -84,7 +84,7 @@ class JDButton extends StatelessWidget {
       if (text != null) {
         childList.add(Container(
           child: textWidget,
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: _kpPadding,
             right: _bPadding,
             top: 0,
@@ -101,7 +101,7 @@ class JDButton extends StatelessWidget {
       if (text != null) {
         childList.add(Container(
           child: textWidget,
-          padding: const EdgeInsets.only(
+          padding: EdgeInsets.only(
             left: _bPadding,
             right: _kpPadding,
             top: 0,

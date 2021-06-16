@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/douyin/comment_widget.dart';
 import 'package:flutter_app_component/demo/douyin/like_gesture_widget.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
@@ -168,57 +169,65 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
   Widget _buildRightMenu() {
     return Container(
       alignment: Alignment.centerRight,
-      child: Container(
-        width: 80,
-        height: 300,
-        child: Column(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.add,
-                color: Colors.white,
+      child: GestureDetector(
+        behavior: HitTestBehavior.translucent,
+        onTap: () {
+          print('right');
+        },
+        child: Container(
+          width: 80,
+          height: 300,
+          color: Colors.red,
+          child: Column(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  print('add');
+                },
               ),
-              onPressed: () {
-                JDNavigationUtil.push(JDDouyinPeopleDetailPage());
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.favorite,
-                color: Colors.white,
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
               ),
-              onPressed: () {
-                print('favorite');
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.comment,
-                color: Colors.white,
+              IconButton(
+                icon: Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  print('favorite');
+                },
               ),
-              onPressed: () {
-                print('comment');
-              },
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 10),
-            ),
-            IconButton(
-              icon: Icon(
-                Icons.share,
-                color: Colors.white,
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
               ),
-              onPressed: () {
-                print('share');
-              },
-            ),
-          ],
+              IconButton(
+                icon: Icon(
+                  Icons.comment,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  print('comment');
+                  _commentAction();
+                },
+              ),
+              const Padding(
+                padding: EdgeInsets.only(top: 10),
+              ),
+              IconButton(
+                icon: Icon(
+                  Icons.share,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  print('share');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -238,9 +247,14 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   Container(
                     padding: const EdgeInsets.only(left: 10),
                     alignment: Alignment.topLeft,
-                    child: const Text(
-                      '@JD',
-                      style: TextStyle(color: Colors.white),
+                    child: GestureDetector(
+                      onTap: () {
+                        JDNavigationUtil.push(JDDouyinPeopleDetailPage());
+                      },
+                      child: const Text(
+                        '@JD',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ),
                   Container(
@@ -280,4 +294,12 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
 
   @override
   bool get wantKeepAlive => true;
+
+  void _commentAction() {
+    showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return CommentWidget();
+        });
+  }
 }

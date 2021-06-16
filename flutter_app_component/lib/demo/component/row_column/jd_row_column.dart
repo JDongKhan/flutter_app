@@ -43,14 +43,25 @@ class _JDRowColumnPageState extends State<JDRowColumnPage> {
                 ],
               ),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                verticalDirection: VerticalDirection.up,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // crossAxisAlignment: CrossAxisAlignment.baseline,
+                // textBaseline: TextBaseline.ideographic,
                 children: <Widget>[
-                  Text(
-                    " hello world ",
-                    style: TextStyle(fontSize: 30.0),
+                  Container(
+                    color: Colors.red,
+                    child: const Text(
+                      ' hello world ',
+                      style: TextStyle(fontSize: 30.0),
+                    ),
                   ),
-                  Text(" I am Jack "),
+                  Container(
+                    color: Colors.green,
+                    child: const Text(' I am Jack '),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                    child: Text(' I am Jack '),
+                  ),
                 ],
               ),
               Padding(
@@ -74,10 +85,17 @@ class _JDRowColumnPageState extends State<JDRowColumnPage> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: <Widget>[
-                  Text("第一个"),
-                  Text("第二个"),
-                  Text("第三个"),
+                  Container(color: Colors.red, child: Text("第一个")),
+                  Container(
+                    color: Colors.green,
+                    child: Text("第二个"),
+                  ),
+                  Container(
+                    color: Colors.blue,
+                    child: Text("第三个"),
+                  ),
                 ],
               ),
               Row(

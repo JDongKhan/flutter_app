@@ -30,12 +30,10 @@ class _LikeGestureWidgetState extends State<LikeGestureWidget> {
   Widget build(BuildContext context) {
     return GestureDetector(
       key: _key,
-      behavior: HitTestBehavior.opaque,
+      behavior: HitTestBehavior.deferToChild,
       onDoubleTapDown: (detail) {
-        setState(() {
-          icons.add(_convertPosition(detail.globalPosition));
-          widget.onAddFavorite?.call();
-        });
+        _addIcon(_convertPosition(detail.globalPosition));
+        widget.onAddFavorite?.call();
       },
       onDoubleTap: () {},
       onTap: () {
@@ -59,12 +57,7 @@ class _LikeGestureWidgetState extends State<LikeGestureWidget> {
       //     lastMilliSeconds = -1;
       //   });
       // },
-      child: Stack(
-        children: <Widget>[
-          widget.child,
-          _getIconStack(),
-        ],
-      ),
+      child: widget.child,
     );
   }
 
@@ -72,6 +65,20 @@ class _LikeGestureWidgetState extends State<LikeGestureWidget> {
   Offset _convertPosition(Offset p) {
     RenderBox getBox = _key.currentContext.findRenderObject();
     return getBox.globalToLocal(p);
+  }
+
+  _addIcon(Offset position) {
+    OverlayEntry overlayEntry = null;
+    overlayEntry = OverlayEntry(builder: (context) {
+      return TikTokFavoriteAnimationIcon(
+        key: Key(position.toString()),
+        position: position,
+        onAnimationComplete: () {
+          overlayEntry.remove();
+        },
+      );
+    });
+    Overlay.of(context).insert(overlayEntry);
   }
 
   _getIconStack() {

@@ -7,6 +7,7 @@ import 'package:flutter_app_component/demo/animal/animal_list.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
 import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
+import 'package:flutter_app_component/demo/canvas/halo/circle_halo.dart';
 import 'package:flutter_app_component/demo/canvas/paragraph/paragraph_page.dart';
 import 'package:flutter_app_component/demo/canvas/pie/ace_pie_page.dart';
 import 'package:flutter_app_component/demo/canvas/progress/ace_progress_page.dart';
@@ -26,6 +27,7 @@ import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
+import 'package:flutter_app_component/demo/wechat/wechat_page.dart';
 import 'package:flutter_app_component/pages/scaffold/jd_scaffold_page.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
@@ -202,6 +204,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'ParagraphPage',
           'page': ParagraphPage(),
+        },
+        {
+          'title': 'CircleHalo',
+          'page': CircleHalo(),
         }
       ],
     },
@@ -261,6 +267,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': '抖音',
           'router': '/douyin',
+        },
+        {
+          'title': 'Wechat',
+          'page': WechatPage(),
         },
         {
           'title': '商城',
