@@ -1,0 +1,83 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+/// @author jd
+
+class AutoCompleteTextField extends StatefulWidget {
+  const AutoCompleteTextField({
+    this.decoration = const InputDecoration(),
+    this.completeList,
+  });
+  final InputDecoration decoration;
+  final List<String> completeList;
+  @override
+  _AutoCompleteTextFieldState createState() => _AutoCompleteTextFieldState();
+}
+
+class _AutoCompleteTextFieldState extends State<AutoCompleteTextField> {
+  final FocusNode _focusNode = FocusNode();
+  OverlayEntry _overlayEntry;
+  final LayerLink _layerLink = LayerLink();
+  TextEditingController _controller = TextEditingController();
+  @override
+  void initState() {
+    _focusNode.addListener(() {
+      if (widget.completeList != null) {
+        if (_focusNode.hasFocus) {
+          _overlayEntry = _createOverlayEntry();
+          Overlay.of(context).insert(this._overlayEntry);
+        } else {
+          _overlayEntry?.remove();
+          _overlayEntry = null;
+        }
+      }
+    });
+    super.initState();
+  }
+
+  OverlayEntry _createOverlayEntry() {
+    RenderBox renderBox = context.findRenderObject();
+    var size = renderBox.size;
+    return OverlayEntry(
+      builder: (context) => Positioned(
+        width: size.width,
+        child: CompositedTransformFollower(
+          link: _layerLink,
+          showWhenUnlinked: false,
+          offset: Offset(0.0, size.height + 5.0),
+          child: Material(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              shrinkWrap: true,
+              children: widget.completeList
+                  .map(
+                    (e) => ListTile(
+                      title: Text(e),
+                      onTap: () {
+                        _overlayEntry.remove();
+                        _overlayEntry = null;
+                        _controller.text = e;
+                        _focusNode.unfocus();
+                      },
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return CompositedTransformTarget(
+      link: _layerLink,
+      child: TextFormField(
+        controller: _controller,
+        focusNode: _focusNode,
+        decoration: widget.decoration,
+      ),
+    );
+  }
+}

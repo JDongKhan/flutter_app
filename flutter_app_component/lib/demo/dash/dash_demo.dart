@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/component/dash_decoration.dart';
-import 'package:flutter_app_component/component/dash_painter.dart';
+import 'package:flutter_app_component/component/dash/dash_decoration.dart';
+import 'package:flutter_app_component/component/dash/dash_painter.dart';
 
 /// @author jd
 // 来源:https://juejin.cn/post/6960468833073102885
