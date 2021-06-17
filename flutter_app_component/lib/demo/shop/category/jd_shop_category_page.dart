@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/shop/search/jd_shop_search_page.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -130,6 +131,9 @@ class _JDShopCategoryPageState extends State<JDShopCategoryPage> {
               ),
             ),
             onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+                return JDShopSearchPage();
+              }));
               // _pushSaved(text, item['router'], item['page']);
             },
           );

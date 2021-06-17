@@ -21,14 +21,13 @@ class _ACEPiePageState extends State<ACEPiePage> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-            appBar: AppBar(title: Text('轻 · 账单'), backgroundColor: Colors.teal),
-            body: Container(
-                width: double.infinity,
-                height: double.infinity,
-                child: Column(
-                    children: <Widget>[_chartWid(), _listWid(), _billBtn()]))));
+    return Scaffold(
+        appBar: AppBar(title: Text('轻 · 账单'), backgroundColor: Colors.teal),
+        body: Container(
+            width: double.infinity,
+            height: double.infinity,
+            child: Column(
+                children: <Widget>[_chartWid(), _listWid(), _billBtn()])));
   }
 
   _chartWid() {

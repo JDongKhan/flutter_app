@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/shop/detail/jd_shop_detail_page.dart';
+import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/jd_core.dart';
@@ -22,6 +24,34 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
     '其他',
   ];
 
+  final List<JDShopInfo> recommendList = [
+    JDShopInfo(
+      icon: JDAssetBundle.getImgPath('defalut_product'),
+      shop_name: '洗发水',
+      price: 18.80,
+    ),
+    JDShopInfo(
+      icon: JDAssetBundle.getImgPath('defalut_product'),
+      shop_name: '蛋糕',
+      price: 8.80,
+    ),
+    JDShopInfo(
+      icon: JDAssetBundle.getImgPath('defalut_product'),
+      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
+      price: 48.80,
+    ),
+    JDShopInfo(
+      icon: JDAssetBundle.getImgPath('defalut_product'),
+      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
+      price: 48.80,
+    ),
+    JDShopInfo(
+      icon: JDAssetBundle.getImgPath('defalut_product'),
+      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
+      price: 48.80,
+    ),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,6 +66,7 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
               ///所以我就用了SliverPersistentHeader来实现这个效果，SliverAppBar的bottom中只放TabBar顶部的布局
               sliver: SliverAppBar(
                 backgroundColor: Colors.blue,
+                // foregroundColor: Colors.white,
                 forceElevated: innerBoxIsScrolled,
                 title: const Text(
                   '生产有限公司',
@@ -43,6 +74,7 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
                 ),
                 centerTitle: false,
                 pinned: true,
+                // floating: true,
                 elevation: 0,
                 actions: const <Widget>[
                   IconButton(
@@ -52,7 +84,7 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
               ),
             ),
             const SliverPadding(
-              padding: EdgeInsets.only(top: 116),
+              padding: EdgeInsets.only(top: 100),
             ),
             SliverToBoxAdapter(
               child: _buildSearch(),
@@ -66,18 +98,14 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
         },
         body: TabBarView(
           children: _tabs
-              .map((e) => SafeArea(
-                    top: false,
-                    bottom: false,
-                    child: Builder(
-                      // This Builder is needed to provide a BuildContext that is
-                      // "inside" the NestedScrollView, so that
-                      // sliverOverlapAbsorberHandleFor() can find the
-                      // NestedScrollView.
-                      builder: (BuildContext context) {
-                        return _buildProductWidget();
-                      },
-                    ),
+              .map((e) => Builder(
+                    // This Builder is needed to provide a BuildContext that is
+                    // "inside" the NestedScrollView, so that
+                    // sliverOverlapAbsorberHandleFor() can find the
+                    // NestedScrollView.
+                    builder: (BuildContext context) {
+                      return _buildProductWidget();
+                    },
                   ))
               .toList(),
         ),
@@ -112,9 +140,15 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          '常购清单',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+        Container(
+          margin: EdgeInsets.only(
+            left: 10,
+            bottom: 10,
+          ),
+          child: const Text(
+            '常购清单',
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
         ),
         Container(
           height: 180,
@@ -125,35 +159,59 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
                   mainAxisSpacing: 15,
                   childAspectRatio: 1.0 //显示区域宽高相等
                   ),
-              itemCount: 20,
+              itemCount: recommendList.length,
               itemBuilder: (context, index) {
+                JDShopInfo shopInfo = recommendList[index];
                 //如果显示到最后一个并且Icon总数小于200时继续获取数据
-                return Container(
-                  color: Colors.white,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                          child: Center(
-                        child: Image.asset(
-                            JDAssetBundle.getImgPath('ali_connors')),
-                      )),
-                      Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: const Text('商品名称')),
-                      Container(
-                          margin: const EdgeInsets.only(
-                            left: 10,
-                          ),
-                          child: const Text('￥100')),
-                    ],
-                  ),
-                );
+                return _buildGirdItem(shopInfo);
               }),
         ),
       ],
+    );
+  }
+
+  Widget _buildGirdItem(JDShopInfo shopInfo) {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+          return JDShopDetailPage(shopInfo);
+        }));
+      },
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              height: 80,
+              child: Center(
+                child: Image.asset(shopInfo.icon),
+              ),
+            ),
+            Container(
+                margin: const EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  top: 10,
+                  bottom: 5,
+                ),
+                child: Text(
+                  shopInfo.shop_name,
+                  style: const TextStyle(
+                    fontSize: 12,
+                  ),
+                )),
+            Container(
+                margin: const EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  bottom: 5,
+                ),
+                child: Text('￥${shopInfo.price}')),
+          ],
+        ),
+      ),
     );
   }
 
@@ -163,11 +221,12 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
             40,
             60,
             Container(
+              color: Colors.grey[100],
               child: Container(
-                color: Colors.grey[100],
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.only(left: 10),
                 child: TabBar(
+                  indicatorSize: TabBarIndicatorSize.label,
                   // These are the widgets to put in each tab in the tab bar.
                   tabs: _tabs.map((String name) => Tab(text: name)).toList(),
                 ),
@@ -176,24 +235,20 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
       );
 
   Widget _buildProductWidget() {
-    return SafeArea(
-      top: false,
-      bottom: false,
-      child: Container(
-        color: Colors.red,
-        child: StaggeredGridView.countBuilder(
-          padding: const EdgeInsets.all(1.0),
-          crossAxisCount:
-              MediaQuery.of(context).orientation == Orientation.portrait
-                  ? 2
-                  : 4,
-          mainAxisSpacing: 10.0,
-          itemCount: 60,
-          crossAxisSpacing: 10.0,
-          itemBuilder: (BuildContext context, int index) =>
-              _buildProductItem(index),
-          staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
-        ),
+    return Container(
+      color: Colors.grey[100],
+      child: StaggeredGridView.countBuilder(
+        padding: const EdgeInsets.all(1.0),
+        crossAxisCount:
+            MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
+        mainAxisSpacing: 10.0,
+        itemCount: recommendList.length * 2,
+        crossAxisSpacing: 10.0,
+        itemBuilder: (BuildContext context, int index) {
+          JDShopInfo shopInfo = recommendList[index % recommendList.length];
+          return _buildGirdItem(shopInfo);
+        },
+        staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
       ),
     );
   }

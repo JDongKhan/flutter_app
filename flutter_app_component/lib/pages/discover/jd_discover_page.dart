@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/bubble_widget.dart';
-import 'package:flutter_app_component/component/mask_widget.dart';
+import 'package:flutter_app_component/component/mask/bubble_widget.dart';
+import 'package:flutter_app_component/component/mask/mask_widget.dart';
 import 'package:flutter_app_component/demo/animal/animal_1.dart';
 import 'package:flutter_app_component/demo/animal/animal_list.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';

@@ -14,7 +14,7 @@ class JDButton extends StatelessWidget {
     this.middlePadding = 2.0,
     this.padding = const EdgeInsets.all(5),
     this.margin = const EdgeInsets.all(0),
-    this.backgroundColor = Colors.blue,
+    this.backgroundColor = Colors.transparent,
     this.imageDirection = AxisDirection.up,
   }) : super(key: key);
 
@@ -131,7 +131,7 @@ class JDButton extends StatelessWidget {
 
     return GestureDetector(
       onTap: () {
-        action();
+        if (action!= null) action();
       },
       child: Container(
         width: width,
