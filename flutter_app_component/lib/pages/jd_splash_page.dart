@@ -205,7 +205,7 @@ class _JDSplashPageState extends State<JDSplashPage> {
 
   @override
   void dispose() {
-    super.dispose();
     if (_timerUtil != null) _timerUtil.cancel(); //记得在dispose里面把timer cancel。
+    super.dispose();
   }
 }

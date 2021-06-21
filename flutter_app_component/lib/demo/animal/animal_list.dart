@@ -51,6 +51,7 @@ class _AnimalListPageState extends State<AnimalListPage> {
   void clickItem(idx) {
     Map map = item[idx];
     Widget page = map['page'];
+    // Navigator.of(context).push(PageAnimationBuilder.slideAnim(page, null));
     JDNavigationUtil.push(page);
   }
 }

@@ -70,8 +70,8 @@ class _JDMyPageState extends State<JDMyPage>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   Widget _buildStyle0AppBar() {

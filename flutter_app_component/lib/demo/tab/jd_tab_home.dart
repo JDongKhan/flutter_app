@@ -29,8 +29,8 @@ class _JDTabHomePageState extends State<JDTabHomePage>
 
   @override
   void dispose() {
-    super.dispose();
     _tabController.dispose();
+    super.dispose();
   }
 
   @override

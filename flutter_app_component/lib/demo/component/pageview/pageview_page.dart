@@ -104,8 +104,8 @@ class _PageViewPageState extends State<PageViewPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _pageController.dispose();
+    super.dispose();
   }
 
   @override

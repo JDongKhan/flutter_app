@@ -18,6 +18,10 @@ import 'package:flutter_app_component/demo/component/reorderableListView/reorder
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
 import 'package:flutter_app_component/demo/custome_layout/renderbox/jd_renderbox_demo.dart';
 import 'package:flutter_app_component/demo/dash/dash_demo.dart';
+import 'package:flutter_app_component/demo/databtransfer/jd_event_bus.dart';
+import 'package:flutter_app_component/demo/databtransfer/jd_inherited_widget.dart';
+import 'package:flutter_app_component/demo/databtransfer/jd_notification.dart';
+import 'package:flutter_app_component/demo/databtransfer/jd_stream.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
@@ -233,19 +237,19 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
       'items': [
         {
           'title': 'InheritedWidget',
-          'router': '/inheritedwidget',
+          'page': JDInheritedWdgetPage(),
         },
         {
           'title': 'Notification',
-          'router': '/notification',
+          'page': JDNotificationPage(),
         },
         {
           'title': 'EventBus',
-          'router': '/eventbus',
+          'page': JDEventBusPage(),
         },
         {
           'title': 'Stream',
-          'router': '/stream',
+          'page': JDStreamPage(),
         }
       ],
     },

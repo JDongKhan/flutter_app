@@ -27,8 +27,8 @@ class _JDTabbarPageState extends State<JDTabbarPage>
 
   @override
   void dispose() {
-    super.dispose();
     _controller.dispose();
+    super.dispose();
   }
 
   @override

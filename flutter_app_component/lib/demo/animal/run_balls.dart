@@ -65,8 +65,10 @@ class _RunBallState extends State<RunBall> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
+    // controller.stop();
+    //要在dispose之前调用
     controller.dispose(); // 资源释放
+    super.dispose();
   }
 
   //核心渲染方法
