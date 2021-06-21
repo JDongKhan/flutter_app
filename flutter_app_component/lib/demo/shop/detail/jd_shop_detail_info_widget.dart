@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/component/star_rating_widget.dart';
 import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
 import 'package:jd_core/jd_core.dart';
 
@@ -21,7 +22,9 @@ class JDShopDetailInfoWidget extends StatefulWidget {
 class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
   ScrollController _scrollController = ScrollController();
   GlobalKey _commentKey = GlobalKey();
+  GlobalKey _productDetailKey = GlobalKey();
   double _commentOffset = 0.0;
+  double _productDetailOffset = 0.0;
   @override
   void initState() {
     super.initState();
@@ -29,17 +32,23 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
       RenderBox renderObject =
           _commentKey.currentContext.findRenderObject() as RenderBox;
       _commentOffset = renderObject.localToGlobal(Offset.zero).dy;
+
+      RenderBox renderObject2 =
+          _productDetailKey.currentContext.findRenderObject() as RenderBox;
+      _productDetailOffset = renderObject2.localToGlobal(Offset.zero).dy;
     });
   }
 
   void _onScroll(double offset) {
     //切换导航tabbar
-    int tempIndex;
-    if (offset > _commentOffset) {
+    int tempIndex = 0;
+    if (offset >= _commentOffset - jd_getHeight(110)) {
       tempIndex = 1;
-    } else {
-      tempIndex = 0;
     }
+    if (offset >= _productDetailOffset - jd_getHeight(110)) {
+      tempIndex = 2;
+    }
+
     widget.navigatorController.changeTabIndex(tempIndex);
 
     //修改导航alpha
@@ -72,18 +81,22 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
             _buildProductInfo(),
             _buildLogistics(),
             _buildComment(),
+            _buildProductDetail(),
+            _buildTips(),
           ],
         ),
       ),
     );
   }
 
+  /// 商品大图
   Widget _buildProductImage() {
     return SliverToBoxAdapter(
       child: Image.asset(JDAssetBundle.getImgPath('meinv2')),
     );
   }
 
+  /// 商品简介
   Widget _buildProductInfo() {
     return SliverToBoxAdapter(
       child: Container(
@@ -164,6 +177,7 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
     );
   }
 
+  /// 物流信息
   Widget _buildLogistics() {
     return SliverToBoxAdapter(
       child: Container(
@@ -266,6 +280,7 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
     );
   }
 
+  /// 评论
   Widget _buildComment() {
     return SliverToBoxAdapter(
       child: Container(
@@ -342,34 +357,8 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('1*****0'),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.yellow,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.yellow,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.yellow,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.yellow,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 16,
-                        color: Colors.yellow,
-                      ),
-                    ],
+                  StarRatingWidget(
+                    value: 4.5,
                   ),
                 ],
               ),
@@ -429,6 +418,73 @@ class _JDShopDetailInfoWidgetState extends State<JDShopDetailInfoWidget> {
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  /// 商品详情
+  Widget _buildProductDetail() {
+    return SliverToBoxAdapter(
+      child: Container(
+        key: _productDetailKey,
+        margin: const EdgeInsets.only(top: 10),
+        color: Colors.white,
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                SizedBox(
+                  width: 50,
+                  child: Divider(
+                    endIndent: 10,
+                    color: Colors.grey,
+                    height: 1,
+                  ),
+                ),
+                Text('宝贝详情'),
+                SizedBox(
+                  width: 50,
+                  child: Divider(
+                    indent: 10,
+                    color: Colors.grey,
+                    height: 1,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            _buildProductDetailImage('guide1'),
+            _buildProductDetailImage('guide2'),
+            _buildProductDetailImage('guide3'),
+            _buildProductDetailImage('guide4'),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildProductDetailImage(String image) {
+    return Image.asset(JDAssetBundle.getImgPath(image));
+  }
+
+  Widget _buildTips() {
+    return SliverToBoxAdapter(
+      child: Container(
+        color: Colors.white,
+        margin: const EdgeInsets.only(top: 10),
+        padding: const EdgeInsets.all(10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('温馨提示'),
+            Text(
+                '1、网站为您提供的送货、安装、维修等服务可能需要收取一定的服务费用和远程费。 \n2、服务中可能涉及的材料费请以服务工程师出示的报价单为准。 \n 3、如存在收费争议，可咨询在线客服或拨打客服电话110'),
+          ],
+        ),
       ),
     );
   }

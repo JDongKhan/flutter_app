@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/detail/jd_shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
@@ -13,7 +14,8 @@ class JDShopHomePage extends StatefulWidget {
   _JDShopHomePageState createState() => _JDShopHomePageState();
 }
 
-class _JDShopHomePageState extends State<JDShopHomePage> {
+class _JDShopHomePageState extends State<JDShopHomePage>
+    with AutomaticKeepAliveClientMixin {
   String _searchText;
   final List<String> _tabs = <String>[
     '推荐',
@@ -183,10 +185,11 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 80,
-              child: Center(
-                child: Image.asset(shopInfo.icon),
+            Expanded(
+              child: Container(
+                child: Center(
+                  child: Image.asset(shopInfo.icon),
+                ),
               ),
             ),
             Container(
@@ -222,14 +225,11 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
             60,
             Container(
               color: Colors.grey[100],
-              child: Container(
-                alignment: Alignment.centerLeft,
-                padding: const EdgeInsets.only(left: 10),
-                child: TabBar(
-                  indicatorSize: TabBarIndicatorSize.label,
-                  // These are the widgets to put in each tab in the tab bar.
-                  tabs: _tabs.map((String name) => Tab(text: name)).toList(),
-                ),
+              child: TabBar(
+                isScrollable: true,
+                indicatorSize: TabBarIndicatorSize.label,
+                // These are the widgets to put in each tab in the tab bar.
+                tabs: _tabs.map((String name) => Tab(text: name)).toList(),
               ),
             )),
       );
@@ -246,7 +246,7 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
         crossAxisSpacing: 10.0,
         itemBuilder: (BuildContext context, int index) {
           JDShopInfo shopInfo = recommendList[index % recommendList.length];
-          return _buildGirdItem(shopInfo);
+          return _buildProductItem(index);
         },
         staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
       ),
@@ -285,4 +285,7 @@ class _JDShopHomePageState extends State<JDShopHomePage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

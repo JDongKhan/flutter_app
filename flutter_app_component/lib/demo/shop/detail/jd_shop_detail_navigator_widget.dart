@@ -7,14 +7,17 @@ import 'package:jd_core/jd_core.dart';
 class JDShopDetailNavigatorController extends ChangeNotifier {
   double alpha = 0.0;
   int tabIndex = 0;
+  TabController _tabController;
   void changeAlpha(double alpha) {
-    this.alpha = alpha;
-    notifyListeners();
+    if (alpha != this.alpha) {
+      this.alpha = alpha;
+      notifyListeners();
+    }
   }
 
   void changeTabIndex(int tabIndex) {
     this.tabIndex = tabIndex;
-    notifyListeners();
+    _tabController.index = tabIndex;
   }
 }
 
@@ -36,15 +39,15 @@ class _JDShopDetailNavigatorWidgetState
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
     widget.controller.addListener(() {
-      setState(() {
-        _tabController.index = widget.controller.tabIndex;
-      });
+      setState(() {});
     });
+    widget.controller._tabController = _tabController;
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print('刷新了一下子');
     return Stack(
       children: [
         Opacity(

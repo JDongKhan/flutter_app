@@ -27,7 +27,7 @@ dependencies:
     sdk: flutter
 
   #下拉菜单
-  gzx_dropdown_menu: ^3.1.0
+  jd_dropdowm_menu_widget: any
   #popwindow
   popup_window: ^1.1.1
   #网络状态

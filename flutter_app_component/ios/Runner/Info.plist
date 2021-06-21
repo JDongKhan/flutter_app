@@ -22,8 +22,6 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UILaunchStoryboardName</key>
-	<string>LaunchScreen</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
@@ -31,12 +29,14 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>APP需要您的同意才能拍摄照片/视频发布信息，如禁止将无法发布照片/视频信息</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>APP需要您的同意才能访问麦克风进行录制音频上传，如禁止将无法发送音频信息</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>APP需要您的同意才能访问相册进行选择照片/视频发布信息，如禁止将无法发布照片/视频信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>APP需要您的同意才能访问相册进行选择照片/视频发布信息，如禁止将无法发布照片/视频信息</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>APP需要您的同意才能访问麦克风进行录制音频上传，如禁止将无法发送音频信息</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UISupportedInterfaceOrientations</key>

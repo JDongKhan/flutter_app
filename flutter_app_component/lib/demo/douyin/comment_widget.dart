@@ -104,12 +104,14 @@ class _CommentWidgetState extends State<CommentWidget> {
   Widget _buildItem(Comment commnet) {
     return Container(
       padding: const EdgeInsets.all(10),
-      child: Stack(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              ClipRRect(
+      child: IntrinsicHeight(
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Container(
+              // color: Colors.red,
+              alignment: Alignment.topCenter,
+              child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.asset(
                   commnet.icon,
@@ -117,90 +119,93 @@ class _CommentWidgetState extends State<CommentWidget> {
                   height: 50,
                 ),
               ),
-              Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 10, right: 0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        commnet.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(commnet.content),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      Row(
-                        children: [
-                          TextButton(
-                            style: TextButton.styleFrom(
-                              primary: Colors.black.withAlpha(150),
-                              backgroundColor: Colors.grey[100],
-                              textStyle: const TextStyle(
-                                fontSize: 12,
-                              ),
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                            ),
-                            onPressed: () {
-                              JDToast.toast('点我干嘛?');
-                            },
-                            child: const Text('回复'),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Expanded(
-                            child: Text(
-                              commnet.time,
-                              style: TextStyle(
-                                  color: Colors.grey[500], fontSize: 12),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Container(
-                width: 55,
-                // color: Colors.blue,
-                child: JDButton(
-                  action: () {
-                    JDToast.toast('点我干嘛?');
-                  },
-                  icon: Icon(Icons.thumb_up_alt_outlined),
-                  text: Text('4'),
-                  middlePadding: 8,
-                  backgroundColor: Colors.transparent,
-                  imageDirection: AxisDirection.right,
-                ),
-              ),
-            ],
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              // color: Colors.blue,
-              child: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    _showDialog();
-                  }),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                alignment: Alignment.topCenter,
+                margin: const EdgeInsets.only(left: 10, right: 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      commnet.name,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(commnet.content),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            primary: Colors.black.withAlpha(150),
+                            backgroundColor: Colors.grey[100],
+                            textStyle: const TextStyle(
+                              fontSize: 12,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(20),
+                              ),
+                            ),
+                          ),
+                          onPressed: () {
+                            JDToast.toast('点我干嘛?');
+                          },
+                          child: const Text('回复'),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Expanded(
+                          child: Text(
+                            commnet.time,
+                            style: TextStyle(
+                                color: Colors.grey[500], fontSize: 12),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              width: 55,
+              // color: Colors.blue,
+              alignment: Alignment.topCenter,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  JDButton(
+                    action: () {
+                      JDToast.toast('点我干嘛?');
+                    },
+                    icon: Icon(Icons.thumb_up_alt_outlined),
+                    text: Text('4'),
+                    middlePadding: 8,
+                    backgroundColor: Colors.transparent,
+                    imageDirection: AxisDirection.right,
+                  ),
+                  Container(
+                    // color: Colors.blue,
+                    child: IconButton(
+                        icon: const Icon(Icons.close),
+                        onPressed: () {
+                          _showDialog();
+                        }),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

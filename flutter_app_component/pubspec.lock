@@ -427,13 +427,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
-  gzx_dropdown_menu:
-    dependency: "direct main"
-    description:
-      name: gzx_dropdown_menu
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.1.0"
   html:
     dependency: transitive
     description:
@@ -490,6 +483,13 @@ packages:
       relative: true
     source: path
     version: "0.0.1"
+  jd_dropdowm_menu_widget:
+    dependency: "direct main"
+    description:
+      name: jd_dropdowm_menu_widget
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.4"
   jd_home:
     dependency: "direct main"
     description:

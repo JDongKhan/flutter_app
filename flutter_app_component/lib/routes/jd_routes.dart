@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/buycar/jd_buycar_page.dart';
 import 'package:flutter_app_component/demo/camera/jd_camera.dart';
 import 'package:flutter_app_component/demo/camera/jd_pickImage.dart';
 import 'package:flutter_app_component/demo/component/align/jd_align.dart';
@@ -101,7 +100,6 @@ final Map<String, Widget> _routes = <String, Widget>{
   '/tabbar': JDTabbarPage(),
   '/tabbar_component': JDTabbar(),
   '/douyin': JDDouyinPage(),
-  '/buy_car': JDBuyCarPage(),
   '/pickImage': JDPickImagePage(),
   '/camera': CameraExampleHome(),
   '/thirdparty_list': JDThirdpartyListPage(),

@@ -42,27 +42,30 @@ class _JDRowColumnPageState extends State<JDRowColumnPage> {
                   Text(" I am Jack "),
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                // crossAxisAlignment: CrossAxisAlignment.baseline,
-                // textBaseline: TextBaseline.ideographic,
-                children: <Widget>[
-                  Container(
-                    color: Colors.red,
-                    child: const Text(
-                      ' hello world ',
-                      style: TextStyle(fontSize: 30.0),
+              IntrinsicHeight(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  // textBaseline: TextBaseline.ideographic,
+                  children: <Widget>[
+                    Container(
+                      color: Colors.red,
+                      height: 200,
+                      child: const Text(
+                        ' hello world ',
+                        style: TextStyle(fontSize: 30.0),
+                      ),
                     ),
-                  ),
-                  Container(
-                    color: Colors.green,
-                    child: const Text(' I am Jack '),
-                  ),
-                  Container(
-                    color: Colors.blue,
-                    child: Text(' I am Jack '),
-                  ),
-                ],
+                    Container(
+                      color: Colors.green,
+                      child: const Text(' I am Jack '),
+                    ),
+                    Container(
+                      color: Colors.blue,
+                      child: Text(' I am Jack '),
+                    ),
+                  ],
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),

@@ -277,10 +277,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': JDShopMainPage(),
         },
         {
-          'title': '购物车',
-          'router': '/buy_car',
-        },
-        {
           'title': '拍照',
           'router': '/pickImage',
         },
