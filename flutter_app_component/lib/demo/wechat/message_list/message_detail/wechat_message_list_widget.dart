@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:jd_core/jd_core.dart';
 
+import 'bubble_widget.dart';
+
 /// @author jd
 
 class Message {
@@ -86,7 +88,7 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
             borderRadius: BorderRadius.circular(20),
             image: DecorationImage(
               image: AssetImage(
-                JDAssetBundle.getImgPath('ali_connors'),
+                JDAssetBundle.getImgPath('user_head_1'),
               ),
             ),
           ),
@@ -101,7 +103,9 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
                     const SizedBox(
                       height: 5,
                     ),
-                    Text(m.message),
+                    BubbleWidget(
+                      child: Text(m.message),
+                    ),
                   ],
                 ))),
       ],
@@ -115,10 +119,24 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
           child: Container(
             alignment: Alignment.centerRight,
             margin: const EdgeInsets.only(left: 50, right: 10),
-            child: Text(m.message),
+            child: BubbleWidget(
+              direction: BubbleDirection.right,
+              child: Text(m.message),
+            ),
           ),
         ),
-        const Icon(Icons.people),
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            image: DecorationImage(
+              image: AssetImage(
+                JDAssetBundle.getImgPath('user_head_0'),
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

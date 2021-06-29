@@ -32,6 +32,8 @@ class _ProviderWidgetState<T extends ViewModel>
     //开始加载数据
     if (widget.onModelReady != null) {
       widget.onModelReady(widget.model);
+    } else {
+      widget.model.initData();
     }
     super.initState();
   }
@@ -99,6 +101,8 @@ class _Provider2WidgetState<T1 extends ViewModel, T2 extends ViewModel>
   void initState() {
     if (widget.onModelReady != null) {
       widget.onModelReady(widget.model1, widget.model2);
+    } else {
+      widget.model1.initData();
     }
     super.initState();
   }
@@ -158,6 +162,8 @@ class _Provider3WidgetState<T1 extends ViewModel, T2 extends ViewModel,
     //开始加载数据
     if (widget.onModelReady != null) {
       widget.onModelReady(widget.model1, widget.model2, widget.model3);
+    } else {
+      widget.model1.initData();
     }
     super.initState();
   }
@@ -227,6 +233,8 @@ class _Provider4WidgetState<
     if (widget.onModelReady != null) {
       widget.onModelReady(
           widget.model1, widget.model2, widget.model3, widget.model4);
+    }else {
+      widget.model1.initData();
     }
     super.initState();
   }

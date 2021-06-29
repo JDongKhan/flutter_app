@@ -30,7 +30,6 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
 
   int _suspensionHeight = 40;
   int _itemHeight = 50;
-  String _suspensionTag = "";
 
   @override
   void initState() {
@@ -54,9 +53,7 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
         _cityList.add(CityInfo(name: value['name']));
       });
       _handleList(_cityList);
-      setState(() {
-        _suspensionTag = _hotCityList[0].getSuspensionTag();
-      });
+      setState(() {});
     });
   }
 
@@ -77,16 +74,28 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
     SuspensionUtil.sortListBySuspensionTag(_cityList);
   }
 
-  void _onSusTagChanged(String tag) {
-    setState(() {
-      _suspensionTag = tag;
-    });
+  Widget _buildListItem(int index) {
+    CityInfo model = _cityList[index];
+    String susTag = model.getSuspensionTag();
+    return SizedBox(
+      height: _itemHeight.toDouble(),
+      child: ListTile(
+        title: Text(model.name),
+        onTap: () {
+          print("OnItemClick: $model");
+          Navigator.pop(context, model);
+        },
+      ),
+    );
   }
 
-  Widget _buildSusWidget(String susTag) {
+  Widget _buildHeadWidget(int index) {
+    CityInfo model = _cityList[index];
+    String susTag = model.tagIndex;
     susTag = (susTag == "★" ? "热门城市" : susTag);
     return Container(
       height: _suspensionHeight.toDouble(),
+      // width: jd_screenWidth(),
       padding: const EdgeInsets.only(left: 15.0),
       color: Color(0xfff3f4f5),
       alignment: Alignment.centerLeft,
@@ -98,29 +107,6 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
           color: Color(0xff999999),
         ),
       ),
-    );
-  }
-
-  Widget _buildListItem(CityInfo model) {
-    String susTag = model.getSuspensionTag();
-    susTag = (susTag == "★" ? "热门城市" : susTag);
-    return Column(
-      children: <Widget>[
-        Offstage(
-          offstage: model.isShowSuspension != true,
-          child: _buildSusWidget(susTag),
-        ),
-        SizedBox(
-          height: _itemHeight.toDouble(),
-          child: ListTile(
-            title: Text(model.name),
-            onTap: () {
-              print("OnItemClick: $model");
-              Navigator.pop(context, model);
-            },
-          ),
-        )
-      ],
     );
   }
 
@@ -138,19 +124,16 @@ class _CitySelectRouteState extends State<CitySelectRoute> {
             height: 50.0,
             child: Text("当前城市: 成都市"),
           ),
-          // Expanded(
-          //     flex: 1,
-          //     child: AzListView(
-          //       data: _cityList,
-          //       topData: _hotCityList,
-          //       itemBuilder: (context, model) => _buildListItem(model),
-          //       suspensionWidget: _buildSusWidget(_suspensionTag),
-          //       isUseRealIndex: true,
-          //       itemHeight: _itemHeight,
-          //       suspensionHeight: _suspensionHeight,
-          //       onSusTagChanged: _onSusTagChanged,
-          //       //showCenterTip: false,
-          //     )),
+          Expanded(
+            flex: 1,
+            child: AzListView(
+              data: _cityList,
+              itemCount: _cityList.length,
+              susItemBuilder: (context, index) => _buildHeadWidget(index),
+              itemBuilder: (context, index) => _buildListItem(index),
+              //showCenterTip: false,
+            ),
+          ),
         ],
       ),
     );

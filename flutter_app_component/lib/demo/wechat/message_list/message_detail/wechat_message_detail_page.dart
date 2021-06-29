@@ -6,12 +6,13 @@ import 'wechat_message_list_widget.dart';
 
 /// @author jd
 
-class WechatPage extends StatefulWidget {
+class WechatMessageDetailPage extends StatefulWidget {
   @override
-  _WechatPageState createState() => _WechatPageState();
+  _WechatMessageDetailPageState createState() =>
+      _WechatMessageDetailPageState();
 }
 
-class _WechatPageState extends State<WechatPage> {
+class _WechatMessageDetailPageState extends State<WechatMessageDetailPage> {
   final WechatInputMessageController _inputMessageController =
       WechatInputMessageController();
 
@@ -24,14 +25,14 @@ class _WechatPageState extends State<WechatPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wehchat'),
+        title: Text('Wechat'),
       ),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
               child: Container(
-                color: Colors.deepOrange,
+                color: Colors.grey[100],
                 child: GestureDetector(
                   behavior: HitTestBehavior.translucent,
                   onTap: () {

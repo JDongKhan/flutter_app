@@ -32,13 +32,7 @@ class JDButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Widget imageWidget = null;
-    if (icon != null) {
-      imageWidget = Container(
-        child: icon,
-      );
-    }
-
+    Widget imageWidget = icon;
     Widget textWidget = text;
 
     double _kpPadding = this.middlePadding;

@@ -182,7 +182,7 @@ class _JDDropdownMenuDemoPageState extends State<JDDropdownMenuDemoPage> {
                         showPop(
                           barrierColor: const Color(0x80000000),
                           context: c,
-                          items: ['个人信息', '退出'],
+                          items: [Text('个人信息'), Text('退出')],
                         );
                       },
                       child: Text('Menu2'));

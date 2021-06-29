@@ -76,8 +76,8 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
         children: [
           Row(
             children: [
-              TextButton(
-                child: Text('Voice'),
+              IconButton(
+                icon: const Icon(Icons.keyboard_voice),
                 onPressed: () {
                   // FocusScope.of(context).requestFocus(FocusNode());
                   _focusNode.unfocus();
@@ -93,16 +93,16 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
               const SizedBox(
                 width: 10,
               ),
-              TextButton(
-                child: Text('Face'),
+              IconButton(
+                icon: const Icon(Icons.face),
                 onPressed: () {
                   // FocusScope.of(context).requestFocus(FocusNode());
                   _focusNode.unfocus();
                   _animationController.forward();
                 },
               ),
-              TextButton(
-                child: Text('+'),
+              IconButton(
+                icon: const Icon(Icons.add_circle_outline),
                 onPressed: () {
                   // FocusScope.of(context).requestFocus(FocusNode());
                   _focusNode.unfocus();

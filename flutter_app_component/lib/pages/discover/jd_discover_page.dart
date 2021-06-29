@@ -30,8 +30,9 @@ import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
+import 'package:flutter_app_component/demo/scroll/scroll_page.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
-import 'package:flutter_app_component/demo/wechat/wechat_page.dart';
+import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
 import 'package:flutter_app_component/pages/scaffold/jd_scaffold_page.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
@@ -274,7 +275,7 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         },
         {
           'title': 'Wechat',
-          'page': WechatPage(),
+          'page': WechatMainPage(),
         },
         {
           'title': '商城',
@@ -319,6 +320,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'IsolatePage',
           'page': IsolatePage(),
+        },
+        {
+          'title': 'SrcollPage',
+          'page': SrcollPage(),
         }
       ],
     }

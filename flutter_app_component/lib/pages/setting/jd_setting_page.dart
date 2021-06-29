@@ -63,6 +63,13 @@ class _JDSettingPageState extends State {
               padding: EdgeInsets.only(top: 20),
             ),
             _buildCell('意见反馈'),
+            _buildCell2(
+              '锁定开关',
+              rightWidget: Builder(builder: (context) {
+                JDTheme theme = context.watch<JDTheme>();
+                return Switch(value: true, onChanged: (value) {});
+              }),
+            ),
             _buildCell('关于我们', onTap: () {
               _showDialog();
             }),
@@ -118,6 +125,37 @@ class _JDSettingPageState extends State {
                             const Icon(Icons.chevron_right)
                           ],
                         ),
+                      ),
+                onTap: () {
+                  onTap?.call();
+                },
+              ),
+            ),
+          ),
+        ),
+        const Divider(
+          height: 1,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildCell2(String title, {Widget rightWidget, Function onTap}) {
+    return Column(
+      children: <Widget>[
+        Material(
+          color: Colors.white,
+          child: InkWell(
+            onTap: () {},
+            child: Container(
+              child: ListTile(
+                title: Text(title),
+                trailing: rightWidget == null
+                    ? const Icon(Icons.chevron_right)
+                    : Container(
+                        alignment: Alignment.centerRight,
+                        width: 80,
+                        child: rightWidget,
                       ),
                 onTap: () {
                   onTap?.call();

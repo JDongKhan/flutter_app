@@ -1,0 +1,77 @@
+[
+  {
+    "name" : "阿里巴巴有限股份公司",
+    "icon" : "user_head_0",
+    "flag" : "1"
+  },
+  {
+    "name" : "AA健身游泳",
+    "icon" : "user_head_1",
+    "flag" : "0"
+  },
+  {
+    "name" : "贝壳买房",
+    "icon" : "user_head_2",
+    "flag" : "0"
+  },
+  {
+    "name" : "德祐卢一发",
+    "icon" : "user_head_3",
+    "flag" : "0"
+  },
+  {
+    "name" : "apple",
+    "icon" : "user_head_4",
+    "flag" : "0"
+  },
+  {
+    "name" : "爸爸",
+    "icon" : "user_head_5",
+    "flag" : "0"
+  },
+  {
+    "name" : "妈妈",
+    "icon" : "user_head_6",
+    "flag" : "0"
+  },
+  {
+    "name" : "陈胜",
+    "icon" : "user_head_7",
+    "flag" : "0"
+  },
+  {
+    "name" : "吴广",
+    "icon" : "user_head_8",
+    "flag" : "0"
+  },
+  {
+    "name" : "汗蒸小妹",
+    "icon" : "user_head_9",
+    "flag" : "0"
+  },
+  {
+    "name" : "游戏好声音",
+    "icon" : "user_head_0",
+    "flag" : "0"
+  },
+  {
+    "name" : "中介",
+    "icon" : "user_head_1",
+    "flag" : "0"
+  },
+  {
+    "name" : "手机专卖",
+    "icon" : "user_head_2",
+    "flag" : "0"
+  },
+  {
+    "name" : "老婆",
+    "icon" : "user_head_3",
+    "flag" : "0"
+  },
+  {
+    "name" : "10086",
+    "icon" : "user_head_4",
+    "flag" : "0"
+  }
+]

@@ -126,7 +126,7 @@ packages:
       name: cli_util
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.3.0"
+    version: "0.3.1"
   clock:
     dependency: transitive
     description:
@@ -280,7 +280,7 @@ packages:
       name: file
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "6.1.1"
+    version: "6.1.2"
   fish_redux:
     dependency: "direct main"
     description:
@@ -489,7 +489,7 @@ packages:
       name: jd_dropdowm_menu_widget
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.4"
+    version: "0.0.5"
   jd_home:
     dependency: "direct main"
     description:
@@ -657,7 +657,7 @@ packages:
       name: pedantic
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "1.11.0"
+    version: "1.11.1"
   permission_handler:
     dependency: transitive
     description:

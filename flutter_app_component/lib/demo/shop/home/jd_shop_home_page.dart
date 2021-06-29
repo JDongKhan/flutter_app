@@ -67,12 +67,12 @@ class _JDShopHomePageState extends State<JDShopHomePage>
               ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
               ///所以我就用了SliverPersistentHeader来实现这个效果，SliverAppBar的bottom中只放TabBar顶部的布局
               sliver: SliverAppBar(
-                backgroundColor: Colors.blue,
+                backgroundColor: Colors.white,
                 // foregroundColor: Colors.white,
                 forceElevated: innerBoxIsScrolled,
                 title: const Text(
                   '生产有限公司',
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.black),
                 ),
                 centerTitle: false,
                 pinned: true,
@@ -132,7 +132,16 @@ class _JDShopHomePageState extends State<JDShopHomePage>
             builder: DotSwiperPaginationBuilder(
                 activeColor: Colors.red, color: Colors.green)),
         itemBuilder: (BuildContext context, int index) {
-          return Image.asset(JDAssetBundle.getImgPath('bg_personal_real_name'));
+          if (index % 2 == 0) {
+            return Image.asset(
+              JDAssetBundle.getImgPath('bg_personal_real_name'),
+              fit: BoxFit.fill,
+            );
+          }
+          return Image.asset(
+            JDAssetBundle.getImgPath('bg_banner'),
+            fit: BoxFit.fill,
+          );
         },
       ),
     );

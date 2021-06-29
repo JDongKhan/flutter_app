@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/component/circle_check_box.dart';
@@ -5,6 +6,8 @@ import 'package:flutter_app_component/component/number_controller/number_control
 import 'package:flutter_app_component/demo/notifier/jd_changenotifierprovider.dart';
 import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
 import 'package:jd_core/jd_core.dart';
+
+import 'jd_shop_car2_page.dart';
 
 /// @author jd
 
@@ -147,19 +150,37 @@ class _JDShopCarPageState extends State<JDShopCarPage> {
               const SizedBox(
                 width: 10,
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.only(
-                    top: 10,
-                    bottom: 10,
-                    left: 25,
-                    right: 25,
+              Builder(
+                builder: (context) => TextButton(
+                  style: TextButton.styleFrom(
+                    padding: const EdgeInsets.only(
+                      top: 10,
+                      bottom: 10,
+                      left: 25,
+                      right: 25,
+                    ),
+                    primary: Colors.white,
+                    backgroundColor: Colors.blue,
                   ),
-                  primary: Colors.white,
-                  backgroundColor: Colors.blue,
+                  onPressed: () {
+                    JDCartModel model =
+                        JDChangeNotifierProvider.of<JDCartModel>(context);
+                    if (model._items.length == 0) {
+                      JDToast.toast('请选择商品');
+                      return;
+                    }
+                    List<JDShopInfo> shopInfos =
+                        model._items.map((e) => e.shopInfo).toList();
+                    Navigator.of(context).push(
+                      CupertinoPageRoute(
+                        builder: (c) => JDShopCar2Page(
+                          shopInfos: shopInfos,
+                        ),
+                      ),
+                    );
+                  },
+                  child: const Text('去结算'),
                 ),
-                onPressed: () {},
-                child: const Text('去结算'),
               ),
             ],
           );

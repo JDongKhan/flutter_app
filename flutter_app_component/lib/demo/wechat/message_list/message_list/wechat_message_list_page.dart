@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/wechat/message_list/message_list/wechat_message_list_view_model.dart';
+import 'package:jd_core/jd_core.dart';
+import 'package:jd_core/view_model/widget/provider_widget.dart';
+import 'package:jd_dropdowm_menu_widget/jd_pop_widget.dart';
+
+import '../message_detail/wechat_message_detail_page.dart';
+
+/// @author jd
+
+class WechatMessageListPage extends StatefulWidget {
+  @override
+  _WechatMessageListPageState createState() => _WechatMessageListPageState();
+}
+
+class _WechatMessageListPageState extends State<WechatMessageListPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('微信'),
+        actions: [
+          Builder(
+            builder: (context) => IconButton(
+              icon: Icon(Icons.add_circle_outline),
+              onPressed: () {
+                showPop(
+                  right: 10,
+                  barrierColor: const Color(0x00000000),
+                  context: context,
+                  items: [Text('发起群聊'), Text('添加朋友'), Text('扫一扫'), Text('收付款')],
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+      body: ProviderWidget<WechatMessageListViewModel>(
+        model: WechatMessageListViewModel(),
+        builder: (context, model) {
+          return ListView.separated(
+              itemBuilder: (context, index) {
+                Map item = model.list[index];
+                return GestureDetector(
+                  behavior: HitTestBehavior.opaque,
+                  onTap: () {
+                    _clickAtIndex(context, item);
+                  },
+                  child: ListTile(
+                    title: Text(item['msg_name']),
+                    leading:
+                        Image.asset(JDAssetBundle.getImgPath(item['icon'])),
+                    subtitle: Text(item['msg_content']),
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) {
+                return Divider(
+                  height: 1,
+                  color: Colors.grey,
+                );
+              },
+              itemCount: model.list.length);
+        },
+      ),
+    );
+  }
+
+  void _clickAtIndex(context, Map map) {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => WechatMessageDetailPage(),
+      ),
+    );
+  }
+}
