@@ -1,47 +1,42 @@
-//import 'package:flt_video_player/flt_video_player.dart';
-//import 'package:flutter/material.dart';
-//
-///// @author jd
-//
-//
-//class JDPlayer extends StatefulWidget {
-//  @override
-//  _JDPlayerState createState() => _JDPlayerState();
-//}
-//
-//class _JDPlayerState extends State<JDPlayer> {
-//
-//  VideoPlayerController _controller;
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//
-//    Function listener = () {
-//      if (!mounted) {
-//        return;
-//      }
-//      setState(() {});
-//    };
-//
-//    _controller = VideoPlayerController.path('http://file.jinxianyun.com/testhaha.mp4', playerConfig: PlayerConfig())
-//    //_controller = TencentPlayerController.asset('static/tencent1.mp4')
-//    //_controller = TencentPlayerController.file('/storage/emulated/0/test.mp4')
-//    //_controller = TencentPlayerController.network(null, playerConfig: {auth: {"appId": 1252463788, "fileId": '4564972819220421305'}})
-//      ..initialize().then((_) {
-//        setState(() {});
-//      });
-//    _controller.addListener(listener);
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return Center(
-//      child: Container(
-//        width: 200,
-//        height: 200,
-//        child: VideoPlayer(_controller),
-//      ),
-//    );
-//  }
-//}
+import 'package:flutter/material.dart';
+import 'package:video_player/video_player.dart';
+
+/// @author jd
+
+class JDPlayer extends StatefulWidget {
+  JDPlayer({@required this.url});
+  final String url;
+  @override
+  _JDPlayerState createState() => _JDPlayerState();
+}
+
+class _JDPlayerState extends State<JDPlayer> {
+  VideoPlayerController _videoPlayerController;
+  bool _isPlaying;
+  @override
+  void initState() {
+    super.initState();
+    Function listener = () {
+      if (!mounted) {
+        return;
+      }
+      final bool isPlaying = _videoPlayerController.value.isPlaying;
+      if (isPlaying != _isPlaying) {
+        setState(() {
+          _isPlaying = isPlaying;
+        });
+      }
+    };
+    _videoPlayerController = VideoPlayerController.asset(widget.url)
+      ..initialize().then((value) {
+        setState(() {});
+      });
+    _videoPlayerController.addListener(listener);
+    _videoPlayerController.play();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return VideoPlayer(_videoPlayerController);
+  }
+}

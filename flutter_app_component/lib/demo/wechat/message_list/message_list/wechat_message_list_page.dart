@@ -27,9 +27,75 @@ class _WechatMessageListPageState extends State<WechatMessageListPage> {
               onPressed: () {
                 showPop(
                   right: 10,
+                  clickCallback: (index) {
+                    print(index);
+                  },
+                  backgroundColor: const Color(0xffaaaaff),
                   barrierColor: const Color(0x00000000),
+                  width: 110,
                   context: context,
-                  items: [Text('发起群聊'), Text('添加朋友'), Text('扫一扫'), Text('收付款')],
+                  items: const [
+                    JDButton(
+                      imageDirection: AxisDirection.left,
+                      padding: EdgeInsets.all(0),
+                      middlePadding: 10,
+                      icon: Icon(
+                        Icons.comment,
+                        color: Colors.white,
+                      ),
+                      text: Text(
+                        '发起群聊',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    JDButton(
+                      imageDirection: AxisDirection.left,
+                      padding: EdgeInsets.all(0),
+                      middlePadding: 10,
+                      icon: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                      ),
+                      text: Text(
+                        '添加朋友',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    JDButton(
+                      imageDirection: AxisDirection.left,
+                      padding: EdgeInsets.all(0),
+                      middlePadding: 10,
+                      icon: Icon(
+                        Icons.scanner_rounded,
+                        color: Colors.white,
+                      ),
+                      text: Text(
+                        '扫一扫',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    JDButton(
+                      imageDirection: AxisDirection.left,
+                      padding: EdgeInsets.all(0),
+                      middlePadding: 10,
+                      icon: Icon(
+                        Icons.payment,
+                        color: Colors.white,
+                      ),
+                      text: Text(
+                        '收付款',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ],
                 );
               },
             ),

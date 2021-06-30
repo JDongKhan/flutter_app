@@ -7,6 +7,10 @@ class JDAssetBundle {
     return 'assets/images/$name.$format';
   }
 
+  static String getIconPath(String name, {String format: 'png'}) {
+    return 'assets/icons/$name.$format';
+  }
+
   static Future<String> loadString(String path) async {
     return rootBundle.loadString(path);
   }

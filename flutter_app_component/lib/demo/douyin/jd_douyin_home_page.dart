@@ -5,6 +5,7 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
 import 'jd_doiyin_people_detail_page.dart';
+import 'jd_douyin_player.dart';
 
 /// @author jd
 
@@ -14,8 +15,40 @@ class JDDouYinHomePage extends StatefulWidget {
 }
 
 class _JDDouYinHomePageState extends State<JDDouYinHomePage>
-    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
+  List<Map<String, dynamic>> _list = [
+    {
+      'video_url': 'assets/videos/video_1.mp4',
+      'author_name': 'JD_1',
+      'content': '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+      'source': '@浙有正能量创作的原创',
+    },
+    {
+      'video_url': 'assets/videos/video_2.mp4',
+      'author_name': 'JD_2',
+      'content': '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+      'source': '@浙有正能量创作的原创',
+    },
+    {
+      'video_url': 'assets/videos/video_3.mp4',
+      'author_name': 'JD_3',
+      'content': '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+      'source': '@浙有正能量创作的原创',
+    },
+    {
+      'video_url': 'assets/videos/video_4.mp4',
+      'author_name': 'JD_4',
+      'content': '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+      'source': '@浙有正能量创作的原创',
+    },
+    {
+      'video_url': 'assets/videos/video_5.mp4',
+      'author_name': 'JD_5',
+      'content': '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+      'source': '@浙有正能量创作的原创',
+    },
+  ];
 
   @override
   void initState() {
@@ -25,7 +58,6 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -52,6 +84,11 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
     );
   }
 
+  @override
+  void deactivate() {
+    print('deactivate');
+    super.deactivate();
+  }
   /******  顶部菜单 ********/
 
   Widget _buildTopMenu() {
@@ -126,47 +163,37 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
   Widget _buildPlayPage() {
     return Swiper(
         scrollDirection: Axis.vertical,
-        itemCount: 2,
+        itemCount: _list.length,
         itemBuilder: (BuildContext context, int index) {
-          return _buildPage1();
+          Map item = _list[index];
+          return _buildPage1(item);
         });
   }
 
-  Widget _buildPage1() {
+  Widget _buildPage1(Map item) {
     return Container(
       color: Colors.black,
-      child: SafeArea(
-        child: Stack(
-          children: <Widget>[
-            _buildPlayer(),
-            _buildRightMenu(),
-            _buildBottom(),
-          ],
-        ),
+      child: Stack(
+        children: <Widget>[
+          _buildPlayer(item),
+          _buildRightMenu(item),
+          _buildBottom(item),
+        ],
       ),
     );
   }
 
-  Widget _buildPlayer() {
-    return GestureDetector(
-      behavior: HitTestBehavior.opaque,
-      onTap: () {
-        print('假装我是播放器');
-      },
-      child: Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: const Center(
-          child: Text(
-            '我是播放器',
-            style: TextStyle(color: Colors.white),
-          ),
-        ),
+  Widget _buildPlayer(Map item) {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      child: JDDouyinPlayer(
+        url: item['video_url'],
       ),
     );
   }
 
-  Widget _buildRightMenu() {
+  Widget _buildRightMenu(Map item) {
     return Container(
       alignment: Alignment.centerRight,
       child: GestureDetector(
@@ -177,7 +204,6 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
         child: Container(
           width: 80,
           height: 300,
-          color: Colors.red,
           child: Column(
             children: <Widget>[
               IconButton(
@@ -233,7 +259,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
     );
   }
 
-  Widget _buildBottom() {
+  Widget _buildBottom(Map item) {
     return Container(
       alignment: Alignment.bottomCenter,
       child: Container(
@@ -251,8 +277,8 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                       onTap: () {
                         JDNavigationUtil.push(JDDouyinPeopleDetailPage());
                       },
-                      child: const Text(
-                        '@JD',
+                      child: Text(
+                        item['author_name'].toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -260,16 +286,16 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   Container(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     alignment: Alignment.topLeft,
-                    child: const Text(
-                      '广告收入、停车位收入、物业管理用房经营收入等都归业主所有，几乎每个小区都有，你拿到了吗？#苏州',
+                    child: Text(
+                      item['content'].toString(),
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
                   Container(
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     alignment: Alignment.topLeft,
-                    child: const Text(
-                      '@浙有正能量创作的原创',
+                    child: Text(
+                      item['source'].toString(),
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
@@ -291,9 +317,6 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
       ),
     );
   }
-
-  @override
-  bool get wantKeepAlive => true;
 
   void _commentAction() {
     showModalBottomSheet(

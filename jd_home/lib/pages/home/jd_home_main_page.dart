@@ -282,7 +282,6 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
         ));
       },
       child: Container(
-        color: const Color(0xEEEEEEEE),
         padding: const EdgeInsets.all(5),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -341,60 +340,41 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
               padding: const EdgeInsets.all(8.0),
               child: Text(itm['content']),
             ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.circular(10)),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.asset(
-                      JDAssetBundle.getImgPath('ali_connors'),
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.circular(10)),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.asset(
-                      JDAssetBundle.getImgPath('ali_connors'),
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    decoration: ShapeDecoration(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadiusDirectional.circular(10)),
-                    ),
-                    clipBehavior: Clip.antiAlias,
-                    child: Image.asset(
-                      JDAssetBundle.getImgPath('ali_connors'),
-                      width: 100,
-                      height: 100,
-                    ),
-                  ),
-                ),
-              ],
+            Container(
+              padding: const EdgeInsets.only(
+                right: 40,
+              ),
+              child: GridView.count(
+                padding: const EdgeInsets.only(left:10,right:30,),
+                shrinkWrap: true,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
+                physics: NeverScrollableScrollPhysics(),
+                crossAxisCount: 3,
+                children: ['user_head_1','user_head_2','user_head_3']
+                    .map(
+                      (e) => Container(
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadiusDirectional.circular(10)),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Image.asset(
+                          JDAssetBundle.getImgPath(e),
+                        ),
+                      ),
+                )
+                    .toList(),
+              ),
             ),
-            Text(
-              "${itm['time']} 发布",
-              style: const TextStyle(
-                color: Colors.grey,
-                fontSize: 12,
+            Container(
+              padding: const EdgeInsets.only(left:10,top:10,),
+              child: Text(
+                "${itm['time']} 发布",
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
               ),
             ),
             const Divider(),
@@ -406,13 +386,13 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
 
   Widget _buildTyle2Cell(Map itm) {
     return Container(
-      padding: EdgeInsets.only(top: jd_getWidth(6), bottom: jd_getHeight(11)),
+      margin: EdgeInsets.only(top: jd_getWidth(10), bottom: jd_getHeight(11),left: 10,right: 10),
       alignment: Alignment.centerLeft,
       child: const JDExpandableText(
         '我要测试是十四师是死是活我要死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活',
-        maxLines: 4,
-        style: TextStyle(fontSize: 14, color: Colors.black),
-        markerStyle: TextStyle(fontSize: 16, color: Colors.orange),
+        maxLines: 2,
+        style: TextStyle(fontSize: 10, color: Colors.black),
+        markerStyle: TextStyle(fontSize: 14, color: Colors.orange),
         atName: 'JD',
       ),
     );

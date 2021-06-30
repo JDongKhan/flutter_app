@@ -17,12 +17,20 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
   /*************************** demo.thirdpary *************************/
   final thirdpary_list = <Map<String, String>>[
     {
+      'title': 'StackedCard',
+      'router': '/stacked_card',
+    },
+    {
       "title": "WebView",
       "router": "/webview",
     },
     {
       "title": "ImageView",
       "router": "/imageView",
+    },
+    {
+      'title': '拍照',
+      'router': '/pickImage',
     },
     {
       "title": "Camera",
@@ -32,18 +40,6 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
       "title": "Player",
       "router": "/player",
     },
-    {
-      "title": "EventBus",
-      "router": "/eventbus",
-    },
-    {
-      "title": "Stream",
-      "router": "/stream",
-    },
-    {
-      'title': 'StackedCard',
-      'router': '/stacked_card',
-    }
   ];
 
   final _biggerFont = const TextStyle(fontSize: 18.0);

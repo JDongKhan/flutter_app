@@ -29,6 +29,7 @@ import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
+import 'package:flutter_app_component/demo/login/login_demo_list_page.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
 import 'package:flutter_app_component/demo/scroll/scroll_page.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
@@ -258,18 +259,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
       'title': 'Demo',
       'items': [
         {
-          'title': 'Login',
-          'router': '/login',
-        },
-        {
-          'title': 'Scaffold',
-          'router': '/scaffold',
-        },
-        {
-          'title': 'Tabbar',
-          'router': '/tabbar',
-        },
-        {
           'title': '抖音',
           'router': '/douyin',
         },
@@ -282,8 +271,8 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': JDShopMainPage(),
         },
         {
-          'title': '拍照',
-          'router': '/pickImage',
+          'title': 'Login',
+          'page': LoginDemoListPage(),
         },
         {
           'title': '第三方组件',
@@ -324,7 +313,15 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'SrcollPage',
           'page': SrcollPage(),
-        }
+        },
+        {
+          'title': 'Scaffold',
+          'router': '/scaffold',
+        },
+        {
+          'title': 'Tabbar',
+          'router': '/tabbar',
+        },
       ],
     }
   ];

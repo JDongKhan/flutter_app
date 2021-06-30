@@ -38,6 +38,7 @@ import 'package:flutter_app_component/demo/style_card/stacked_card_demo.dart';
 import 'package:flutter_app_component/demo/tab/jd_tabbar.dart';
 import 'package:flutter_app_component/demo/thirdpary/image/jd_imageview.dart';
 import 'package:flutter_app_component/demo/thirdpary/jd_thirdparty_list.dart';
+import 'package:flutter_app_component/demo/thirdpary/player/jd_player_demo_page.dart';
 import 'package:flutter_app_component/demo/thirdpary/webview/jd_webview.dart';
 import 'package:flutter_app_component/global/jd_notfind.dart';
 import 'package:flutter_app_component/pages/login/jd_login_page.dart';
@@ -92,7 +93,7 @@ final Map<String, Widget> _routes = <String, Widget>{
   '/webview': JDWebViewPage(),
   '/imageView': JDImageViewPage(),
   '/stacked_card': StackedCardDemo(),
-//  '/player':  JDPlayer(),
+  '/player': JDPlayerDemoPage(),
 
   '/login': JDLoginPage(),
   '/scaffold': JDScaffoldPage(),

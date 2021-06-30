@@ -6,6 +6,7 @@ import 'package:jd_core/utils/jd_appinfo.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
+import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
 
 void collectLog(String line) {
@@ -30,6 +31,9 @@ void initProject() {
     runApp(
       MultiProvider(
         providers: [
+          ChangeNotifierProvider<UserCenterViewModel>(
+            create: (BuildContext context) => UserCenterViewModel(),
+          ),
           ChangeNotifierProvider<JDAppUserInfo>(
             create: (BuildContext context) => JDAppUserInfo(),
           ),

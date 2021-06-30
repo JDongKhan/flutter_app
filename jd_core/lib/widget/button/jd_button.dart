@@ -53,6 +53,7 @@ class JDButton extends StatelessWidget {
         ));
       }
       layoutWidget = Column(
+        mainAxisSize:MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: childList,
       );
@@ -70,6 +71,7 @@ class JDButton extends StatelessWidget {
       }
       if (imageWidget != null) childList.add(imageWidget);
       layoutWidget = Column(
+        mainAxisSize:MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.end,
         children: childList,
       );
@@ -88,7 +90,8 @@ class JDButton extends StatelessWidget {
       }
 
       layoutWidget = Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize:MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: childList,
       );
     } else if (imageDirection == AxisDirection.right) {
@@ -107,6 +110,7 @@ class JDButton extends StatelessWidget {
 
       layoutWidget = Row(
         mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisSize:MainAxisSize.min,
         children: childList,
       );
     }
@@ -123,19 +127,24 @@ class JDButton extends StatelessWidget {
       );
     }
 
-    return GestureDetector(
-      onTap: () {
-        if (action!= null) action();
-      },
-      child: Container(
-        width: width,
-        height: height,
-        color: backgroundColor,
-        decoration: boxDecoration,
-        padding: padding,
-        margin: margin,
-        child: layoutWidget,
-      ),
+    layoutWidget = Container(
+      width: width,
+      height: height,
+      color: backgroundColor,
+      decoration: boxDecoration,
+      padding: padding,
+      margin: margin,
+      child: layoutWidget,
     );
+    if (action!= null) {
+      layoutWidget = GestureDetector(
+        onTap: () {
+          if (action!= null) action();
+        },
+        child: layoutWidget,
+      );
+    }
+
+    return layoutWidget;
   }
 }

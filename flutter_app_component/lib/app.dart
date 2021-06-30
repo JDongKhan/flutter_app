@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:jd_core/style/jd_colors.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'package:provider/provider.dart';
 
 import 'routes/jd_routes.dart';
@@ -66,6 +67,10 @@ class MyAppState extends State<MyApp> {
         ),
         home: JDSplashPage(),
 //      routes: routes,
+        navigatorObservers: [
+          JDNavigatorObserver(),
+          defaultLifecycleObserver,
+        ],
         onGenerateRoute: JDRouter.generateRoute,
 //      onUnknownRoute: (settings) => MaterialPageRoute<dynamic>(builder: (context) => JDNotFindPage()),
 //      onGenerateRoute: (RouteSettings settings){
@@ -78,5 +83,31 @@ class MyAppState extends State<MyApp> {
 //      },
       ),
     );
+  }
+}
+
+class JDNavigatorObserver extends NavigatorObserver {
+  void didPush(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print('app - didPush');
+  }
+
+  void didPop(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print('app - didPop');
+  }
+
+  void didRemove(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print('app - didRemove');
+  }
+
+  void didReplace({Route<dynamic> newRoute, Route<dynamic> oldRoute}) {
+    print('app - didReplace');
+  }
+
+  void didStartUserGesture(Route<dynamic> route, Route<dynamic> previousRoute) {
+    print('app - didStartUserGesture');
+  }
+
+  void didStopUserGesture() {
+    print('app - didStopUserGesture');
   }
 }
