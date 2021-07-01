@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_home/pages/demo/jd_home_demo.dart';
 import 'package:jd_home/pages/home/jd_home_main_page.dart';
-import 'package:jd_home/pages/home/viewmodel/home_viewmodel.dart';
+import 'package:jd_home/pages/home/viewmodel/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 

@@ -25,37 +25,39 @@ void showShareBottomSheet(BuildContext context) {
   GridView girdView = GridView(
     physics: const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 4,
+    padding: const EdgeInsets.all(0),
+    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      maxCrossAxisExtent: 100,
       mainAxisSpacing: 4,
       crossAxisSpacing: 4,
     ),
     children: shareList
-        .map((e) => SizedBox(
-              width: 80,
-              height: 80,
-              child: Image.asset(
-                JDAssetBundle.getImgPath(e.icon),
-              ),
-            ))
+        .map((e) => Container(child: SizedBox(
+      width: 10,
+      height: 10,
+      child: Image.asset(
+        'packages/jd_core/assets/${e.icon}.png',
+        // package: 'js_core',
+      ),
+    ),))
         .toList(),
   );
 
   ThemeData currentTheme = Theme.of(context);
   showModalBottomSheet(
     elevation: 0,
-    backgroundColor: currentTheme.highlightColor,
+    // backgroundColor: currentTheme.highlightColor,
     context: context,
     builder: (BuildContext context) => Container(
       width: jd_screenWidth(),
-      decoration: BoxDecoration(color: currentTheme.primaryColor),
+      decoration: BoxDecoration(color: Colors.white),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           Container(
-            alignment: Alignment.bottomLeft,
-            height: jd_getWidth(59),
-            padding: EdgeInsets.only(left: jd_getWidth(42)),
+            alignment: Alignment.centerLeft,
+            height: 40,
+            padding: EdgeInsets.only(left: jd_getWidth(42),top: 10),
             child: Text(
               '分享',
               style: TextStyle(
@@ -65,9 +67,6 @@ void showShareBottomSheet(BuildContext context) {
             ),
           ),
           Container(
-            height: jd_getWidth(206),
-            padding:
-                EdgeInsets.only(top: jd_getWidth(33), left: jd_getWidth(33)),
             alignment: Alignment.topLeft,
             decoration: BoxDecoration(
               border: Border(
@@ -80,13 +79,12 @@ void showShareBottomSheet(BuildContext context) {
             child: girdView,
           ),
           Container(
-            height: jd_getWidth(206),
-            padding:
-                EdgeInsets.only(top: jd_getWidth(33), left: jd_getWidth(33)),
+            height: 80,
+            margin: EdgeInsets.only(top: 10),
             alignment: Alignment.topLeft,
             child: Row(
               children: const <Widget>[
-                SizedBox(width: 80, height: 80, child: Icon(Icons.share)),
+                SizedBox(width: 80, height: 80, child: Icon(Icons.share,color: Colors.grey,)),
               ],
             ),
           ),
@@ -96,23 +94,22 @@ void showShareBottomSheet(BuildContext context) {
             },
             child: Container(
               width: jd_screenWidth(),
-              height: jd_getWidth(125),
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 border: Border(
                   top: BorderSide(
-                    width: jd_getWidth(10),
-                    color: currentTheme.backgroundColor,
+                    width: 1,
+                    color: currentTheme.dividerColor,
                   ),
                 ),
               ),
-              child: Text(
+              child: SafeArea(child: Container(alignment: Alignment.center,height: 60,child: Text(
                 '取消',
                 style: TextStyle(
                   fontSize: jd_getSp(36),
                   color: Colors.black,
                 ),
-              ),
+              ),),),
             ),
           ),
         ],

@@ -1,6 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:jd_core/style/jd_theme.dart';
+import 'package:provider/provider.dart';
 
-void main() => runApp(MyApp());
+import 'pages/home/jd_home_page.dart';
+
+void main() => runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<JDTheme>(
+            create: (BuildContext context) => JDTheme(),
+          ),
+        ],
+        child: MyApp(),
+      ),
+    );
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -90,6 +103,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => JDHomePage(),
+                    ),
+                  );
+                },
+                child: Text('Next Page')),
             Text(
               'You have pushed the button this many times:',
             ),

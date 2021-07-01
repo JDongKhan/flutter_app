@@ -72,7 +72,7 @@ class _ProviderWidgetState<T extends ViewModel>
 
 class Provider2Widget<T1 extends ViewModel, T2 extends ViewModel>
     extends StatefulWidget {
-  final Widget Function(BuildContext context, T1 model1, T2 model2) builder;
+  final Widget Function(BuildContext context) builder;
 
   ///根据model状态构建页面
   final T1 model1;
@@ -120,9 +120,7 @@ class _Provider2WidgetState<T1 extends ViewModel, T2 extends ViewModel>
       ],
       child: Builder(
         builder: (BuildContext c) {
-          T1 model1 = c.watch<T1>();
-          T2 model2 = c.watch<T2>();
-          return widget.builder(c, model1, model2);
+          return widget.builder(c);
         },
       ),
     );
@@ -131,8 +129,7 @@ class _Provider2WidgetState<T1 extends ViewModel, T2 extends ViewModel>
 
 class Provider3Widget<T1 extends ViewModel, T2 extends ViewModel,
     T3 extends ViewModel> extends StatefulWidget {
-  final Widget Function(BuildContext context, T1 model1, T2 model2, T3 model3)
-      builder;
+  final Widget Function(BuildContext context) builder;
 
   ///根据model状态构建页面
   final T1 model1;
@@ -184,10 +181,7 @@ class _Provider3WidgetState<T1 extends ViewModel, T2 extends ViewModel,
       ],
       child: Builder(
         builder: (BuildContext c) {
-          T1 model1 = c.watch<T1>();
-          T2 model2 = c.watch<T2>();
-          T3 model3 = c.watch<T3>();
-          return widget.builder(c, model1, model2, model3);
+          return widget.builder(c);
         },
       ),
     );
@@ -197,7 +191,7 @@ class _Provider3WidgetState<T1 extends ViewModel, T2 extends ViewModel,
 class Provider4Widget<T1 extends ViewModel, T2 extends ViewModel,
     T3 extends ViewModel, T4 extends ViewModel> extends StatefulWidget {
   final Widget Function(
-      BuildContext context, T1 model1, T2 model2, T3 model3, T4 model4) builder;
+      BuildContext context) builder;
 
   ///根据model状态构建页面
   final T1 model1;
@@ -258,11 +252,7 @@ class _Provider4WidgetState<
       ],
       child: Builder(
         builder: (BuildContext c) {
-          T1 model1 = c.watch<T1>();
-          T2 model2 = c.watch<T2>();
-          T3 model3 = c.watch<T3>();
-          T4 model4 = c.watch<T4>();
-          return widget.builder(c, model1, model2, model3, model4);
+          return widget.builder(c);
         },
       ),
     );

@@ -399,9 +399,9 @@ class _JDShopMyPageState extends State<JDShopMyPage>
           children: [
             Expanded(
               child: Container(
-                margin: const EdgeInsets.only(left: 10, right: 10),
+                margin: const EdgeInsets.all(10),
                 child: Image.asset(
-                  JDAssetBundle.getImgPath('ali_connors'),
+                  JDAssetBundle.getImgPath('shop_${index % 5}'),
                 ),
               ),
             ),

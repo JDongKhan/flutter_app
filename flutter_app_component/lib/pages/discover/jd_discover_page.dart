@@ -48,6 +48,78 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
   int _currentIndex = 0;
 
   final List<Map<String, dynamic>> module_list = <Map<String, dynamic>>[
+    ///demo
+    {
+      'title': 'Demo',
+      'items': [
+        {
+          'title': '抖音',
+          'router': '/douyin',
+        },
+        {
+          'title': 'Wechat',
+          'page': WechatMainPage(),
+        },
+        {
+          'title': '商城',
+          'page': JDShopMainPage(),
+        },
+        {
+          'title': 'Login',
+          'page': LoginDemoListPage(),
+        },
+        {
+          'title': '第三方组件',
+          'router': '/thirdparty_list',
+        },
+        {
+          'title': 'fishredux',
+          'page': OnePagePage().buildPage({}),
+        },
+        {
+          'title': 'BottomDragDemo',
+          'page': BottomDragDemo(),
+        },
+        {
+          'title': 'LinkScrollMenu',
+          'page': JDLinkScrollMenu(),
+        },
+        {
+          'title': 'RenderBoxDemo',
+          'page': JDRenderShiftedBoxDemo(),
+        },
+        {
+          'title': 'DropdownMenuDemoPage',
+          'page': JDDropdownMenuDemoPage(),
+        },
+        {
+          'title': 'PopDemoPage',
+          'page': JDPopDemoPage(),
+        },
+        {
+          'title': 'DashDemo',
+          'page': DashDemo(),
+        },
+        {
+          'title': 'IsolatePage',
+          'page': IsolatePage(),
+        },
+        {
+          'title': 'SrcollPage',
+          'page': SrcollPage(),
+        },
+        {
+          'title': 'Scaffold',
+          'router': '/scaffold',
+        },
+        {
+          'title': 'Tabbar',
+          'router': '/tabbar',
+        },
+      ],
+    },
+
+    ///widget
     {
       'title': '组件列表',
       'items': [
@@ -171,6 +243,8 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         }
       ],
     },
+
+    ///Animal
     {
       'title': 'Animal',
       'items': [
@@ -188,6 +262,8 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         }
       ],
     },
+
+    ///Canvas
     {
       'title': 'Canvas',
       'items': [
@@ -217,6 +293,8 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         }
       ],
     },
+
+    ///State
     {
       'title': 'State',
       'items': [
@@ -234,6 +312,8 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         }
       ],
     },
+
+    ///DataTransfer
     {
       'title': 'DataTransfer',
       'items': [
@@ -255,75 +335,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         }
       ],
     },
-    {
-      'title': 'Demo',
-      'items': [
-        {
-          'title': '抖音',
-          'router': '/douyin',
-        },
-        {
-          'title': 'Wechat',
-          'page': WechatMainPage(),
-        },
-        {
-          'title': '商城',
-          'page': JDShopMainPage(),
-        },
-        {
-          'title': 'Login',
-          'page': LoginDemoListPage(),
-        },
-        {
-          'title': '第三方组件',
-          'router': '/thirdparty_list',
-        },
-        {
-          'title': 'fishredux',
-          'page': OnePagePage().buildPage({}),
-        },
-        {
-          'title': 'BottomDragDemo',
-          'page': BottomDragDemo(),
-        },
-        {
-          'title': 'LinkScrollMenu',
-          'page': JDLinkScrollMenu(),
-        },
-        {
-          'title': 'RenderBoxDemo',
-          'page': JDRenderShiftedBoxDemo(),
-        },
-        {
-          'title': 'DropdownMenuDemoPage',
-          'page': JDDropdownMenuDemoPage(),
-        },
-        {
-          'title': 'PopDemoPage',
-          'page': JDPopDemoPage(),
-        },
-        {
-          'title': 'DashDemo',
-          'page': DashDemo(),
-        },
-        {
-          'title': 'IsolatePage',
-          'page': IsolatePage(),
-        },
-        {
-          'title': 'SrcollPage',
-          'page': SrcollPage(),
-        },
-        {
-          'title': 'Scaffold',
-          'router': '/scaffold',
-        },
-        {
-          'title': 'Tabbar',
-          'router': '/tabbar',
-        },
-      ],
-    }
   ];
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();

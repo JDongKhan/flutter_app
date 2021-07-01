@@ -50,7 +50,7 @@ class _LikeButtonState extends State<LikeButton> with TickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
-    _controller = new AnimationController(duration: widget.duration, value: 0)
+    _controller = new AnimationController(vsync: this,duration: widget.duration, value: 0)
       ..addListener(() {
         setState(() {});
       });

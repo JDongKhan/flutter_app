@@ -7,10 +7,12 @@ import 'package:flutter/material.dart';
  */
 
 class JDSearchBar extends StatefulWidget {
-  JDSearchBar({this.onTap, this.text});
+  JDSearchBar({this.onTap, this.text,this.color = Colors.white,this.padding = const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),});
 
   GestureTapCallback onTap;
   String text;
+  final Color color;
+  final EdgeInsets padding;
 
   @override
   State createState() => _JDSearchBarState();
@@ -30,12 +32,15 @@ class _JDSearchBarState extends State<JDSearchBar> {
   Widget build(BuildContext context) {
     return Container(
       height: 60.0,
-      color: Colors.transparent,
-      child: Padding(
-        padding: const EdgeInsets.all(6),
-        child: Card(
-          child: _buildSearchWidget(),
+      alignment: Alignment.centerLeft,
+      padding: widget.padding,
+      child: Container(
+        decoration: BoxDecoration(
+          color: widget.color,
+          borderRadius: BorderRadius.all(Radius.circular(20),),
         ),
+        height: 40.0,
+        child: _buildSearchWidget(),
       ),
     );
   }
@@ -65,7 +70,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
               ),
               onTap: () {
                 _focusNode.unfocus();
-                widget.onTap();
+                widget?.onTap();
               },
             ),
           ),

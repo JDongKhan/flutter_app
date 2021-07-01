@@ -58,6 +58,7 @@ abstract class RefreshListViewModel<T> extends ListViewModel<T> {
   /// 上拉加载更多
   Future<List<T>> loadMore() async {
     try {
+      setBusy(true);
       var data = await loadData(pageNum: ++currentPageNum);
       if (data.isEmpty) {
         currentPageNum--;
@@ -70,6 +71,7 @@ abstract class RefreshListViewModel<T> extends ListViewModel<T> {
           refreshController.loadComplete();
         }
         onCompleted(data);
+        setComplete(listeners: true);
       }
       return data;
     } catch (e, s) {

@@ -28,27 +28,27 @@ class _JDShopHomePageState extends State<JDShopHomePage>
 
   final List<JDShopInfo> recommendList = [
     JDShopInfo(
-      icon: JDAssetBundle.getImgPath('defalut_product'),
+      icon: JDAssetBundle.getImgPath('shop_0'),
       shop_name: '洗发水',
       price: 18.80,
     ),
     JDShopInfo(
-      icon: JDAssetBundle.getImgPath('defalut_product'),
+      icon: JDAssetBundle.getImgPath('shop_1'),
       shop_name: '蛋糕',
       price: 8.80,
     ),
     JDShopInfo(
-      icon: JDAssetBundle.getImgPath('defalut_product'),
+      icon: JDAssetBundle.getImgPath('shop_2'),
       shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
       price: 48.80,
     ),
     JDShopInfo(
-      icon: JDAssetBundle.getImgPath('defalut_product'),
+      icon: JDAssetBundle.getImgPath('shop_3'),
       shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
       price: 48.80,
     ),
     JDShopInfo(
-      icon: JDAssetBundle.getImgPath('defalut_product'),
+      icon: JDAssetBundle.getImgPath('shop_4'),
       shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
       price: 48.80,
     ),
@@ -116,16 +116,20 @@ class _JDShopHomePageState extends State<JDShopHomePage>
   }
 
   Widget _buildSearch() {
-    return JDSearchBar(
-      text: _searchText,
-      onTap: () {},
+    return Container(
+      margin: const EdgeInsets.only(top: 10),
+      child: JDSearchBar(
+        text: _searchText,
+        onTap: () {},
+      ),
     );
   }
 
   Widget _buildSwiper() {
     return Container(
+      margin: const EdgeInsets.only(top: 10),
       width: MediaQuery.of(context).size.width,
-      height: 100,
+      height: 150,
       child: Swiper(
         itemCount: 5,
         pagination: const SwiperPagination(
@@ -134,12 +138,12 @@ class _JDShopHomePageState extends State<JDShopHomePage>
         itemBuilder: (BuildContext context, int index) {
           if (index % 2 == 0) {
             return Image.asset(
-              JDAssetBundle.getImgPath('bg_personal_real_name'),
+              JDAssetBundle.getImgPath('bg_0', format: 'jpg'),
               fit: BoxFit.fill,
             );
           }
           return Image.asset(
-            JDAssetBundle.getImgPath('bg_banner'),
+            JDAssetBundle.getImgPath('bg_1', format: 'jpg'),
             fit: BoxFit.fill,
           );
         },
@@ -152,7 +156,8 @@ class _JDShopHomePageState extends State<JDShopHomePage>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-          margin: EdgeInsets.only(
+          margin: const EdgeInsets.only(
+            top: 10,
             left: 10,
             bottom: 10,
           ),
@@ -196,6 +201,7 @@ class _JDShopHomePageState extends State<JDShopHomePage>
           children: [
             Expanded(
               child: Container(
+                margin: const EdgeInsets.all(10),
                 child: Center(
                   child: Image.asset(shopInfo.icon),
                 ),
@@ -210,6 +216,8 @@ class _JDShopHomePageState extends State<JDShopHomePage>
                 ),
                 child: Text(
                   shopInfo.shop_name,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
                   style: const TextStyle(
                     fontSize: 12,
                   ),
@@ -271,9 +279,9 @@ class _JDShopHomePageState extends State<JDShopHomePage>
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              margin: EdgeInsets.only(left: 10, right: 10),
+              margin: const EdgeInsets.all(10),
               child: Image.asset(
-                JDAssetBundle.getImgPath('ali_connors'),
+                JDAssetBundle.getImgPath('shop_${index % 5}'),
               ),
             ),
             Container(
@@ -282,6 +290,7 @@ class _JDShopHomePageState extends State<JDShopHomePage>
                 ),
                 child: const Text(
                   '商品名称',
+                  overflow: TextOverflow.ellipsis,
                   maxLines: 2,
                 )),
             Container(

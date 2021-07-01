@@ -6,19 +6,21 @@ import 'package:jd_core/style/jd_icons.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_screen_utils.dart';
-import 'package:jd_core/widget//Text/jd_expandable_text.dart';
-import 'package:jd_core/widget//footerrefresh/jd_customfooter.dart';
-import 'package:jd_core/widget//loading/jd_loading.dart';
-import 'package:jd_core/widget//sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
+import 'package:jd_core/view_model/widget/provider_widget.dart';
+import 'package:jd_core/widget/Text/jd_expandable_text.dart';
+import 'package:jd_core/widget/footerrefresh/jd_customfooter.dart';
+import 'package:jd_core/widget/loading/jd_loading.dart';
 import 'package:jd_core/widget/searchbar/jd_searchbar.dart';
+import 'package:jd_core/widget/sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
 import 'package:jd_home/models/home_model.dart';
 import 'package:jd_home/pages/home/detail/jd_home_Info_detail_page.dart';
 import 'package:jd_home/pages/home/detail/jd_home_main_detail_page.dart';
 import 'package:jd_home/pages/home/jd_home_searchbar_delegate.dart';
-import 'package:jd_home/pages/home/viewmodel/home_viewmodel.dart';
-import 'package:jd_home/services/jd_request.dart';
+import 'package:jd_home/pages/home/viewmodel/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'viewmodel/home_list_view_model.dart';
 
 /// jd
 
@@ -34,8 +36,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
   String _searchText;
   double _appAlpha = 1;
 
-  final RefreshController _refreshController =
-      RefreshController(initialRefresh: true);
+  HomeListViewModel _listViewModel = HomeListViewModel();
   final ScrollController _scrollController = ScrollController();
 
   @override
@@ -43,40 +44,12 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
     super.initState();
   }
 
-  void _loadData() {
-    //请求banner
-    JDRequest.home()
-        .then((dynamic value) => {
-              context.read<HomeViewModel>().saveBanner(value),
-            })
-        .catchError((e) {
-      context.read<HomeViewModel>().saveBanner(HomeModel());
-    });
-    //请求列表
-    JDRequest.homeList()
-        .then((dynamic value) => {
-              context.read<HomeViewModel>().saveList(value),
-            })
-        .catchError((e) {
-      context.read<HomeViewModel>().saveList(HomeModelList());
-    });
-  }
-
   void _onRefresh() {
-    _loadData();
-    _refreshController.refreshCompleted();
+    _listViewModel.refresh();
   }
 
   void _onLoading() {
-    //请求列表
-    JDRequest.homeList().then((dynamic value) {
-      if (value == null) {
-        _refreshController.loadNoData();
-      } else {
-        _refreshController.loadComplete();
-        context.read<HomeViewModel>().loadMore(value);
-      }
-    });
+    _listViewModel.loadMore();
   }
 
   Future<dynamic> _click() async {
@@ -118,15 +91,25 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
                 }
                 return true;
               },
-              child: SmartRefresher(
-                enablePullDown: true,
-                enablePullUp: true,
-                header: const WaterDropHeader(),
-                footer: JDCustomFooter(),
-                controller: _refreshController,
-                onRefresh: _onRefresh,
-                onLoading: _onLoading,
-                child: _buildScrollView(),
+              child: Provider2Widget<HomeViewModel, HomeListViewModel>(
+                model1: HomeViewModel(),
+                model2: _listViewModel,
+                onModelReady: (model1, model2) {
+                  model1.initData();
+                  model2.initData();
+                },
+                builder: (BuildContext context) {
+                  return SmartRefresher(
+                    enablePullDown: true,
+                    enablePullUp: true,
+                    header: const WaterDropHeader(),
+                    footer: JDCustomFooter(),
+                    controller: _listViewModel.refreshController,
+                    onRefresh: _onRefresh,
+                    onLoading: _onLoading,
+                    child: _buildScrollView(context),
+                  );
+                },
               ),
             ),
           ),
@@ -158,8 +141,9 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
     );
   }
 
-  Widget _buildSwiper() {
-    final HomeModel homeModel = context.watch<HomeViewModel>().homeModel;
+  Widget _buildSwiper(BuildContext context) {
+    HomeViewModel viewModel = context.watch<HomeViewModel>();
+    final HomeModel homeModel = viewModel.data;
     if (homeModel?.banner == null || homeModel.banner.isEmpty) {
       return Container();
     }
@@ -181,15 +165,15 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
     );
   }
 
-  Widget _buildScrollView() {
+  Widget _buildScrollView(BuildContext context) {
     return CustomScrollView(
       controller: _scrollController,
       slivers: <Widget>[
         SliverToBoxAdapter(
-          child: _buildSwiper(),
+          child: _buildSwiper(context),
         ),
 
-        _buildGridView(),
+        _buildGridView(context),
         _buildPersistentHeader('热门推荐'),
         // SliverLayoutBuilder(
         //   builder: (BuildContext context, SliverConstraints constraints) {
@@ -201,13 +185,13 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
     );
   }
 
-  Widget _buildGridView() {
-    HomeModel homeModel = context.watch<HomeViewModel>().homeModel;
-    if (homeModel?.menuGrid == null) {
+  Widget _buildGridView(BuildContext context) {
+    HomeViewModel viewModel = context.watch<HomeViewModel>();
+    HomeModel homeModel = viewModel.data;
+    var menuGrid = homeModel?.menuGrid;
+    if (viewModel.busy || menuGrid == null) {
       return SliverToBoxAdapter(child: Container());
     }
-    var menuGrid = homeModel?.menuGrid;
-
     return SliverGrid.count(
       crossAxisCount: 4,
       children: List.generate(menuGrid.length, (index) {
@@ -247,15 +231,24 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
       );
 
   Widget _buildListView(BuildContext context) {
-    HomeModelList homeModelList = context.watch<HomeViewModel>().homeModelList;
-    if (homeModelList == null) {
+    HomeListViewModel homeModelList = context.watch<HomeListViewModel>();
+    if (homeModelList.busy) {
       return const SliverToBoxAdapter(child: JDLoading(loading: true));
     }
-    if (homeModelList?.list == null) {
+    if (homeModelList.error) {
       return const SliverFillRemaining(
         child: JDLoading(
           error: true,
           errorMsg: '网络连接失败',
+        ),
+      );
+    }
+
+    if (homeModelList.empty) {
+      return const SliverFillRemaining(
+        child: JDLoading(
+          error: true,
+          errorMsg: '暂无数据',
         ),
       );
     }
@@ -345,30 +338,37 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
                 right: 40,
               ),
               child: GridView.count(
-                padding: const EdgeInsets.only(left:10,right:30,),
+                padding: const EdgeInsets.only(
+                  left: 10,
+                  right: 30,
+                ),
                 shrinkWrap: true,
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 physics: NeverScrollableScrollPhysics(),
                 crossAxisCount: 3,
-                children: ['user_head_1','user_head_2','user_head_3']
+                children: ['user_head_1', 'user_head_2', 'user_head_3']
                     .map(
                       (e) => Container(
                         decoration: ShapeDecoration(
                           shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadiusDirectional.circular(10)),
+                              borderRadius:
+                                  BorderRadiusDirectional.circular(10)),
                         ),
                         clipBehavior: Clip.antiAlias,
                         child: Image.asset(
                           JDAssetBundle.getImgPath(e),
                         ),
                       ),
-                )
+                    )
                     .toList(),
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(left:10,top:10,),
+              padding: const EdgeInsets.only(
+                left: 10,
+                top: 10,
+              ),
               child: Text(
                 "${itm['time']} 发布",
                 style: const TextStyle(
@@ -386,7 +386,8 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
 
   Widget _buildTyle2Cell(Map itm) {
     return Container(
-      margin: EdgeInsets.only(top: jd_getWidth(10), bottom: jd_getHeight(11),left: 10,right: 10),
+      margin: EdgeInsets.only(
+          top: jd_getWidth(10), bottom: jd_getHeight(11), left: 10, right: 10),
       alignment: Alignment.centerLeft,
       child: const JDExpandableText(
         '我要测试是十四师是死是活我要死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活我要测试是十四师是死是活',
@@ -401,7 +402,6 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
   @override
   void dispose() {
     super.dispose();
-    _refreshController.dispose();
   }
 
   @override

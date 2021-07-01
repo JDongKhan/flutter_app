@@ -20,7 +20,7 @@ class _JDShopSearchPageState extends State<JDShopSearchPage> {
     list = List.generate(
       50,
       (index) => JDShopInfo(
-        icon: JDAssetBundle.getImgPath('defalut_product'),
+        icon: JDAssetBundle.getImgPath('shop_${index % 5}'),
         shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
         price: 48.80,
       ),
@@ -132,13 +132,18 @@ class _JDShopSearchPageState extends State<JDShopSearchPage> {
           Container(
             width: 100,
             height: 100,
+            margin: const EdgeInsets.all(10),
             child: Image.asset(shopInfo.icon),
           ),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(shopInfo.shop_name),
+                Text(
+                  shopInfo.shop_name,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 2,
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -185,15 +190,20 @@ class _JDShopSearchPageState extends State<JDShopSearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Center(
-              child: Container(
-                width: 100,
-                height: 100,
-                child: Image.asset(shopInfo.icon),
+            Expanded(
+              child: Center(
+                child: Container(
+                  margin: const EdgeInsets.all(10),
+                  child: Image.asset(shopInfo.icon),
+                ),
               ),
             ),
-            Text(shopInfo.shop_name),
-            SizedBox(
+            Text(
+              shopInfo.shop_name,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 2,
+            ),
+            const SizedBox(
               height: 10,
             ),
             Text(shopInfo.price.toString()),
