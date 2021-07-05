@@ -7,6 +7,25 @@
 ![demo png](5.gif "demo")
 
 
+### 抖音
+![demo png](1.png "demo")
+
+### 微信
+![demo png](2.png "demo")
+![demo png](3.png "demo")
+![demo png](4.png "demo")
+![demo png](5.png "demo")
+![demo png](6.png "demo")
+![demo png](7.png "demo")
+
+### 商城
+![demo png](8.png "demo")
+![demo png](9.png "demo")
+![demo png](10.png "demo")
+![demo png](11.png "demo")
+![demo png](12.png "demo")
+![demo png](13.png "demo")
+
 
 ### 现有功能
 
