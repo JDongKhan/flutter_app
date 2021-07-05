@@ -35,6 +35,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                   return true;
                 },
                 child: CustomScrollView(
+                  physics: const BouncingScrollPhysics(),
                   slivers: [
                     _buildUserInfo(),
                     _buildList(model),
@@ -67,9 +68,11 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
           children: [
             Positioned.fill(
               top: -200,
+              left: 0,
+              right: 0,
               bottom: 20,
               child: Image.asset(
-                JDAssetBundle.getImgPath('user_head'),
+                JDAssetBundle.getImgPath('login_background'),
                 fit: BoxFit.fill,
               ),
             ),

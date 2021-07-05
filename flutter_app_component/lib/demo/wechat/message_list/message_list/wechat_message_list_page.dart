@@ -1,6 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/wechat/message_list/message_list/wechat_message_list_view_model.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:jd_dropdowm_menu_widget/jd_pop_widget.dart';
@@ -14,7 +16,8 @@ class WechatMessageListPage extends StatefulWidget {
   _WechatMessageListPageState createState() => _WechatMessageListPageState();
 }
 
-class _WechatMessageListPageState extends State<WechatMessageListPage> {
+class _WechatMessageListPageState extends State<WechatMessageListPage>
+    with AutomaticKeepAliveClientMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -108,27 +111,82 @@ class _WechatMessageListPageState extends State<WechatMessageListPage> {
           return ListView.separated(
               itemBuilder: (context, index) {
                 Map item = model.list[index];
-                return GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    _clickAtIndex(context, item);
-                  },
-                  child: ListTile(
-                    title: Text(item['msg_name']),
-                    leading:
-                        Image.asset(JDAssetBundle.getImgPath(item['icon'])),
-                    subtitle: Text(item['msg_content']),
-                  ),
-                );
+                return _buildListItem(model, item);
               },
               separatorBuilder: (context, index) {
-                return Divider(
+                return const Divider(
                   height: 1,
                   color: Colors.grey,
                 );
               },
               itemCount: model.list.length);
         },
+      ),
+    );
+  }
+
+  Widget _buildListItem(WechatMessageListViewModel model, Map item) {
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      actions: [
+        IconSlideAction(
+          caption: 'Archive',
+          color: Colors.blue,
+          icon: Icons.archive,
+          onTap: () {
+            print('Archive');
+          },
+        ),
+        IconSlideAction(
+          caption: 'Share',
+          color: Colors.indigo,
+          icon: Icons.share,
+          onTap: () {
+            print('Share');
+          },
+        ),
+      ],
+      secondaryActions: [
+        IconSlideAction(
+          caption: 'More',
+          color: Colors.black45,
+          icon: Icons.more_horiz,
+          onTap: () {
+            print('More');
+          },
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red,
+          icon: Icons.delete,
+          onTap: () {
+            print('Delete');
+          },
+        ),
+      ],
+      child: ListTile(
+        onTap: () {
+          _clickAtIndex(context, item);
+        },
+        title: Text(item['msg_name']),
+        leading: Badge(
+          toAnimate: false,
+          showBadge: int.parse(item['msg_count']) > 0,
+          badgeContent: Text(
+            item['msg_count'],
+            style: const TextStyle(color: Colors.white),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: Image.asset(
+              JDAssetBundle.getImgPath(item['icon']),
+            ),
+          ),
+        ),
+        subtitle: Text(
+          item['msg_content'],
+        ),
       ),
     );
   }
@@ -140,4 +198,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage> {
       ),
     );
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

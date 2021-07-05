@@ -61,11 +61,11 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
     //显示sus tag
     SuspensionUtil.setShowSuspensionStatus(_userList);
 
-    _userList.insert(0, UserInfo(name: '企业微信联系人', flag: '2', icon: 'userHead'));
-    _userList.insert(0, UserInfo(name: '公众号', flag: '2', icon: 'userHead'));
-    _userList.insert(0, UserInfo(name: '标签', flag: '2', icon: 'userHead'));
-    _userList.insert(0, UserInfo(name: '群聊', flag: '2', icon: 'userHead'));
-    _userList.insert(0, UserInfo(name: '新的朋友', flag: '2', icon: 'userHead'));
+    _userList.insert(0, UserInfo(name: '企业微信联系人', flag: '2', icon: 'wechat'));
+    _userList.insert(0, UserInfo(name: '公众号', flag: '2', icon: 'other'));
+    _userList.insert(0, UserInfo(name: '标签', flag: '2', icon: 'tag'));
+    _userList.insert(0, UserInfo(name: '群聊', flag: '2', icon: 'qunliao'));
+    _userList.insert(0, UserInfo(name: '新的朋友', flag: '2', icon: 'new_friend'));
 
     setState(() {});
   }
@@ -125,9 +125,9 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
       height: 50,
       child: ListTile(
         leading: Image.asset(
-          JDAssetBundle.getImgPath(model.icon),
-          width: 40,
-          height: 40,
+          JDAssetBundle.getIconPath(model.icon, format: 'webp'),
+          width: 30,
+          height: 30,
           fit: BoxFit.fitWidth,
         ),
         title: Text(model.name),
@@ -161,10 +161,13 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
         Container(
           height: 70,
           child: ListTile(
-            leading: Image.asset(
-              JDAssetBundle.getImgPath(model.icon),
-              width: 60,
-              height: 60,
+            leading: ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(
+                JDAssetBundle.getImgPath(model.icon),
+                width: 50,
+                height: 50,
+              ),
             ),
             title: Text(model.name),
             onTap: () {

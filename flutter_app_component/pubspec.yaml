@@ -101,6 +101,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   # 图标库
   cupertino_icons: ^1.0.0
+  badges: ^2.0.1
 
   lifecycle: 0.2.0
 #  flutterlifecyclehooks: 1.0.1

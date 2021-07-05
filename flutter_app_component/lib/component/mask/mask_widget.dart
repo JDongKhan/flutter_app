@@ -16,6 +16,19 @@ class MarkEntry {
   });
 }
 
+class MarkUtils {
+  static void showMark(BuildContext context, List<MarkEntry> entrys) {
+    overlayEntry = OverlayEntry(
+      builder: (context) {
+        return MarkWidget(
+          entrys: entrys,
+        );
+      },
+    );
+    Overlay.of(context).insert(overlayEntry);
+  }
+}
+
 class MarkWidget extends StatefulWidget {
   final List<MarkEntry> entrys;
   const MarkWidget({this.entrys});
@@ -58,18 +71,5 @@ class _MarkWidgetState extends State<MarkWidget> {
         ),
       ),
     );
-  }
-}
-
-class MarkUtils {
-  static void showMark(BuildContext context, List<MarkEntry> entrys) {
-    overlayEntry = OverlayEntry(
-      builder: (context) {
-        return MarkWidget(
-          entrys: entrys,
-        );
-      },
-    );
-    Overlay.of(context).insert(overlayEntry);
   }
 }

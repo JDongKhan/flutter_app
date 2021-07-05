@@ -17,7 +17,7 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('发现'),
+        title: const Text('发现'),
       ),
       body: Container(
         color: Colors.grey[100],
@@ -35,8 +35,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                   );
                 },
                 child: ListTile(
-                  leading: Image.asset('weChat'.img),
-                  title: Text('朋友圈'),
+                  leading: const Icon(Icons.child_friendly),
+                  title: const Text('朋友圈'),
                   trailing: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
@@ -45,7 +45,7 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                         width: 40,
                         height: 40,
                       ),
-                      Icon(
+                      const Icon(
                         Icons.arrow_forward_ios,
                       )
                     ],
@@ -57,8 +57,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
               child: ListTile(
-                leading: Image.asset('weChat'.img),
-                title: Text('视频号'),
+                leading: const Icon(Icons.video_call),
+                title: const Text('视频号'),
                 trailing: Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -67,8 +67,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                       width: 30,
                       height: 30,
                     ),
-                    Text('赞过'),
-                    Icon(
+                    const Text('赞过'),
+                    const Icon(
                       Icons.arrow_forward_ios,
                     )
                   ],
@@ -78,8 +78,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.scanner_rounded),
                 title: Text('扫一扫'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -88,8 +88,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             ),
             Container(
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.phone),
                 title: Text('摇一摇'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -99,8 +99,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.watch),
                 title: Text('看一看'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -109,8 +109,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             ),
             Container(
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.search_sharp),
                 title: Text('搜一搜'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -120,8 +120,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.near_me),
                 title: Text('直播和附近'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -131,8 +131,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.event_busy),
                 title: Text('购物'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -141,8 +141,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             ),
             Container(
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.games),
                 title: Text('游戏'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
@@ -152,8 +152,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
             Container(
               margin: const EdgeInsets.only(top: 10),
               color: Colors.white,
-              child: ListTile(
-                leading: Image.asset('weChat'.img),
+              child: const ListTile(
+                leading: Icon(Icons.pages_sharp),
                 title: Text('小程序'),
                 trailing: Icon(
                   Icons.arrow_forward_ios,
