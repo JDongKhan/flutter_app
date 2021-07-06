@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jd_core/jd_core.dart';
 
 import 'bottom_drag_widget.dart';
 
@@ -28,7 +29,20 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
             ),
           ),
           dragContainer: DragContainer(
-            drawer: getListView(),
+            drawer: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                    color: Colors.grey[200],
+                    borderRadius: const BorderRadius.only(
+                        topLeft: Radius.circular(30),
+                        topRight: Radius.circular(30)),
+                  ),
+                  margin: const EdgeInsets.only(top: 40),
+                ),
+                getListView(),
+              ],
+            ),
             defaultShowHeight: 150.0,
             height: 700.0,
           )),
@@ -37,17 +51,10 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
 
   Widget getListView() {
     return Container(
-      height: 600.0,
-
-      ///总高度
-      color: Colors.amberAccent,
       child: Column(
         children: <Widget>[
-          Container(
-            color: Colors.deepOrangeAccent,
-            height: 10.0,
-          ),
-          Expanded(child: newListView())
+          _buildUserHeadWidget(),
+          Expanded(child: _buildDragList())
         ],
       ),
     );
@@ -90,5 +97,63 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
         physics: const ClampingScrollPhysics(),
       ),
     );
+  }
+
+  Widget _buildUserHeadWidget() {
+    return Container(
+      height: 150,
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.grey[200],
+            margin: const EdgeInsets.only(top: 60),
+          ),
+          Center(
+            child: Column(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(40),
+                  child: Image.asset(
+                    JDAssetBundle.getImgPath('user_head_0'),
+                    width: 80,
+                    height: 80,
+                  ),
+                ),
+                const Text(
+                  '欢迎回来',
+                  style: TextStyle(color: Colors.lightBlue, fontSize: 30),
+                ),
+                const Text(
+                  '看看你都错过了哪些精彩内容',
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildDragList() {
+    return GridView.builder(
+        itemBuilder: (context, index) {
+          return Container(
+            color: Colors.grey[200],
+            padding: const EdgeInsets.all(
+              10,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15),
+              child: Image.asset(
+                JDAssetBundle.getImgPath('user_head_${index % 5}'),
+              ),
+            ),
+          );
+        },
+        itemCount: 40,
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 120,
+        ));
   }
 }

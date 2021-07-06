@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/component/input/input_message_widget.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -157,6 +158,7 @@ class _CommentWidgetState extends State<CommentWidget> {
                           ),
                           onPressed: () {
                             JDToast.toast('点我干嘛?');
+                            showInputMessage(context);
                           },
                           child: const Text('回复'),
                         ),

@@ -13,6 +13,7 @@ import 'package:flutter_app_component/demo/canvas/pie/ace_pie_page.dart';
 import 'package:flutter_app_component/demo/canvas/progress/ace_progress_page.dart';
 import 'package:flutter_app_component/demo/canvas/timeline_page.dart';
 import 'package:flutter_app_component/demo/component/draggable/draggable_grid_page.dart';
+import 'package:flutter_app_component/demo/component/draggable/draggable_scrollablesheet.dart';
 import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
@@ -240,6 +241,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'DraggableGridPage',
           'page': DraggableGridPage(),
+        },
+        {
+          'title': 'DraggableScrollableSheet Page',
+          'page': DraggableScrollableSheetPage(),
         }
       ],
     },
