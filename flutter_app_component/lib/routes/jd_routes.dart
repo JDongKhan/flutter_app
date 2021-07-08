@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/camera/jd_camera.dart';
 import 'package:flutter_app_component/demo/camera/jd_pickImage.dart';
 import 'package:flutter_app_component/demo/component/align/jd_align.dart';
-import 'package:flutter_app_component/demo/component/button/jd_button.dart';
+import 'package:flutter_app_component/demo/component/button/jd_button_page.dart';
 import 'package:flutter_app_component/demo/component/checkbox/jd_checkbox.dart';
 import 'package:flutter_app_component/demo/component/constrainedbox/jd_constrainedbox.dart';
 import 'package:flutter_app_component/demo/component/container/jd_container.dart';

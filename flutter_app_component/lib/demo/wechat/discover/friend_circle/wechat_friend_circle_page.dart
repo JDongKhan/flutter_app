@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/component/pop/pop_route.dart';
 import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_navigator.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
@@ -15,6 +16,7 @@ class WechatFriendCirclePage extends StatefulWidget {
 }
 
 class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
+  ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
   WechatFriendCircleNavigatorController _navigatorController =
       WechatFriendCircleNavigatorController();
   @override
@@ -22,24 +24,30 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            color: Color(0xff111111),
-            child: ProviderWidget(
-              model: WechatFriendCircleViewModel(),
-              builder: (context, model) => NotificationListener(
-                onNotification: (ScrollUpdateNotification scrollNotification) {
-                  if (scrollNotification is ScrollUpdateNotification &&
-                      scrollNotification.depth == 0) {
-                    _onScroll(scrollNotification.metrics.pixels);
-                  }
-                  return true;
-                },
-                child: CustomScrollView(
-                  physics: const BouncingScrollPhysics(),
-                  slivers: [
-                    _buildUserInfo(),
-                    _buildList(model),
-                  ],
+          Positioned.fill(
+            top: -40,
+            child: Container(
+              color: Color(0xff111111),
+              child: ProviderWidget(
+                model: WechatFriendCircleViewModel(),
+                builder: (context, model) => NotificationListener(
+                  onNotification:
+                      (ScrollUpdateNotification scrollNotification) {
+                    if (scrollNotification is ScrollUpdateNotification &&
+                        scrollNotification.depth == 0) {
+                      _onScroll(scrollNotification.metrics.pixels);
+                    }
+                    return true;
+                  },
+                  child: CustomScrollView(
+                    controller: _scrollController,
+                    physics: const BouncingScrollPhysics(),
+                    clipBehavior: Clip.none,
+                    slivers: [
+                      _buildUserInfo(),
+                      _buildList(model),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -67,7 +75,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
         child: Stack(
           children: [
             Positioned.fill(
-              top: -200,
+              top: 0,
               left: 0,
               right: 0,
               bottom: 20,
@@ -179,12 +187,18 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                             style: TextStyle(color: Colors.grey),
                           ),
                           Spacer(),
-                          IconButton(
-                              icon: Icon(
-                                Icons.more_horiz,
-                                color: Colors.grey,
-                              ),
-                              onPressed: () {}),
+                          Builder(
+                            builder: (context) {
+                              return IconButton(
+                                  icon: Icon(
+                                    Icons.more_horiz,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: () {
+                                    _showCommentWidget(context);
+                                  });
+                            },
+                          ),
                         ],
                       )
                     ],
@@ -195,6 +209,41 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
           );
         },
         childCount: model.list.length,
+      ),
+    );
+  }
+
+  ///弹出退出按钮
+  ///点击退出调用onClick
+  void _showCommentWidget(BuildContext context) {
+    showPopMenu(
+      context: context,
+      alignment: Alignment.topLeft,
+      child: _buildCommentWidget(),
+    );
+  }
+
+  Widget _buildCommentWidget() {
+    return Container(
+      width: 140,
+      height: 40,
+      color: Colors.blue,
+      child: Row(
+        children: [
+          JDButton(
+            action: () {},
+            text: Text('赞'),
+            icon: Icon(Icons.favorite),
+            imageDirection: AxisDirection.left,
+          ),
+          VerticalDivider(),
+          JDButton(
+            action: () {},
+            text: Text('评论'),
+            icon: Icon(Icons.comment_bank_sharp),
+            imageDirection: AxisDirection.left,
+          ),
+        ],
       ),
     );
   }

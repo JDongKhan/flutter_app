@@ -1,83 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/component/pop/pop_route.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:popup_window/popup_window.dart';
 
 /// @author jd
-
-class PopRoute extends PopupRoute {
-  final Duration _duration = Duration(milliseconds: 300);
-  Widget child;
-
-  PopRoute({@required this.child});
-
-  @override
-  Color get barrierColor => null;
-
-  @override
-  bool get barrierDismissible => true;
-
-  @override
-  String get barrierLabel => null;
-
-  @override
-  Widget buildPage(BuildContext context, Animation<double> animation,
-      Animation<double> secondaryAnimation) {
-    return child;
-  }
-
-  @override
-  Duration get transitionDuration => _duration;
-}
-
-class Popup extends StatelessWidget {
-  final Widget child;
-  final Function onClick; //点击child事件
-  final double left; //距离左边位置
-  final double top; //距离上面位置
-
-  Popup({
-    @required this.child,
-    this.onClick,
-    this.left,
-    this.top,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Material(
-      color: Colors.transparent,
-      child: GestureDetector(
-        child: Stack(
-          children: <Widget>[
-            Container(
-              width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
-              color: Colors.transparent,
-            ),
-            Positioned(
-              child: GestureDetector(
-                  child: child,
-                  onTap: () {
-                    //点击子child
-                    if (onClick != null) {
-                      Navigator.of(context).pop();
-                      onClick();
-                    }
-                  }),
-              left: left,
-              top: top,
-            ),
-          ],
-        ),
-        onTap: () {
-          //点击空白处
-          Navigator.of(context).pop();
-        },
-      ),
-    );
-  }
-}
 
 class JDPopDemoPage extends StatefulWidget {
   @override
@@ -221,14 +148,9 @@ class _JDPopDemoPageState extends State<JDPopDemoPage> {
     Navigator.push(
       context,
       PopRoute(
-        child: Popup(
-          child: _buildExit(),
-          left: 64,
-          top: 122,
-          onClick: () {
-            print("exit");
-          },
-        ),
+        left: 64,
+        top: 122,
+        child: _buildExit(),
       ),
     );
   }

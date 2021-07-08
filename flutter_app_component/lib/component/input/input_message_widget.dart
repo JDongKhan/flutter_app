@@ -22,7 +22,12 @@ void showInputMessage(BuildContext context) {
       body: Column(
         children: [
           Expanded(
-            child: Container(),
+            child: GestureDetector(
+                behavior: HitTestBehavior.opaque,
+                onTap: () {
+                  dismissInputMessage();
+                },
+                child: Container()),
           ),
           Container(
             color: Colors.white,

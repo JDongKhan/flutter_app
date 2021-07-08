@@ -137,6 +137,7 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
 
   Widget _buildDragList() {
     return GridView.builder(
+        physics: ClampingScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             color: Colors.grey[200],

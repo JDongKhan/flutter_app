@@ -107,7 +107,7 @@ class _SrcollPageState extends State<SrcollPage> {
           child: ListView.builder(
               physics: const AlwaysScrollableScrollPhysics(
                   parent: ClampingScrollPhysics()),
-              itemCount: 50,
+              itemCount: 100,
               itemBuilder: (context, index) {
                 return Text('$index');
               }),

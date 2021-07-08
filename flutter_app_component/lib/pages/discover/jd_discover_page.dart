@@ -23,6 +23,7 @@ import 'package:flutter_app_component/demo/databtransfer/jd_event_bus.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_inherited_widget.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_notification.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_stream.dart';
+import 'package:flutter_app_component/demo/didi/didi_main_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
@@ -64,6 +65,14 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': '商城',
           'page': JDShopMainPage(),
+        },
+        {
+          'title': '滴滴',
+          'page': DidiMainPage(),
+        },
+        {
+          'title': 'PP体育',
+          'router': '/tabbar',
         },
         {
           'title': 'Login',
@@ -112,10 +121,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'Scaffold',
           'router': '/scaffold',
-        },
-        {
-          'title': 'Tabbar',
-          'router': '/tabbar',
         },
       ],
     },
