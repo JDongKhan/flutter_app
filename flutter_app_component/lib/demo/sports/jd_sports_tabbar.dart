@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/tab/jd_tab_home.dart';
 import 'package:flutter_app_component/pages/discover/jd_discover_page.dart';
+
+import 'jd_sports_tab_home.dart';
 
 /**
  *

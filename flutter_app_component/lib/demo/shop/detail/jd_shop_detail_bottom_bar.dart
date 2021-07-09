@@ -33,25 +33,37 @@ class _JDShopDetailBottomBarState extends State<JDShopDetailBottomBar> {
               JDButton(
                 action: () {},
                 margin: const EdgeInsets.only(left: 10, right: 10),
-                text: const Text('收藏'),
+                text: const Text(
+                  '收藏',
+                  style: TextStyle(fontSize: 12),
+                ),
                 icon: const Icon(
                   Icons.collections,
+                  color: Colors.grey,
                 ),
               ),
               JDButton(
                 action: () {},
                 margin: const EdgeInsets.only(left: 10, right: 10),
-                text: const Text('购物车'),
+                text: const Text(
+                  '购物车',
+                  style: TextStyle(fontSize: 12),
+                ),
                 icon: const Icon(
                   Icons.shop,
+                  color: Colors.grey,
                 ),
               ),
               JDButton(
                 action: () {},
                 margin: const EdgeInsets.only(left: 10, right: 10),
-                text: const Text('客服'),
+                text: const Text(
+                  '客服',
+                  style: TextStyle(fontSize: 12),
+                ),
                 icon: const Icon(
                   Icons.people,
+                  color: Colors.grey,
                 ),
               ),
               Expanded(

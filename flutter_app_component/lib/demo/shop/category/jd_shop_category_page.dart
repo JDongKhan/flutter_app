@@ -39,7 +39,9 @@ class _JDShopCategoryPageState extends State<JDShopCategoryPage> {
   }
 
   Widget _buildSearch() {
-    return JDSearchBar();
+    return JDSearchBar(
+      color: Colors.grey[100],
+    );
   }
 
   Widget _buildSuggestions(JDShopCategoryViewModel viewModel) {

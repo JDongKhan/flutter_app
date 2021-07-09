@@ -46,7 +46,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                         height: 40,
                       ),
                       const Icon(
-                        Icons.arrow_forward_ios,
+                        Icons.arrow_forward_ios_rounded,
+                        size: 16,
                       )
                     ],
                   ),
@@ -69,7 +70,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                     ),
                     const Text('赞过'),
                     const Icon(
-                      Icons.arrow_forward_ios,
+                      Icons.arrow_forward_ios_rounded,
+                      size: 16,
                     )
                   ],
                 ),
@@ -82,7 +84,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.scanner_rounded),
                 title: Text('扫一扫'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -92,7 +95,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.phone),
                 title: Text('摇一摇'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -103,7 +107,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.watch),
                 title: Text('看一看'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -113,7 +118,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.search_sharp),
                 title: Text('搜一搜'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -124,7 +130,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.near_me),
                 title: Text('直播和附近'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -135,7 +142,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.event_busy),
                 title: Text('购物'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -145,7 +153,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.games),
                 title: Text('游戏'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),
@@ -156,7 +165,8 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
                 leading: Icon(Icons.pages_sharp),
                 title: Text('小程序'),
                 trailing: Icon(
-                  Icons.arrow_forward_ios,
+                  Icons.arrow_forward_ios_rounded,
+                  size: 16,
                 ),
               ),
             ),

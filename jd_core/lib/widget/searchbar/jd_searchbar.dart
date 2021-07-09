@@ -7,8 +7,9 @@ import 'package:flutter/material.dart';
  */
 
 class JDSearchBar extends StatefulWidget {
-  JDSearchBar({this.onTap, this.text,this.color = Colors.white,this.padding = const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),});
+  JDSearchBar({this.onTap,this.onSubmitted, this.text,this.color = Colors.white,this.padding = const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),});
 
+  final ValueChanged<String> onSubmitted;
   GestureTapCallback onTap;
   String text;
   final Color color;
@@ -46,46 +47,37 @@ class _JDSearchBarState extends State<JDSearchBar> {
   }
 
   Widget _buildSearchWidget() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        const SizedBox(
-          width: 10.0,
-        ),
-        Icon(
+    return TextField(
+//              enabled: false,
+      controller: _controller,
+      focusNode: _focusNode,
+      decoration: InputDecoration(
+        // contentPadding: EdgeInsets.only(top: 5,bottom: 5),
+        hintText: widget.text ?? '查找',
+        prefixIcon: Icon(
           Icons.search,
           color: Colors.grey,
         ),
-        Expanded(
-          child: Container(
-            alignment: Alignment.center,
-            child: TextField(
-//              enabled: false,
-              controller: _controller,
-              focusNode: _focusNode,
-              decoration: InputDecoration(
-                //                            contentPadding: EdgeInsets.all(0),
-                hintText: widget.text ?? '查找',
-                border: InputBorder.none,
-              ),
-              onTap: () {
-                _focusNode.unfocus();
-                widget?.onTap();
-              },
-            ),
-          ),
-        ),
-        IconButton(
-          icon: Icon(Icons.cancel),
-          color: Colors.grey,
-          iconSize: 18.0,
-          onPressed: () {
-            widget.text = '';
-            _controller.clear();
-            setState(() {});
-          },
-        ),
-      ],
+        suffixIcon:  GestureDetector(
+          child: Icon(Icons.cancel, color: Colors.grey[600],size: 18,),
+          onTap: () {
+          widget.text = '';
+          _controller.clear();
+          setState(() {});
+        },),
+        border: InputBorder.none,
+      ),
+      onSubmitted: (String value) {
+        if (widget.onSubmitted != null) {
+          widget.onSubmitted(value);
+        }
+      },
+      onTap: () {
+        if (widget.onTap != null) {
+          _focusNode.unfocus();
+          widget.onTap();
+        }
+      },
     );
   }
 }

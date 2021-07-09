@@ -76,6 +76,7 @@ class _WechatMinePageState extends State<WechatMinePage> {
             ),
             Icon(
               Icons.arrow_forward_ios_sharp,
+              size: 16,
             ),
           ],
         ),
@@ -89,7 +90,10 @@ class _WechatMinePageState extends State<WechatMinePage> {
       child: ListTile(
         leading: Icon(iconData),
         title: Text(menu),
-        trailing: Icon(Icons.arrow_forward_ios),
+        trailing: Icon(
+          Icons.arrow_forward_ios_rounded,
+          size: 16,
+        ),
       ),
     );
   }

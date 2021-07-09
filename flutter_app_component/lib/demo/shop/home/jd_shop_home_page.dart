@@ -29,12 +29,12 @@ class _JDShopHomePageState extends State<JDShopHomePage>
   final List<JDShopInfo> recommendList = [
     JDShopInfo(
       icon: JDAssetBundle.getImgPath('shop_0'),
-      shop_name: '洗发水',
+      shop_name: '洗发水-你值得拥有',
       price: 18.80,
     ),
     JDShopInfo(
       icon: JDAssetBundle.getImgPath('shop_1'),
-      shop_name: '蛋糕',
+      shop_name: '蛋糕-好吃到爆',
       price: 8.80,
     ),
     JDShopInfo(
@@ -85,8 +85,15 @@ class _JDShopHomePageState extends State<JDShopHomePage>
                 ],
               ),
             ),
-            const SliverPadding(
-              padding: EdgeInsets.only(top: 100),
+            // const SliverPadding(
+            //   padding: EdgeInsets.only(top: 80),
+            // ),
+            const SliverToBoxAdapter(
+              child: SafeArea(
+                child: SizedBox(
+                  height: 50,
+                ),
+              ),
             ),
             SliverToBoxAdapter(
               child: _buildSearch(),

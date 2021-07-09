@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/sports/live/jd_sports_live_detail_page.dart';
 import 'package:jd_core/jd_core.dart';
 
 class JDContent {
@@ -81,28 +82,37 @@ class _JDTabHomeFirstPageState extends State<JDTabHomeFirstPage> {
     return ListView.separated(
       itemBuilder: (c, idx) {
         JDContent content = _allContents[idx];
-        return ListTile(
-          // dense: true,
-          // visualDensity: VisualDensity(vertical: 10),
-          contentPadding:
-              const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),
-          title: Text(
-            content.title,
-            style: const TextStyle(color: Colors.black87, fontSize: 18),
-          ),
-          subtitle: Container(
-            margin: const EdgeInsets.only(
-              top: 10,
+        return GestureDetector(
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => JDSportsLiveDetailPage(),
+              ),
+            );
+          },
+          child: ListTile(
+            // dense: true,
+            // visualDensity: VisualDensity(vertical: 10),
+            contentPadding:
+                const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),
+            title: Text(
+              content.title,
+              style: const TextStyle(color: Colors.black87, fontSize: 18),
             ),
-            child: Text(
-              '${content.source}  ${content.comment_num}评论',
-              style: const TextStyle(color: Colors.grey, fontSize: 12),
+            subtitle: Container(
+              margin: const EdgeInsets.only(
+                top: 10,
+              ),
+              child: Text(
+                '${content.source}  ${content.comment_num}评论',
+                style: const TextStyle(color: Colors.grey, fontSize: 12),
+              ),
             ),
-          ),
-          trailing: Image.asset(
-            JDAssetBundle.getImgPath(content.img, format: 'jpg'),
-            width: 100,
-            fit: BoxFit.fill,
+            trailing: Image.asset(
+              JDAssetBundle.getImgPath(content.img, format: 'jpg'),
+              width: 100,
+              fit: BoxFit.fill,
+            ),
           ),
         );
       },
