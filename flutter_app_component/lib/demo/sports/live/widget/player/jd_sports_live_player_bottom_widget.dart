@@ -68,10 +68,10 @@ class _JDSportsLivePlayerBottomWidgetState
             ),
           ),
           Expanded(
-            child: Container(
-              color: Colors.red,
-              height: 1,
-            ),
+            child: LinearProgressIndicator(
+                value: _getValueFromDuration(),
+                backgroundColor: Colors.greenAccent,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
           ),
           Container(
             height: double.infinity,
@@ -159,6 +159,15 @@ class _JDSportsLivePlayerBottomWidgetState
         color: Colors.white,
       ),
     );
+  }
+
+  double _getValueFromDuration() {
+    if (widget.controller._position == null) {
+      return 0.0;
+    }
+    double d = widget.controller._position.inSeconds /
+        widget.controller._duration.inSeconds;
+    return d;
   }
 
   String duration_toString(Duration duration) {
