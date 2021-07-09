@@ -53,42 +53,37 @@ class _JDSportsLivePlayerBottomWidgetState
   }
 
   Widget _buildBottomWidget() {
-    return Positioned(
-      bottom: 10,
-      left: 8,
-      right: 8,
-      child: Container(
-        height: 40,
-        child: Row(
-          children: [
-            _buildPlayOrNotWidget(),
-            Container(
-              height: double.infinity,
-              margin: const EdgeInsets.only(left: 10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                duration_toString(widget.controller._position),
-                style: TextStyle(color: Colors.white),
-              ),
+    return Container(
+      height: 40,
+      child: Row(
+        children: [
+          _buildPlayOrNotWidget(),
+          Container(
+            height: double.infinity,
+            margin: const EdgeInsets.only(left: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              duration_toString(widget.controller._position),
+              style: TextStyle(color: Colors.white),
             ),
-            Expanded(
-              child: Container(
-                color: Colors.red,
-                height: 1,
-              ),
+          ),
+          Expanded(
+            child: Container(
+              color: Colors.red,
+              height: 1,
             ),
-            Container(
-              height: double.infinity,
-              margin: const EdgeInsets.only(left: 10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                duration_toString(widget.controller._duration),
-                style: TextStyle(color: Colors.white),
-              ),
+          ),
+          Container(
+            height: double.infinity,
+            margin: const EdgeInsets.only(left: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              duration_toString(widget.controller._duration),
+              style: TextStyle(color: Colors.white),
             ),
-            _buildFullWidget(),
-          ],
-        ),
+          ),
+          _buildFullWidget(),
+        ],
       ),
     );
   }

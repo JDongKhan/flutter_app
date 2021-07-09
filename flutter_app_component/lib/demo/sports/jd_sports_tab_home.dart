@@ -49,7 +49,10 @@ class _JDTabHomePageState extends State<JDTabHomePage>
           title: TabBar(
             //生成Tab菜单
             isScrollable: true,
+            indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.white,
+            unselectedLabelStyle: TextStyle(fontSize: 14),
+            labelStyle: TextStyle(fontSize: 18),
             controller: _tabController,
             tabs: tabs.map((e) => Tab(text: e)).toList(),
           ),

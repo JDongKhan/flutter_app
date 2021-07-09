@@ -357,7 +357,20 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         MarkEntry(
           widget: BubbleWidget(
             child: Text(
-              '我是第一个',
+              '标题',
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+          left: 100,
+          top: 80,
+        ),
+        MarkEntry(
+          widget: BubbleWidget(
+            position: BubbleArrowDirection.right,
+            child: Text(
+              '内容',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -368,22 +381,9 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         ),
         MarkEntry(
           widget: BubbleWidget(
-            position: BubbleArrowDirection.right,
-            child: Text(
-              '我是第二个',
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ),
-          left: 250,
-          top: 100,
-        ),
-        MarkEntry(
-          widget: BubbleWidget(
             position: BubbleArrowDirection.left,
             child: Text(
-              '我是第三个',
+              '列表',
               style: TextStyle(
                 color: Colors.white,
               ),

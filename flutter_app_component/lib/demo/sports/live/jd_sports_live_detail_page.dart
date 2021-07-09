@@ -22,7 +22,7 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
   JDSportsLiveController _controller = JDSportsLiveController();
   GlobalKey _globalKey = GlobalKey();
 
-  String _play_url = 'assets/videos/video_1.mp4';
+  String _play_url = 'assets/videos/video_11.mp4';
   final List<Map<String, dynamic>> _tabs = [
     {
       'title': '概况',
@@ -88,9 +88,7 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
                   key: _globalKey,
                 ),
               ),
-              orientation == Orientation.landscape
-                  ? Expanded(child: Container())
-                  : Expanded(child: _buildContentWidget()),
+              Expanded(child: _buildContentWidget()),
             ],
           );
         }),

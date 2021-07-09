@@ -25,6 +25,7 @@ class JDPlayer extends StatefulWidget {
     Key key,
     @required this.url,
     this.loop = true,
+    this.onTap,
     this.onChange,
     this.playStatus,
     @required this.controller,
@@ -33,6 +34,7 @@ class JDPlayer extends StatefulWidget {
   final String url;
   final bool loop;
   final ValueChanged<bool> playStatus;
+  final Function onTap;
   final PlayerValueChanged<Duration, Duration> onChange;
   final JDPlayerController controller;
   @override
@@ -167,6 +169,9 @@ class _JDPlayerState extends State<JDPlayer>
               } else {
                 widget.controller.play();
               }
+              if (widget.onTap != null) {
+                widget.onTap();
+              }
             },
             child: Stack(
               children: [
@@ -188,6 +193,8 @@ class _JDPlayerState extends State<JDPlayer>
               ],
             ),
           );
+        } else if (snapshot.connectionState == ConnectionState.waiting) {
+          return Container();
         }
         return GestureDetector(
           behavior: HitTestBehavior.opaque,

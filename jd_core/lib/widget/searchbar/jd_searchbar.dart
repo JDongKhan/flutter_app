@@ -7,12 +7,20 @@ import 'package:flutter/material.dart';
  */
 
 class JDSearchBar extends StatefulWidget {
-  JDSearchBar({this.onTap,this.onSubmitted, this.text,this.color = Colors.white,this.padding = const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),});
+  JDSearchBar({
+    this.onTap,
+    this.onSubmitted,
+    this.text,
+    this.height = 40,
+    this.color = Colors.white,
+    this.padding = const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),
+  });
 
   final ValueChanged<String> onSubmitted;
   GestureTapCallback onTap;
   String text;
   final Color color;
+  final double height;
   final EdgeInsets padding;
 
   @override
@@ -32,15 +40,15 @@ class _JDSearchBarState extends State<JDSearchBar> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 60.0,
+      height: widget.height,
       alignment: Alignment.centerLeft,
       padding: widget.padding,
       child: Container(
         decoration: BoxDecoration(
           color: widget.color,
-          borderRadius: BorderRadius.all(Radius.circular(20),),
+          borderRadius: BorderRadius.all(Radius.circular((widget.height)/2),),
         ),
-        height: 40.0,
+        height: widget.height,
         child: _buildSearchWidget(),
       ),
     );
@@ -52,7 +60,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
       controller: _controller,
       focusNode: _focusNode,
       decoration: InputDecoration(
-        // contentPadding: EdgeInsets.only(top: 5,bottom: 5),
+        contentPadding: EdgeInsets.only(top: 0,bottom: 0),
         hintText: widget.text ?? '查找',
         prefixIcon: Icon(
           Icons.search,

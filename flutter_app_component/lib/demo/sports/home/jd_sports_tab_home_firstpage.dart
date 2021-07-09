@@ -58,9 +58,13 @@ class _JDTabHomeFirstPageState extends State<JDTabHomeFirstPage> {
   Widget _buildSearch() {
     return Container(
       color: Colors.black87,
+      padding: const EdgeInsets.only(bottom: 10),
       child: Row(
         children: [
-          Expanded(child: JDSearchBar()),
+          Expanded(
+              child: JDSearchBar(
+            height: 40,
+          )),
           IconButton(
               icon: const Icon(
                 Icons.airplay,
