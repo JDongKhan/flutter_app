@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/detail/viewmodel/jd_shop_detail_view_model.dart';
 import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
@@ -22,14 +23,17 @@ class _JDShopDetailPageState extends State<JDShopDetailPage> {
       JDShopDetailNavigatorController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ProviderWidget<JDShopDetailViewModel>(
-        model: JDShopDetailViewModel(),
-        builder: (context, model) {
-          return _buildContent();
-        },
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: ProviderWidget<JDShopDetailViewModel>(
+          model: JDShopDetailViewModel(),
+          builder: (context, model) {
+            return _buildContent();
+          },
+        ),
+        bottomNavigationBar: JDShopDetailBottomBar(),
       ),
-      bottomNavigationBar: JDShopDetailBottomBar(),
     );
   }
 

@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app_component/demo/douyin/comment_widget.dart';
 import 'package:flutter_app_component/demo/douyin/like_gesture_widget.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
+import 'package:marquee/marquee.dart';
 
 import 'jd_doiyin_people_detail_page.dart';
 import 'jd_douyin_player.dart';
+import 'vinyl_disk.dart';
 
 /// @author jd
 
@@ -58,21 +62,24 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _buildBackground(),
-          LikeGestureWidget(
-            onAddFavorite: () {
-              print('我在双击');
-            },
-            onSingleTap: () {
-              print('我在单击');
-            },
-            child: _buildPage(),
-          ),
-          _buildTopMenu(),
-        ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        body: Stack(
+          children: <Widget>[
+            _buildBackground(),
+            LikeGestureWidget(
+              onAddFavorite: () {
+                print('我在双击');
+              },
+              onSingleTap: () {
+                print('我在单击');
+              },
+              child: _buildPage(),
+            ),
+            _buildTopMenu(),
+          ],
+        ),
       ),
     );
   }
@@ -292,11 +299,30 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                     ),
                   ),
                   Container(
+                    height: 30,
+                    // color: Colors.red,
                     padding: const EdgeInsets.only(left: 10, top: 10),
                     alignment: Alignment.topLeft,
-                    child: Text(
-                      item['source'].toString(),
-                      style: TextStyle(color: Colors.white),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          item['source'].toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        Container(
+                          width: 200,
+                          height: 25,
+                          margin: const EdgeInsets.only(left: 10),
+                          child: Marquee(
+                            text: '隐形的翅膀-张韶涵',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -305,12 +331,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
             Container(
               width: 50,
               alignment: Alignment.bottomRight,
-              child: IconButton(
-                icon: Icon(
-                  Icons.play_circle_filled,
-                  color: Colors.white,
-                ),
-              ),
+              child: VinylDisk(JDAssetBundle.getImgPath('user_head_0')),
             ),
           ],
         ),

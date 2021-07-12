@@ -70,7 +70,8 @@ dependencies:
   #大图预览
   photo_view: ^0.10.1
 
-
+  # 走马灯
+  marquee: ^2.1.0
   # 视频播放
   #fijkplayer: ^0.8.3
   # rxdart https://github.com/ReactiveX/rxdart
