@@ -163,14 +163,16 @@ class _JDPlayerState extends State<JDPlayer>
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
+              if (widget.onTap != null) {
+                widget.onTap();
+              }
+            },
+            onDoubleTap: () {
               final bool isPlaying = _videoPlayerController.value.isPlaying;
               if (isPlaying) {
                 widget.controller.pause();
               } else {
                 widget.controller.play();
-              }
-              if (widget.onTap != null) {
-                widget.onTap();
               }
             },
             child: Stack(
@@ -182,11 +184,23 @@ class _JDPlayerState extends State<JDPlayer>
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
                   opacity: isPlaying ? 0 : 1.0,
-                  child: const Center(
-                    child: Icon(
-                      Icons.play_arrow,
-                      size: 50,
-                      color: Colors.white,
+                  child: Center(
+                    child: GestureDetector(
+                      onTap: () {
+                        final bool isPlaying =
+                            _videoPlayerController.value.isPlaying;
+                        if (isPlaying) {
+                          widget.controller.pause();
+                        } else {
+                          widget.controller.play();
+                        }
+                      },
+                      behavior: HitTestBehavior.opaque,
+                      child: const Icon(
+                        Icons.play_arrow,
+                        size: 50,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

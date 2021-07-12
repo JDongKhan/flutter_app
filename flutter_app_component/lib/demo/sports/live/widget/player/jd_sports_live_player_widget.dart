@@ -26,6 +26,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
   JDSportsLivePlayerBottomController _bottomController;
   AnimationController _animationController;
   Animation _slideTopAnimation, _slideBottomAnimation, _slideRightAnimation;
+  bool _isShowMenuAnimal = false;
   @override
   void initState() {
     _bottomController =
@@ -33,7 +34,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
     _bottomController.addListener(() {});
 
     _animationController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 300));
+        vsync: this, duration: const Duration(milliseconds: 500));
     _slideTopAnimation = Tween(
       begin: Offset(0, -2),
       end: Offset(0, 0),
@@ -61,7 +62,9 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
   }
 
   void showMenu({bool immediately}) {
+    if (_isShowMenuAnimal) return;
     Future.delayed(Duration(seconds: 0), () {
+      _isShowMenuAnimal = true;
       _animationController.forward();
     });
 
@@ -72,6 +75,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
 
   void dissmisMenu() {
     _animationController.reverse();
+    _isShowMenuAnimal = false;
   }
 
   @override
