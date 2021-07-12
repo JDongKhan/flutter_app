@@ -435,7 +435,7 @@ packages:
     source: hosted
     version: "0.17.0"
   jd_core:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../jd_core"
       relative: true

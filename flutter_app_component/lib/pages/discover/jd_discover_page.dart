@@ -30,6 +30,7 @@ import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
+import 'package:flutter_app_component/demo/lifecycle/jd_lifecycle_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:flutter_app_component/demo/login/login_demo_list_page.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
@@ -117,6 +118,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'SrcollPage',
           'page': SrcollPage(),
+        },
+        {
+          'title': 'LifeCycle',
+          'page': JDLifeCyclePage(),
         },
         {
           'title': 'Scaffold',
