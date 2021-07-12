@@ -17,6 +17,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
   final Color _backgoundColor = Colors.grey[100];
   bool _hasPush = false;
   double _mapOffset = 0;
+  double _menuOffset = 200;
   List<Map<String, dynamic>> _menuList = [
     {
       'title': '打车',
@@ -68,7 +69,11 @@ class _DidiHomePageState extends State<DidiHomePage> {
           _buildMapWidget(),
           SafeArea(
             child: Container(
-              padding: const EdgeInsets.only(left: 10, right: 10),
+              transform: Matrix4.translationValues(0.0, _menuOffset, 0.0),
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+              ),
               child: _buildScrollWidget(),
             ),
           ),
@@ -147,8 +152,10 @@ class _DidiHomePageState extends State<DidiHomePage> {
     //处理map偏移
     if (offset >= 0) {
       _mapOffset = -offset;
+      _menuOffset = 200 - offset;
       if (offset > 200) {
         _mapOffset = -200;
+        _menuOffset = 0;
       }
       setState(() {});
     } else {
@@ -173,6 +180,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
         _scroll(notification.metrics.pixels);
       },
       child: CustomScrollView(
+        clipBehavior: Clip.none,
         slivers: [
           _buildSearchWidget(),
           _buildMenuWidget(),
@@ -189,9 +197,6 @@ class _DidiHomePageState extends State<DidiHomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
-              height: 200,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
