@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// @author jd
+///
 
-class WechatInputMessageController extends ChangeNotifier {
+class LiveChatInputMessageController extends ChangeNotifier {
   bool _hiddenKeyboard = false;
 
   hiddenKeyboard() {
@@ -12,17 +12,16 @@ class WechatInputMessageController extends ChangeNotifier {
   }
 }
 
-class WechatInputMessageWidget extends StatefulWidget {
-  final WechatInputMessageController controller;
-
-  const WechatInputMessageWidget({this.controller, Key key}) : super(key: key);
-
+class JDSportsLiveChatBottomWidget extends StatefulWidget {
+  JDSportsLiveChatBottomWidget({this.controller});
+  final LiveChatInputMessageController controller;
   @override
-  _WechatInputMessageWidgetState createState() =>
-      _WechatInputMessageWidgetState();
+  _JDSportsLiveChatBottomWidgetState createState() =>
+      _JDSportsLiveChatBottomWidgetState();
 }
 
-class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
+class _JDSportsLiveChatBottomWidgetState
+    extends State<JDSportsLiveChatBottomWidget>
     with SingleTickerProviderStateMixin {
   FocusNode _focusNode = FocusNode();
   Animation _animation;
@@ -83,7 +82,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
                   onPressed: () {
                     // FocusScope.of(context).requestFocus(FocusNode());
                     _focusNode.unfocus();
-                    _animationController.reverse(from: 0);
+                    _animationController.reverse();
                   },
                 ),
                 const SizedBox(

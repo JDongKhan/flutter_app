@@ -18,6 +18,7 @@ class WechatMessageListPage extends StatefulWidget {
 
 class _WechatMessageListPageState extends State<WechatMessageListPage>
     with AutomaticKeepAliveClientMixin {
+  SlidableController _slidableController = SlidableController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -127,6 +128,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
 
   Widget _buildListItem(WechatMessageListViewModel model, Map item) {
     return Slidable(
+      controller: _slidableController,
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       actions: [

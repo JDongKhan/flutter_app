@@ -4,7 +4,7 @@ import 'package:jd_core/jd_core.dart';
 import 'package:provider/provider.dart';
 
 import 'jd_sports_live_controller.dart';
-import 'widget/jd_sports_live_chat_widget.dart';
+import 'widget/chat/jd_sports_live_chat_widget.dart';
 import 'widget/jd_sports_live_introduce_widget.dart';
 import 'widget/jd_sports_live_store_widget.dart';
 import 'widget/player/jd_sports_live_player_widget.dart';
