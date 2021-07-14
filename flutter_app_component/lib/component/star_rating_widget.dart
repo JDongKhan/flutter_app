@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
+///五星
 class StarRatingWidget extends StatelessWidget {
   const StarRatingWidget({
     Key key,

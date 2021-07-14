@@ -10,6 +10,7 @@ const double _kTextAndIconTabHeight = 72.0;
 
 enum TabBarAlignType { left, center, right }
 
+///可选对齐方式的tabbar
 class JDTabBar extends StatefulWidget implements PreferredSizeWidget {
   const JDTabBar(
       {Key key,

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_appinfo.dart';
+import 'package:logger_flutter/logger_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
@@ -25,7 +26,7 @@ FlutterErrorDetails makeDetails(Object obj, StackTrace stack) {
 void initProject() {
   // window.onDrawFrame = null;
   // window.onBeginFrame = null;
-
+  LogConsole.init();
   //初始化
   JDAppInfo.init(() {
     runApp(

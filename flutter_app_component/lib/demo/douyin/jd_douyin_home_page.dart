@@ -310,15 +310,16 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                           item['source'].toString(),
                           style: TextStyle(color: Colors.white),
                         ),
-                        Container(
-                          width: 200,
-                          height: 25,
-                          margin: const EdgeInsets.only(left: 10),
-                          child: Marquee(
-                            text: '隐形的翅膀-张韶涵',
-                            style: TextStyle(
-                              fontSize: 15,
-                              color: Colors.white,
+                        Expanded(
+                          child: Container(
+                            height: 25,
+                            margin: const EdgeInsets.only(left: 10),
+                            child: Marquee(
+                              text: '隐形的翅膀-张韶涵',
+                              style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),

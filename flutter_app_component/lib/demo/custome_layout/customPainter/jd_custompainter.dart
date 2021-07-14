@@ -14,6 +14,17 @@ class JDCircleProgressPage extends StatelessWidget {
       ),
       body: Column(
         children: [
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: double.infinity,
+            child: Text(
+              'CustomSingleChildLayout',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 20,
+              ),
+            ),
+          ),
           SizedBox(
             width: double.infinity,
             height: 200,
@@ -21,6 +32,17 @@ class JDCircleProgressPage extends StatelessWidget {
               child: Text('helloworld').intoContainer(color: Colors.blue),
             ),
           ).intoContainer(color: Colors.red),
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: double.infinity,
+            child: Text(
+              'CustomMultiChildLayout',
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 20,
+              ),
+            ),
+          ),
           SizedBox(
             height: 500,
             child: GridLayout(
@@ -151,6 +173,7 @@ class RectLayoutDelegate extends SingleChildLayoutDelegate {
 
   @override
   BoxConstraints getConstraintsForChild(BoxConstraints constraints) {
+    //默认直接返回constraints即可，不过此处可以做逻辑处理更改约束
     double maxEdge = min(constraints.maxWidth, constraints.maxHeight);
     return BoxConstraints(maxWidth: maxEdge, maxHeight: maxEdge);
   }

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
+///自动完成
 class AutoCompleteTextField extends StatefulWidget {
   const AutoCompleteTextField({
     this.decoration = const InputDecoration(),

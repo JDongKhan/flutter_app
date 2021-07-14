@@ -12,8 +12,13 @@ class BottomDragDemo extends StatefulWidget {
 }
 
 class _BottomDragDemoState extends State<BottomDragDemo> {
+  bool _canScroll = false;
+
+  DragController controller = DragController();
+
   @override
   Widget build(BuildContext context) {
+    double showHeight = jd_screenHeight() - jd_navigationHeight();
     return Scaffold(
       appBar: AppBar(
         title: const Text('BottomDrag'),
@@ -29,22 +34,9 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
             ),
           ),
           dragContainer: DragContainer(
-            drawer: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
-                  ),
-                  margin: const EdgeInsets.only(top: 40),
-                ),
-                getListView(),
-              ],
-            ),
+            drawer: getListView(),
             defaultShowHeight: 150.0,
-            height: 700.0,
+            height: showHeight,
           )),
     );
   }
@@ -53,8 +45,36 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
     return Container(
       child: Column(
         children: <Widget>[
-          _buildUserHeadWidget(),
-          Expanded(child: _buildDragList())
+          Container(
+            height: 50.0,
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  top: 25,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
+                Center(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(25),
+                    child: Image.asset(
+                      JDAssetBundle.getImgPath('user_head_0'),
+                      width: 50,
+                      height: 50,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(child: Container(color: Colors.white, child: newListView()))
         ],
       ),
     );
@@ -64,7 +84,11 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
     return OverscrollNotificationWidget(
       child: ListView.builder(
         itemBuilder: (BuildContext context, int index) {
-          return Text('data=$index');
+          return ListTile(
+            leading: Icon(Icons.people),
+            title: Text('data=$index'),
+            trailing: Icon(Icons.arrow_forward_ios_outlined),
+          );
         },
         itemCount: 100,
 
@@ -137,7 +161,9 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
 
   Widget _buildDragList() {
     return GridView.builder(
-        physics: ClampingScrollPhysics(),
+        physics: _canScroll
+            ? ClampingScrollPhysics()
+            : NeverScrollableScrollPhysics(),
         itemBuilder: (context, index) {
           return Container(
             color: Colors.grey[200],

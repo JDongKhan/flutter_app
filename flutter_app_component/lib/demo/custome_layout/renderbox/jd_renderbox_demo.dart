@@ -26,17 +26,29 @@ class JDRenderShiftedBoxDemo extends StatelessWidget {
       appBar: AppBar(
         title: Text("RenderBoxDemo"),
       ),
-      body: _buildRenderConstrainedBox(),
+      body: Column(
+        children: [
+          _buildRenderConstrainedBox(),
+          Container(height: 200, child: _buildRenderShiftedBox()),
+        ],
+      ),
     );
   }
 
   Widget _buildRenderShiftedBox() {
     return JDAlignWidget(
-      alignment: Alignment.centerRight,
+      alignment: Alignment.centerLeft,
       child: Container(
         width: 100,
         height: 100,
+        alignment: Alignment.center,
         color: Colors.red,
+        child: Text(
+          '实现了Align的效果',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
       ),
     );
   }

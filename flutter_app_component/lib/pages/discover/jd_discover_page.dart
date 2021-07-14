@@ -17,6 +17,7 @@ import 'package:flutter_app_component/demo/component/draggable/draggable_scrolla
 import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
+import 'package:flutter_app_component/demo/custome_layout/renderbox/cloud/cloud_demo_page.dart';
 import 'package:flutter_app_component/demo/custome_layout/renderbox/jd_renderbox_demo.dart';
 import 'package:flutter_app_component/demo/dash/dash_demo.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_event_bus.dart';
@@ -94,10 +95,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'LinkScrollMenu',
           'page': JDLinkScrollMenu(),
-        },
-        {
-          'title': 'RenderBoxDemo',
-          'page': JDRenderShiftedBoxDemo(),
         },
         {
           'title': 'DropdownMenuDemoPage',
@@ -241,10 +238,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'router': '/tabbar_component',
         },
         {
-          'title': 'CustomPainter',
-          'page': JDCircleProgressPage(),
-        },
-        {
           'title': 'ReorderableListView',
           'page': JDReorderableListView(),
         },
@@ -256,6 +249,24 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'title': 'DraggableScrollableSheet Page',
           'page': DraggableScrollableSheetPage(),
         }
+      ],
+    },
+    //自定义布局
+    {
+      'title': '自定义布局',
+      'items': [
+        {
+          'title': 'CustomSingleChildLayout/CustomMultiChildLayout',
+          'page': JDCircleProgressPage(),
+        },
+        {
+          'title': 'MultiChildRenderObjectWidget',
+          'page': CloudDemoPage(),
+        },
+        {
+          'title': 'SingleChildRenderObjectWidget',
+          'page': JDRenderShiftedBoxDemo(),
+        },
       ],
     },
 

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
+///圆形checkbox
 class CircleCheckBox extends StatelessWidget {
   CircleCheckBox({
     Key key,

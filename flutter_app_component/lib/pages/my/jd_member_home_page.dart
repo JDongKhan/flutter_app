@@ -213,8 +213,11 @@ class _JDMemberHomePageState extends State<JDMemberHomePage> {
                 return Container(
                   child: Column(
                     children: [
-                      Center(
-                        child: Icon(Icons.menu),
+                      Container(
+                        color: Colors.blue[100],
+                        child: Center(
+                          child: Icon(Icons.menu),
+                        ),
                       ),
                       Expanded(child: _buildDragList(scrollController)),
                     ],

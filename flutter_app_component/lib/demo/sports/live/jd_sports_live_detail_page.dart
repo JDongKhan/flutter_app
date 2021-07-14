@@ -82,7 +82,7 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
               Container(
                 height: orientation == Orientation.landscape
                     ? jd_screenHeight()
-                    : 250,
+                    : jd_screenWidth() / 9 * 6,
                 child: JDSportsLivePlayerWidget(
                   url: _play_url,
                   key: _globalKey,

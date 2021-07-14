@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// @author jd
-
+/// + - 框
 class NumberControllerWidget extends StatefulWidget {
   const NumberControllerWidget({
     Key key,
@@ -60,6 +60,7 @@ class _NumberControllerWidgetState extends State<NumberControllerWidget> {
                 FilteringTextInputFormatter(RegExp('[0-9]'), allow: true),
               ],
               controller: _textEditingController,
+              textInputAction: TextInputAction.done,
               keyboardType: TextInputType.number,
               textAlign: TextAlign.center,
               style: const TextStyle(

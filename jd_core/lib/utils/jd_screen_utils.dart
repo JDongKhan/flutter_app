@@ -22,6 +22,14 @@ double jd_screenHeight() {
   return ScreenUtil().screenHeight;
 }
 
+double jd_statusBarHeight() {
+  return ScreenUtil().statusBarHeight;
+}
+
+double jd_navigationHeight() {
+  return 44 + jd_statusBarHeight();
+}
+
 double jd_getSp(double fontSize) {
   return ScreenUtil().setSp(fontSize);
 }

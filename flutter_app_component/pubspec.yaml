@@ -67,6 +67,9 @@ dependencies:
 
   stacked_card_carousel: ^0.0.2+1
 
+  #logger
+#  logger: ^1.0.0
+  logger_flutter: ^0.7.1
   #大图预览
   photo_view: ^0.10.1
 

@@ -15,26 +15,28 @@ class _JDSportsLiveIntroduceWidgetState
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
-      child: Column(
-        children: [
-          ///开通会员
-          _buildMemberPayButton(),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            ///开通会员
+            _buildMemberPayButton(),
 
-          ///title
-          _buildTitleWidget(),
+            ///title
+            _buildTitleWidget(),
 
-          ///分割线
-          _buildDivider(),
+            ///分割线
+            _buildDivider(),
 
-          ///节目信息
-          _buildProgramInfoWidget(),
+            ///节目信息
+            _buildProgramInfoWidget(),
 
-          ///分割线
-          _buildDivider(),
+            ///分割线
+            _buildDivider(),
 
-          ///广告
-          _buildAd(),
-        ],
+            ///广告
+            _buildAd(),
+          ],
+        ),
       ),
     );
   }

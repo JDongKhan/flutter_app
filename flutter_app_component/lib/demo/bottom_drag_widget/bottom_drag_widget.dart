@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/utils/logger_util.dart';
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
@@ -81,7 +82,7 @@ class _DragContainerState extends State<DragContainer>
   @override
   void initState() {
     animalController = AnimationController(
-        value: 0, duration: const Duration(milliseconds: 250), vsync: this);
+        vsync: this, duration: const Duration(milliseconds: 250));
     maxOffsetDistance = (widget.height + widget.defaultShowHeight) * 0.5;
 
 //    if (controller != null) {
@@ -91,7 +92,7 @@ class _DragContainerState extends State<DragContainer>
         _handleDragEnd(null);
       } else {
         setState(() {
-          offsetDistance = offsetDistance + value;
+          offsetDistance = offsetDistance + value * 3.5;
         });
       }
     });
@@ -342,7 +343,7 @@ class OverscrollNotificationWidgetState
 
   @override
   Widget build(BuildContext context) {
-    print('NotificationListener build');
+    logger.d('NotificationListener build');
     final Widget child = NotificationListener<ScrollStartNotification>(
       key: _key,
       child: NotificationListener<ScrollUpdateNotification>(

@@ -4,6 +4,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 /// @author jd
 
+///web
 class WebPage extends StatefulWidget {
   final String url;
   WebPage({this.url});
