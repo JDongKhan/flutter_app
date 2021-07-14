@@ -18,7 +18,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
     return <Widget>[
       ///头部信息
       SliverPersistentHeader(
-        delegate: GSYSliverHeaderDelegate(
+        delegate: SliverHeaderDelegate(
           maxHeight: 180,
           minHeight: 180,
           vSync: this,
@@ -37,7 +37,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
           pinned: true,
 
           /// SliverPersistentHeaderDelegate 的实现
-          delegate: GSYSliverHeaderDelegate(
+          delegate: SliverHeaderDelegate(
               maxHeight: 60,
               minHeight: 60,
               changeSize: true,
@@ -138,8 +138,8 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
 }
 
 ///动态头部处理
-class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  GSYSliverHeaderDelegate(
+class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
+  SliverHeaderDelegate(
       {@required this.minHeight,
       @required this.maxHeight,
       @required this.snapConfig,
@@ -176,7 +176,7 @@ class GSYSliverHeaderDelegate extends SliverPersistentHeaderDelegate {
   }
 
   @override
-  bool shouldRebuild(GSYSliverHeaderDelegate oldDelegate) {
+  bool shouldRebuild(SliverHeaderDelegate oldDelegate) {
     return true;
   }
 

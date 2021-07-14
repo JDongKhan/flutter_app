@@ -1,11 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/input/pin_input_widget.dart';
+import 'package:flutter_app_component/component/input/vercode_input_widget.dart';
+import 'package:flutter_app_component/component/mask/bubble_demo_page.dart';
 import 'package:flutter_app_component/component/mask/bubble_widget.dart';
 import 'package:flutter_app_component/component/mask/mask_widget.dart';
+import 'package:flutter_app_component/demo/animal/anim_bg_demo_page.dart';
+import 'package:flutter_app_component/demo/animal/anim_button/anim_button_demo_page.dart';
 import 'package:flutter_app_component/demo/animal/animal_1.dart';
+import 'package:flutter_app_component/demo/animal/animal_2.dart';
 import 'package:flutter_app_component/demo/animal/animal_list.dart';
+import 'package:flutter_app_component/demo/animal/particle/particle_page.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
+import 'package:flutter_app_component/demo/bookpage/book_page.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
+import 'package:flutter_app_component/demo/canvas/clock/canvas_click_demo_page.dart';
 import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
 import 'package:flutter_app_component/demo/canvas/halo/circle_halo.dart';
 import 'package:flutter_app_component/demo/canvas/paragraph/paragraph_page.dart';
@@ -25,6 +34,7 @@ import 'package:flutter_app_component/demo/databtransfer/jd_inherited_widget.dar
 import 'package:flutter_app_component/demo/databtransfer/jd_notification.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_stream.dart';
 import 'package:flutter_app_component/demo/didi/didi_main_page.dart';
+import 'package:flutter_app_component/demo/dropmenu/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
@@ -35,10 +45,14 @@ import 'package:flutter_app_component/demo/lifecycle/jd_lifecycle_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:flutter_app_component/demo/login/login_demo_list_page.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
+import 'package:flutter_app_component/demo/qq/anim_progressImg_demo_page.dart';
 import 'package:flutter_app_component/demo/scroll/scroll_page.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
+import 'package:flutter_app_component/demo/stick/stick_demo_page.dart';
+import 'package:flutter_app_component/demo/stick/stick_demo_page2.dart';
 import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
 import 'package:flutter_app_component/pages/scaffold/jd_scaffold_page.dart';
+import 'package:flutter_app_component/pages/tantan/anim_scan_demo_page.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
 
@@ -81,6 +95,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': LoginDemoListPage(),
         },
         {
+          'title': 'Book',
+          'page': BookPage(),
+        },
+        {
           'title': '第三方组件',
           'router': '/thirdparty_list',
         },
@@ -93,12 +111,44 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': BottomDragDemo(),
         },
         {
+          'title': '列表滑动停靠 （Stick）',
+          'page': StickDemoPage(),
+        },
+        {
+          'title': '列表滑动停靠 （Stick）+ 展开收回',
+          'page': StickExpendDemoPage(),
+        },
+        {
+          'title': 'Bubble',
+          'page': BubbleDemoPage(),
+        },
+        {
+          'title': '验证码输入框',
+          'page': VerificationCodeInputDemoPage(),
+        },
+        {
+          'title': '支付密码输入框',
+          'page': VerificationCodeInputDemoPage2(),
+        },
+        {
+          'title': '类似QQ发送图片的动画',
+          'page': AnimProgressImgDemoPage(),
+        },
+        {
+          'title': '类似探探扫描的动画效果',
+          'page': AnimScanDemoPage(),
+        },
+        {
           'title': 'LinkScrollMenu',
           'page': JDLinkScrollMenu(),
         },
         {
           'title': 'DropdownMenuDemoPage',
           'page': JDDropdownMenuDemoPage(),
+        },
+        {
+          'title': 'DropdownMenuDemoPage2',
+          'page': DropSelectDemoPage(),
         },
         {
           'title': 'PopDemoPage',
@@ -279,6 +329,22 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': JDAnimal1(),
         },
         {
+          'title': '文本弹出动画效果',
+          'page': AnimaDemoPage5(),
+        },
+        {
+          'title': 'AnimButtonDemoPage',
+          'page': AnimButtonDemoPage(),
+        },
+        {
+          'title': 'AnimBgDemoPage',
+          'page': AnimBgDemoPage(),
+        },
+        {
+          'title': '粒子动画',
+          'page': ParticlePage(),
+        },
+        {
           'title': 'RunBall',
           'page': RunBall(),
         },
@@ -296,6 +362,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'ClockDemoPage',
           'page': ClockDemoPage(),
+        },
+        {
+          'title': 'CanvasClickDemoPage',
+          'page': CanvasClickDemoPage(),
         },
         {
           'title': 'TimeLinePage',

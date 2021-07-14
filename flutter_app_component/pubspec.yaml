@@ -110,6 +110,8 @@ dependencies:
   badges: ^2.0.1
 
   lifecycle: 0.2.0
+
+  simple_animations: 2.4.2
 #  flutterlifecyclehooks: 1.0.1
 
 #  flutter_tencentplayer_plus: any
