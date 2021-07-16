@@ -9,11 +9,12 @@ import 'package:flutter_app_component/demo/animal/anim_bg_demo_page.dart';
 import 'package:flutter_app_component/demo/animal/anim_button/anim_button_demo_page.dart';
 import 'package:flutter_app_component/demo/animal/animal_1.dart';
 import 'package:flutter_app_component/demo/animal/animal_2.dart';
-import 'package:flutter_app_component/demo/animal/animal_list.dart';
+import 'package:flutter_app_component/demo/animal/animal_3.dart';
 import 'package:flutter_app_component/demo/animal/particle/particle_page.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
 import 'package:flutter_app_component/demo/bookpage/book_page.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
+import 'package:flutter_app_component/demo/bottom_sheet/bottom_anim_nav_page.dart';
 import 'package:flutter_app_component/demo/canvas/clock/canvas_click_demo_page.dart';
 import 'package:flutter_app_component/demo/canvas/clock_demo_page.dart';
 import 'package:flutter_app_component/demo/canvas/halo/circle_halo.dart';
@@ -97,6 +98,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'Book',
           'page': BookPage(),
+        },
+        {
+          'title': 'BottomSheet',
+          'page': BottomAnimNavPage(),
         },
         {
           'title': '第三方组件',
@@ -329,8 +334,12 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': JDAnimal1(),
         },
         {
-          'title': '文本弹出动画效果',
-          'page': AnimaDemoPage5(),
+          'title': 'Animal 2',
+          'page': JDAnimal2(),
+        },
+        {
+          'title': 'Animal 3',
+          'page': JDAnimal3(),
         },
         {
           'title': 'AnimButtonDemoPage',
@@ -347,10 +356,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'RunBall',
           'page': RunBall(),
-        },
-        {
-          'title': 'AnimalListPage',
-          'page': AnimalListPage(),
         }
       ],
     },
@@ -582,6 +587,7 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
       JDNavigationUtil.push(page);
       return;
     }
+
     // Navigator.pushNamed(context, router);
     var map = JDNavigationUtil.pushNamed(router, arguments: {'title': title});
     //带有返回值

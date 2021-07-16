@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:jd_core/jd_core.dart';
 
 /**
  *
@@ -14,6 +17,27 @@ class JDStreamPage extends StatefulWidget {
 }
 
 class _JDStreamPageState extends State<JDStreamPage> {
+  StreamController _streamController = StreamController();
+  StreamSink get _sink => _streamController.sink;
+  Stream get _stream => _streamController.stream;
+  StreamSubscription _streamSubscription;
+
+  @override
+  void initState() {
+    _streamSubscription = _stream.listen((event) {
+      JDToast.toast(event.toString());
+      print(event);
+    });
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _streamSubscription.cancel();
+    _streamController.close();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +70,12 @@ class _JDStreamPageState extends State<JDStreamPage> {
               },
               child: Text(
                   'Stream.periodic(Duration period,[T computation(int computationCount)?])'),
+            ),
+            TextButton(
+              onPressed: () {
+                _streamControllerAction();
+              },
+              child: Text('StreamController'),
             ),
           ]),
         ) // This trailing comma makes auto-formatting nicer for build methods.
@@ -93,5 +123,9 @@ class _JDStreamPageState extends State<JDStreamPage> {
     }).onDone(() {
       print('Stream.fromFuture -> done');
     });
+  }
+
+  _streamControllerAction() {
+    _sink.add({'title': 'JD', 'action': 'tap'});
   }
 }

@@ -82,6 +82,9 @@ class _JDSportsLiveChatListWidgetState
     return RichText(
       text: TextSpan(
         children: [
+          WidgetSpan(
+            child: Icon(Icons.people),
+          ),
           TextSpan(
               text: '会跑马拉松的猫:',
               style: TextStyle(

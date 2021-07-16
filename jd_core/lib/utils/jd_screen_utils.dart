@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /// @author jd
@@ -27,7 +27,7 @@ double jd_statusBarHeight() {
 }
 
 double jd_navigationHeight() {
-  return 44 + jd_statusBarHeight();
+  return kToolbarHeight + jd_statusBarHeight();
 }
 
 double jd_getSp(double fontSize) {

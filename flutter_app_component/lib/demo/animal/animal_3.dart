@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
-class Animal1Page extends StatefulWidget {
+class JDAnimal3 extends StatefulWidget {
   @override
   _Animal1PageState createState() => _Animal1PageState();
 }
 
-class _Animal1PageState extends State<Animal1Page> {
+class _Animal1PageState extends State<JDAnimal3> {
   IconData iconData = Icons.clear;
 
   ///定义需要执行的滑动效果数值
@@ -47,16 +47,9 @@ class _Animal1PageState extends State<Animal1Page> {
           },
           duration: Duration(milliseconds: 300),
           child: IconButton(
-              key: ValueKey(iconData),
-              icon: Icon(iconData),
-              onPressed: () {
-                setState(() {
-                  if (iconData == Icons.clear)
-                    iconData = Icons.add;
-                  else
-                    iconData = Icons.clear;
-                });
-              }),
+            key: ValueKey(iconData),
+            icon: Icon(iconData),
+          ),
         ),
         // When the user taps the button
         onPressed: () {

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
@@ -9,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'app.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
+import 'pages/error_page.dart';
 
 void collectLog(String line) {
   //收集日志
@@ -27,6 +30,15 @@ void initProject() {
   // window.onDrawFrame = null;
   // window.onBeginFrame = null;
   LogConsole.init();
+
+  //错误信息提示
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    Zone.current.handleUncaughtError(details.exception, details.stack);
+    return ErrorPage(
+        details.exception.toString() + "\n " + details.stack.toString(),
+        details);
+  };
+
   //初始化
   JDAppInfo.init(() {
     runApp(
@@ -54,7 +66,7 @@ void initIOSAndAndroid() {
     initProject();
   }, handler: (FlutterErrorDetails details) {
     //继续打印到控制台
-    FlutterError.dumpErrorToConsole(details);
+    FlutterError.dumpErrorToConsole(details, forceReport: true);
   });
 }
 
@@ -63,7 +75,7 @@ void initOther() {
     //TODO 此处可以上传到自己的服务器
     reportErrorAndLog(details);
     //继续打印到控制台
-    FlutterError.dumpErrorToConsole(details);
+    FlutterError.dumpErrorToConsole(details, forceReport: true);
   };
   // Some desktop specific code there
   initProject();

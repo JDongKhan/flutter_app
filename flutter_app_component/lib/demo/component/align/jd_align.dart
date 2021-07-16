@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'align_demo_page.dart';
+
 /**
  *
  * @author jd
@@ -19,6 +21,18 @@ class _JDAlignPageState extends State<JDAlignPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(widget.title),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (_) => AlignDemoPage(),
+                  ),
+                );
+              },
+              child: Text('Demo'),
+            ),
+          ],
         ),
         body: Center(
           child: Column(

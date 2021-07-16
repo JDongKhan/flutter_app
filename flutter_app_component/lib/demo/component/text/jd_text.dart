@@ -39,7 +39,6 @@ class _JDTextPageState extends State<JDTextPage> {
 
   @override
   Widget build(BuildContext context) {
-
     print("build");
     // 在Widget树中向上查找最近的父级`Scaffold` widget
     // Scaffold scaffold = context.ancestorWidgetOfExactType(Scaffold);
@@ -87,52 +86,49 @@ class _JDTextPageState extends State<JDTextPage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text("Hello world "* 10,  //字符串重复六次
+            Text(
+              "Hello world " * 10, //字符串重复六次
               textAlign: TextAlign.center,
             ),
 
-            Text("I'm Jack. "* 14,
+            Text(
+              "I'm Jack. " * 14,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
 
             //MediaQueryData.textScaleFactor
-            Text("Hello world",
+            Text(
+              "Hello world",
               textScaleFactor: 1.5,
             ),
 
             Text("Hello world",
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 18.0,
-                  height: 1.2,
-                  fontFamily: "Courier",
-                  background: new Paint()..color=Colors.yellow,
-                  decoration:TextDecoration.underline,
-                  decorationStyle: TextDecorationStyle.dashed
-              )
-            ),
+                style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 18.0,
+                    height: 1.2,
+                    fontFamily: "Courier",
+                    background: new Paint()..color = Colors.yellow,
+                    decoration: TextDecoration.underline,
+                    decorationStyle: TextDecorationStyle.dashed)),
 
-            Text.rich(TextSpan(
-                children: [
-                  TextSpan(
-                      text: "Home: "
-                  ),
-                  TextSpan(
-                      text: "https://flutterchina.club",
-                      style: TextStyle(
-                          color: Colors.blue
-                      ),
+            Text.rich(TextSpan(children: [
+              WidgetSpan(
+                child: Icon(Icons.people),
+              ),
+              TextSpan(text: "Home: "),
+              TextSpan(
+                text: "https://flutterchina.club",
+                style: TextStyle(color: Colors.blue),
 //                      recognizer: _tapRecognizer
-                  ),
-                ]
-            )),
-
+              ),
+            ])),
 
             DefaultTextStyle(
               //1.设置文本默认样式
               style: TextStyle(
-                color:Colors.red,
+                color: Colors.red,
                 fontSize: 20.0,
               ),
               textAlign: TextAlign.start,
@@ -141,11 +137,11 @@ class _JDTextPageState extends State<JDTextPage> {
                 children: <Widget>[
                   Text("hello world"),
                   Text("I am Jack"),
-                  Text("I am Jack",
+                  Text(
+                    "I am Jack",
                     style: TextStyle(
                         inherit: false, //2.不继承默认样式
-                        color: Colors.grey
-                    ),
+                        color: Colors.grey),
                   ),
                 ],
               ),
@@ -168,7 +164,6 @@ class _JDTextPageState extends State<JDTextPage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
-
 
   /***************** 重写一些方法 *******************/
 
@@ -201,5 +196,4 @@ class _JDTextPageState extends State<JDTextPage> {
     super.didChangeDependencies();
     print("didChangeDependencies");
   }
-
 }

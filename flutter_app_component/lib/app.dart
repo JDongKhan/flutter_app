@@ -29,6 +29,10 @@ class MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    //缓存个数 100
+    PaintingBinding.instance.imageCache.maximumSize = 100;
+//缓存大小 50m
+    PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
     _initListener();
   }
 
