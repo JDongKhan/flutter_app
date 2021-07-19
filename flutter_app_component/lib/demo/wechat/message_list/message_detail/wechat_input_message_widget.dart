@@ -133,6 +133,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
         keyboardType: TextInputType.multiline,
         maxLines: 5,
         minLines: 1,
+        textInputAction: TextInputAction.send,
         focusNode: _focusNode,
         decoration: InputDecoration(
           hintText: 'input message',

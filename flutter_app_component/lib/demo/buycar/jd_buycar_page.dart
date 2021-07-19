@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/notifier/jd_changenotifierprovider.dart';
+import 'package:flutter_app_component/demo/databtransfer/notifier/jd_changenotifierprovider.dart';
 /**
  *
  * @author jd

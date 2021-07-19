@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/component/circle_check_box.dart';
 import 'package:flutter_app_component/component/number_controller/number_controller_widget.dart';
-import 'package:flutter_app_component/demo/notifier/jd_changenotifierprovider.dart';
+import 'package:flutter_app_component/demo/databtransfer/notifier/jd_changenotifierprovider.dart';
 import 'package:flutter_app_component/demo/shop/model/jd_shop_info.dart';
 import 'package:jd_core/jd_core.dart';
 

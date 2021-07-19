@@ -8,6 +8,7 @@ import 'package:flutter_app_component/pages/my/jd_my_page.dart';
 import 'package:flutter_app_component/service/jd_request.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
 import 'package:jd_home/pages/home/jd_home_page.dart';
+import 'package:logger_flutter/logger_flutter.dart';
 
 /**
  *
@@ -112,29 +113,31 @@ class JDScaffoldPageState extends State<JDScaffoldPage>
           ],
         ),
       ),
-      child: Scaffold(
-        key: _scaffoldKey,
-        drawer: _drawer, //抽屉
-        body: TabBarView(
+      child: LogConsoleOnShake(
+        child: Scaffold(
+          key: _scaffoldKey,
+          drawer: _drawer, //抽屉
+          body: TabBarView(
 //          index: _selectedIndex,
-          controller: _tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _tabs.map((e) {
-            return e['page'] as Widget;
-          }).toList(),
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          // 底部导航
-          items: _tabs
-              .map((e) => BottomNavigationBarItem(
-                  icon: Icon(e["icon"] as IconData),
-                  title: Text(e["title"].toString())))
-              .toList(),
-          currentIndex: _selectedIndex,
-          type: BottomNavigationBarType.fixed,
-          selectedItemColor: Colors.blue,
-          unselectedItemColor: Colors.red,
-          onTap: _onItemTapped,
+            controller: _tabController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: _tabs.map((e) {
+              return e['page'] as Widget;
+            }).toList(),
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            // 底部导航
+            items: _tabs
+                .map((e) => BottomNavigationBarItem(
+                    icon: Icon(e["icon"] as IconData),
+                    title: Text(e["title"].toString())))
+                .toList(),
+            currentIndex: _selectedIndex,
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.blue,
+            unselectedItemColor: Colors.red,
+            onTap: _onItemTapped,
+          ),
         ),
       ),
     );
