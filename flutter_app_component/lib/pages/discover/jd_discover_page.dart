@@ -51,9 +51,9 @@ import 'package:flutter_app_component/demo/scroll/scroll_page.dart';
 import 'package:flutter_app_component/demo/shop/jd_shop_main_page.dart';
 import 'package:flutter_app_component/demo/stick/stick_demo_page.dart';
 import 'package:flutter_app_component/demo/stick/stick_demo_page2.dart';
+import 'package:flutter_app_component/demo/tantan/anim_scan_demo_page.dart';
 import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
 import 'package:flutter_app_component/pages/scaffold/jd_scaffold_page.dart';
-import 'package:flutter_app_component/pages/tantan/anim_scan_demo_page.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
 
