@@ -64,14 +64,14 @@ class _JDSportsLivePlayerBottomWidgetState
             alignment: Alignment.centerLeft,
             child: Text(
               duration_toString(widget.controller._position),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
           Expanded(
             child: LinearProgressIndicator(
                 value: _getValueFromDuration(),
                 backgroundColor: Colors.greenAccent,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.red)),
+                valueColor: const AlwaysStoppedAnimation<Color>(Colors.red)),
           ),
           Container(
             height: double.infinity,
@@ -79,7 +79,7 @@ class _JDSportsLivePlayerBottomWidgetState
             alignment: Alignment.centerLeft,
             child: Text(
               duration_toString(widget.controller._duration),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
           ),
           _buildFullWidget(),
@@ -95,7 +95,7 @@ class _JDSportsLivePlayerBottomWidgetState
         onTap: () {
           widget.controller.playerController.pause();
         },
-        child: Icon(
+        child: const Icon(
           Icons.pause_circle_outline_rounded,
           color: Colors.white,
           size: 30,
@@ -107,7 +107,7 @@ class _JDSportsLivePlayerBottomWidgetState
       onTap: () {
         widget.controller.playerController.play();
       },
-      child: Icon(
+      child: const Icon(
         Icons.play_circle_outline_rounded,
         color: Colors.white,
         size: 30,
@@ -124,7 +124,7 @@ class _JDSportsLivePlayerBottomWidgetState
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
           ]);
-          Future.delayed(Duration(seconds: 1), () {
+          Future.delayed(const Duration(seconds: 1), () {
             SystemChrome.setPreferredOrientations([
               DeviceOrientation.portraitUp,
               DeviceOrientation.landscapeLeft,
@@ -132,7 +132,7 @@ class _JDSportsLivePlayerBottomWidgetState
             ]);
           });
         },
-        child: Icon(
+        child: const Icon(
           Icons.fullscreen_exit_rounded,
           size: 30,
           color: Colors.white,
@@ -144,8 +144,9 @@ class _JDSportsLivePlayerBottomWidgetState
       onTap: () {
         SystemChrome.setPreferredOrientations([
           DeviceOrientation.landscapeLeft,
+          DeviceOrientation.landscapeRight,
         ]);
-        Future.delayed(Duration(seconds: 1), () {
+        Future.delayed(const Duration(seconds: 1), () {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
             DeviceOrientation.landscapeLeft,
@@ -153,7 +154,7 @@ class _JDSportsLivePlayerBottomWidgetState
           ]);
         });
       },
-      child: Icon(
+      child: const Icon(
         Icons.fullscreen_rounded,
         size: 30,
         color: Colors.white,

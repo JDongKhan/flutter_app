@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_component/component/logger/logger_console_on_shake.dart';
 import 'package:flutter_app_component/models/models.dart';
 import 'package:flutter_app_component/pages/buiness/jd_business_page.dart';
 import 'package:flutter_app_component/pages/discover/jd_discover_page.dart';
@@ -8,7 +9,6 @@ import 'package:flutter_app_component/pages/my/jd_my_page.dart';
 import 'package:flutter_app_component/service/jd_request.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
 import 'package:jd_home/pages/home/jd_home_page.dart';
-import 'package:logger_flutter/logger_flutter.dart';
 
 /**
  *

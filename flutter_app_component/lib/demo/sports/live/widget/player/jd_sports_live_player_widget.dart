@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/jd_player.dart';
 import 'package:provider/provider.dart';
 
@@ -27,6 +28,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
   AnimationController _animationController;
   Animation _slideTopAnimation, _slideBottomAnimation, _slideRightAnimation;
   bool _isShowMenuAnimal = false;
+  bool _isLocked = false;
   @override
   void initState() {
     _bottomController =
@@ -36,17 +38,17 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     _slideTopAnimation = Tween(
-      begin: Offset(0, -2),
-      end: Offset(0, 0),
+      begin: const Offset(0, -2),
+      end: const Offset(0, 0),
     ).animate(_animationController);
     _slideBottomAnimation = Tween(
-      begin: Offset(0, 2),
-      end: Offset(0, 0),
+      begin: const Offset(0, 2),
+      end: const Offset(0, 0),
     ).animate(_animationController);
 
     _slideRightAnimation = Tween(
-      begin: Offset(2, 0),
-      end: Offset(0, 0),
+      begin: const Offset(2, 0),
+      end: const Offset(0, 0),
     ).animate(_animationController);
 
     showMenu();
@@ -63,12 +65,12 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
 
   void showMenu({bool immediately}) {
     if (_isShowMenuAnimal) return;
-    Future.delayed(Duration(seconds: 0), () {
+    Future.delayed(const Duration(seconds: 0), () {
       _isShowMenuAnimal = true;
       _animationController.forward();
     });
 
-    Future.delayed(Duration(seconds: 2), () {
+    Future.delayed(const Duration(seconds: 3), () {
       dissmisMenu();
     });
   }
@@ -87,6 +89,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
             url: widget.url,
             controller: _playerController,
             onTap: () {
+              if (_isLocked) return;
               showMenu();
             },
             onChange: (position, duration) {
@@ -108,6 +111,12 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
               left: 0,
               top: 0,
               child: _buildBackWidget(),
+            ),
+            Positioned(
+              left: 0,
+              top: 0,
+              bottom: 0,
+              child: Center(child: _buildLockWidget()),
             ),
             Positioned(
               left: 0,
@@ -150,22 +159,50 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
           ]);
-          Future.delayed(Duration(seconds: 1), () {
-            SystemChrome.setPreferredOrientations([
-              DeviceOrientation.portraitUp,
-              DeviceOrientation.landscapeLeft,
-              DeviceOrientation.landscapeRight,
-            ]);
-          });
+          OrientationObserver.reset(context);
           return;
         }
         Navigator.of(context).pop();
       },
-      icon: Icon(
+      icon: const Icon(
         Icons.arrow_back_ios_outlined,
         color: Colors.white,
       ),
     );
+  }
+
+  Widget _buildLockWidget() {
+    JDSportsLiveController controller = context.watch<JDSportsLiveController>();
+    if (controller.orientation == Orientation.portrait) {
+      return Container();
+    }
+    return _isLocked
+        ? IconButton(
+            icon: const Icon(Icons.lock_outline, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                _isLocked = false;
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.portraitUp,
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ]);
+              });
+            },
+          )
+        : IconButton(
+            icon: const Icon(Icons.lock_open_outlined, color: Colors.white),
+            onPressed: () {
+              setState(() {
+                _isLocked = true;
+                SystemChrome.setPreferredOrientations([
+                  DeviceOrientation.landscapeLeft,
+                  DeviceOrientation.landscapeRight,
+                ]);
+                dissmisMenu();
+              });
+            },
+          );
   }
 
   Widget _buildRightMenuWidget() {
@@ -174,7 +211,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
       alignment: Alignment.centerRight,
       child: Column(
         mainAxisSize: MainAxisSize.min,
-        children: [
+        children: const [
           Icon(
             Icons.airplay,
             color: Colors.white,

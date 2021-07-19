@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_component/component/orientation/orientation_mixin.dart';
+import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:provider/provider.dart';
 
@@ -17,9 +19,8 @@ class JDSportsLiveDetailPage extends StatefulWidget {
 }
 
 class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, OrientationAware, OrientationMixin {
   TabController _tabController; //需要定义一个Controller
-  JDSportsLiveController _controller = JDSportsLiveController();
   GlobalKey _globalKey = GlobalKey();
 
   String _play_url = 'assets/videos/video_11.mp4';
@@ -42,11 +43,6 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
 
   @override
   void initState() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-      DeviceOrientation.portraitUp,
-    ]);
     _playerWidget = JDSportsLivePlayerWidget(
       url: _play_url,
       key: _globalKey,
@@ -57,9 +53,6 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
 
   @override
   void dispose() {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-    ]);
     super.dispose();
   }
 
@@ -126,5 +119,14 @@ class _JDSportsLiveDetailPageState extends State<JDSportsLiveDetailPage>
         ],
       ),
     );
+  }
+
+  @override
+  List<DeviceOrientation> orientations() {
+    return [
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.portraitUp,
+    ];
   }
 }

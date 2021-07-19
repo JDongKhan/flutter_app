@@ -31,7 +31,7 @@ class _JDSportsLivePlayerTopWidgetState
   Widget _buildTitleWidget() {
     JDSportsLiveController controller = context.watch<JDSportsLiveController>();
     if (controller.orientation == Orientation.landscape) {
-      return Text(
+      return const Text(
         '我是播放器',
         style: TextStyle(
           color: Colors.white,

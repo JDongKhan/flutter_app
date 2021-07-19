@@ -75,6 +75,12 @@ class _JDPlayerState extends State<JDPlayer>
   }
 
   @override
+  void reassemble() {
+    print('reassemble');
+    super.reassemble();
+  }
+
+  @override
   void didChangeDependencies() {
     print('didChangeDependencies');
     super.didChangeDependencies();
@@ -231,19 +237,19 @@ class _JDPlayerState extends State<JDPlayer>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      print(' -- push -- ');
+      print(' -- onLifecycleEvent push -- ');
     } else if (event == LifecycleEvent.visible) {
-      print(' -- visible -- ');
+      print(' -- onLifecycleEvent visible -- ');
     } else if (event == LifecycleEvent.active) {
       widget.controller.play();
-      print(' -- active -- ');
+      print(' -- onLifecycleEvent active -- ');
     } else if (event == LifecycleEvent.inactive) {
-      print(' -- inactive -- ');
+      print(' -- onLifecycleEvent inactive -- ');
     } else if (event == LifecycleEvent.invisible) {
       widget.controller.pause();
-      print(' -- invisible -- ');
+      print(' -- onLifecycleEvent invisible -- ');
     } else if (event == LifecycleEvent.pop) {
-      print(' -- pop -- ');
+      print(' -- onLifecycleEvent pop -- ');
     }
   }
 }

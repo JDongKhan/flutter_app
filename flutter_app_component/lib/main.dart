@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_appinfo.dart';
-import 'package:logger_flutter/logger_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
+import 'component/logger/log_console.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
 import 'pages/error_page.dart';

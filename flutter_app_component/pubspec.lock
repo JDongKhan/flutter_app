@@ -392,6 +392,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "7.1.8"
+  get:
+    dependency: "direct main"
+    description:
+      name: get
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.4"
   glob:
     dependency: transitive
     description:
@@ -505,19 +512,12 @@ packages:
     source: hosted
     version: "3.0.6+9"
   logger:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: logger
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.7.0+2"
-  logger_flutter:
-    dependency: "direct main"
-    description:
-      name: logger_flutter
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "0.7.1"
+    version: "1.0.0"
   logging:
     dependency: transitive
     description:
@@ -764,12 +764,12 @@ packages:
     source: hosted
     version: "0.1.10"
   sensors:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: sensors
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.4.2+6"
+    version: "2.0.3"
   share:
     dependency: transitive
     description:
