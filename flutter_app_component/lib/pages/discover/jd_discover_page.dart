@@ -41,6 +41,7 @@ import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
+import 'package:flutter_app_component/demo/get/get_demo_list_page.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/lifecycle/jd_lifecycle_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
@@ -174,6 +175,10 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'LifeCycle',
           'page': JDLifeCyclePage(),
+        },
+        {
+          'title': 'Get Demo List',
+          'page': GetDemoListPage(),
         },
         {
           'title': 'Scaffold',

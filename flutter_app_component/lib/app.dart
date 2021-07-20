@@ -4,6 +4,7 @@ import 'package:flutter_app_component/pages/jd_splash_page.dart';
 import 'package:flutter_app_component/routes/jd_routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/style/jd_colors.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
@@ -46,7 +47,7 @@ class MyAppState extends State<MyApp> {
     final JDTheme theme = context.watch<JDTheme>();
     return ScreenUtilInit(
       designSize: const Size(750, 1334),
-      builder: () => MaterialApp(
+      builder: () => GetMaterialApp(
         title: 'Flutter App',
         navigatorKey: JDNavigationUtil.getInstance().navigatorKey,
         // ignore: always_specify_types

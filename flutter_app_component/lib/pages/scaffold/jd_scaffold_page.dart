@@ -7,6 +7,7 @@ import 'package:flutter_app_component/pages/discover/jd_discover_page.dart';
 import 'package:flutter_app_component/pages/leftdrawer/jd_left_drawer.dart';
 import 'package:flutter_app_component/pages/my/jd_my_page.dart';
 import 'package:flutter_app_component/service/jd_request.dart';
+import 'package:flutter_app_component/utils/logger_util.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
 import 'package:jd_home/pages/home/jd_home_page.dart';
 
@@ -41,6 +42,7 @@ class JDScaffoldPageState extends State<JDScaffoldPage>
     super.initState();
     //初始化工具
     //initScreenUtil(context);
+    logger.d('init pages');
     _tabs.add({'title': '首页', 'icon': Icons.home, 'page': JDHomePage()});
 
     _tabs.add({
