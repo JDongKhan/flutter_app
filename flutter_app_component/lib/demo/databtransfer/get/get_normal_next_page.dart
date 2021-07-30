@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/get/get_normal_page.dart';
 import 'package:get/get.dart';
+
+import 'get_normal_page.dart';
 
 /// @author jd
 

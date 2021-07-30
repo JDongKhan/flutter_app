@@ -259,7 +259,7 @@ class _JDShopCarPageState extends State<JDShopCarPage> {
                           ),
                           NumberControllerWidget(
                             updateChanged: (v) {
-                              print(v);
+                              debugPrint(v);
                             },
                           ),
                         ],

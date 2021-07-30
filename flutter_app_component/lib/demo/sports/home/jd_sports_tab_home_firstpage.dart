@@ -58,7 +58,7 @@ class _JDTabHomeFirstPageState extends State<JDTabHomeFirstPage> {
   Widget _buildSearch() {
     return Container(
       color: Colors.black87,
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: const EdgeInsets.only(bottom: 5),
       child: Row(
         children: [
           Expanded(
@@ -68,12 +68,14 @@ class _JDTabHomeFirstPageState extends State<JDTabHomeFirstPage> {
           IconButton(
               icon: const Icon(
                 Icons.airplay,
+                size: 22,
                 color: Colors.white,
               ),
               onPressed: () {}),
           IconButton(
               icon: const Icon(
                 Icons.shopping_cart,
+                size: 22,
                 color: Colors.white,
               ),
               onPressed: () {}),

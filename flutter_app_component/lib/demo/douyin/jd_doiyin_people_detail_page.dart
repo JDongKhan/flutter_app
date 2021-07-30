@@ -29,7 +29,7 @@ class _JDDouyinPeopleDetailPageState extends State<JDDouyinPeopleDetailPage>
       double offset = _scrollController.positions.elementAt(0).pixels;
       setState(() {
         appAlpha = offset / 200;
-        print(appAlpha);
+        debugPrint(appAlpha.toString());
       });
     });
   }

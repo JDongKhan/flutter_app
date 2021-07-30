@@ -122,10 +122,10 @@ class _JDReorderableListViewState extends State<JDReorderableListView> {
           return renderItem(index);
         },
         onMove: (data) {
-          print(data);
+          debugPrint(data.toString());
         },
         onLeave: (data) {
-          print('$data is Leaving item $index');
+          debugPrint('$data is Leaving item $index');
         },
         onWillAccept: (data) {
           return true;

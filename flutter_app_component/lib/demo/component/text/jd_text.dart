@@ -46,12 +46,12 @@ class _JDTextPageState extends State<JDTextPage> {
   @override
   void initState() {
     super.initState();
-    print("initState");
+    debugPrint("initState");
   }
 
   @override
   Widget build(BuildContext context) {
-    print("build");
+    debugPrint("build");
     // 在Widget树中向上查找最近的父级`Scaffold` widget
     // Scaffold scaffold = context.ancestorWidgetOfExactType(Scaffold);
 
@@ -202,30 +202,30 @@ class _JDTextPageState extends State<JDTextPage> {
   @override
   void didUpdateWidget(JDTextPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    print("didUpdateWidget");
+    debugPrint("didUpdateWidget");
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    print("deactive");
+    debugPrint("deactive");
   }
 
   @override
   void dispose() {
     super.dispose();
-    print("dispose");
+    debugPrint("dispose");
   }
 
   @override
   void reassemble() {
     super.reassemble();
-    print("reassemble");
+    debugPrint("reassemble");
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    print("didChangeDependencies");
+    debugPrint("didChangeDependencies");
   }
 }

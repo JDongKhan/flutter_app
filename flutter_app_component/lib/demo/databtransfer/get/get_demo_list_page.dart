@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/get/get_simple_page.dart';
 
 import 'get_normal_page.dart';
+import 'get_simple_page.dart';
 
 /// @author jd
 class GetDemoListPage extends StatelessWidget {

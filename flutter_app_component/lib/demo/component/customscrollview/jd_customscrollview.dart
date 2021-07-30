@@ -3,6 +3,7 @@ import 'package:flutter_app_component/demo/component/customscrollview/jd_section
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
 import 'jd_customscrollview2.dart';
+import 'thirdparty_tableview_demo_page.dart';
 
 /**
  *
@@ -21,12 +22,27 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
   final ScrollController _controller = ScrollController();
   bool showToTopBtn = false; //是否显示“返回到顶部”按钮
 
+  List _menu = [
+    {
+      'title': 'SectionTableView',
+      'page': JDSectionTableView(),
+    },
+    {
+      'title': 'TableView',
+      'page': ThirdPartyTableViewDemoPage(),
+    },
+    {
+      'title': 'CustomScrollView2Demo',
+      'page': JDCustomScrollView2Demo(),
+    },
+  ];
+
   @override
   void initState() {
     super.initState();
     //监听滚动事件，打印滚动位置
     _controller.addListener(() {
-      print(_controller.offset); //打印滚动位置
+      debugPrint(_controller.offset.toString()); //打印滚动位置
       if (_controller.offset < 1000 && showToTopBtn) {
         setState(() {
           showToTopBtn = false;
@@ -54,14 +70,6 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
         slivers: <Widget>[
           //AppBar，包含一个导航栏
           SliverAppBar(
-            actions: <Widget>[
-              FlatButton(
-                child: const Text('SectionTableView'),
-                onPressed: () {
-                  JDNavigationUtil.push(JDSectionTableView());
-                },
-              ),
-            ],
             pinned: true,
             expandedHeight: 250.0,
             flexibleSpace: FlexibleSpaceBar(
@@ -85,19 +93,20 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
+                  Map map = _menu[index % 3];
                   //创建子widget
                   return InkWell(
                     onTap: () {
-                      _tap(index);
+                      _tap(map);
                     },
                     child: Container(
                       alignment: Alignment.center,
                       color: Colors.cyan[100 * (index % 9)],
-                      child: Text('grid item $index'),
+                      child: Text('${map['title']}'),
                     ),
                   );
                 },
-                childCount: 60,
+                childCount: _menu.length * 5,
               ),
             ),
           ),
@@ -120,9 +129,8 @@ class _JDCustomScrollViewPageState extends State<JDCustomScrollViewPage> {
     );
   }
 
-  void _tap(int index) {
-    if (index == 0) {
-      JDNavigationUtil.push(JDCustomScrollView2Demo());
-    }
+  void _tap(map) {
+    Widget widget = map['page'];
+    JDNavigationUtil.push(widget);
   }
 }

@@ -51,8 +51,8 @@ class _JDTabHomePageState extends State<JDTabHomePage>
             isScrollable: true,
             indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.white,
-            unselectedLabelStyle: TextStyle(fontSize: 14),
-            labelStyle: TextStyle(fontSize: 18),
+            unselectedLabelStyle: const TextStyle(fontSize: 14),
+            labelStyle: const TextStyle(fontSize: 18),
             controller: _tabController,
             tabs: tabs.map((e) => Tab(text: e)).toList(),
           ),
@@ -60,6 +60,7 @@ class _JDTabHomePageState extends State<JDTabHomePage>
             IconButton(
               icon: const Icon(
                 Icons.menu,
+                size: 22,
                 color: Colors.white,
               ),
               onPressed: () {

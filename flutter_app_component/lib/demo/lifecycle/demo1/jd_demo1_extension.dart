@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 import 'jd_demo_1.dart';
 
 /// @author jd
@@ -5,6 +7,6 @@ import 'jd_demo_1.dart';
 extension D_5 on JDDemo1 {
   ///可以添加不存在的方法
   void printMessage2() {
-    print('D_5 printMessage');
+    debugPrint('D_5 printMessage');
   }
 }

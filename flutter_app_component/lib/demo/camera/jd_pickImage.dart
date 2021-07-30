@@ -19,18 +19,10 @@ class JDPickImagePage extends StatefulWidget {
 }
 
 class _JDPickImagePageState extends State<JDPickImagePage> {
-  //获取控件的位置
-  GlobalKey positionKey = GlobalKey();
   File _image;
 
   //拍照
   Future getImage() async {
-    RenderBox renderBox =
-        positionKey.currentContext.findRenderObject() as RenderBox;
-    var offset = renderBox.localToGlobal(Offset.zero);
-    print(offset.dx); //横坐标
-    print(offset.dy); //纵坐标
-
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
     uploadImgFunc(image);
     setState(() {
@@ -59,7 +51,7 @@ class _JDPickImagePageState extends State<JDPickImagePage> {
     });
     Dio dio = Dio();
     var result = await dio.post<dynamic>('接口', data: formData);
-    print(result);
+    debugPrint(result.toString());
   }
 
   @override
@@ -68,16 +60,30 @@ class _JDPickImagePageState extends State<JDPickImagePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: _image == null
-            ? const Text('No image selected.')
-            : Image.file(_image),
-      ),
-      floatingActionButton: FloatingActionButton(
-        key: positionKey,
-        onPressed: getImage,
-        tooltip: 'Pick Image',
-        child: const Icon(Icons.add_a_photo),
+      body: Column(
+        children: [
+          Row(
+            children: [
+              TextButton(
+                onPressed: () {
+                  openGallery();
+                },
+                child: Text('相册'),
+              ),
+              TextButton(
+                onPressed: () {
+                  getImage();
+                },
+                child: Text('拍照'),
+              ),
+            ],
+          ),
+          Center(
+            child: _image == null
+                ? const Text('No image selected.')
+                : Image.file(_image),
+          ),
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

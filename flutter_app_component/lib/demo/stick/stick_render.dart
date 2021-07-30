@@ -80,7 +80,6 @@ class StickRender extends RenderBox
     defaultPaint(context, offset);
   }
 
-
   ///设置我们的 StickParentData
   @override
   void setupParentData(RenderObject child) {
@@ -107,11 +106,10 @@ class StickRender extends RenderBox
     ///对于当前布局，用内容作为宽高
     var width = content.size.width;
     var height = headerHeight + contentHeight;
-    size = new Size(width, height);
+    size = Size(width, height);
 
     ///内容的初始化位置
-    (content.parentData as StickParentData).offset =
-    new Offset(0, headerHeight);
+    (content.parentData as StickParentData).offset = Offset(0, headerHeight);
 
     /// 计算出 header 需要的整体偏移量，用于反方向
     var headerOffset = height - headerHeight;
@@ -122,14 +120,13 @@ class StickRender extends RenderBox
     ///是滑动的多还是偏移量
     var realHeaderOffset = math.min(-scrollAbleDy, headerOffset);
     (header.parentData as StickParentData).offset =
-    new Offset(0, math.max(0, realHeaderOffset));
+        Offset(0, math.max(0, realHeaderOffset));
   }
 
   @override
   bool hitTestChildren(HitTestResult result, {Offset position}) {
     return defaultHitTestChildren(result, position: position);
   }
-
 }
 
 class StickParentData extends ContainerBoxParentData<RenderBox> {}

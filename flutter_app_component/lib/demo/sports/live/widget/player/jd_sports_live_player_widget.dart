@@ -178,7 +178,7 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
     }
     return _isLocked
         ? IconButton(
-            icon: const Icon(Icons.lock_outline, color: Colors.white),
+            icon: const Icon(Icons.lock_outline, size: 20, color: Colors.white),
             onPressed: () {
               setState(() {
                 _isLocked = false;
@@ -191,7 +191,8 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
             },
           )
         : IconButton(
-            icon: const Icon(Icons.lock_open_outlined, color: Colors.white),
+            icon: const Icon(Icons.lock_open_outlined,
+                size: 20, color: Colors.white),
             onPressed: () {
               setState(() {
                 _isLocked = true;
@@ -213,7 +214,8 @@ class JDSportsLivePlayerWidgetState extends State<JDSportsLivePlayerWidget>
         mainAxisSize: MainAxisSize.min,
         children: const [
           Icon(
-            Icons.airplay,
+            Icons.games,
+            size: 20,
             color: Colors.white,
           ),
         ],

@@ -141,6 +141,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "1.15.0"
+  color_dart:
+    dependency: "direct main"
+    description:
+      name: color_dart
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.1"
   connectivity:
     dependency: transitive
     description:
@@ -190,6 +197,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.5"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.16.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -205,7 +219,7 @@ packages:
     source: hosted
     version: "1.3.12"
   device_info:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: device_info
       url: "https://pub.flutter-io.cn"
@@ -274,6 +288,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "6.1.2"
+  file_utils:
+    dependency: transitive
+    description:
+      name: file_utils
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.4"
   fish_redux:
     dependency: "direct main"
     description:
@@ -380,6 +401,48 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_ume:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0+1"
+  flutter_ume_kit_console:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume_kit_console
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
+  flutter_ume_kit_device:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume_kit_device
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
+  flutter_ume_kit_perf:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume_kit_perf
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
+  flutter_ume_kit_show_code:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume_kit_show_code
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
+  flutter_ume_kit_ui:
+    dependency: "direct dev"
+    description:
+      name: flutter_ume_kit_ui
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.0"
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -406,6 +469,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  globbing:
+    dependency: transitive
+    description:
+      name: globbing
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.1"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.14.0+4"
   http:
     dependency: transitive
     description:
@@ -420,6 +497,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.4"
+  iconfont_dart:
+    dependency: "direct main"
+    description:
+      name: iconfont_dart
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.3"
   image:
     dependency: transitive
     description:
@@ -666,7 +750,7 @@ packages:
     source: hosted
     version: "0.10.3"
   platform:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: platform
       url: "https://pub.flutter-io.cn"
@@ -694,7 +778,7 @@ packages:
     source: hosted
     version: "4.2.1"
   provider:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: provider
       url: "https://pub.flutter-io.cn"
@@ -778,7 +862,7 @@ packages:
     source: hosted
     version: "0.6.5+4"
   shared_preferences:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: shared_preferences
       url: "https://pub.flutter-io.cn"
@@ -915,6 +999,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.0+2"
+  system_info:
+    dependency: transitive
+    description:
+      name: system_info
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.1.3"
+  tableview:
+    dependency: "direct main"
+    description:
+      name: tableview
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.3"
   term_glyph:
     dependency: transitive
     description:
@@ -936,6 +1034,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.1.6"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "1.0.3"
   typed_data:
     dependency: transitive
     description:
@@ -1013,6 +1118,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.0.1"
+  vm_service:
+    dependency: transitive
+    description:
+      name: vm_service
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.2.0"
   watcher:
     dependency: transitive
     description:

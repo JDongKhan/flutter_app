@@ -25,10 +25,6 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
       "router": "/webview",
     },
     {
-      "title": "ImageView",
-      "router": "/imageView",
-    },
-    {
       'title': '拍照',
       'router': '/pickImage',
     },
@@ -76,7 +72,7 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
     //带有返回值
     var map = await Navigator.of(context)
         .pushNamed(router, arguments: {"title": title});
-    print(map);
+    debugPrint(map.toString());
   }
 
   @override

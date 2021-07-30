@@ -10,7 +10,7 @@ class JDLifecycle2Page extends StatefulWidget {
 class _JDLifecycle2PageState extends State<JDLifecycle2Page> {
   @override
   Widget build(BuildContext context) {
-    print('Page B deactivate');
+    debugPrint('Page B deactivate');
     return Scaffold(
       appBar: AppBar(
         title: Text('第二个页面'),
@@ -23,34 +23,34 @@ class _JDLifecycle2PageState extends State<JDLifecycle2Page> {
 
   @override
   void initState() {
-    print('Page B initState');
+    debugPrint('Page B initState');
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    print('Page B didChangeDependencies');
+    debugPrint('Page B didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void reassemble() {
-    print('Page B reassemble');
+    debugPrint('Page B reassemble');
   }
 
   @override
   void deactivate() {
-    print('Page B deactivate');
+    debugPrint('Page B deactivate');
   }
 
   @override
   void didUpdateWidget(JDLifecycle2Page oldWidget) {
-    print('Page B didUpdateWidget');
+    debugPrint('Page B didUpdateWidget');
   }
 
   @override
   void dispose() {
-    print('Page B dispose');
+    debugPrint('Page B dispose');
     super.dispose();
   }
 }

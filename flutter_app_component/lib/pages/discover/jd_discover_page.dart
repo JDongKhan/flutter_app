@@ -22,14 +22,17 @@ import 'package:flutter_app_component/demo/canvas/paragraph/paragraph_page.dart'
 import 'package:flutter_app_component/demo/canvas/pie/ace_pie_page.dart';
 import 'package:flutter_app_component/demo/canvas/progress/ace_progress_page.dart';
 import 'package:flutter_app_component/demo/canvas/timeline_page.dart';
+import 'package:flutter_app_component/demo/component/dialog/jd_dialog_page.dart';
 import 'package:flutter_app_component/demo/component/draggable/draggable_grid_page.dart';
 import 'package:flutter_app_component/demo/component/draggable/draggable_scrollablesheet.dart';
 import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderableListView.dart';
+import 'package:flutter_app_component/demo/component/timepicker/jd_timepicker_page.dart';
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
 import 'package:flutter_app_component/demo/custome_layout/renderbox/cloud/cloud_demo_page.dart';
 import 'package:flutter_app_component/demo/custome_layout/renderbox/jd_renderbox_demo.dart';
 import 'package:flutter_app_component/demo/dash/dash_demo.dart';
+import 'package:flutter_app_component/demo/databtransfer/get/get_demo_list_page.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_event_bus.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_inherited_widget.dart';
 import 'package:flutter_app_component/demo/databtransfer/jd_notification.dart';
@@ -41,7 +44,6 @@ import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
-import 'package:flutter_app_component/demo/get/get_demo_list_page.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/lifecycle/jd_lifecycle_page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
@@ -177,10 +179,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': JDLifeCyclePage(),
         },
         {
-          'title': 'Get Demo List',
-          'page': GetDemoListPage(),
-        },
-        {
           'title': 'Scaffold',
           'router': '/scaffold',
         },
@@ -215,6 +213,14 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'LinearProgressIndicator',
           'router': '/linearprogressindicator',
+        },
+        {
+          'title': 'TimePicker',
+          'page': JDTimePicker(),
+        },
+        {
+          'title': 'Dialog',
+          'page': JDDialogPage(),
         },
 
         //布局组件
@@ -438,7 +444,11 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': 'Stream',
           'page': JDStreamPage(),
-        }
+        },
+        {
+          'title': 'Get Demo List',
+          'page': GetDemoListPage(),
+        },
       ],
     },
   ];
@@ -597,7 +607,7 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
     var map = JDNavigationUtil.pushNamed(router, arguments: {'title': title});
     //带有返回值
 //    var map = await Navigator.of(context).pushNamed(router, arguments: {'title' : title});
-    print(map);
+    debugPrint(map.toString());
 
 //
 //  //此种方法可传参

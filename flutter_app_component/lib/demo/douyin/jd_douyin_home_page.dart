@@ -70,10 +70,10 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
             _buildBackground(),
             LikeGestureWidget(
               onAddFavorite: () {
-                print('我在双击');
+                debugPrint('我在双击');
               },
               onSingleTap: () {
-                print('我在单击');
+                debugPrint('我在单击');
               },
               child: _buildPage(),
             ),
@@ -93,7 +93,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
 
   @override
   void deactivate() {
-    print('deactivate');
+    debugPrint('deactivate');
     super.deactivate();
   }
   /******  顶部菜单 ********/
@@ -206,7 +206,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
       child: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
-          print('right');
+          debugPrint('right');
         },
         child: Container(
           width: 80,
@@ -219,7 +219,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  print('add');
+                  debugPrint('add');
                 },
               ),
               const Padding(
@@ -231,7 +231,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  print('favorite');
+                  debugPrint('favorite');
                 },
               ),
               const Padding(
@@ -243,7 +243,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  print('comment');
+                  debugPrint('comment');
                   _commentAction();
                 },
               ),
@@ -256,7 +256,7 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
                   color: Colors.white,
                 ),
                 onPressed: () {
-                  print('share');
+                  debugPrint('share');
                 },
               ),
             ],

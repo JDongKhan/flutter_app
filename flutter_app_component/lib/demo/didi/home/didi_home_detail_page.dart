@@ -63,6 +63,13 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
         _scrollController.animateTo(0,
             duration: Duration(milliseconds: 500), curve: Curves.easeOut);
       });
+    } else if (offset < 500) {
+      print('回到顶部-开始');
+      Future.delayed(Duration(seconds: 0), () {
+        print('回到顶部');
+        _scrollController.animateTo(300,
+            duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+      });
     } else if (offset < 700) {
       print('回到顶部-开始');
       Future.delayed(Duration(seconds: 0), () {

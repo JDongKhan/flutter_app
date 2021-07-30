@@ -7,9 +7,7 @@ import 'package:logger/logger.dart';
 
 import 'ansi_parser.dart';
 
-ListQueue<OutputEvent> _outputEventBuffer = ListQueue();
 int _bufferSize = 30;
-bool _initialized = false;
 
 typedef MyOutputCallback = void Function(OutputEvent event);
 
@@ -68,17 +66,13 @@ class UIAndConsoleOutput extends LogOutput {
 class LogConsole extends StatefulWidget {
   final bool dark;
   final bool showCloseButton;
+  final VoidCallback backAction;
 
   LogConsole({
     this.dark = false,
     this.showCloseButton = false,
-  }) : assert(_initialized, "Please call LogConsole.init() first.");
-
-  static void init({int bufferSize = 20}) {
-    if (_initialized) return;
-    _bufferSize = bufferSize;
-    _initialized = true;
-  }
+    this.backAction,
+  });
 
   @override
   _LogConsoleState createState() => _LogConsoleState();
@@ -266,7 +260,11 @@ class _LogConsoleState extends State<LogConsole> {
             IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
-                JDNavigationUtil.goBack();
+                if (widget.backAction != null) {
+                  widget.backAction();
+                } else {
+                  JDNavigationUtil.goBack();
+                }
                 // Navigator.pop(context);
               },
             ),

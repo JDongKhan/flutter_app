@@ -233,11 +233,11 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
   Widget _buildListView(BuildContext context) {
     HomeListViewModel homeModelList = context.watch<HomeListViewModel>();
     if (homeModelList.busy) {
-      return const SliverToBoxAdapter(child: JDLoading(loading: true));
+      return const SliverToBoxAdapter(child: JDLoadingWidget(loading: true));
     }
     if (homeModelList.error) {
       return const SliverFillRemaining(
-        child: JDLoading(
+        child: JDLoadingWidget(
           error: true,
           errorMsg: '网络连接失败',
         ),
@@ -246,7 +246,7 @@ class _JDHomeMainPageState extends State<JDHomeMainPage>
 
     if (homeModelList.empty) {
       return const SliverFillRemaining(
-        child: JDLoading(
+        child: JDLoadingWidget(
           error: true,
           errorMsg: '暂无数据',
         ),

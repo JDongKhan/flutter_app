@@ -28,26 +28,26 @@ class _StickExpendDemoPageState extends State<StickExpendDemoPage> {
       ),
       body: Container(
         ///列表数据
-        child: new ListView.builder(
+        child: ListView.builder(
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: widget.tagList.length,
             itemBuilder: (context, index) {
-              return new Container(
+              return Container(
                 color: Colors.white,
 
                 ///头部停靠
-                child: new StickWidget(
+                child: StickWidget(
                   ///头部
-                  stickHeader: new Container(
+                  stickHeader: Container(
                     height: stickHeader,
                     color: Colors.deepPurple,
                     padding: new EdgeInsets.only(left: 10.0),
                     alignment: Alignment.centerLeft,
-                    child: new InkWell(
+                    child: InkWell(
                       onTap: () {
                         print("header");
                       },
-                      child: new Text(
+                      child: Text(
                         '我的 $index 头啊',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -161,12 +161,12 @@ class ExpandableVisibleContainer extends StatelessWidget {
 
   ///大于可见数量才使用 查看更多
   renderExpendedMore(context) {
-    return new Container(
+    return Container(
       height: 50.0,
       color: Colors.grey,
       padding: new EdgeInsets.only(left: 10.0),
       alignment: Alignment.center,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           ///展开，回调
           ExpandableController.of(context).toggle();
@@ -175,7 +175,7 @@ class ExpandableVisibleContainer extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
-          child: new Text(
+          child: Text(
             '查看更多',
             style: TextStyle(color: Colors.black),
           ),
@@ -196,8 +196,8 @@ class ExpandableVisibleContainer extends StatelessWidget {
             ? visibleCount + 1
             : visibleCount;
 
-    return new Container(
-      child: new Align(
+    return Container(
+      child: Align(
         alignment: Alignment.centerLeft,
         child: Column(
           children: List.generate(realVisibleCount, (index) {
@@ -205,15 +205,15 @@ class ExpandableVisibleContainer extends StatelessWidget {
             if (index == visibleCount) {
               return renderExpendedMore(context);
             }
-            return new InkWell(
+            return InkWell(
               onTap: () {
                 print("content $index");
               },
-              child: new Container(
+              child: Container(
                 color: Colors.pinkAccent,
                 height: itemHeight,
-                child: new Center(
-                  child: new Text(
+                child: Center(
+                  child: Text(
                     '我的 $index 内容',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -240,12 +240,12 @@ class ExpandableContainer extends StatelessWidget {
       this.expandedStateChanged});
 
   renderMoreItem(context) {
-    return new Container(
+    return Container(
       height: 50.0,
       color: Colors.grey,
-      padding: new EdgeInsets.only(left: 10.0),
+      padding: EdgeInsets.only(left: 10.0),
       alignment: Alignment.center,
-      child: new InkWell(
+      child: InkWell(
         onTap: () {
           ///收起，回调
           ExpandableController.of(context).toggle();
@@ -254,7 +254,7 @@ class ExpandableContainer extends StatelessWidget {
         child: Container(
           alignment: Alignment.center,
           width: MediaQuery.of(context).size.width,
-          child: new Text(
+          child: Text(
             '收起',
             style: TextStyle(color: Colors.black),
           ),
@@ -274,21 +274,21 @@ class ExpandableContainer extends StatelessWidget {
       return Container();
     }
 
-    return new Column(
+    return Column(
       children: List.generate(expandedCount, (index) {
         ///只有展开后的才需要显示 收起按键
         if (index == decCount) {
           return renderMoreItem(context);
         }
-        return new InkWell(
+        return InkWell(
           onTap: () {
             print("content $index");
           },
-          child: new Container(
+          child: Container(
             color: Colors.pinkAccent,
             height: itemHeight,
-            child: new Center(
-              child: new Text(
+            child: Center(
+              child: Text(
                 '我的展开的 $index 内容 啊',
                 style: TextStyle(color: Colors.white),
               ),

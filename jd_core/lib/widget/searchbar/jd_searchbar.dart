@@ -11,6 +11,7 @@ class JDSearchBar extends StatefulWidget {
     this.onTap,
     this.onSubmitted,
     this.text,
+    this.hintText,
     this.height = 40,
     this.color = Colors.white,
     this.padding =
@@ -20,6 +21,7 @@ class JDSearchBar extends StatefulWidget {
   final ValueChanged<String> onSubmitted;
   GestureTapCallback onTap;
   String text;
+  String hintText;
   final Color color;
   final double height;
   final EdgeInsets padding;
@@ -35,6 +37,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
   bool _editIconShow = false;
   @override
   void initState() {
+    _controller.text = widget.text;
     super.initState();
   }
 
@@ -62,6 +65,8 @@ class _JDSearchBarState extends State<JDSearchBar> {
 //              enabled: false,
       controller: _controller,
       focusNode: _focusNode,
+      style:TextStyle(fontSize: 14,),
+      maxLines: 1,
       onChanged: (text) {
         if (text.length > 0) {
           if (_editIconShow == false) {
@@ -76,8 +81,12 @@ class _JDSearchBarState extends State<JDSearchBar> {
         }
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(top: 0, bottom: 0),
-        hintText: widget.text ?? '查找',
+        contentPadding: EdgeInsets.only(top: 8),
+        hintText: widget.hintText ?? '查找',
+        filled: true,
+        fillColor: Colors.transparent,
+        border: InputBorder.none,
+        isCollapsed: true,//相当于高度包裹的意思，必须为true，不然有默认的最小高度
         prefixIcon: Icon(
           Icons.search,
           color: Colors.grey,
@@ -98,7 +107,6 @@ class _JDSearchBarState extends State<JDSearchBar> {
                 },
               )
             : null,
-        border: InputBorder.none,
       ),
       onSubmitted: (String value) {
         if (widget.onSubmitted != null) {

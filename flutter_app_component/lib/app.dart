@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_app_component/generated/l10n.dart';
 import 'package:flutter_app_component/pages/jd_splash_page.dart';
 import 'package:flutter_app_component/routes/jd_routes.dart';
@@ -45,10 +46,19 @@ class MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     final JDTheme theme = context.watch<JDTheme>();
+    debugPaintSizeEnabled = theme.debugPaintSizeEnabled; //显示边界布局
+    debugPaintPointersEnabled = theme.debugPaintPointersEnabled; //点击效果
+    debugPaintLayerBordersEnabled = theme.debugPaintLayerBordersEnabled; //显示边界
+    debugRepaintRainbowEnabled = theme.debugRepaintRainbowEnabled; //重绘时周边显示旋转色
+
     return ScreenUtilInit(
       designSize: const Size(750, 1334),
       builder: () => GetMaterialApp(
         title: 'Flutter App',
+        showPerformanceOverlay: theme.showPerformanceOverlay,
+        debugShowCheckedModeBanner: false,
+        checkerboardRasterCacheImages: theme.checkerboardRasterCacheImages,
+        checkerboardOffscreenLayers: theme.checkerboardOffscreenLayers,
         navigatorKey: JDNavigationUtil.getInstance().navigatorKey,
         // ignore: always_specify_types
         localizationsDelegates: const [
@@ -57,6 +67,12 @@ class MyAppState extends State<MyApp> {
           GlobalCupertinoLocalizations.delegate, // 对应的Cupertino风格
           GlobalWidgetsLocalizations.delegate // 指定默认的文本排列方向, 由左到右或由右到左
         ],
+        localeListResolutionCallback: (locales, supportedLocales) {
+          return Locale('zh');
+        },
+        localeResolutionCallback: (locales, supportedLocales) {
+          return Locale('zh');
+        },
         supportedLocales: S.delegate.supportedLocales,
 //      debugShowCheckedModeBanner: false,
         theme: ThemeData(

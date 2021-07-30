@@ -15,25 +15,25 @@ class _StickDemoPageState extends State<StickDemoPage> {
         title: Text("StickDemoPage"),
       ),
       body: Container(
-        child: new ListView.builder(
+        child: ListView.builder(
             physics: AlwaysScrollableScrollPhysics(),
             itemCount: 100,
             itemBuilder: (context, index) {
-              return new Container(
+              return Container(
                 height: 200,
                 color: Colors.deepOrange,
-                child: new StickWidget(
+                child: StickWidget(
                   ///header
-                  stickHeader: new Container(
+                  stickHeader: Container(
                     height: 50.0,
                     color: Colors.deepPurple,
-                    padding: new EdgeInsets.only(left: 10.0),
+                    padding: EdgeInsets.only(left: 10.0),
                     alignment: Alignment.centerLeft,
-                    child: new InkWell(
+                    child: InkWell(
                       onTap: () {
                         print("header");
                       },
-                      child: new Text(
+                      child: Text(
                         '我的 $index 头啊',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -41,16 +41,16 @@ class _StickDemoPageState extends State<StickDemoPage> {
                   ),
 
                   ///content
-                  stickContent: new InkWell(
+                  stickContent: InkWell(
                     onTap: () {
                       print("content");
                     },
-                    child: new Container(
+                    child: Container(
                       margin: EdgeInsets.only(left: 10),
                       color: Colors.pinkAccent,
                       height: 150,
-                      child: new Center(
-                        child: new Text(
+                      child: Center(
+                        child: Text(
                           '我的$index 内容 啊',
                           style: TextStyle(color: Colors.white),
                         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/count_down_widget.dart';
 import 'package:jd_core/jd_core.dart';
 
 class JDSportsLiveStoreWidget extends StatefulWidget {
@@ -33,10 +34,14 @@ class _JDSportsLiveStoreWidgetState extends State<JDSportsLiveStoreWidget> {
             height: 20,
             color: Colors.red,
           ),
-          SizedBox(
+          const SizedBox(
             width: 10,
           ),
-          Text('限时抢购 07:46:23 后结束'),
+          CountDownWidget(
+            time: DateTime(2022, 9, 20, 21, 0, 0),
+            prefixString: '限时抢购 ',
+            suffixString: ' 后结束',
+          ),
         ],
       ),
     );
@@ -70,13 +75,13 @@ class _JDSportsLiveStoreWidgetState extends State<JDSportsLiveStoreWidget> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                const Text(
                   '阿迪达斯 阳帽男帽女帽棒球帽运动帽户外跑步鸭舌帽FK0891',
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 Container(
                   margin: const EdgeInsets.only(top: 10, bottom: 40),
-                  child: LinearProgressIndicator(
+                  child: const LinearProgressIndicator(
                     value: 0.5,
                     backgroundColor: Colors.grey,
                     minHeight: 5,
@@ -89,7 +94,7 @@ class _JDSportsLiveStoreWidgetState extends State<JDSportsLiveStoreWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
-                      children: [
+                      children: const [
                         Text(
                           '￥68',
                           style: TextStyle(color: Colors.red, fontSize: 20),
@@ -121,7 +126,7 @@ class _JDSportsLiveStoreWidgetState extends State<JDSportsLiveStoreWidget> {
                               ),
                             ),
                           ),
-                          child: Text(
+                          child: const Text(
                             '马上抢',
                             style: TextStyle(
                               fontSize: 12,

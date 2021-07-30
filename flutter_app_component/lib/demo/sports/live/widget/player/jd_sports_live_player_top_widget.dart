@@ -49,12 +49,14 @@ class _JDSportsLivePlayerTopWidgetState
         IconButton(
           icon: Icon(
             Icons.tv,
+            size: 20,
             color: Colors.white,
           ),
         ),
         IconButton(
           icon: Icon(
             Icons.more_horiz,
+            size: 20,
             color: Colors.white,
           ),
         ),

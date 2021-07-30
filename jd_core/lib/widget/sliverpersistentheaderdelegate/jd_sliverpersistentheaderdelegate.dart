@@ -10,7 +10,10 @@ import 'package:flutter/material.dart';
 
 class JDSliverPersistentHeaderDelegate extends SliverPersistentHeaderDelegate {
   JDSliverPersistentHeaderDelegate(
-      @required this.minHeight, @required this.maxHeight, @required this.child);
+    @required this.minHeight,
+    @required this.maxHeight,
+    @required this.child,
+  );
   final double minHeight;
   final double maxHeight;
   final Widget child;

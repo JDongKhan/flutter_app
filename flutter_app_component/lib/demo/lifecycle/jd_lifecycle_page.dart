@@ -13,7 +13,7 @@ class JDLifeCyclePage extends StatefulWidget {
 class _JDLifeCyclePageState extends State<JDLifeCyclePage> {
   @override
   Widget build(BuildContext context) {
-    print('Page A build');
+    debugPrint('Page A build');
     return Scaffold(
       appBar: AppBar(
         title: Text('LifeCycle'),
@@ -21,7 +21,7 @@ class _JDLifeCyclePageState extends State<JDLifeCyclePage> {
       body: Column(
         children: [
           TextButton(
-            child: Text('mixin'),
+            child: Text('mixin and extension'),
             onPressed: () {
               _test1();
             },
@@ -48,34 +48,34 @@ class _JDLifeCyclePageState extends State<JDLifeCyclePage> {
 
   @override
   void initState() {
-    print('Page A initState');
+    debugPrint('Page A initState');
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    print('Page A didChangeDependencies');
+    debugPrint('Page A didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void reassemble() {
-    print('Page A reassemble');
+    debugPrint('Page A reassemble');
   }
 
   @override
   void deactivate() {
-    print('Page A deactivate');
+    debugPrint('Page A deactivate');
   }
 
   @override
   void didUpdateWidget(JDLifeCyclePage oldWidget) {
-    print('Page A didUpdateWidget');
+    debugPrint('Page A didUpdateWidget');
   }
 
   @override
   void dispose() {
-    print('Page A dispose');
+    debugPrint('Page A dispose');
     super.dispose();
   }
 }

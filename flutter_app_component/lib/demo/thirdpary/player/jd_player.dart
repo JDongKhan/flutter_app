@@ -9,6 +9,7 @@ typedef PlayerValueChanged<T1, T2> = void Function(T1 value1, T2 value2);
 
 class JDPlayerController extends ChangeNotifier {
   bool isPlaying = false;
+  Duration seekDuration;
   void play() {
     isPlaying = true;
     notifyListeners();
@@ -16,6 +17,11 @@ class JDPlayerController extends ChangeNotifier {
 
   void pause() {
     isPlaying = false;
+    notifyListeners();
+  }
+
+  void seek(Duration duration) {
+    seekDuration = duration;
     notifyListeners();
   }
 }
@@ -51,7 +57,7 @@ class _JDPlayerState extends State<JDPlayer>
   @override
   void initState() {
     super.initState();
-    print('initState');
+    debugPrint('initState');
     WidgetsBinding.instance.addObserver(this);
     if (widget.controller != null) {
       widget.controller.addListener(() {
@@ -59,6 +65,10 @@ class _JDPlayerState extends State<JDPlayer>
           _play();
         } else {
           _pause();
+        }
+
+        if (widget.controller.seekDuration != null) {
+          _videoPlayerController.seekTo(widget.controller.seekDuration);
         }
       });
     }
@@ -68,7 +78,7 @@ class _JDPlayerState extends State<JDPlayer>
 
   @override
   void dispose() {
-    print('dispose');
+    debugPrint('dispose');
     _videoPlayerController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -76,48 +86,48 @@ class _JDPlayerState extends State<JDPlayer>
 
   @override
   void reassemble() {
-    print('reassemble');
+    debugPrint('reassemble');
     super.reassemble();
   }
 
   @override
   void didChangeDependencies() {
-    print('didChangeDependencies');
+    debugPrint('didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant JDPlayer oldWidget) {
-    print('didUpdateWidget');
+    debugPrint('didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
-    print('deactivate');
+    debugPrint('deactivate');
     super.deactivate();
   }
 
   @override
   void didChangeMetrics() {
-    print('didChangeMetrics');
+    debugPrint('didChangeMetrics');
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    print('didPushRoute');
+    debugPrint('didPushRoute');
     return super.didPushRoute(route);
   }
 
   @override
   Future<bool> didPopRoute() {
-    print('didPopRoute');
+    debugPrint('didPopRoute');
     return super.didPopRoute();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print('didChangeAppLifecycleState');
+    debugPrint('didChangeAppLifecycleState');
   }
 
   void _listener() {
@@ -161,7 +171,7 @@ class _JDPlayerState extends State<JDPlayer>
 
   @override
   Widget build(BuildContext context) {
-    print('build');
+    debugPrint('build');
     return FutureBuilder(
       future: _videoPlayerFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -237,19 +247,19 @@ class _JDPlayerState extends State<JDPlayer>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      print(' -- onLifecycleEvent push -- ');
+      debugPrint(' -- onLifecycleEvent push -- ');
     } else if (event == LifecycleEvent.visible) {
-      print(' -- onLifecycleEvent visible -- ');
+      debugPrint(' -- onLifecycleEvent visible -- ');
     } else if (event == LifecycleEvent.active) {
       widget.controller.play();
-      print(' -- onLifecycleEvent active -- ');
+      debugPrint(' -- onLifecycleEvent active -- ');
     } else if (event == LifecycleEvent.inactive) {
-      print(' -- onLifecycleEvent inactive -- ');
+      debugPrint(' -- onLifecycleEvent inactive -- ');
     } else if (event == LifecycleEvent.invisible) {
       widget.controller.pause();
-      print(' -- onLifecycleEvent invisible -- ');
+      debugPrint(' -- onLifecycleEvent invisible -- ');
     } else if (event == LifecycleEvent.pop) {
-      print(' -- onLifecycleEvent pop -- ');
+      debugPrint(' -- onLifecycleEvent pop -- ');
     }
   }
 }

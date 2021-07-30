@@ -15,7 +15,7 @@ class StickWidget extends MultiChildRenderObjectWidget {
   @override
   StickRender createRenderObject(BuildContext context) {
     ///传入 ScrollableState
-    return new StickRender(scrollable: Scrollable.of(context));
+    return StickRender(scrollable: Scrollable.of(context));
   }
 
   @override

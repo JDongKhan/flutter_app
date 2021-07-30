@@ -10,6 +10,8 @@ import 'package:jd_core/utils/jd_toast_utils.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
+import 'developer/jd_developer_setting_page.dart';
+import 'feedback/jd_feedback_page.dart';
 import 'jd_message_setting_page.dart';
 import 'jd_privacy_setting_page.dart';
 
@@ -62,7 +64,9 @@ class _JDSettingPageState extends State {
             const Padding(
               padding: EdgeInsets.only(top: 20),
             ),
-            _buildCell('意见反馈'),
+            _buildCell('意见反馈', onTap: () {
+              JDNavigationUtil.push(JDFeedbackPage());
+            }),
             _buildCell2(
               '锁定开关',
               rightWidget: Builder(builder: (context) {
@@ -72,6 +76,9 @@ class _JDSettingPageState extends State {
             ),
             _buildCell('关于我们', onTap: () {
               _showDialog();
+            }),
+            _buildCell('开发者设置', onTap: () {
+              JDNavigationUtil.push(JDDeveloperSettingPage());
             }),
             context.watch<JDAppUserInfo>().isLogin
                 ? Container(
@@ -248,9 +255,9 @@ class _JDSettingPageState extends State {
       double value = await _getTotalSizeOfFilesInDir(tempDir);
       /*tempDir.list(followLinks: false,recursive: true).listen((file){
           //打印每个缓存文件的路径
-        print(file.path);
+        debugPrint(file.path);
       });*/
-      print('临时目录大小: ' + value.toString());
+      debugPrint('临时目录大小: ' + value.toString());
       setState(() {
         _cacheSizeStr = _renderSize(value);
       });

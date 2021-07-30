@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/logger/log_menu.dart';
 
-import 'log_console.dart';
 import 'shake_detector.dart';
 
 class LogConsoleOnShake extends StatefulWidget {
@@ -43,7 +42,6 @@ class _LogConsoleOnShakeState extends State<LogConsoleOnShake> {
   }
 
   _init() {
-    LogConsole.init();
     _detector = ShakeDetector(onPhoneShake: _openLogConsole);
     _detector.startListening();
   }
