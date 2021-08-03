@@ -18,6 +18,6 @@ class CustomSliver extends RenderSliverSingleBoxAdapter {
     child.layout(constraints.asBoxConstraints(), parentUsesSize: true);
     //计算绘制大小
     // final double paintedChildSize = calculatePaintOffset(constraints, from: 0.0, to: childExtent);
-    //计算缓存大小
+    //计
   }
 }

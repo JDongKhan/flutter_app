@@ -11,6 +11,10 @@ import 'mine/wechat_mine_page.dart';
 class WechatMainPage extends StatefulWidget {
   @override
   _WechatMainPageState createState() => _WechatMainPageState();
+
+  static _WechatMainPageState of(BuildContext context) {
+    return context.findAncestorStateOfType<_WechatMainPageState>();
+  }
 }
 
 class _WechatMainPageState extends State<WechatMainPage>
@@ -18,6 +22,7 @@ class _WechatMainPageState extends State<WechatMainPage>
   final List<Map<String, dynamic>> _tabs = [];
   TabController _tabController;
   int _selectedIndex = 0;
+  bool _hiddenBottomBar = false;
   @override
   void initState() {
     _tabs.add({
@@ -48,6 +53,12 @@ class _WechatMainPageState extends State<WechatMainPage>
     super.initState();
   }
 
+  void hiddenBottomNavigationBar(bool hidden) {
+    setState(() {
+      _hiddenBottomBar = hidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,22 +69,26 @@ class _WechatMainPageState extends State<WechatMainPage>
           return e['page'] as Widget;
         }).toList(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        // 底部导航
-        items: _tabs
-            .map(
-              (e) => BottomNavigationBarItem(
-                icon: Icon(e["icon"] as IconData),
-                label: e["title"].toString(),
-              ),
-            )
-            .toList(),
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.red,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: _hiddenBottomBar ? null : _bottomBar(),
+    );
+  }
+
+  Widget _bottomBar() {
+    return BottomNavigationBar(
+      // 底部导航
+      items: _tabs
+          .map(
+            (e) => BottomNavigationBarItem(
+              icon: Icon(e["icon"] as IconData),
+              label: e["title"].toString(),
+            ),
+          )
+          .toList(),
+      currentIndex: _selectedIndex,
+      type: BottomNavigationBarType.fixed,
+      selectedItemColor: Colors.blue,
+      unselectedItemColor: Colors.red,
+      onTap: _onItemTapped,
     );
   }
 

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/web/web_page.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 
@@ -111,10 +113,54 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
           ),
-          Text(
-            '   《用户协议》 《隐私政策》 《儿童隐私政策》\n   《中国联通认证服务协议》',
-            style: TextStyle(color: Colors.white, fontSize: jd_getSp(22)),
-          )
+          Text.rich(
+            TextSpan(
+              text: '登录即代表同意并阅读',
+              style: TextStyle(
+                fontSize: jd_getSp(22),
+                color: Colors.white,
+              ),
+              children: [
+                TextSpan(
+                  text: '《用户协议》',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: jd_getSp(22),
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => WebPage(
+                            title: '《用户协议》',
+                            url: 'https://flutter.dev',
+                          ),
+                        ),
+                      );
+                    },
+                ),
+                TextSpan(text: '和'),
+                TextSpan(
+                  text: '《隐私政策》',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: jd_getSp(22),
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (_) => WebPage(
+                            title: '隐私政策》',
+                            url: 'https://flutter.dev',
+                          ),
+                        ),
+                      );
+                    },
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
