@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/bookpage/book_page.dart';
+import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
+import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
+import 'package:jd_core/jd_core.dart';
 
 /**
  *
@@ -15,7 +19,7 @@ class JDThirdpartyListPage extends StatefulWidget {
 
 class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
   /*************************** demo.thirdpary *************************/
-  final thirdpary_list = <Map<String, String>>[
+  final thirdpary_list = <Map<String, dynamic>>[
     {
       'title': 'StackedCard',
       'router': '/stacked_card',
@@ -36,6 +40,18 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
       "title": "Player",
       "router": "/player",
     },
+    {
+      'title': 'LinkScrollMenu',
+      'router': JDLinkScrollMenu(),
+    },
+    {
+      'title': 'Book',
+      'router': BookPage(),
+    },
+    {
+      'title': 'fishredux',
+      'router': OnePagePage().buildPage({}),
+    },
   ];
 
   final _biggerFont = const TextStyle(fontSize: 18.0);
@@ -52,8 +68,8 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
         });
   }
 
-  Widget _buildRow(Map<String, String> map) {
-    String text = map["title"];
+  Widget _buildRow(Map<String, dynamic> map) {
+    String text = map["title"].toString();
     return new ListTile(
       contentPadding: EdgeInsets.all(10.0),
       title: new Text(
@@ -67,7 +83,12 @@ class _JDThirdpartyListPageState extends State<JDThirdpartyListPage> {
     );
   }
 
-  void _pushSaved(String title, String router) async {
+  void _pushSaved(String title, dynamic router) async {
+    if (router != null && router is Widget) {
+      JDNavigationUtil.push(router);
+      return;
+    }
+
     // Navigator.pushNamed(context, router);
     //带有返回值
     var map = await Navigator.of(context)

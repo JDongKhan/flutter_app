@@ -47,7 +47,7 @@ dependencies:
   # 分享
   share: ^0.6.4+1
   #webview
-  webview_flutter: ^1.0.7
+  webview_flutter: ^2.0.10
 
 dev_dependencies:
   flutter_test:

@@ -12,7 +12,6 @@ import 'package:flutter_app_component/demo/animal/animal_2.dart';
 import 'package:flutter_app_component/demo/animal/animal_3.dart';
 import 'package:flutter_app_component/demo/animal/particle/particle_page.dart';
 import 'package:flutter_app_component/demo/animal/run_balls.dart';
-import 'package:flutter_app_component/demo/bookpage/book_page.dart';
 import 'package:flutter_app_component/demo/bottom_drag_widget/bottom_drag_demo.dart';
 import 'package:flutter_app_component/demo/bottom_sheet/bottom_anim_nav_page.dart';
 import 'package:flutter_app_component/demo/canvas/clock/canvas_click_demo_page.dart';
@@ -40,13 +39,11 @@ import 'package:flutter_app_component/demo/databtransfer/jd_stream.dart';
 import 'package:flutter_app_component/demo/didi/didi_main_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
-import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_a.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_b.dart';
 import 'package:flutter_app_component/demo/funcation/state/jd_tapbox_c.dart';
 import 'package:flutter_app_component/demo/isolate/isolate_page.dart';
 import 'package:flutter_app_component/demo/lifecycle/jd_lifecycle_page.dart';
-import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:flutter_app_component/demo/login/login_demo_list_page.dart';
 import 'package:flutter_app_component/demo/pop/jd_pop_demo_page.dart';
 import 'package:flutter_app_component/demo/qq/anim_progressImg_demo_page.dart';
@@ -99,20 +96,12 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
           'page': LoginDemoListPage(),
         },
         {
-          'title': 'Book',
-          'page': BookPage(),
-        },
-        {
           'title': 'BottomSheet',
           'page': BottomAnimNavPage(),
         },
         {
           'title': '第三方组件',
           'router': '/thirdparty_list',
-        },
-        {
-          'title': 'fishredux',
-          'page': OnePagePage().buildPage({}),
         },
         {
           'title': 'BottomDragDemo',
@@ -145,10 +134,6 @@ class _JDDiscoverPageState extends State<JDDiscoverPage>
         {
           'title': '类似探探扫描的动画效果',
           'page': AnimScanDemoPage(),
-        },
-        {
-          'title': 'LinkScrollMenu',
-          'page': JDLinkScrollMenu(),
         },
         {
           'title': 'DropdownMenuDemoPage',

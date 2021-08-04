@@ -267,66 +267,71 @@ class _JDDouYinHomePageState extends State<JDDouYinHomePage>
   }
 
   Widget _buildBottom(Map item) {
-    return Container(
-      alignment: Alignment.bottomCenter,
+    return Positioned(
+      bottom: 0,
+      left: 0,
+      right: 0,
       child: Container(
-        height: 120,
         margin: const EdgeInsets.only(bottom: 64),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Expanded(
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    padding: const EdgeInsets.only(left: 10),
-                    alignment: Alignment.topLeft,
-                    child: GestureDetector(
-                      onTap: () {
-                        JDNavigationUtil.push(JDDouyinPeopleDetailPage());
-                      },
+              child: Container(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Container(
+                      padding: const EdgeInsets.only(left: 10),
+                      alignment: Alignment.topLeft,
+                      child: GestureDetector(
+                        onTap: () {
+                          JDNavigationUtil.push(JDDouyinPeopleDetailPage());
+                        },
+                        child: Text(
+                          item['author_name'].toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.only(left: 10, top: 10),
+                      alignment: Alignment.topLeft,
                       child: Text(
-                        item['author_name'].toString(),
+                        item['content'].toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.only(left: 10, top: 10),
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      item['content'].toString(),
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ),
-                  Container(
-                    height: 30,
-                    // color: Colors.red,
-                    padding: const EdgeInsets.only(left: 10, top: 10),
-                    alignment: Alignment.topLeft,
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          item['source'].toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        Expanded(
-                          child: Container(
-                            height: 25,
-                            margin: const EdgeInsets.only(left: 10),
-                            child: Marquee(
-                              text: '隐形的翅膀-张韶涵',
-                              style: TextStyle(
-                                fontSize: 15,
-                                color: Colors.white,
+                    Container(
+                      height: 30,
+                      // color: Colors.red,
+                      padding: const EdgeInsets.only(left: 10, top: 10),
+                      alignment: Alignment.topLeft,
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            item['source'].toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          Expanded(
+                            child: Container(
+                              height: 25,
+                              margin: const EdgeInsets.only(left: 10),
+                              child: Marquee(
+                                text: '隐形的翅膀-张韶涵',
+                                style: TextStyle(
+                                  fontSize: 15,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
             Container(

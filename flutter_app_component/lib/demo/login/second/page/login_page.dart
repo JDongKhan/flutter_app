@@ -133,7 +133,7 @@ class _LoginPageState extends State<LoginPage> {
                         MaterialPageRoute(
                           builder: (_) => WebPage(
                             title: '《用户协议》',
-                            url: 'https://flutter.dev',
+                            url: 'https://baidu.com',
                           ),
                         ),
                       );
@@ -151,8 +151,8 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (_) => WebPage(
-                            title: '隐私政策》',
-                            url: 'https://flutter.dev',
+                            title: '《隐私政策》',
+                            url: 'assets/data/my.html',
                           ),
                         ),
                       );
