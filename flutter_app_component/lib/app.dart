@@ -15,7 +15,7 @@ import 'package:provider/provider.dart';
 import 'component/orientation/orientation_observer.dart';
 import 'routes/routes.dart';
 
-/**
+/*
  * flutter 相对布局
  * 一、Stack和Align配合
  * 二、Row和mainAxisAlignment.spaceBetween

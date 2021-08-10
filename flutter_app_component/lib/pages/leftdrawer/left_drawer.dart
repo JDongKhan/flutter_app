@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/global/jd_appuserinfo.dart';
-import 'package:flutter_app_component/pages/qrcode/jd_my_qrcode_page.dart';
+import 'package:flutter_app_component/pages/qrcode/my_qrcode_page.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
@@ -16,24 +16,22 @@ import 'viewmodel/cityinfo_view_model.dart';
  *
  */
 
-class JDDrawer extends StatefulWidget {
+class LeftDrawer extends StatefulWidget {
   final String title = "jd_left_drawer";
 
   @override
-  State createState() => _JDDrawerState();
+  State createState() => _LeftDrawerState();
 }
 
-class _JDDrawerState extends State<JDDrawer>
+class _LeftDrawerState extends State<LeftDrawer>
     with AutomaticKeepAliveClientMixin {
-  final _menu_list = [
+  final List<Map<String, dynamic>> _menu_list = [
     {'icon': Icons.add, 'title': '开通会员'},
     {'icon': Icons.favorite, 'title': '我的收藏'},
     {
       'icon': Icons.view_quilt,
       'title': '我的二维码',
-      'click': () {
-        JDNavigationUtil.push(JDMyQRcodePage());
-      },
+      'click': () => JDNavigationUtil.push(MyQRcodePage()),
     },
     {'icon': Icons.feedback, 'title': '意见反馈'},
     {'icon': Icons.account_box, 'title': '关于我们'},

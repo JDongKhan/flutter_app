@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jd_core/style/jd_styles.dart';
 
 import 'widget/ace_stepper.dart';
 
@@ -34,7 +35,7 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
     }
     return MaterialApp(
         home: Scaffold(
-            appBar: AppBar(title: Text('ACEStepper Page')),
+            appBar: myAppBar(title: Text('ACEStepper Page')),
             body: widget.type == ACEStepperType.horizontal
                 ? Column(children: <Widget>[
                     Expanded(child: _aceStepperWid02()),

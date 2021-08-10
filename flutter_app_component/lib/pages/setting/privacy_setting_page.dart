@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jd_core/jd_core.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 /**
@@ -7,19 +8,18 @@ import 'package:permission_handler/permission_handler.dart';
  *
  */
 
-class JDPrivacySettingPage extends StatefulWidget {
+class PrivacySettingPage extends StatefulWidget {
   final String title = "隐私设置";
 
   @override
-  State createState() => _JDPrivacySettingPageState();
+  State createState() => _PrivacySettingPageState();
 }
 
-class _JDPrivacySettingPageState extends State<JDPrivacySettingPage> {
+class _PrivacySettingPageState extends State<PrivacySettingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1, //隐藏底部阴影
+        appBar: myAppBar(
           title: Text(widget.title),
         ),
         body: ListView(

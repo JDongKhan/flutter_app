@@ -37,6 +37,7 @@ dependencies:
 
   #持久化数据库
   shared_preferences: ^0.5.8
+  auto_size_text: ^2.1.0
 
   jd_home:
     path: ../jd_home

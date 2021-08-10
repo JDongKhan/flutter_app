@@ -5,7 +5,7 @@ import 'package:flutter_app_component/component/logger/logger_console_on_shake.d
 import 'package:flutter_app_component/component/privacy_widget.dart';
 import 'package:flutter_app_component/component/web/web_page.dart';
 import 'package:flutter_app_component/models/models.dart';
-import 'package:flutter_app_component/pages/leftdrawer/jd_left_drawer.dart';
+import 'package:flutter_app_component/pages/leftdrawer/left_drawer.dart';
 import 'package:flutter_app_component/service/request.dart';
 import 'package:flutter_app_component/utils/logger_util.dart';
 import 'package:flutter_app_upgrade/flutter_app_upgrade.dart';
@@ -39,7 +39,7 @@ class ScaffoldPageState extends State<ScaffoldPage>
   TabController _tabController;
 
   ///左侧菜单
-  final JDDrawer _drawer = JDDrawer();
+  final LeftDrawer _drawer = LeftDrawer();
 
   @override
   void initState() {

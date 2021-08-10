@@ -1,3 +1,0 @@
-/// @author jd
-
-class JDGlobalMenuWidget {}

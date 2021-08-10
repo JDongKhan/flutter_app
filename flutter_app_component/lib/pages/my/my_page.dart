@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/pages/logistics/logistics_page.dart';
 import 'package:flutter_app_component/pages/logistics/widget/ace_stepper.dart';
-import 'package:flutter_app_component/pages/setting/jd_setting_page.dart';
+import 'package:flutter_app_component/pages/setting/setting_page.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
@@ -83,7 +83,7 @@ class _MyPageState extends State<MyPage>
       title: InkWell(
         onTap: () {
           setState(() {
-            _appBarStyle = (_appBarStyle == 0 ? 1 : 0);
+            _appBarStyle = _appBarStyle == 0 ? 1 : 0;
           });
         },
         child: const Text(
@@ -103,7 +103,7 @@ class _MyPageState extends State<MyPage>
           alignment: AlignmentDirectional.bottomCenter,
           children: <Widget>[
             Image.asset(
-              JDAssetBundle.getImgPath("user_head"),
+              JDAssetBundle.getImgPath('user_head'),
               height: double.infinity,
               width: double.infinity,
               fit: BoxFit.fitWidth,
@@ -125,7 +125,7 @@ class _MyPageState extends State<MyPage>
         title: InkWell(
           onTap: () {
             setState(() {
-              _appBarStyle = (_appBarStyle == 0 ? 1 : 0);
+              _appBarStyle = _appBarStyle == 0 ? 1 : 0;
             });
           },
           child: const Text(
@@ -147,7 +147,7 @@ class _MyPageState extends State<MyPage>
           onTap: () {
             JDNavigationUtil.push(MemberHomePage());
           },
-          child: Image.asset(JDAssetBundle.getImgPath("head")),
+          child: Image.asset(JDAssetBundle.getImgPath('head')),
         ),
       );
 
@@ -158,7 +158,7 @@ class _MyPageState extends State<MyPage>
             color: _appBarStyle == 0 ? Colors.white : Colors.black12,
           ),
           onPressed: () {
-            JDNavigationUtil.push(JDSettingPage());
+            JDNavigationUtil.push(SettingPage());
           },
         )
       ];
@@ -183,7 +183,10 @@ class _MyPageState extends State<MyPage>
                       ),
                       child: Text(
                         e['title'].toString(),
-                        style: const TextStyle(color: Colors.white),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 14,
+                        ),
                       ),
                     ),
                   ),
@@ -203,16 +206,20 @@ class _MyPageState extends State<MyPage>
               children: <Widget>[
                 Container(
                   padding: const EdgeInsets.only(left: 10),
-                  child: Text(
+                  child: const Text(
                     '我的订单',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Container(
                   child: FlatButton(
                     child: Row(
-                      children: <Widget>[
-                        Text('详情'),
+                      children: const <Widget>[
+                        Text(
+                          '详情',
+                          style: TextStyle(
+                              fontSize: 14, fontWeight: FontWeight.bold),
+                        ),
                         Icon(Icons.keyboard_arrow_right),
                       ],
                     ),
@@ -223,26 +230,32 @@ class _MyPageState extends State<MyPage>
             ),
             const Divider(),
             ListTile(
-              leading: Image.asset(JDAssetBundle.getImgPath("head")),
+              leading: Image.asset(JDAssetBundle.getImgPath('head')),
               title: Container(
                 padding: const EdgeInsets.only(bottom: 5),
-                child: Text(
+                child: const Text(
                   '发布需求',
                   style: TextStyle(fontSize: 14, color: Colors.black),
                 ),
               ),
-              subtitle: Text(
+              subtitle: const Text(
                 '免费获取方案和报价',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 12,
                     color: Colors.black54),
               ),
-              trailing: OutlineButton(
+              trailing: TextButton(
                 onPressed: () {},
-                child: const Text('立即获取'),
-                shape: const RoundedRectangleBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                child: const Text(
+                  '立即获取',
+                  style: TextStyle(fontSize: 12),
+                ),
+                style: TextButton.styleFrom(
+                  shape: const RoundedRectangleBorder(
+                    side: BorderSide(color: Color(0xFFAAAAAA)),
+                    borderRadius: BorderRadius.all(Radius.circular(20)),
+                  ),
                 ),
               ),
             ),
@@ -263,21 +276,21 @@ class _MyPageState extends State<MyPage>
                 Container(
                   height: 50,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: const Text(
                     '常用功能',
-                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             GridView.count(
               crossAxisCount: 4,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               childAspectRatio: 1,
               shrinkWrap: true, //解决gridview不能在customScrollView显示的问题
               children: gridMenu.map((item) => _getItem(item)).toList(),
@@ -310,9 +323,9 @@ class _MyPageState extends State<MyPage>
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.center,
-        child: Text(
+        child: const Text(
           '--- 为您推荐-人气店铺 ---',
-          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
       ),
     );
@@ -363,7 +376,7 @@ class _MyPageState extends State<MyPage>
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: NotificationListener(
+      child: NotificationListener<Notification>(
           onNotification: (Notification scrollNotification) {
             if ((scrollNotification is ScrollUpdateNotification) &&
                 (scrollNotification.depth == 0)) {
@@ -380,9 +393,10 @@ class _MyPageState extends State<MyPage>
                 controller: _controller,
                 slivers: <Widget>[
                   //AppBar，包含一个导航栏
-                  _appBarStyle == 0
-                      ? _buildStyle0AppBar()
-                      : _buildStyle1AppBar(),
+                  if (_appBarStyle == 0)
+                    _buildStyle0AppBar()
+                  else
+                    _buildStyle1AppBar(),
 
                   SliverPadding(
                     padding: const EdgeInsets.all(10),

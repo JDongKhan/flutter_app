@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/global/jd_appuserinfo.dart';
+import 'package:jd_core/style/jd_styles.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
@@ -10,10 +11,10 @@ import 'package:jd_core/utils/jd_toast_utils.dart';
 import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
-import 'developer/jd_developer_setting_page.dart';
-import 'feedback/jd_feedback_page.dart';
-import 'jd_message_setting_page.dart';
-import 'jd_privacy_setting_page.dart';
+import 'developer/developer_setting_page.dart';
+import 'feedback/feedback_page.dart';
+import 'message_setting_page.dart';
+import 'privacy_setting_page.dart';
 
 /**
  *
@@ -21,12 +22,12 @@ import 'jd_privacy_setting_page.dart';
  *
  */
 
-class JDSettingPage extends StatefulWidget {
+class SettingPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _JDSettingPageState();
+  State<StatefulWidget> createState() => _SettingPageState();
 }
 
-class _JDSettingPageState extends State {
+class _SettingPageState extends State {
   String _cacheSizeStr = "";
 
   @override
@@ -39,8 +40,7 @@ class _JDSettingPageState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xffeeeeee),
-      appBar: AppBar(
-        elevation: 1, //隐藏底部阴影
+      appBar: myAppBar(
         title: const Text('账户设置'),
       ),
       body: ListTileTheme(
@@ -49,10 +49,10 @@ class _JDSettingPageState extends State {
           children: <Widget>[
             _buildCell('偏好设置'),
             _buildCell('消息通知', onTap: () {
-              JDNavigationUtil.push(JDMessageSettingPage());
+              JDNavigationUtil.push(MessageSettingPage());
             }),
             _buildCell('隐私设置', onTap: () {
-              JDNavigationUtil.push(JDPrivacySettingPage());
+              JDNavigationUtil.push(PrivacySettingPage());
             }),
             SettingThemeWidget(),
             const Divider(
@@ -65,7 +65,7 @@ class _JDSettingPageState extends State {
               padding: EdgeInsets.only(top: 20),
             ),
             _buildCell('意见反馈', onTap: () {
-              JDNavigationUtil.push(JDFeedbackPage());
+              JDNavigationUtil.push(FeedbackPage());
             }),
             _buildCell2(
               '锁定开关',
@@ -78,7 +78,7 @@ class _JDSettingPageState extends State {
               _showDialog();
             }),
             _buildCell('开发者设置', onTap: () {
-              JDNavigationUtil.push(JDDeveloperSettingPage());
+              JDNavigationUtil.push(DeveloperSettingPage());
             }),
             context.watch<JDAppUserInfo>().isLogin
                 ? Container(

@@ -4,6 +4,7 @@ import 'dart:ui';
 // import 'package:albumsaver/albumsaver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:jd_core/style/jd_styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
@@ -13,14 +14,14 @@ import 'package:qr_flutter/qr_flutter.dart';
  *
  */
 
-class JDMyQRcodePage extends StatefulWidget {
+class MyQRcodePage extends StatefulWidget {
   final String title = "我的二维码";
 
   @override
-  State createState() => _JDMyQRcodePageState();
+  State createState() => _MyQRcodePageState();
 }
 
-class _JDMyQRcodePageState extends State<JDMyQRcodePage> {
+class _MyQRcodePageState extends State<MyQRcodePage> {
   GlobalKey _repaintKey = GlobalKey();
 
   var _tips_string = '我的二维码';
@@ -41,8 +42,7 @@ class _JDMyQRcodePageState extends State<JDMyQRcodePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 1, //隐藏底部阴影
+        appBar: myAppBar(
           title: Text(widget.title),
         ),
         body: CustomScrollView(

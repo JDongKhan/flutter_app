@@ -300,7 +300,7 @@ class _HomeMainPageState extends State<HomeMainPage>
                           itm['title'],
                           style: const TextStyle(
                             fontWeight: FontWeight.bold,
-                            fontSize: 18,
+                            fontSize: 16,
                           ),
                         ),
                         Padding(
@@ -319,7 +319,7 @@ class _HomeMainPageState extends State<HomeMainPage>
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('立即咨询'),
+                  child: const Text('立即咨询',style: TextStyle(fontSize: 14),),
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.blue,
@@ -330,7 +330,7 @@ class _HomeMainPageState extends State<HomeMainPage>
             //content
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(itm['content']),
+              child: Text(itm['content'],style: TextStyle(fontSize: 12),),
             ),
             Container(
               padding: const EdgeInsets.only(

@@ -8,16 +8,16 @@ import 'package:jd_core/widget//async/jd_futurebuilder.dart';
 
 /// @author jd
 
-class JDBusinessPage extends StatefulWidget {
-  const JDBusinessPage(this.source);
+class BusinessPage extends StatefulWidget {
+  const BusinessPage(this.source);
 
   final String source;
 
   @override
-  State createState() => _JDBusinessPageState();
+  State createState() => _BusinessPageState();
 }
 
-class _JDBusinessPageState extends State<JDBusinessPage>
+class _BusinessPageState extends State<BusinessPage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;

@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/search/shop_search_page.dart';
@@ -154,7 +155,7 @@ class _ShopCategoryPageState extends State<ShopCategoryPage> {
                     color: Colors.grey[300],
                   ),
                 ),
-                child: Text(
+                child: AutoSizeText(
                   item,
                   style: const TextStyle(fontSize: 14.0),
                 ),

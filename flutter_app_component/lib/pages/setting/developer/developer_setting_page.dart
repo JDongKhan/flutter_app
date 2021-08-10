@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 
 /// @author jd
 
-class JDDeveloperSettingPage extends StatelessWidget {
+class DeveloperSettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     JDTheme theme = context.watch<JDTheme>();
     return Scaffold(
-      appBar: AppBar(
+      appBar: myAppBar(
         title: Text('开发者设置'),
       ),
       body: Column(

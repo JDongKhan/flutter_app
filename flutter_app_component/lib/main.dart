@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_app_component/service/environment.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
@@ -19,26 +20,22 @@ import 'component/logger/ume_logger/logger_plugin.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
 import 'pages/error/error_page.dart';
-import 'service/config/page/environment_page.dart';
+import 'service/page/environment_page.dart';
 
 ///入口类
 void main() {
 //
   //可以从编译参数获取环境变量，用以更改
   const String env = String.fromEnvironment('Env', defaultValue: 'prd');
-
-  print('env:$env');
+  //初始化环境配置
+  Environments.init(environment: env);
 
   if (JDAppInfo.isAndroid || JDAppInfo.isIOS) {
     // Some android/ios specific code
     //ios、android相关代码
-    initIOSAndAndroid();
-  } else if (JDAppInfo.isWeb) {
-    initOther();
-  } else if (JDAppInfo.isLinux || JDAppInfo.isMacOS || JDAppInfo.isWindow) {
-    initOther();
+    _initIOSAndAndroid();
   } else {
-    initOther();
+    _initOther();
     // Some web specific code there
   }
 //  runApp(
@@ -63,10 +60,10 @@ void main() {
 }
 
 //初始化Android和iOS
-void initIOSAndAndroid() {
+void _initIOSAndAndroid() {
   //ios、android相关代码
   FlutterBugly.postCatchedException(() {
-    initProject();
+    _initProject();
   }, handler: (FlutterErrorDetails details) {
     //继续打印到控制台
     FlutterError.dumpErrorToConsole(details, forceReport: true);
@@ -74,7 +71,7 @@ void initIOSAndAndroid() {
 }
 
 //初始化web或desktop
-void initOther() {
+void _initOther() {
   FlutterError.onError = (FlutterErrorDetails details) {
     //继续打印到控制台
     FlutterError.dumpErrorToConsole(details, forceReport: true);
@@ -82,14 +79,14 @@ void initOther() {
   };
   // Some desktop specific code there
   runZonedGuarded(() {
-    initProject();
+    _initProject();
   }, (error, stackTrace) {
     //TODO 此处可以上传到自己的服务器
     reportErrorAndLog(error, stackTrace);
   });
 }
 
-void initProject() async {
+void _initProject() async {
   // window.onDrawFrame = null;
   // window.onBeginFrame = null;
 
@@ -145,14 +142,18 @@ Widget _mainApp() {
   );
 }
 
-//收集日志
-void collectLog(String line) {}
+///收集日志
+void collectLog(String line) {
+  //TODO 采集日志到平台
+}
+
+///收集崩溃
 void reportErrorAndLog(Object error, StackTrace stackTrace) {
   // 上报错误和日志逻辑
   // print(details);
 }
 
 FlutterErrorDetails makeDetails(Object obj, StackTrace stack) {
-  // 构建错误信息
+  ///构建错误信息
   return null;
 }

@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/pages/logistics/logistics_page.dart';
 import 'package:flutter_app_component/pages/logistics/widget/ace_stepper.dart';
 import 'package:flutter_app_component/pages/my/member_home_page.dart';
-import 'package:flutter_app_component/pages/setting/jd_setting_page.dart';
+import 'package:flutter_app_component/pages/setting/setting_page.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -164,7 +164,7 @@ class _ShopMyPageState extends State<ShopMyPage>
             color: _appBarStyle == 0 ? Colors.white : Colors.black12,
           ),
           onPressed: () {
-            JDNavigationUtil.push(JDSettingPage());
+            JDNavigationUtil.push(SettingPage());
           },
         )
       ];

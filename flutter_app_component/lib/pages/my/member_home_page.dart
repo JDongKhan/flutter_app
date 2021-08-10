@@ -56,7 +56,7 @@ class _MemberHomePageState extends State<MemberHomePage> {
         );
       },
       separatorBuilder: (c, idx) {
-        return Divider();
+        return const Divider();
       },
       itemCount: _allContents.length,
     );
@@ -84,13 +84,13 @@ class _MemberHomePageState extends State<MemberHomePage> {
                       height: 80,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: const [
                         Text(
                           '卡其色的基毛杜鹃',
                           style: TextStyle(color: Colors.white, fontSize: 20),
@@ -104,24 +104,24 @@ class _MemberHomePageState extends State<MemberHomePage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
-              Text(
+              const Text(
                 '留下你的个性签名，让大家了解和关注你',
                 style: TextStyle(color: Colors.white, fontSize: 14),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Row(
                 children: [
                   _numWidget('关注', '7'),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   _numWidget('粉丝', '0'),
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   _numWidget('获赞', '0'),
@@ -130,26 +130,26 @@ class _MemberHomePageState extends State<MemberHomePage> {
                     onPressed: () {},
                     style: TextButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                        side: BorderSide(color: Colors.white),
+                        side: const BorderSide(color: Colors.white),
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       '编辑资料',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   OutlinedButton(
                     style: OutlinedButton.styleFrom(
                       primary: Colors.white,
                       padding: const EdgeInsets.all(5),
-                      side: BorderSide(color: Colors.white),
-                      shape: CircleBorder(),
+                      side: const BorderSide(color: Colors.white),
+                      shape: const CircleBorder(),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.message_outlined,
                       size: 18,
                     ),
@@ -160,7 +160,9 @@ class _MemberHomePageState extends State<MemberHomePage> {
             ],
           ),
         ),
-        Expanded(child: _buildBackHomeList()),
+        Expanded(
+          child: _buildBackHomeList(),
+        ),
       ],
     );
   }
@@ -181,7 +183,7 @@ class _MemberHomePageState extends State<MemberHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: myAppBar(
         title: const Text('个人主页'),
       ),
       body: Stack(
@@ -215,7 +217,7 @@ class _MemberHomePageState extends State<MemberHomePage> {
                     children: [
                       Container(
                         color: Colors.blue[100],
-                        child: Center(
+                        child: const Center(
                           child: Icon(Icons.menu),
                         ),
                       ),
@@ -237,11 +239,11 @@ class _MemberHomePageState extends State<MemberHomePage> {
       children: [
         Text(
           '$num',
-          style: TextStyle(color: Colors.white, fontSize: 14),
+          style: const TextStyle(color: Colors.white, fontSize: 14),
         ),
         Text(
           '$text',
-          style: TextStyle(color: Colors.white70, fontSize: 14),
+          style: const TextStyle(color: Colors.white70, fontSize: 14),
         ),
       ],
     );

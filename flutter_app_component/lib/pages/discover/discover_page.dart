@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/mask/bubble_widget.dart';
 import 'package:flutter_app_component/component/mask/mask_widget.dart';
 import 'package:flutter_app_component/pages/scaffold/scaffold_page.dart';
+import 'package:jd_core/style/jd_styles.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
 
@@ -201,8 +202,7 @@ class _DiscoverPageState extends State<DiscoverPage>
     // than having to individually change instances of widgets.
     return Scaffold(
       key: _scaffoldKey,
-      appBar: AppBar(
-        elevation: 1, //隐藏底部阴影
+      appBar: myAppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: const Text(

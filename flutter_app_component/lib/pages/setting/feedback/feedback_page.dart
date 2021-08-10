@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/dropdownbutton.dart';
+import 'package:jd_core/style/jd_styles.dart';
 
 /// @author jd
 
-class JDFeedbackPage extends StatefulWidget {
+class FeedbackPage extends StatefulWidget {
   @override
-  _JDFeedbackState createState() => _JDFeedbackState();
+  _FeedbackState createState() => _FeedbackState();
 }
 
-class _JDFeedbackState extends State<JDFeedbackPage> {
+class _FeedbackState extends State<FeedbackPage> {
   var _list = ['直播', '会员', '账号', '其他', '建议优化'];
   var _selectedType = '建议优化';
 
@@ -19,7 +20,7 @@ class _JDFeedbackState extends State<JDFeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
+      appBar: myAppBar(
         title: Text('反馈'),
       ),
       body: Column(
