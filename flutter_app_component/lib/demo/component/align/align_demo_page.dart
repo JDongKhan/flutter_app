@@ -14,7 +14,7 @@ class _AlignDemoPageState extends State<AlignDemoPage>
       child: Container(
         height: 20,
         width: 20,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
             color: Colors.green,
             borderRadius: BorderRadius.all(Radius.circular(10))),
       ),
@@ -27,10 +27,10 @@ class _AlignDemoPageState extends State<AlignDemoPage>
     int size = 20;
     return Scaffold(
       appBar: AppBar(
-        title: Text("AlignDemoPage"),
+        title: const Text("AlignDemoPage"),
       ),
       body: Container(
-        alignment: Alignment(0, 0),
+        alignment: const Alignment(0, 0),
         child: Container(
           height: MediaQuery.of(context).size.width,
           width: MediaQuery.of(context).size.width,

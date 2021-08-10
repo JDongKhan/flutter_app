@@ -15,23 +15,78 @@ import 'package:jd_core/utils/jd_appinfo.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'component/environment/environment_page.dart';
 import 'component/logger/ume_logger/logger_plugin.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
-import 'pages/error_page.dart';
+import 'pages/error/error_page.dart';
+import 'service/config/page/environment_page.dart';
 
-void collectLog(String line) {
-  //收集日志
-}
-void reportErrorAndLog(FlutterErrorDetails details) {
-  // 上报错误和日志逻辑
-  // print(details);
+///入口类
+void main() {
+//
+  //可以从编译参数获取环境变量，用以更改
+  const String env = String.fromEnvironment('Env', defaultValue: 'prd');
+
+  print('env:$env');
+
+  if (JDAppInfo.isAndroid || JDAppInfo.isIOS) {
+    // Some android/ios specific code
+    //ios、android相关代码
+    initIOSAndAndroid();
+  } else if (JDAppInfo.isWeb) {
+    initOther();
+  } else if (JDAppInfo.isLinux || JDAppInfo.isMacOS || JDAppInfo.isWindow) {
+    initOther();
+  } else {
+    initOther();
+    // Some web specific code there
+  }
+//  runApp(
+//      ColorFiltered(
+//        colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
+//        child: MyApp()
+//      )
+//  );
+
+//  runZoned(
+//        () => runApp(MyApp()),
+//        zoneSpecification: ZoneSpecification(
+//            print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
+//            collectLog(line); // 收集日志
+//          },
+//        ),
+//       onError: (Object obj, StackTrace stack) {
+//           var details = makeDetails(obj, stack);
+//           reportErrorAndLog(details);
+//        },
+//  );
 }
 
-FlutterErrorDetails makeDetails(Object obj, StackTrace stack) {
-  // 构建错误信息
-  return null;
+//初始化Android和iOS
+void initIOSAndAndroid() {
+  //ios、android相关代码
+  FlutterBugly.postCatchedException(() {
+    initProject();
+  }, handler: (FlutterErrorDetails details) {
+    //继续打印到控制台
+    FlutterError.dumpErrorToConsole(details, forceReport: true);
+  });
+}
+
+//初始化web或desktop
+void initOther() {
+  FlutterError.onError = (FlutterErrorDetails details) {
+    //继续打印到控制台
+    FlutterError.dumpErrorToConsole(details, forceReport: true);
+    Zone.current.handleUncaughtError(details.exception, details.stack);
+  };
+  // Some desktop specific code there
+  runZonedGuarded(() {
+    initProject();
+  }, (error, stackTrace) {
+    //TODO 此处可以上传到自己的服务器
+    reportErrorAndLog(error, stackTrace);
+  });
 }
 
 void initProject() async {
@@ -90,63 +145,14 @@ Widget _mainApp() {
   );
 }
 
-void initIOSAndAndroid() {
-  //ios、android相关代码
-  FlutterBugly.postCatchedException(() {
-    initProject();
-  }, handler: (FlutterErrorDetails details) {
-    //继续打印到控制台
-    FlutterError.dumpErrorToConsole(details, forceReport: true);
-  });
+//收集日志
+void collectLog(String line) {}
+void reportErrorAndLog(Object error, StackTrace stackTrace) {
+  // 上报错误和日志逻辑
+  // print(details);
 }
 
-void initOther() {
-  FlutterError.onError = (FlutterErrorDetails details) {
-    //TODO 此处可以上传到自己的服务器
-    reportErrorAndLog(details);
-    //继续打印到控制台
-    FlutterError.dumpErrorToConsole(details, forceReport: true);
-  };
-  // Some desktop specific code there
-  initProject();
-}
-
-void main() {
-//
-  //可以从编译参数获取环境变量，用以更改
-  const String env = String.fromEnvironment('Env', defaultValue: 'prd');
-
-  print('env:$env');
-
-  if (JDAppInfo.isAndroid || JDAppInfo.isIOS) {
-    // Some android/ios specific code
-    //ios、android相关代码
-    initIOSAndAndroid();
-  } else if (JDAppInfo.isWeb) {
-    initOther();
-  } else if (JDAppInfo.isLinux || JDAppInfo.isMacOS || JDAppInfo.isWindow) {
-    initOther();
-  } else {
-    initOther();
-    // Some web specific code there
-  }
-//  runApp(
-//      ColorFiltered(
-//        colorFilter: ColorFilter.mode(Colors.white, BlendMode.color),
-//        child: MyApp()
-//      )
-//  );
-
-//  runZoned(
-//        () => runApp(MyApp()),
-//        zoneSpecification: ZoneSpecification(
-//            print: (Zone self, ZoneDelegate parent, Zone zone, String line) {
-//            collectLog(line); // 收集日志
-//          },
-//        ),
-//       onError: (Object obj, StackTrace stack) {
-//           var details = makeDetails(obj, stack);
-//           reportErrorAndLog(details);
-//        },
-//  );
+FlutterErrorDetails makeDetails(Object obj, StackTrace stack) {
+  // 构建错误信息
+  return null;
 }

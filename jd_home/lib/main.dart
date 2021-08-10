@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/home/jd_home_page.dart';
+import 'pages/home_page.dart';
 
 void main() => runApp(
       MultiProvider(
@@ -107,7 +107,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => JDHomePage(),
+                      builder: (context) => HomePage(),
                     ),
                   );
                 },

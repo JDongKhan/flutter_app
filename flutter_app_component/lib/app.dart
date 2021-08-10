@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app_component/generated/l10n.dart';
-import 'package:flutter_app_component/pages/jd_splash_page.dart';
-import 'package:flutter_app_component/routes/jd_routes.dart';
+import 'package:flutter_app_component/pages/splash/splash_page.dart';
+import 'package:flutter_app_component/routes/routes.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -13,7 +13,7 @@ import 'package:lifecycle/lifecycle.dart';
 import 'package:provider/provider.dart';
 
 import 'component/orientation/orientation_observer.dart';
-import 'routes/jd_routes.dart';
+import 'routes/routes.dart';
 
 /**
  * flutter 相对布局
@@ -34,14 +34,9 @@ class MyAppState extends State<MyApp> {
     super.initState();
     //缓存个数 100
     PaintingBinding.instance.imageCache.maximumSize = 100;
-//缓存大小 50m
+    //缓存大小 50m
     PaintingBinding.instance.imageCache.maximumSizeBytes = 50 << 20;
-    _initListener();
   }
-
-  void _initListener() {}
-
-  void _loadLocale() {}
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +82,7 @@ class MyAppState extends State<MyApp> {
 
           primarySwatch: Colors.blue,
         ),
-        home: JDSplashPage(),
+        home: SplashPage(),
 //      routes: routes,
         navigatorObservers: [
           defaultOrientationObserver,

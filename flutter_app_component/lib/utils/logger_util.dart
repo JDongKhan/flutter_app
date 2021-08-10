@@ -1,8 +1,7 @@
 import 'package:flutter_app_component/component/logger/log_console.dart';
 import 'package:logger/logger.dart';
 
-/// @author jd
-
+/// 日志工具
 var logger = Logger(
   printer: PrettyPrinter(
     methodCount: 1,

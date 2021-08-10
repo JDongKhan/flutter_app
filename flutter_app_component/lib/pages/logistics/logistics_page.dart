@@ -9,7 +9,7 @@ class ACEStepperPage extends StatefulWidget {
   ACEStepperPage({Key key, this.type});
 
   @override
-  _ACEStepperPageState createState() => new _ACEStepperPageState();
+  _ACEStepperPageState createState() => _ACEStepperPageState();
 }
 
 class _ACEStepperPageState extends State<ACEStepperPage> {
@@ -56,19 +56,21 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
           {VoidCallback onStepContinue, VoidCallback onStepCancel}) {
         return Row(children: <Widget>[
           Container(
-              margin: EdgeInsets.all(10),
+              margin: const EdgeInsets.all(10),
               width: 100,
               child: Image.asset(_curImg)),
-          SizedBox(width: 30, height: 30),
+          const SizedBox(width: 30, height: 30),
           Column(children: <Widget>[
             FlatButton(
-                color: Colors.orangeAccent.withOpacity(0.4),
-                onPressed: onStepContinue,
-                child: Text('下一步')),
+              color: Colors.orangeAccent.withOpacity(0.4),
+              onPressed: onStepContinue,
+              child: const Text('下一步'),
+            ),
             FlatButton(
-                color: Colors.purple.withOpacity(0.4),
-                onPressed: onStepCancel,
-                child: Text('上一步'))
+              color: Colors.purple.withOpacity(0.4),
+              onPressed: onStepCancel,
+              child: const Text('上一步'),
+            )
           ])
         ]);
       },
@@ -94,50 +96,55 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
       },
       steps: [
         ACEStep(
-            title: Text('标题一'),
-            content: Text('内容一'),
-            subtitle: Text('副标题一'),
-            lineType: LineType.circle,
-            iconType: IconType.text,
-            circleData: CircleData(),
-            isActive: _curStep >= 0 ? true : false,
-            toptips: Text('2019-08-08')),
+          title: const Text('标题一'),
+          content: const Text('内容一'),
+          subtitle: const Text('副标题一'),
+          lineType: LineType.circle,
+          iconType: IconType.text,
+          circleData: CircleData(),
+          isActive: _curStep >= 0,
+          toptips: const Text('2019-08-08'),
+        ),
         ACEStep(
-            title: Text('标题二'),
-            content: Text('内容二'),
-            subtitle: Text('副标题二'),
-            lineType: LineType.circle,
-            iconType: IconType.text,
-            circleData: CircleData(),
-            isActive: _curStep >= 1 ? true : false,
-            toptips: Text('2019-09-18')),
+          title: const Text('标题二'),
+          content: const Text('内容二'),
+          subtitle: const Text('副标题二'),
+          lineType: LineType.circle,
+          iconType: IconType.text,
+          circleData: CircleData(),
+          isActive: _curStep >= 1,
+          toptips: const Text('2019-09-18'),
+        ),
         ACEStep(
-            title: Text('标题三'),
-            content: Text('内容三'),
-            subtitle: Text('副标题三'),
-            lineType: LineType.circle,
-            iconType: IconType.text,
-            circleData: CircleData(),
-            isActive: _curStep >= 2 ? true : false,
-            toptips: Text('2019-10-01')),
+          title: const Text('标题三'),
+          content: const Text('内容三'),
+          subtitle: const Text('副标题三'),
+          lineType: LineType.circle,
+          iconType: IconType.text,
+          circleData: CircleData(),
+          isActive: _curStep >= 2,
+          toptips: const Text('2019-10-01'),
+        ),
         ACEStep(
-            title: Text('标题四'),
-            subtitle: Text('副标题四'),
-            content: SizedBox.shrink(),
-            lineType: LineType.circle,
-            iconType: IconType.text,
-            isActive: _curStep >= 3 ? true : false,
-            circleData: CircleData(),
-            toptips: Text('2019-11-25')),
+          title: const Text('标题四'),
+          subtitle: const Text('副标题四'),
+          content: const SizedBox.shrink(),
+          lineType: LineType.circle,
+          iconType: IconType.text,
+          isActive: _curStep >= 3,
+          circleData: CircleData(),
+          toptips: const Text('2019-11-25'),
+        ),
         ACEStep(
-            title: Text('标题五'),
-            subtitle: Text('副标题五'),
-            content: Text('内容五'),
-            lineType: LineType.circle,
-            isActive: _curStep >= 4 ? true : false,
-            circleData: CircleData(),
-            iconType: IconType.text,
-            toptips: Text('2019-12-05'))
+          title: const Text('标题五'),
+          subtitle: const Text('副标题五'),
+          content: const Text('内容五'),
+          lineType: LineType.circle,
+          isActive: _curStep >= 4,
+          circleData: CircleData(),
+          iconType: IconType.text,
+          toptips: const Text('2019-12-05'),
+        )
       ],
     );
   }
@@ -151,33 +158,33 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
         },
         steps: [
           ACEStep(
-              title: Text('5天'),
+              title: const Text('5天'),
               lineType: LineType.circle,
               iconType: IconType.text,
-              circleData: CircleData(circleText: "50"),
+              circleData: CircleData(circleText: '50'),
               isActive: true,
-              toptips: Text('2019-08-08')),
+              toptips: const Text('2019-08-08')),
           ACEStep(
-              title: Text('10天'),
+              title: const Text('10天'),
               lineType: LineType.circle,
               iconType: IconType.text,
-              circleData: CircleData(circleText: "100"),
+              circleData: CircleData(circleText: '100'),
               isActive: true,
-              toptips: Text('继续坚持哦')),
+              toptips: const Text('继续坚持哦')),
           ACEStep(
-              title: Text('20天'),
+              title: const Text('20天'),
               lineType: LineType.circle,
               iconType: IconType.text,
               isActive: false,
-              circleData: CircleData(circleText: "200")),
+              circleData: CircleData(circleText: '200')),
           ACEStep(
-              title: Text('30天'),
-              subtitle: Text('超值大礼包'),
+              title: const Text('30天'),
+              subtitle: const Text('超值大礼包'),
               lineType: LineType.circle,
               iconType: IconType.ass_url,
               isActive: true,
               circleData: CircleData(circleAssUrl: 'images/icon_vip.png'),
-              toptips: Text('VIP 赠送'))
+              toptips: const Text('VIP 赠送'))
         ]);
   }
 
@@ -194,21 +201,22 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
             contentActiveColor: Colors.green),
         steps: [
           ACEStep(
-              title: Text('一级标题'),
-              subtitle: Text('二级标题'),
+              title: const Text('一级标题'),
+              subtitle: const Text('二级标题'),
               circleData: CircleData(circleText: '新'),
               isActive: true,
-              toptips: Text('顶部 Tips', style: TextStyle(color: Colors.green))),
+              toptips:
+                  const Text('顶部 Tips', style: TextStyle(color: Colors.green))),
           ACEStep(
-              title: Text('10天'),
+              title: const Text('10天'),
               circleData: CircleData(circleText: '年'),
               isActive: true),
           ACEStep(
-              title: Text('20天'),
+              title: const Text('20天'),
               isActive: true,
               circleData: CircleData(circleText: '快')),
           ACEStep(
-              title: Text('30天'),
+              title: const Text('30天'),
               isActive: true,
               circleData: CircleData(circleText: '乐'))
         ]);
@@ -227,24 +235,25 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
             contentActiveColor: Colors.orange),
         steps: [
           ACEStep(
-              title: Text('5天'),
+              title: const Text('5天'),
               iconType: IconType.ass_url,
               circleData: CircleData(circleAssUrl: 'images/icon_coins.png'),
               isActive: true),
           ACEStep(
-              title: Text('一级标题'),
-              subtitle: Text('二级标题'),
+              title: const Text('一级标题'),
+              subtitle: const Text('二级标题'),
               iconType: IconType.ass_url,
               circleData: CircleData(circleAssUrl: 'images/icon_vip.png'),
               isActive: false,
-              toptips: Text('顶部 Tips', style: TextStyle(color: Colors.grey))),
+              toptips:
+                  const Text('顶部 Tips', style: TextStyle(color: Colors.grey))),
           ACEStep(
-              title: Text('20天'),
+              title: const Text('20天'),
               iconType: IconType.icon,
               circleData: CircleData(circleIcon: Icons.android),
               isActive: true),
           ACEStep(
-              title: Text('30天'),
+              title: const Text('30天'),
               iconType: IconType.net_url,
               circleData: CircleData(
                   circleNetUrl:
@@ -265,38 +274,40 @@ class _ACEStepperPageState extends State<ACEStepperPage> {
             contentActiveColor: Colors.deepPurple),
         steps: [
           ACEStep(
-              title: Text('5天'),
+              title: const Text('5天'),
               circleData: CircleData(),
               isActive: true,
               lineType: LineType.circle),
           ACEStep(
-              title: Text('10天'),
+              title: const Text('10天'),
               iconType: IconType.ass_url,
               circleData: CircleData(circleAssUrl: 'images/icon_vip.png'),
               isActive: true,
               lineType: LineType.circle),
           ACEStep(
-              title: Text('20天', style: TextStyle(color: Colors.deepPurple)),
-              subtitle:
-                  Text('还差10天', style: TextStyle(color: Colors.deepPurple)),
-              toptips: Text('加油！', style: TextStyle(color: Colors.deepPurple)),
+              title:
+                  const Text('20天', style: TextStyle(color: Colors.deepPurple)),
+              subtitle: const Text('还差10天',
+                  style: TextStyle(color: Colors.deepPurple)),
+              toptips:
+                  const Text('加油！', style: TextStyle(color: Colors.deepPurple)),
               iconType: IconType.icon,
               lineType: LineType.circle,
               circleData: CircleData(circleIcon: Icons.android),
               isActive: true),
           ACEStep(
-              title: Text('30天'),
+              title: const Text('30天'),
               iconType: IconType.net_url,
               lineType: LineType.circle,
               circleData: CircleData(
                   circleNetUrl:
                       'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575609869646&di=497ef407b501b95d80765bdd27b80bdc&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01c9505541bb22000001a64b457752.jpg')),
           ACEStep(
-              title: Text('45天'),
+              title: const Text('45天'),
               circleData: CircleData(),
               lineType: LineType.circle),
           ACEStep(
-              title: Text('60天'),
+              title: const Text('60天'),
               circleData: CircleData(),
               lineType: LineType.circle)
         ]);

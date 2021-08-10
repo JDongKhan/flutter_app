@@ -5,13 +5,12 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
-class JDAnimal1 extends StatefulWidget {
+class Animal1 extends StatefulWidget {
   @override
-  _JDAnimal1State createState() => _JDAnimal1State();
+  _Animal1State createState() => _Animal1State();
 }
 
-class _JDAnimal1State extends State<JDAnimal1>
-    with SingleTickerProviderStateMixin {
+class _Animal1State extends State<Animal1> with SingleTickerProviderStateMixin {
   Animation<double> animation;
   Animation rotateAnimal;
   AnimationController animationController;

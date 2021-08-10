@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///处理html
 class HtmlUtils {
   static generateCode2HTml(
     String mdData, {

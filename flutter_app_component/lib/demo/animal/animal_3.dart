@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
-class JDAnimal3 extends StatefulWidget {
+class Animal3 extends StatefulWidget {
   @override
   _Animal1PageState createState() => _Animal1PageState();
 }
 
-class _Animal1PageState extends State<JDAnimal3> {
+class _Animal1PageState extends State<Animal3> {
   IconData iconData = Icons.clear;
 
   ///定义需要执行的滑动效果数值

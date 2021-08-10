@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/models/image_model.dart';
-import 'package:flutter_app_component/service/jd_request.dart';
+import 'package:flutter_app_component/service/request.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/style/jd_push_animation.dart';
 import 'package:jd_core/widget//async/jd_futurebuilder.dart';
@@ -26,7 +26,7 @@ class _JDBusinessPageState extends State<JDBusinessPage>
   Widget build(BuildContext context) {
     super.build(context);
     return JDFutureBuilder<List<JDImage>>(
-      future: JDRequest.imageList(),
+      future: Request.imageList(),
       onError: () {
         setState(() {});
       },

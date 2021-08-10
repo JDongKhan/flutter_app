@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 
 const String testString = "Hello JD，欢迎你的交流";
 
-class JDAnimal2 extends StatefulWidget {
+class Animal2 extends StatefulWidget {
   @override
   _AnimaDemoPageState createState() => _AnimaDemoPageState();
 }
 
-class _AnimaDemoPageState extends State<JDAnimal2>
-    with TickerProviderStateMixin {
+class _AnimaDemoPageState extends State<Animal2> with TickerProviderStateMixin {
   List<String> _charList = [];
   List<AnimationController> _controllerList = [];
   List<CurvedAnimation> _moveAnimation = [];
