@@ -75,7 +75,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
         },
         child: CustomScrollView(
           controller: _scrollController,
-          physics: BouncingScrollPhysics(),
+          physics: const BouncingScrollPhysics(),
           slivers: [
             _buildProductImage(),
             _buildProductInfo(),
@@ -181,7 +181,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
   Widget _buildLogistics() {
     return SliverToBoxAdapter(
       child: Container(
-        margin: EdgeInsets.only(
+        margin: const EdgeInsets.only(
           top: 10,
         ),
         padding: const EdgeInsets.all(10),
@@ -190,11 +190,11 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
           children: [
             Row(
               children: [
-                Text('已选'),
-                SizedBox(
+                const Text('已选'),
+                const SizedBox(
                   width: 10,
                 ),
-                Expanded(
+                const Expanded(
                   child: Text(
                     '规格:1L, 系列:薰衣草 1件',
                     style: TextStyle(color: Colors.grey),
@@ -206,14 +206,14 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('送至'),
-                SizedBox(
+                const Text('送至'),
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -225,7 +225,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                              children: const <Widget>[
                                 Text(
                                   '江苏南京玄武全区',
                                   style: TextStyle(color: Colors.grey),
@@ -246,10 +246,10 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      Divider(
+                      const Divider(
                         height: 0.5,
                       ),
                     ],
@@ -261,7 +261,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
               height: 10,
             ),
             Row(
-              children: [
+              children: const <Widget>[
                 Text('运费'),
                 SizedBox(
                   width: 10,
@@ -298,10 +298,10 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('评价(5.8万+)'),
+              children: <Widget>[
+                const Text('评价(5.8万+)'),
                 JDButton(
-                  text: Text(
+                  text: const Text(
                     '99%好评',
                     style: TextStyle(
                       color: Colors.grey,
@@ -315,11 +315,11 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 1,
             ),
             _buildCommentItem(),
-            Divider(
+            const Divider(
               height: 1,
             ),
             _buildCommentItem(),
@@ -329,7 +329,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20.0)),
                 ),
-                child: Text('查看全部评价'),
+                child: const Text('查看全部评价'),
               ),
             ),
           ],
@@ -340,14 +340,14 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
 
   Widget _buildCommentItem() {
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 10,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
+        children: <Widget>[
           Row(
-            children: [
+            children: <Widget>[
               Image.asset(
                 JDAssetBundle.getImgPath('recommend_customer_icon'),
                 width: 40,
@@ -355,7 +355,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
               ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text('1*****0'),
                   StarRatingWidget(
                     value: 4.5,
@@ -364,10 +364,10 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
-          Text('物流很快，昨晚下单今天就收到了，价格又很便宜还是大瓶的，很不错哦，给个五星'),
+          const Text('物流很快，昨晚下单今天就收到了，价格又很便宜还是大瓶的，很不错哦，给个五星'),
           Row(
             children: [
               Padding(
@@ -434,7 +434,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: const [
+              children: const <Widget>[
                 SizedBox(
                   width: 50,
                   child: Divider(
@@ -454,7 +454,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             _buildProductDetailImage('guide1'),
@@ -479,7 +479,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
         padding: const EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+          children: const <Widget>[
             Text('温馨提示'),
             Text(
                 '1、网站为您提供的送货、安装、维修等服务可能需要收取一定的服务费用和远程费。 \n2、服务中可能涉及的材料费请以服务工程师出示的报价单为准。 \n 3、如存在收费争议，可咨询在线客服或拨打客服电话110'),

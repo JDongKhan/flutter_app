@@ -4,7 +4,7 @@ import 'package:jd_core/jd_core.dart';
 /// @author jd
 
 class WeChatMessageListBottomMenu extends StatefulWidget {
-  WeChatMessageListBottomMenu({this.opacity, this.onBack});
+  const WeChatMessageListBottomMenu({this.opacity, this.onBack});
   final double opacity;
   final VoidCallback onBack;
   @override
@@ -16,7 +16,7 @@ class _WeChatMessageListBottomMenuState
     extends State<WeChatMessageListBottomMenu> {
   @override
   Widget build(BuildContext context) {
-    double width = (jd_screenWidth() - 100) / 3 - 10;
+    final double width = (jd_screenWidth() - 100) / 3 - 10;
     return Opacity(
       opacity: widget.opacity,
       child: Align(

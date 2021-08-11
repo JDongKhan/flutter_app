@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/dropdownbutton.dart';
+import 'package:flutter_app_component/component/dropdown_button.dart';
 import 'package:jd_core/style/jd_styles.dart';
 
 /// @author jd

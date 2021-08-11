@@ -6,8 +6,7 @@ import 'package:jd_core/jd_core.dart';
 
 import 'log_console.dart';
 
-/// @author jd
-
+// ignore: avoid_classes_with_only_static_members
 class LogMenu {
   static bool isShow = false;
   static bool isShowLogConsole = false;
@@ -30,7 +29,7 @@ class LogMenu {
     isShow = true;
   }
 
-  static void _gotLogConsole(BuildContext context) async {
+  static void _gotoLogConsole(BuildContext context) async {
     if (isShowLogConsole) {
       return;
     }
@@ -76,7 +75,7 @@ class _LogMenuWidgetState extends State<LogMenuWidget> {
       height: _height,
       child: GestureDetector(
         onTap: () {
-          LogMenu._gotLogConsole(context);
+          LogMenu._gotoLogConsole(context);
         },
         onDoubleTap: () {
           LogMenu.remove();

@@ -3,16 +3,6 @@ import 'package:flutter/material.dart';
 import 'dash_painter.dart';
 
 class DashDecoration extends Decoration {
-  final Gradient gradient;
-
-  final Color color;
-  final double step;
-  final double span;
-  final int pointCount;
-  final double pointWidth;
-  final Radius radius;
-  final double strokeWidth;
-
   const DashDecoration(
       {this.gradient,
       this.color,
@@ -23,15 +13,24 @@ class DashDecoration extends Decoration {
       this.pointWidth,
       this.radius});
 
+  final Gradient gradient;
+
+  final Color color;
+  final double step;
+  final double span;
+  final int pointCount;
+  final double pointWidth;
+  final Radius radius;
+  final double strokeWidth;
+
   @override
   BoxPainter createBoxPainter([VoidCallback onChanged]) => DashBoxPainter(this);
 }
 
 class DashBoxPainter extends BoxPainter {
-  final DashDecoration _decoration;
-
   const DashBoxPainter(this._decoration);
 
+  final DashDecoration _decoration;
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     if (configuration.size == null) {

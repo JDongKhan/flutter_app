@@ -38,8 +38,9 @@ class _TabHomePageState extends State<TabHomePage>
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
           elevation: 1,
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.black,
           brightness: Brightness.dark,
           iconTheme: const IconThemeData(
             color: Colors.white,
@@ -49,10 +50,15 @@ class _TabHomePageState extends State<TabHomePage>
           title: TabBar(
             //生成Tab菜单
             isScrollable: true,
+            enableFeedback: false,
+            overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+              return Colors.transparent;
+            }),
             indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.white,
             unselectedLabelStyle: const TextStyle(fontSize: 14),
-            labelStyle: const TextStyle(fontSize: 18),
+            labelStyle: const TextStyle(fontSize: 16),
             controller: _tabController,
             tabs: tabs.map((e) => Tab(text: e)).toList(),
           ),

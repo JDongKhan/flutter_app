@@ -4,46 +4,8 @@ import 'package:flutter/material.dart';
 
 enum BubbleArrowDirection { top, bottom, right, left }
 
+// ignore: must_be_immutable
 class BubbleWidget extends StatelessWidget {
-  // 尖角位置
-  final position;
-
-  // 尖角高度
-  var arrHeight;
-
-  // 尖角角度
-  var arrAngle;
-
-  // 圆角半径
-  var radius;
-
-  // 宽度
-  final width;
-
-  // 高度
-  final height;
-
-  // 边距
-  double length;
-
-  // 颜色
-  Color color;
-
-  // 边框颜色
-  Color borderColor;
-
-  // 边框宽度
-  final strokeWidth;
-
-  // 填充样式
-  final style;
-
-  // 子 Widget
-  final child;
-
-  // 子 Widget 与起泡间距
-  var innerPadding;
-
   BubbleWidget({
     this.width = 180.0,
     this.height = 60.0,
@@ -60,6 +22,45 @@ class BubbleWidget extends StatelessWidget {
     this.child,
     this.innerPadding = 6.0,
   }) : super(key: key);
+
+  // 尖角位置
+  final BubbleArrowDirection position;
+
+  // 尖角高度
+  double arrHeight;
+
+  // 尖角角度
+  double arrAngle;
+
+  // 圆角半径
+  double radius;
+
+  // 宽度
+  final double width;
+
+  // 高度
+  final double height;
+
+  // 边距
+  double length;
+
+  // 颜色
+  final Color color;
+
+  // 边框颜色
+  Color borderColor;
+
+  // 边框宽度
+  final double strokeWidth;
+
+  // 填充样式
+  final PaintingStyle style;
+
+  // 子 Widget
+  final Widget child;
+
+  // 子 Widget 与起泡间距
+  double innerPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -154,23 +155,11 @@ class BubbleWidget extends StatelessWidget {
             left: (position == BubbleArrowDirection.left)
                 ? arrHeight + innerPadding
                 : innerPadding),
-        child: Center(child: this.child));
+        child: Center(child: child));
   }
 }
 
 class BubbleCanvas extends CustomPainter {
-  BuildContext context;
-  final position;
-  final arrHeight;
-  final arrAngle;
-  final radius;
-  final width;
-  final height;
-  final length;
-  final color;
-  final strokeWidth;
-  final style;
-
   BubbleCanvas(
       this.context,
       this.width,
@@ -184,9 +173,21 @@ class BubbleCanvas extends CustomPainter {
       this.style,
       this.length);
 
+  BuildContext context;
+  final BubbleArrowDirection position;
+  final double arrHeight;
+  final double arrAngle;
+  final double radius;
+  final double width;
+  final double height;
+  final double length;
+  final Color color;
+  final double strokeWidth;
+  final PaintingStyle style;
+
   @override
   void paint(Canvas canvas, Size size) {
-    Path path = Path();
+    final Path path = Path();
     path.arcTo(
         Rect.fromCircle(
             center: Offset(
@@ -306,6 +307,6 @@ class BubbleCanvas extends CustomPainter {
   }
 }
 
-double _angle(angle) {
+double _angle(double angle) {
   return angle * pi / 180;
 }

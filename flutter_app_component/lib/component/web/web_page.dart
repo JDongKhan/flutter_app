@@ -8,7 +8,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 /// @author jd
 
-///web
+///web page
 class WebPage extends StatefulWidget {
   final String url;
   final String title;

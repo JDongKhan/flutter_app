@@ -25,7 +25,8 @@ class _WechatMessageDetailPageState extends State<WechatMessageDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Wechat'),
+        elevation: 1,
+        title: const Text('Wechat'),
       ),
       body: SafeArea(
         child: Column(

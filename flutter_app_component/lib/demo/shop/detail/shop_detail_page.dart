@@ -28,7 +28,7 @@ class _ShopDetailPageState extends State<ShopDetailPage> {
       child: Scaffold(
         body: ProviderWidget<ShopDetailViewModel>(
           model: ShopDetailViewModel(),
-          builder: (context, model) {
+          builder: (BuildContext context, ShopDetailViewModel model) {
             return _buildContent();
           },
         ),

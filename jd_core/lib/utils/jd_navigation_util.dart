@@ -68,7 +68,7 @@ class JDNavigationUtil {
 
   void _pushWeb(
       {String title, String titleId, String url, bool isHome: false}) {
-    if (ObjectUtil.isEmpty(url)) return;
+    if (ObjectUtils.isEmpty(url)) return;
     if (url.endsWith(".apk")) {
       launchInBrowser(url, title: title ?? titleId);
     } else {

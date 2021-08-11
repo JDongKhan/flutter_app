@@ -4,6 +4,7 @@ import 'package:jd_core/jd_core.dart';
 
 /// @author jd
 
+//弹框菜单， 朋友圈使用
 void showPopMenu({
   BuildContext context,
 

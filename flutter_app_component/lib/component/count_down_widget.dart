@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// @author jd
 
+///倒计时，商品促销使用
 class CountDownWidget extends StatefulWidget {
   const CountDownWidget({
     Key key,

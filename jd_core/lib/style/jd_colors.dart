@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class JDColors {
-
   static const Color transparent_80 = Color(0x80000000); //<!--204-->
 
   static const Color text_dark = Color(0xFF333333);

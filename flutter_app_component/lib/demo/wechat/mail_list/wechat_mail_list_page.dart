@@ -16,15 +16,15 @@ class WechatMailListPage extends StatefulWidget {
 }
 
 class _WechatMailListPageState extends State<WechatMailListPage> {
-  List<UserInfo> _userList = [];
+  final List<UserInfo> _userList = [];
 
   @override
   void initState() {
     super.initState();
-    loadData();
+    _loadData();
   }
 
-  void loadData() async {
+  void _loadData() async {
     //加载城市列表
     rootBundle.loadString('assets/jsons/mail_list.json').then((value) {
       List list = json.decode(value);
@@ -74,17 +74,18 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('通讯录'),
+        elevation: 1,
+        title: const Text('通讯录'),
       ),
       body: AzListView(
         data: _userList,
         itemCount: _userList.length,
-        itemBuilder: (context, index) {
+        itemBuilder: (BuildContext context, int index) {
           return _buildListItem(index);
         },
-        physics: BouncingScrollPhysics(),
+        physics: const BouncingScrollPhysics(),
         indexBarData: SuspensionUtil.getTagIndexList(_userList),
-        indexHintBuilder: (context, hint) {
+        indexHintBuilder: (BuildContext context, String hint) {
           return Container(
             alignment: Alignment.center,
             width: 60,
@@ -95,11 +96,11 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
             ),
             child: Text(
               hint,
-              style: TextStyle(color: Colors.white, fontSize: 30),
+              style: const TextStyle(color: Colors.white, fontSize: 30),
             ),
           );
         },
-        indexBarMargin: EdgeInsets.all(10),
+        indexBarMargin: const EdgeInsets.all(10),
         indexBarOptions: IndexBarOptions(
           needRebuild: true,
           decoration: getIndexBarDecoration(Colors.grey[50]),
@@ -136,12 +137,12 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
   }
 
   Widget _buildSusWidget(String susTag) {
-    susTag = (susTag == "★" ? "热门城市" : susTag);
+    susTag = susTag == '★' ? '热门城市' : susTag;
     return Container(
       height: 40,
       // width: jd_screenWidth(),
       padding: const EdgeInsets.only(left: 15.0),
-      color: Color(0xfff3f4f5),
+      color: const Color(0xfff3f4f5),
       alignment: Alignment.centerLeft,
       child: Text(susTag),
     );
@@ -149,9 +150,13 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
 
   Widget _buildListItem(int index) {
     UserInfo model = _userList[index];
-    if (model.flag == "2") return _buildMenu(model);
+    if (model.flag == '2') {
+      return _buildMenu(model);
+    }
     String susTag = model.getSuspensionTag();
-    if (model.flag == '1') susTag = '我的企业';
+    if (model.flag == '1') {
+      susTag = '我的企业';
+    }
     return Column(
       children: <Widget>[
         Offstage(
@@ -171,7 +176,7 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
             ),
             title: Text(model.name),
             onTap: () {
-              print("OnItemClick: $model");
+              print('OnItemClick: $model');
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => WechatMessageDetailPage(),
@@ -188,17 +193,17 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
   Widget _buildHeadWidget(int index) {
     UserInfo model = _userList[index];
     String susTag = model.tagIndex;
-    susTag = (susTag == "★" ? "热门城市" : susTag);
+    susTag = susTag == '★' ? '热门城市' : susTag;
     return Container(
       height: 40,
       width: jd_screenWidth(),
       padding: const EdgeInsets.only(left: 15.0),
-      color: Color(0xfff3f4f5),
+      color: const Color(0xfff3f4f5),
       alignment: Alignment.centerLeft,
       child: Text(
-        '$susTag',
+        susTag,
         softWrap: false,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14.0,
           color: Color(0xff999999),
         ),
@@ -208,7 +213,12 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
 }
 
 class UserInfo extends ISuspensionBean {
-  UserInfo({this.name, this.tagIndex, this.flag, this.icon});
+  UserInfo({
+    this.name,
+    this.tagIndex,
+    this.flag,
+    this.icon,
+  });
   String tagIndex;
   String name;
   String namePinyin;
@@ -216,7 +226,7 @@ class UserInfo extends ISuspensionBean {
   String icon;
 
   @override
-  getSuspensionTag() {
-    return this.tagIndex;
+  String getSuspensionTag() {
+    return tagIndex;
   }
 }

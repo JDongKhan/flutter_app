@@ -1,4 +1,4 @@
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
@@ -6,6 +6,17 @@ import 'package:flutter/material.dart';
 
 ///绘制气泡背景
 class BubblePainter extends CustomPainter {
+  BubblePainter(BubbleBuilder builder) {
+    mAngle = builder.mAngle;
+    mArrowHeight = builder.mArrowHeight;
+    mArrowWidth = builder.mArrowWidth;
+    mArrowPosition = builder.mArrowPosition;
+    bubbleColor = builder.bubbleColor;
+    mArrowLocation = builder.mArrowLocation;
+    bubbleType = builder.bubbleType;
+    mArrowCenter = builder.arrowCenter;
+  }
+
   Rect mRect;
   Path mPath = Path();
   Paint mPaint = Paint();
@@ -17,17 +28,6 @@ class BubblePainter extends CustomPainter {
   BubbleType bubbleType;
   bool mArrowCenter = true;
   Color bubbleColor;
-
-  BubblePainter(BubbleBuilder builder) {
-    this.mAngle = builder.mAngle;
-    this.mArrowHeight = builder.mArrowHeight;
-    this.mArrowWidth = builder.mArrowWidth;
-    this.mArrowPosition = builder.mArrowPosition;
-    this.bubbleColor = builder.bubbleColor;
-    this.mArrowLocation = builder.mArrowLocation;
-    this.bubbleType = builder.bubbleType;
-    this.mArrowCenter = builder.arrowCenter;
-  }
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -64,7 +64,7 @@ class BubblePainter extends CustomPainter {
       case BubbleType.BITMAP:
         break;
     }
-    mRect ??= new Rect.fromLTRB(0, 0, size.width, size.height);
+    mRect ??= Rect.fromLTRB(0, 0, size.width, size.height);
     setUpPath(mArrowLocation, mPath);
     canvas.drawPath(mPath, mPaint);
   }
@@ -93,7 +93,7 @@ class BubblePainter extends CustomPainter {
     }
 
     path.moveTo(
-        rect.left + Math.min(mArrowPosition, mAngle), rect.top + mArrowHeight);
+        rect.left + math.min(mArrowPosition, mAngle), rect.top + mArrowHeight);
     path.lineTo(rect.left + mArrowPosition, rect.top + mArrowHeight);
     path.lineTo(rect.left + mArrowWidth / 2 + mArrowPosition, rect.top);
     path.lineTo(
@@ -175,7 +175,7 @@ class BubbleBuilder {
   ///箭头是否需要剧中
   bool arrowCenter = true;
 
-  build() {
+  BubblePainter build() {
     return BubblePainter(this);
   }
 }

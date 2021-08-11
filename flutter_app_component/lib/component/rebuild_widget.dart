@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 typedef RebuildFuncation<T> = bool Function(T oldWidget, T newWidget);
 
+///重建widget
 class RebuildWidget<T extends Widget> extends StatefulWidget {
   const RebuildWidget({
     Key key,

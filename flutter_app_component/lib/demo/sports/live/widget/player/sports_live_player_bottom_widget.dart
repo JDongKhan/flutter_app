@@ -68,7 +68,7 @@ class _SportsLivePlayerBottomWidgetState
             alignment: Alignment.centerLeft,
             child: Text(
               duration_toString(widget.controller._position),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
           Expanded(
@@ -95,7 +95,7 @@ class _SportsLivePlayerBottomWidgetState
             alignment: Alignment.centerLeft,
             child: Text(
               duration_toString(widget.controller._duration),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
           _buildFullWidget(),

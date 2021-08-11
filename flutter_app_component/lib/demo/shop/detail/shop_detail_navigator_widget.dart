@@ -34,7 +34,7 @@ class ShopDetailNavigatorWidget extends StatefulWidget {
 class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
     with TickerProviderStateMixin {
   TabController _tabController;
-  Color _backgroundColor = Colors.white;
+  final Color _backgroundColor = Colors.white;
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
@@ -59,7 +59,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.white,
                       ),
@@ -67,9 +67,9 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                         Navigator.of(context).pop();
                       },
                     ),
-                    Spacer(),
+                    const Spacer(),
                     IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.upload_outlined,
                           color: Colors.white,
                         ),
@@ -97,7 +97,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                 child: Row(
                   children: [
                     IconButton(
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
                       ),
@@ -110,7 +110,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                         child: Center(
                           child: TabBar(
                             controller: _tabController,
-                            tabs: [
+                            tabs: const <Widget>[
                               Text('商品'),
                               Text('评价'),
                               Text('详情'),
@@ -128,7 +128,8 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                             ),
                             isScrollable: true,
                             indicatorSize: TabBarIndicatorSize.label,
-                            labelPadding: EdgeInsets.only(left: 10, right: 10),
+                            labelPadding:
+                                const EdgeInsets.only(left: 10, right: 10),
                             // indicatorPadding: EdgeInsets.only(top: 1),
                             indicatorWeight: 4,
                           ),
@@ -136,7 +137,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                       ),
                     ),
                     IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.upload_outlined,
                           color: Colors.black,
                         ),

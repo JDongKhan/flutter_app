@@ -16,8 +16,9 @@ class WechatFriendCirclePage extends StatefulWidget {
 }
 
 class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
-  ScrollController _scrollController = ScrollController(initialScrollOffset: 0);
-  WechatFriendCircleNavigatorController _navigatorController =
+  final ScrollController _scrollController =
+      ScrollController(initialScrollOffset: 0);
+  final WechatFriendCircleNavigatorController _navigatorController =
       WechatFriendCircleNavigatorController();
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
           Positioned.fill(
             top: -40,
             child: Container(
-              color: Color(0xff111111),
+              color: const Color(0xff111111),
               child: ProviderWidget(
                 model: WechatFriendCircleViewModel(),
                 builder: (context, model) => NotificationListener(
@@ -60,7 +61,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
     );
   }
 
-  void _onScroll(offset) {
+  void _onScroll(double offset) {
     //修改导航alpha
     double alpha = offset / 100.0;
     alpha = min(1, alpha);
@@ -89,14 +90,14 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
+                  const Text(
                     'apple',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   ClipRRect(
@@ -119,7 +120,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
   Widget _buildList(WechatFriendCircleViewModel model) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
-        (context, index) {
+        (BuildContext context, int index) {
           Map item = model.list[index];
           List imgs = item['imgs'];
           return Container(
@@ -135,7 +136,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                     height: 60,
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Expanded(
@@ -144,20 +145,20 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                     children: [
                       Text(
                         item['name'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.lightBlue,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(
                         item['msg'],
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Container(
@@ -169,7 +170,7 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                           shrinkWrap: true,
                           crossAxisSpacing: 5,
                           mainAxisSpacing: 5,
-                          physics: NeverScrollableScrollPhysics(),
+                          physics: const NeverScrollableScrollPhysics(),
                           crossAxisCount: 3,
                           children: imgs
                               .map(
@@ -184,13 +185,13 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
                         children: [
                           Text(
                             item['time'],
-                            style: TextStyle(color: Colors.grey),
+                            style: const TextStyle(color: Colors.grey),
                           ),
-                          Spacer(),
+                          const Spacer(),
                           Builder(
-                            builder: (context) {
+                            builder: (BuildContext context) {
                               return IconButton(
-                                  icon: Icon(
+                                  icon: const Icon(
                                     Icons.more_horiz,
                                     color: Colors.grey,
                                   ),
@@ -232,15 +233,15 @@ class _WechatFriendCirclePageState extends State<WechatFriendCirclePage> {
         children: [
           JDButton(
             action: () {},
-            text: Text('赞'),
-            icon: Icon(Icons.favorite),
+            text: const Text('赞'),
+            icon: const Icon(Icons.favorite),
             imageDirection: AxisDirection.left,
           ),
-          VerticalDivider(),
+          const VerticalDivider(),
           JDButton(
             action: () {},
-            text: Text('评论'),
-            icon: Icon(Icons.comment_bank_sharp),
+            text: const Text('评论'),
+            icon: const Icon(Icons.comment_bank_sharp),
             imageDirection: AxisDirection.left,
           ),
         ],

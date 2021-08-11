@@ -6,16 +6,15 @@ import 'package:flutter/widgets.dart';
 class WechatInputMessageController extends ChangeNotifier {
   bool _hiddenKeyboard = false;
 
-  hiddenKeyboard() {
+  void hiddenKeyboard() {
     _hiddenKeyboard = true;
     notifyListeners();
   }
 }
 
 class WechatInputMessageWidget extends StatefulWidget {
-  final WechatInputMessageController controller;
-
   const WechatInputMessageWidget({this.controller, Key key}) : super(key: key);
+  final WechatInputMessageController controller;
 
   @override
   _WechatInputMessageWidgetState createState() =>
@@ -24,7 +23,7 @@ class WechatInputMessageWidget extends StatefulWidget {
 
 class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
     with SingleTickerProviderStateMixin {
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   Animation _animation;
   AnimationController _animationController;
 
@@ -37,7 +36,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
     });
 
     _animationController = AnimationController(
-        duration: Duration(
+        duration: const Duration(
           milliseconds: 250,
         ),
         vsync: this);
@@ -65,19 +64,20 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
 
   @override
   Widget build(BuildContext context) {
-    return bottom_input();
+    return _bottom_input();
   }
 
-  Widget bottom_input() {
+  // ignore: non_constant_identifier_names
+  Widget _bottom_input() {
     return SafeArea(
       top: false,
       child: Container(
         padding: const EdgeInsets.only(top: 10),
         alignment: Alignment.topCenter,
         child: Column(
-          children: [
+          children: <Widget>[
             Row(
-              children: [
+              children: <Widget>[
                 IconButton(
                   icon: const Icon(Icons.keyboard_voice),
                   onPressed: () {
@@ -90,7 +90,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
                   width: 10,
                 ),
                 Expanded(
-                  child: input(),
+                  child: _input(),
                 ),
                 const SizedBox(
                   width: 10,
@@ -120,7 +120,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
     );
   }
 
-  Widget input() {
+  Widget _input() {
     return Container(
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
@@ -135,7 +135,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
         minLines: 1,
         textInputAction: TextInputAction.send,
         focusNode: _focusNode,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'input message',
           filled: true,
           fillColor: Colors.white,
@@ -147,13 +147,13 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
     );
   }
 
-  Widget input2() {
+  Widget _input2() {
     return TextField(
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       minLines: 1,
       focusNode: _focusNode,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'input message',
         filled: true,
         fillColor: Colors.white,
@@ -180,39 +180,39 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
           crossAxisCount: 4,
           children: [
             TextButton(
-              child: Text('Menu 1'),
+              child: const Text('Menu 1'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 2'),
+              child: const Text('Menu 2'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 3'),
+              child: const Text('Menu 3'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 4'),
+              child: const Text('Menu 4'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 5'),
+              child: const Text('Menu 5'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 6'),
+              child: const Text('Menu 6'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 7'),
+              child: const Text('Menu 7'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 8'),
+              child: const Text('Menu 8'),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 9'),
+              child: const Text('Menu 9'),
               onPressed: () {},
             ),
           ],

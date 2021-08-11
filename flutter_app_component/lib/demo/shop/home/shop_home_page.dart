@@ -26,7 +26,7 @@ class _ShopHomePageState extends State<ShopHomePage>
     '其他',
   ];
 
-  final List<ShopInfo> recommendList = [
+  final List<ShopInfo> _recommendList = [
     ShopInfo(
       icon: JDAssetBundle.getImgPath('shop_0'),
       shop_name: '洗发水-你值得拥有',
@@ -182,9 +182,9 @@ class _ShopHomePageState extends State<ShopHomePage>
                   mainAxisSpacing: 15,
                   childAspectRatio: 1.0 //显示区域宽高相等
                   ),
-              itemCount: recommendList.length,
+              itemCount: _recommendList.length,
               itemBuilder: (context, index) {
-                ShopInfo shopInfo = recommendList[index];
+                ShopInfo shopInfo = _recommendList[index];
                 //如果显示到最后一个并且Icon总数小于200时继续获取数据
                 return _buildGirdItem(shopInfo);
               }),
@@ -266,10 +266,10 @@ class _ShopHomePageState extends State<ShopHomePage>
         crossAxisCount:
             MediaQuery.of(context).orientation == Orientation.portrait ? 2 : 4,
         mainAxisSpacing: 10.0,
-        itemCount: recommendList.length * 2,
+        itemCount: _recommendList.length * 2,
         crossAxisSpacing: 10.0,
         itemBuilder: (BuildContext context, int index) {
-          ShopInfo shopInfo = recommendList[index % recommendList.length];
+          ShopInfo shopInfo = _recommendList[index % _recommendList.length];
           return _buildProductItem(index);
         },
         staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),

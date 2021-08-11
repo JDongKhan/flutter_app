@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 
 /// @author jd
 
+///转屏处理器，拦截导航，统一处理
 final OrientationObserver defaultOrientationObserver = OrientationObserver();
 
 abstract class OrientationAware {

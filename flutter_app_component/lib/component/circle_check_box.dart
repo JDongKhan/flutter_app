@@ -3,9 +3,9 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
-///圆形checkbox
+///圆形checkbox，自定义样式的checkbox
 class CircleCheckBox extends StatelessWidget {
-  CircleCheckBox({
+  const CircleCheckBox({
     Key key,
     this.value = false,
     this.unCheckColor = Colors.grey,

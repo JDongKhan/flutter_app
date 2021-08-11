@@ -19,19 +19,28 @@ class _ShopMyPageState extends State<ShopMyPage>
     with AutomaticKeepAliveClientMixin {
   int _appBarStyle = 0;
   bool _showToTopBtn = false; //是否显示“返回到顶部”按钮
-  ScrollController _controller = new ScrollController();
+  final ScrollController _controller = ScrollController();
 
-  final _headMenu = [
-    {'icon': Icons.memory, 'title': "钻石"},
-    {'icon': Icons.filter_center_focus, 'title': "关注"},
+  final List _headMenu = [
+    {
+      'icon': Icons.memory,
+      'title': '钻石',
+    },
+    {
+      'icon': Icons.filter_center_focus,
+      'title': '关注',
+    },
     {
       'icon': Icons.border_horizontal,
-      'title': "足迹",
+      'title': '足迹',
     },
-    {'icon': Icons.contact_phone, 'title': "优惠券"}
+    {
+      'icon': Icons.contact_phone,
+      'title': '优惠券',
+    }
   ];
 
-  var _orderMenu = [
+  final List _orderMenu = [
     {
       'icon': Icons.payment,
       'title': '待支付',
@@ -53,13 +62,31 @@ class _ShopMyPageState extends State<ShopMyPage>
       'title': '退款/售后',
     },
   ];
-  var gridMenu = [
-    {'icon': Icons.assignment, 'title': '发票'},
-    {'icon': Icons.contact_phone, 'title': '客服'},
-    {'icon': Icons.border_color, 'title': '意见反馈'},
-    {'icon': Icons.help, 'title': '帮助'},
-    {'icon': Icons.people, 'title': '合作伙伴'},
-    {'icon': Icons.color_lens, 'title': '我的余额'},
+  final List _gridMenu = [
+    {
+      'icon': Icons.assignment,
+      'title': '发票',
+    },
+    {
+      'icon': Icons.contact_phone,
+      'title': '客服',
+    },
+    {
+      'icon': Icons.border_color,
+      'title': '意见反馈',
+    },
+    {
+      'icon': Icons.help,
+      'title': '帮助',
+    },
+    {
+      'icon': Icons.people,
+      'title': '合作伙伴',
+    },
+    {
+      'icon': Icons.color_lens,
+      'title': '我的余额',
+    },
   ];
 
   @override
@@ -85,7 +112,7 @@ class _ShopMyPageState extends State<ShopMyPage>
       title: InkWell(
         onTap: () {
           setState(() {
-            _appBarStyle = (_appBarStyle == 0 ? 1 : 0);
+            _appBarStyle = _appBarStyle == 0 ? 1 : 0;
           });
         },
         child: const Text(
@@ -105,7 +132,7 @@ class _ShopMyPageState extends State<ShopMyPage>
           alignment: AlignmentDirectional.bottomCenter,
           children: <Widget>[
             Image.asset(
-              JDAssetBundle.getImgPath("user_head"),
+              JDAssetBundle.getImgPath('user_head'),
               height: double.infinity,
               width: double.infinity,
               fit: BoxFit.fitWidth,
@@ -127,7 +154,7 @@ class _ShopMyPageState extends State<ShopMyPage>
         title: InkWell(
           onTap: () {
             setState(() {
-              _appBarStyle = (_appBarStyle == 0 ? 1 : 0);
+              _appBarStyle = _appBarStyle == 0 ? 1 : 0;
             });
           },
           child: const Text(
@@ -136,7 +163,7 @@ class _ShopMyPageState extends State<ShopMyPage>
           ),
         ),
         background: Image.asset(
-          JDAssetBundle.getImgPath("user_head"),
+          JDAssetBundle.getImgPath('user_head'),
           fit: BoxFit.cover,
         ),
       ),
@@ -151,7 +178,7 @@ class _ShopMyPageState extends State<ShopMyPage>
               onTap: () {
                 JDNavigationUtil.push(MemberHomePage());
               },
-              child: Image.asset(JDAssetBundle.getImgPath("head")),
+              child: Image.asset(JDAssetBundle.getImgPath('head')),
             ),
           ],
         ),
@@ -257,24 +284,24 @@ class _ShopMyPageState extends State<ShopMyPage>
                 Container(
                   height: 50,
                   alignment: Alignment.center,
-                  padding: EdgeInsets.only(left: 10),
-                  child: Text(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: const Text(
                     '常用功能',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
             ),
-            Divider(),
+            const Divider(),
             GridView.count(
               crossAxisCount: 4,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               childAspectRatio: 1,
               shrinkWrap: true, //解决gridview不能在customScrollView显示的问题
-              children: gridMenu.map((item) => _getItem(item)).toList(),
+              children: _gridMenu.map((item) => _getItem(item)).toList(),
             )
           ],
         ),
@@ -304,7 +331,7 @@ class _ShopMyPageState extends State<ShopMyPage>
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.center,
-        child: Text(
+        child: const Text(
           '--- 为您推荐-人气商品 ---',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
@@ -363,9 +390,10 @@ class _ShopMyPageState extends State<ShopMyPage>
                 controller: _controller,
                 slivers: <Widget>[
                   //AppBar，包含一个导航栏
-                  _appBarStyle == 0
-                      ? _buildStyle0AppBar()
-                      : _buildStyle1AppBar(),
+                  if (_appBarStyle == 0)
+                    _buildStyle0AppBar()
+                  else
+                    _buildStyle1AppBar(),
 
                   SliverPadding(
                     padding: const EdgeInsets.all(10),

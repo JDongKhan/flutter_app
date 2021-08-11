@@ -7,11 +7,16 @@ import 'bubble_widget.dart';
 /// @author jd
 
 class Message {
+  const Message({
+    this.time,
+    this.message,
+    this.isMe,
+    this.name,
+  });
   final String time;
   final String message;
   final bool isMe;
   final String name;
-  const Message({this.time, this.message, this.isMe, this.name});
 }
 
 class WechatMessageListWidget extends StatefulWidget {
@@ -22,13 +27,13 @@ class WechatMessageListWidget extends StatefulWidget {
 
 class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
   List message = [];
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
     message = List.generate(
       50,
-      (index) => Message(
+      (int index) => Message(
         time: '2021-01-01 06:30:$index',
         message:
             ' this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message  this is $index message',
@@ -47,11 +52,11 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
     super.dispose();
   }
 
-  _jumpToBottom() {
+  void _jumpToBottom() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       ///首次加载需要调两次才能滚动到底
       _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
-      Future.delayed(Duration(milliseconds: 50), () {
+      Future.delayed(const Duration(milliseconds: 50), () {
         _scrollController.jumpTo(_scrollController.position.maxScrollExtent);
       });
     });
@@ -72,15 +77,15 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
           return Container(
             padding:
                 const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 10),
-            child: m.isMe ? myMessage(m) : otherMessage(m),
+            child: m.isMe ? _myMessage(m) : _otherMessage(m),
           );
         });
   }
 
-  Widget otherMessage(Message m) {
+  Widget _otherMessage(Message m) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
+      children: <Widget>[
         Container(
           width: 40,
           height: 40,
@@ -112,9 +117,9 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
     );
   }
 
-  Widget myMessage(Message m) {
+  Widget _myMessage(Message m) {
     return Row(
-      children: [
+      children: <Widget>[
         Expanded(
           child: Container(
             alignment: Alignment.centerRight,

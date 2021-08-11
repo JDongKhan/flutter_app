@@ -33,7 +33,7 @@ class JDUtils {
   }
 
   static double getTitleFontSize(String title) {
-    if (ObjectUtil.isEmpty(title) || title.length < 10) {
+    if (ObjectUtils.isEmpty(title) || title.length < 10) {
       return 18.0;
     }
     int count = 0;

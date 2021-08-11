@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
+/// 输入弹框
 OverlayEntry overlayEntry;
 
 void dismissInputMessage() {
@@ -14,13 +15,13 @@ void dismissInputMessage() {
 
 void showInputMessage(BuildContext context) {
   dismissInputMessage();
-  overlayEntry = OverlayEntry(builder: (context) {
+  overlayEntry = OverlayEntry(builder: (BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black.withOpacity(
         0.4,
       ),
       body: Column(
-        children: [
+        children: <Widget>[
           Expanded(
             child: GestureDetector(
                 behavior: HitTestBehavior.opaque,
@@ -41,7 +42,7 @@ void showInputMessage(BuildContext context) {
     );
   });
 
-  OverlayState overlay = Overlay.of(context);
+  final OverlayState overlay = Overlay.of(context);
   overlay.insert(overlayEntry);
 }
 
@@ -51,10 +52,10 @@ class InputMessageWidget extends StatefulWidget {
 }
 
 class _InputMessageWidgetState extends State<InputMessageWidget> {
-  FocusNode _focusNode = FocusNode();
+  final FocusNode _focusNode = FocusNode();
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    WidgetsBinding.instance.addPostFrameCallback((Duration timeStamp) {
       _focusNode.requestFocus();
     });
     super.initState();
@@ -65,20 +66,20 @@ class _InputMessageWidgetState extends State<InputMessageWidget> {
     return Container(
       margin: const EdgeInsets.only(top: 20),
       child: Column(
-        children: [
+        children: <Widget>[
           Row(
-            children: [
+            children: <Widget>[
               Expanded(
                 child: _input(),
               ),
               Container(
                 width: 100,
                 child: Column(
-                  children: [
-                    Icon(Icons.open_in_full_outlined),
+                  children: <Widget>[
+                    const Icon(Icons.open_in_full_outlined),
                     TextButton(
                       onPressed: () {},
-                      child: Text('发布'),
+                      child: const Text('发布'),
                     ),
                   ],
                 ),
@@ -86,13 +87,13 @@ class _InputMessageWidgetState extends State<InputMessageWidget> {
             ],
           ),
           Row(
-            children: [
+            children: <Widget>[
               IconButton(
-                  icon: Icon(Icons.message),
+                  icon: const Icon(Icons.message),
                   onPressed: () {
                     dismissInputMessage();
                   }),
-              IconButton(icon: Icon(Icons.face), onPressed: () {}),
+              IconButton(icon: const Icon(Icons.face), onPressed: () {}),
             ],
           ),
         ],

@@ -57,7 +57,7 @@ class _TabHomeFirstPageState extends State<TabHomeFirstPage> {
 
   Widget _buildSearch() {
     return Container(
-      color: Colors.black87,
+      color: Colors.black,
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
         children: [
@@ -68,14 +68,14 @@ class _TabHomeFirstPageState extends State<TabHomeFirstPage> {
           IconButton(
               icon: const Icon(
                 Icons.airplay,
-                size: 22,
+                size: 18,
                 color: Colors.white,
               ),
               onPressed: () {}),
           IconButton(
               icon: const Icon(
                 Icons.shopping_cart,
-                size: 22,
+                size: 18,
                 color: Colors.white,
               ),
               onPressed: () {}),
@@ -103,7 +103,7 @@ class _TabHomeFirstPageState extends State<TabHomeFirstPage> {
                 const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),
             title: Text(
               content.title,
-              style: const TextStyle(color: Colors.black87, fontSize: 18),
+              style: const TextStyle(color: Colors.black87, fontSize: 16),
             ),
             subtitle: Container(
               margin: const EdgeInsets.only(

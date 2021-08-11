@@ -15,10 +15,11 @@ class WechatFriendCircleNavigatorController extends ChangeNotifier {
 }
 
 class WechatFriendCircleNavigator extends StatefulWidget {
-  final WechatFriendCircleNavigatorController controller;
   const WechatFriendCircleNavigator({
     @required this.controller,
   });
+  final WechatFriendCircleNavigatorController controller;
+
   @override
   _WechatFriendCircleNavigatorState createState() =>
       _WechatFriendCircleNavigatorState();
@@ -73,7 +74,7 @@ class _WechatFriendCircleNavigatorState
                         onTap: () {
                           Navigator.of(context).pop();
                         },
-                        child: IconButton(
+                        child: const IconButton(
                           icon: Icon(
                             Icons.arrow_back_ios,
                             color: Colors.white,
@@ -81,7 +82,7 @@ class _WechatFriendCircleNavigatorState
                         ),
                       ),
                       IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.camera_alt,
                             color: Colors.white,
                           ),

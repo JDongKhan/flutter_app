@@ -17,12 +17,13 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         title: const Text('发现'),
       ),
       body: Container(
         color: Colors.grey[100],
         child: ListView(
-          children: [
+          children: <Widget>[
             Container(
               color: Colors.white,
               child: GestureDetector(

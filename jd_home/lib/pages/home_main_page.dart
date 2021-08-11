@@ -16,10 +16,11 @@ import 'package:jd_home/models/home_model.dart';
 import 'package:jd_home/pages/detail/home_Info_detail_page.dart';
 import 'package:jd_home/pages/detail/home_main_detail_page.dart';
 import 'package:jd_home/pages/home_searchbar_delegate.dart';
-import 'package:jd_home/viewmodel/home_list_view_model.dart';
-import 'package:jd_home/viewmodel/home_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+
+import 'viewmodel/home_list_view_model.dart';
+import 'viewmodel/home_view_model.dart';
 
 /// jd
 
@@ -319,7 +320,10 @@ class _HomeMainPageState extends State<HomeMainPage>
                 ),
                 TextButton(
                   onPressed: () {},
-                  child: const Text('立即咨询',style: TextStyle(fontSize: 14),),
+                  child: const Text(
+                    '立即咨询',
+                    style: TextStyle(fontSize: 14),
+                  ),
                   style: TextButton.styleFrom(
                     primary: Colors.white,
                     backgroundColor: Colors.blue,
@@ -330,7 +334,10 @@ class _HomeMainPageState extends State<HomeMainPage>
             //content
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(itm['content'],style: TextStyle(fontSize: 12),),
+              child: Text(
+                itm['content'],
+                style: TextStyle(fontSize: 12),
+              ),
             ),
             Container(
               padding: const EdgeInsets.only(

@@ -1,7 +1,10 @@
 /// @author jd
 ///
 /// Object Util.
-class ObjectUtil {
+class ObjectUtils {
+  /// 判断对象是否为null
+  static bool isNull(dynamic s) => s == null;
+
   /// Returns true if the string is null or 0-length.
   static bool isEmptyString(String str) {
     return str == null || str.isEmpty;

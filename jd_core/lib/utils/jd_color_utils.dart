@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 //Color randomColor(){/// 用来返回一个随机色
@@ -19,11 +20,10 @@ import 'package:flutter/material.dart';
 //  return Color.fromARGB(a, r, g, b);//生成argb模式的颜色
 //}
 
-
 class JDRandomProvider {
-  JDRandomProvider._();//私有化构造
-  static final _random= Random();
-  static Random get random =>_random;
+  JDRandomProvider._(); //私有化构造
+  static final _random = Random();
+  static Random get random => _random;
 }
 
 class JDColorUtils {
@@ -41,7 +41,6 @@ class JDColorUtils {
     return Color.fromARGB(a, r, g, b); //生成argb模式的颜色
   }
 
-
   /// 使用方法:
   /// var color1=ColorUtils.parse("#33428A43");
   /// var color2=ColorUtils.parse("33428A43");
@@ -49,8 +48,8 @@ class JDColorUtils {
   ///var color4=ColorUtils.parse("428A43");
   ///
   static Color parse(String code) {
-    Color result =Colors.red;
-    var value = 0 ;
+    Color result = Colors.red;
+    var value = 0;
     if (code.contains("#")) {
       try {
         value = int.parse(code.substring(1), radix: 16);
@@ -58,30 +57,30 @@ class JDColorUtils {
         print(e);
       }
       switch (code.length) {
-        case 1 + 6://6位
+        case 1 + 6: //6位
           result = Color(value + 0xFF000000);
           break;
-        case 1 + 8://8位
+        case 1 + 8: //8位
           result = Color(value);
           break;
         default:
-          result =Colors.red;
+          result = Colors.red;
       }
-    }else {
+    } else {
       try {
         value = int.parse(code, radix: 16);
       } catch (e) {
         print(e);
       }
       switch (code.length) {
-        case  6:
+        case 6:
           result = Color(value + 0xFF000000);
           break;
-        case  8:
+        case 8:
           result = Color(value);
           break;
         default:
-          result =Colors.red;
+          result = Colors.red;
       }
     }
     return result;
@@ -90,4 +89,3 @@ class JDColorUtils {
   static String colorString(Color color) =>
       "#${color.value.toRadixString(16).padLeft(8, '0').toUpperCase()}";
 }
-

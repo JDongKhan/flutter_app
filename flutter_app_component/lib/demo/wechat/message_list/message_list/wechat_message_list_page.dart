@@ -65,84 +65,15 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
           transform: Matrix4.translationValues(0.0, _offset, 0.0),
           child: Scaffold(
             appBar: AppBar(
-              title: Text('微信'),
+              elevation: 1,
+              automaticallyImplyLeading: false,
+              title: const Text('微信'),
               actions: [
                 Builder(
-                  builder: (context) => IconButton(
-                    icon: Icon(Icons.add_circle_outline),
+                  builder: (BuildContext context) => IconButton(
+                    icon: const Icon(Icons.add_circle_outline),
                     onPressed: () {
-                      showPop(
-                        right: 10,
-                        clickCallback: (index) {
-                          print(index);
-                        },
-                        backgroundColor: const Color(0xffaaaaff),
-                        barrierColor: const Color(0x00000000),
-                        width: 110,
-                        context: context,
-                        items: const [
-                          JDButton(
-                            imageDirection: AxisDirection.left,
-                            padding: EdgeInsets.all(0),
-                            middlePadding: 10,
-                            icon: Icon(
-                              Icons.comment,
-                              color: Colors.white,
-                            ),
-                            text: Text(
-                              '发起群聊',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          JDButton(
-                            imageDirection: AxisDirection.left,
-                            padding: EdgeInsets.all(0),
-                            middlePadding: 10,
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                            ),
-                            text: Text(
-                              '添加朋友',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          JDButton(
-                            imageDirection: AxisDirection.left,
-                            padding: EdgeInsets.all(0),
-                            middlePadding: 10,
-                            icon: Icon(
-                              Icons.scanner_rounded,
-                              color: Colors.white,
-                            ),
-                            text: Text(
-                              '扫一扫',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          JDButton(
-                            imageDirection: AxisDirection.left,
-                            padding: EdgeInsets.all(0),
-                            middlePadding: 10,
-                            icon: Icon(
-                              Icons.payment,
-                              color: Colors.white,
-                            ),
-                            text: Text(
-                              '收付款',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      );
+                      _showMenu(context);
                     },
                   ),
                 ),
@@ -150,9 +81,11 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
             ),
             body: ProviderWidget<WechatMessageListViewModel>(
               model: WechatMessageListViewModel(),
-              builder: (context, model) {
+              builder:
+                  (BuildContext context, WechatMessageListViewModel model) {
                 return SmartRefresher(
-                  enablePullUp: true,
+                  enablePullUp: false,
+                  enablePullDown: false,
                   onRefresh: _onRefresh,
                   header: CustomHeader(
                     completeDuration: const Duration(milliseconds: 300),
@@ -181,11 +114,11 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
                   ),
                   controller: _refreshController,
                   child: ListView.separated(
-                      itemBuilder: (context, index) {
+                      itemBuilder: (BuildContext context, int index) {
                         Map item = model.list[index];
                         return _buildListItem(model, item);
                       },
-                      separatorBuilder: (context, index) {
+                      separatorBuilder: (BuildContext context, int index) {
                         return const Divider(
                           height: 1,
                           color: Colors.grey,
@@ -229,9 +162,9 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
   Widget _buildListItem(WechatMessageListViewModel model, Map item) {
     return Slidable(
       controller: _slidableController,
-      actionPane: SlidableDrawerActionPane(),
+      actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
-      actions: [
+      actions: <Widget>[
         IconSlideAction(
           caption: 'Archive',
           color: Colors.blue,
@@ -249,7 +182,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
           },
         ),
       ],
-      secondaryActions: [
+      secondaryActions: <Widget>[
         IconSlideAction(
           caption: 'More',
           color: Colors.black45,
@@ -293,11 +226,86 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
     );
   }
 
-  void _clickAtIndex(context, Map map) {
+  void _clickAtIndex(BuildContext context, Map map) {
     Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => WechatMessageDetailPage(),
+      MaterialPageRoute<WechatMessageDetailPage>(
+        builder: (BuildContext context) => WechatMessageDetailPage(),
       ),
+    );
+  }
+
+  void _showMenu(BuildContext context) {
+    showPop(
+      right: 10,
+      clickCallback: (int index) {
+        print(index);
+      },
+      backgroundColor: const Color(0xffaaaaff),
+      barrierColor: const Color(0x00000000),
+      width: 110,
+      context: context,
+      items: const [
+        JDButton(
+          imageDirection: AxisDirection.left,
+          padding: EdgeInsets.all(0),
+          middlePadding: 10,
+          icon: Icon(
+            Icons.comment,
+            color: Colors.white,
+          ),
+          text: Text(
+            '发起群聊',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        JDButton(
+          imageDirection: AxisDirection.left,
+          padding: EdgeInsets.all(0),
+          middlePadding: 10,
+          icon: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          text: Text(
+            '添加朋友',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        JDButton(
+          imageDirection: AxisDirection.left,
+          padding: EdgeInsets.all(0),
+          middlePadding: 10,
+          icon: Icon(
+            Icons.scanner_rounded,
+            color: Colors.white,
+          ),
+          text: Text(
+            '扫一扫',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+        JDButton(
+          imageDirection: AxisDirection.left,
+          padding: EdgeInsets.all(0),
+          middlePadding: 10,
+          icon: Icon(
+            Icons.payment,
+            color: Colors.white,
+          ),
+          text: Text(
+            '收付款',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ],
     );
   }
 

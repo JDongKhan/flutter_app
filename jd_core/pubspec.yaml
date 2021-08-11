@@ -18,6 +18,11 @@ dependencies:
   dio_cookie_manager: ^1.0.0
   cookie_jar: ^1.0.0
 
+  #网络请求
+  http: ^0.12.2
+  #网络图片库
+  cached_network_image: ^2.2.0
+
   #打开第三方应用
   url_launcher: 5.5.0
   #path

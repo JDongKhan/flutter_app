@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 /// @author jd
 
+//可拖动滚动条，直播模块使用
 class DragProgressBar extends StatefulWidget {
   const DragProgressBar({
     Key key,

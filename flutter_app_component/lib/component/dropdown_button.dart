@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 /// @author jd
 
+///自定义下拉菜单，如意见反馈模块
 class JDDropdownButton<T> extends StatelessWidget {
   JDDropdownButton({
     Key key,
@@ -18,12 +19,12 @@ class JDDropdownButton<T> extends StatelessWidget {
   final T value;
   final Color dropdownColor;
 
-  var _currentValue = '';
-  get currentValue => _currentValue;
+  String _currentValue = '';
+  String get currentValue => _currentValue;
   set currentValue(v) {
     _currentValue = v;
-    if (this.onChanged != null) {
-      this.onChanged(v);
+    if (onChanged != null) {
+      onChanged(v);
     }
   }
 
@@ -39,10 +40,10 @@ class JDDropdownButton<T> extends StatelessWidget {
   }
 
   void _show(BuildContext context) {
-    RenderBox renderBox = context.findRenderObject();
-    var size = renderBox.size;
+    final RenderBox renderBox = context.findRenderObject();
+    final Size size = renderBox.size;
     _overlayEntry = OverlayEntry(
-      builder: (context) => Positioned(
+      builder: (BuildContext context) => Positioned(
         width: size.width,
         child: CompositedTransformFollower(
           link: _layerLink,
@@ -102,7 +103,7 @@ class JDDropdownButton<T> extends StatelessWidget {
               ),
               Expanded(
                 child: Text(
-                  '${_currentValue.length > 0 ? _currentValue : value}',
+                  '${_currentValue.isNotEmpty ? _currentValue : value}',
                   textAlign: TextAlign.left,
                   style: style,
                 ),

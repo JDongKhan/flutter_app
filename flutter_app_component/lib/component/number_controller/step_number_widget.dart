@@ -3,36 +3,38 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 /// @author jd
-/// + - 框
-class NumberControllerWidget extends StatefulWidget {
-  const NumberControllerWidget({
+/// + - 输入编辑框
+class StepNumberWidget extends StatefulWidget {
+  const StepNumberWidget({
     Key key,
     this.height = 30,
     this.width = 40,
     this.iconWidth = 40,
-    this.defultNum = 0,
+    this.value = 0,
     this.min = 0,
     this.max = 99999,
-    this.updateChanged,
+    this.onChanged,
   }) : super(key: key);
   final int max;
   final int min;
   final double height;
   final double width;
   final double iconWidth;
-  final int defultNum;
-  final ValueChanged updateChanged;
+  final int value;
+  final ValueChanged onChanged;
 
   @override
-  _NumberControllerWidgetState createState() => _NumberControllerWidgetState();
+  _StepNumberWidgetState createState() => _StepNumberWidgetState();
 }
 
-class _NumberControllerWidgetState extends State<NumberControllerWidget> {
+class _StepNumberWidgetState extends State<StepNumberWidget> {
   final TextEditingController _textEditingController = TextEditingController();
+  int value;
   @override
   void initState() {
     super.initState();
-    _textEditingController.text = widget.defultNum.toString();
+    value = widget.value;
+    _textEditingController.text = widget.value.toString();
   }
 
   @override
@@ -45,8 +47,8 @@ class _NumberControllerWidgetState extends State<NumberControllerWidget> {
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          CoustomIconButton(icon: Icons.remove),
+        children: <Widget>[
+          _reduceIconButton(),
           Container(
             width: widget.width,
             decoration: const BoxDecoration(
@@ -56,7 +58,7 @@ class _NumberControllerWidgetState extends State<NumberControllerWidget> {
               ),
             ),
             child: TextField(
-              inputFormatters: [
+              inputFormatters: <TextInputFormatter>[
                 FilteringTextInputFormatter(RegExp('[0-9]'), allow: true),
               ],
               controller: _textEditingController,
@@ -80,33 +82,73 @@ class _NumberControllerWidgetState extends State<NumberControllerWidget> {
               ),
             ),
           ),
-          CoustomIconButton(icon: Icons.add, isAdd: true),
+          _addIconButton(),
         ],
       ),
     );
   }
 
-  Widget CoustomIconButton({IconData icon, bool isAdd = false}) {
+  Widget _reduceIconButton() {
+    Function click;
+    if (value > widget.min) {
+      click = _reduceClick;
+    }
     return Container(
       width: widget.width,
       alignment: Alignment.center,
       child: IconButton(
+        // enableFeedback: false,
         iconSize: 20,
         padding: const EdgeInsets.all(0.0),
-        icon: Icon(icon),
-        onPressed: () {
-          var num = int.parse(_textEditingController.text);
-          if (isAdd) {
-            num++;
-          } else {
-            num--;
-          }
-          _textEditingController.text = num.toString();
-          if (widget.updateChanged != null) {
-            widget.updateChanged(num);
-          }
-        },
+        icon: const Icon(Icons.remove),
+        onPressed: click,
       ),
     );
+  }
+
+  Widget _addIconButton() {
+    Function click;
+    if (value < widget.max) {
+      click = _addClick;
+    }
+    return Container(
+      width: widget.width,
+      alignment: Alignment.center,
+      child: IconButton(
+        // enableFeedback: false,
+        iconSize: 20,
+        padding: const EdgeInsets.all(0.0),
+        icon: const Icon(Icons.add),
+        onPressed: click,
+      ),
+    );
+  }
+
+  void _addClick() {
+    int num = int.parse(_textEditingController.text);
+    num++;
+    if (num > widget.max) {
+      num = widget.max;
+    }
+    value = num;
+    _textEditingController.text = num.toString();
+    if (widget.onChanged != null) {
+      widget.onChanged(num);
+    }
+    setState(() {});
+  }
+
+  void _reduceClick() {
+    int num = int.parse(_textEditingController.text);
+    num--;
+    if (num < widget.min) {
+      num = widget.min;
+    }
+    value = num;
+    _textEditingController.text = num.toString();
+    if (widget.onChanged != null) {
+      widget.onChanged(num);
+    }
+    setState(() {});
   }
 }

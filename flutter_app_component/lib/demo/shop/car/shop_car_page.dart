@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/component/circle_check_box.dart';
-import 'package:flutter_app_component/component/number_controller/number_controller_widget.dart';
+import 'package:flutter_app_component/component/number_controller/step_number_widget.dart';
 import 'package:flutter_app_component/demo/databtransfer/notifier/jd_changenotifierprovider.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:jd_core/jd_core.dart';
@@ -80,10 +80,11 @@ class _ShopCarPageState extends State<ShopCarPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('购物车'),
+          elevation: 1,
+          title: const Text('购物车'),
           actions: [
             TextButton(
-              child: Text('添加购物车'),
+              child: const Text('添加购物车'),
               onPressed: () {
                 setState(() {
                   carList.add(
@@ -145,7 +146,7 @@ class _ShopCarPageState extends State<ShopCarPage> {
               const Spacer(),
               Padding(
                 padding: const EdgeInsets.only(left: 20),
-                child: Text("总价: ${cart.totalPrice}"),
+                child: Text('总价: ${cart.totalPrice}'),
               ),
               const SizedBox(
                 width: 10,
@@ -165,7 +166,7 @@ class _ShopCarPageState extends State<ShopCarPage> {
                   onPressed: () {
                     CartModel model =
                         JDChangeNotifierProvider.of<CartModel>(context);
-                    if (model._items.length == 0) {
+                    if (model._items.isEmpty) {
                       JDToast.toast('请选择商品');
                       return;
                     }
@@ -174,7 +175,7 @@ class _ShopCarPageState extends State<ShopCarPage> {
                     Navigator.of(context).push(
                       CupertinoPageRoute(
                         builder: (c) => ShopCar2Page(
-                          shopInfos: shopInfos,
+                          shopInfoList: shopInfos,
                         ),
                       ),
                     );
@@ -254,12 +255,15 @@ class _ShopCarPageState extends State<ShopCarPage> {
                             style: const TextStyle(
                               color: Colors.red,
                               fontSize: 18,
+                              fontFamily: 'PingFang SC',
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          NumberControllerWidget(
-                            updateChanged: (v) {
-                              debugPrint(v);
+                          StepNumberWidget(
+                            min: 0,
+                            max: 10,
+                            onChanged: (v) {
+                              debugPrint(v.toString());
                             },
                           ),
                         ],

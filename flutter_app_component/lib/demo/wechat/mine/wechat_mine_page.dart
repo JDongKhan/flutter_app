@@ -38,7 +38,7 @@ class _WechatMinePageState extends State<WechatMinePage> {
   Widget _buildUserHeadWidget() {
     return Container(
       color: Colors.white,
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         left: 20,
         top: 20,
         right: 10,
@@ -55,13 +55,13 @@ class _WechatMinePageState extends State<WechatMinePage> {
                 height: 100,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
+                children: const [
                   Text('apple'),
                   SizedBox(
                     height: 10,
@@ -74,7 +74,7 @@ class _WechatMinePageState extends State<WechatMinePage> {
                 ],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_sharp,
               size: 16,
             ),
@@ -90,7 +90,7 @@ class _WechatMinePageState extends State<WechatMinePage> {
       child: ListTile(
         leading: Icon(iconData),
         title: Text(menu),
-        trailing: Icon(
+        trailing: const Icon(
           Icons.arrow_forward_ios_rounded,
           size: 16,
         ),

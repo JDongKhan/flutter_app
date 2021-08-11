@@ -45,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
         offstage: controller.showAd,
         child: Container(
           color: Colors.cyan,
-          child: ObjectUtil.isEmpty(bannerList)
+          child: ObjectUtils.isEmpty(bannerList)
               ? Container()
               : Swiper(
                   loop: false,

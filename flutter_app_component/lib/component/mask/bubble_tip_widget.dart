@@ -6,6 +6,17 @@ import 'bubble_painter.dart';
 
 ///提示弹框
 class BubbleTipWidget extends StatefulWidget {
+  const BubbleTipWidget({
+    this.width,
+    this.height,
+    this.radius,
+    this.text = '',
+    this.arrowLocation = ArrowLocation.BOTTOM,
+    this.voidCallback,
+    this.x = 0,
+    this.y = 0,
+  });
+
   ///控件高度
   final double height;
 
@@ -29,16 +40,6 @@ class BubbleTipWidget extends StatefulWidget {
 
   final VoidCallback voidCallback;
 
-  const BubbleTipWidget(
-      {this.width,
-      this.height,
-      this.radius,
-      this.text = "",
-      this.arrowLocation = ArrowLocation.BOTTOM,
-      this.voidCallback,
-      this.x = 0,
-      this.y = 0});
-
   @override
   State<StatefulWidget> createState() => _BubbleTipWidgetState();
 }
@@ -61,12 +62,12 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
 
   @override
   Widget build(BuildContext context) {
-    double arrowHeight = 10;
-    double arrowWidth = 10;
+    const double arrowHeight = 10;
+    const double arrowWidth = 10;
 
     double x = widget.x;
     double y = widget.y;
-    Size size = MediaQuery.of(context).size;
+    final Size size = MediaQuery.of(context).size;
 
     ///计算出位置的中心点
     if (widget.arrowLocation == ArrowLocation.BOTTOM ||
@@ -77,10 +78,10 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     }
 
     ///宽度是否超出
-    bool widthOut = (widget.width + x) > size.width || x < 0;
+    final bool widthOut = (widget.width + x) > size.width || x < 0;
 
     ///高度是否超出
-    bool heightOut = (widget.height + y) > size.height || y < 0;
+    final bool heightOut = (widget.height + y) > size.height || y < 0;
 
     ///不能小于0
     if (x < 0) {
@@ -95,7 +96,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
     }
 
     ///箭头在这个状态下是否需要居中
-    bool arrowCenter = (widget.arrowLocation == ArrowLocation.BOTTOM ||
+    final bool arrowCenter = (widget.arrowLocation == ArrowLocation.BOTTOM ||
             widget.arrowLocation == ArrowLocation.TOP)
         ? !widthOut
         : !heightOut;
@@ -124,10 +125,10 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
 
     EdgeInsets margin = EdgeInsets.zero;
     if (widget.arrowLocation == ArrowLocation.TOP) {
-      margin = EdgeInsets.only(top: arrowHeight, right: 5, left: 5);
+      margin = const EdgeInsets.only(top: arrowHeight, right: 5, left: 5);
     }
 
-    var bubbleBuild = BubbleBuilder()
+    final BubbleBuilder bubbleBuild = BubbleBuilder()
       ..mAngle = widget.radius
       ..mArrowHeight = arrowHeight
       ..mArrowWidth = arrowWidth
@@ -135,7 +136,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
       ..mArrowLocation = widget.arrowLocation
       ..arrowCenter = arrowCenter;
 
-    var alignment = Alignment.centerLeft;
+    Alignment alignment = Alignment.centerLeft;
     if (widget.arrowLocation == ArrowLocation.TOP ||
         widget.arrowLocation == ArrowLocation.BOTTOM) {
       alignment = Alignment.center;
@@ -154,12 +155,12 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
           width: widget.width,
           height: widget.height,
           margin: EdgeInsets.only(left: x, top: y),
-          child: new Stack(
+          child: Stack(
             children: <Widget>[
               ///绘制气泡背景
               CustomPaint(
                   key: paintKey,
-                  size: new Size(widget.width, widget.height),
+                  size: Size(widget.width, widget.height),
                   painter: bubbleBuild.build()),
 
               Align(
@@ -176,7 +177,7 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       Container(
-                        margin: EdgeInsets.only(left: 20),
+                        margin: const EdgeInsets.only(left: 20),
                         height: widget.height,
                         child: Icon(
                           Icons.notifications,
@@ -186,10 +187,11 @@ class _BubbleTipWidgetState extends State<BubbleTipWidget>
                       ),
                       Expanded(
                         child: Container(
-                          margin: EdgeInsets.only(left: 5, right: 5),
+                          margin: const EdgeInsets.only(left: 5, right: 5),
                           child: Text(
                             widget.text,
-                            style: TextStyle(fontSize: 14, color: Colors.black),
+                            style: const TextStyle(
+                                fontSize: 14, color: Colors.black),
                           ),
                         ),
                       )
