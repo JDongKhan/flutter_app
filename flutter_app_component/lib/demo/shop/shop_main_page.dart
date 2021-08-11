@@ -63,9 +63,14 @@ class _ShopMainPageState extends State<ShopMainPage>
       bottomNavigationBar: BottomNavigationBar(
         // 底部导航
         items: _tabs
-            .map((e) => BottomNavigationBarItem(
-                icon: Icon(e["icon"] as IconData),
-                title: Text(e["title"].toString())))
+            .map(
+              (e) => BottomNavigationBarItem(
+                icon: Icon(e['icon'] as IconData),
+                title: Text(
+                  e['title'].toString(),
+                ),
+              ),
+            )
             .toList(),
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,

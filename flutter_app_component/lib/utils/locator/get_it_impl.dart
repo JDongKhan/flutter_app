@@ -1,4 +1,4 @@
-part of 'jd_get_it.dart';
+part of 'get_it.dart';
 
 /// Two handy function that helps me to express my intention clearer and shorter to check for runtime
 /// errors

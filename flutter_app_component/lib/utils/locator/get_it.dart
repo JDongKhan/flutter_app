@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:async/async.dart';
 import 'package:flutter/material.dart';
 
-part 'jd_get_it_impl.dart';
+part 'get_it_impl.dart';
 
 /// If your singleton that you register wants to use the manually signalling
 /// of its ready state, it can implement this interface class instead of using
