@@ -2,12 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/debug/menu_page.dart';
 import 'package:jd_core/jd_core.dart';
 
-import 'log_console.dart';
-
 // ignore: avoid_classes_with_only_static_members
-class LogMenu {
+class FloatMenuController {
   static bool isShow = false;
   static bool isShowLogConsole = false;
   static OverlayEntry _overlayEntry;
@@ -22,23 +21,21 @@ class LogMenu {
     }
     _overlayEntry = OverlayEntry(
       builder: (BuildContext context) {
-        return LogMenuWidget();
+        return FloatMenuWidget();
       },
     );
     Overlay.of(context).insert(_overlayEntry);
     isShow = true;
   }
 
+  // ignore: avoid_void_async
   static void _gotoLogConsole(BuildContext context) async {
     if (isShowLogConsole) {
       return;
     }
     isShowLogConsole = true;
-    var logConsole = LogConsole(
-      showCloseButton: true,
-      dark: Theme.of(context).brightness == Brightness.dark,
-    );
-    await JDNavigationUtil.push(logConsole);
+    final MenuPage menu = MenuPage();
+    await JDNavigationUtil.push(menu);
     isShowLogConsole = false;
   }
 
@@ -49,15 +46,15 @@ class LogMenu {
   }
 }
 
-class LogMenuWidget extends StatefulWidget {
+class FloatMenuWidget extends StatefulWidget {
   @override
-  _LogMenuWidgetState createState() => _LogMenuWidgetState();
+  _FloatMenuWidgetState createState() => _FloatMenuWidgetState();
 }
 
 double left = 0;
 double top = 100;
 
-class _LogMenuWidgetState extends State<LogMenuWidget> {
+class _FloatMenuWidgetState extends State<FloatMenuWidget> {
   int _animalDuration = 0;
   double _width = 60, _height = 60;
   @override
@@ -75,10 +72,10 @@ class _LogMenuWidgetState extends State<LogMenuWidget> {
       height: _height,
       child: GestureDetector(
         onTap: () {
-          LogMenu._gotoLogConsole(context);
+          FloatMenuController._gotoLogConsole(context);
         },
         onDoubleTap: () {
-          LogMenu.remove();
+          FloatMenuController.remove();
         },
         onPanStart: (DragStartDetails details) {
           setState(() {

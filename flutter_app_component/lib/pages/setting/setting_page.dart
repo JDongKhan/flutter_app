@@ -80,25 +80,26 @@ class _SettingPageState extends State {
             _buildCell('开发者设置', onTap: () {
               JDNavigationUtil.push(DeveloperSettingPage());
             }),
-            context.watch<JDAppUserInfo>().isLogin
-                ? Container(
-                    margin: const EdgeInsets.only(top: 40),
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    height: 50,
-                    child: FlatButton(
-                      color: Colors.redAccent,
-                      highlightColor: Colors.green[700],
-                      colorBrightness: Brightness.dark,
-                      splashColor: Colors.grey,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20.0)),
-                      child: const Text('退出'),
-                      onPressed: () {
-                        _logoutAction();
-                      },
-                    ),
-                  )
-                : Container(),
+            if (context.watch<JDAppUserInfo>().isLogin)
+              Container(
+                margin: const EdgeInsets.only(top: 40),
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                height: 50,
+                child: FlatButton(
+                  color: Colors.redAccent,
+                  highlightColor: Colors.green[700],
+                  colorBrightness: Brightness.dark,
+                  splashColor: Colors.grey,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: const Text('退出'),
+                  onPressed: () {
+                    _logoutAction();
+                  },
+                ),
+              )
+            else
+              Container(),
           ],
         ),
       ),

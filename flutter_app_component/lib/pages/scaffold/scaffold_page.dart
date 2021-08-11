@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_component/component/logger/logger_console_on_shake.dart';
 import 'package:flutter_app_component/component/privacy_widget.dart';
 import 'package:flutter_app_component/component/web/web_page.dart';
+import 'package:flutter_app_component/debug/menu_console_on_shake.dart';
 import 'package:flutter_app_component/models/models.dart';
 import 'package:flutter_app_component/pages/leftdrawer/left_drawer.dart';
 import 'package:flutter_app_component/service/request.dart';
@@ -127,7 +127,7 @@ class ScaffoldPageState extends State<ScaffoldPage>
           ],
         ),
       ),
-      child: LogConsoleOnShake(
+      child: MenuConsoleOnShake(
         child: Scaffold(
           key: _scaffoldKey,
           drawer: _drawer, //抽屉

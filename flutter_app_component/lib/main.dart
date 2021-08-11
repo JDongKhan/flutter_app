@@ -16,11 +16,11 @@ import 'package:jd_core/utils/jd_appinfo.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'component/logger/ume_logger/logger_plugin.dart';
+import 'debug/environment/environment_page.dart';
+import 'debug/ume_logger/logger_plugin.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/jd_appuserinfo.dart';
 import 'pages/error/error_page.dart';
-import 'service/page/environment_page.dart';
 
 ///入口类
 void main() {

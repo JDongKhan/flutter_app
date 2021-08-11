@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/service/environment.dart';
 import 'package:flutter_ume/flutter_ume.dart';
 import 'package:flutter_ume/util/floating_widget.dart';
 import 'package:jd_core/jd_core.dart';
+import 'package:jd_core/utils/jd_enum_utils.dart';
 
 /// @author jd
 
@@ -28,9 +30,15 @@ class EnvironmentPage extends StatefulWidget implements Pluggable {
 }
 
 class _EnvironmentPageState extends State<EnvironmentPage> {
-  List _environments = ['PRD', 'SIT', 'PRE'];
+  final List _environments = ['prd', 'sit', 'pre'];
 
-  String _currentEnvironment = 'PRD';
+  String _currentEnvironment = 'prd';
+
+  @override
+  void initState() {
+    _currentEnvironment = EnumUtils.enumValueToString(Environments.environment);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +49,13 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
             .map(
               (e) => ListTile(
                 title: Text(e),
-                trailing: _currentEnvironment == e ? Icon(Icons.check) : null,
+                trailing:
+                    _currentEnvironment == e ? const Icon(Icons.check) : null,
                 onTap: () {
                   setState(() {
                     _currentEnvironment = e;
+                    //初始化环境配置
+                    Environments.init(environment: e);
                   });
                 },
               ),

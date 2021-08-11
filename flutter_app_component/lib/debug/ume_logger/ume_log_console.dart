@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/debug/logger/log_console.dart';
 import 'package:logger/logger.dart';
-
-import '../log_console.dart';
 
 /// @author jd
 

@@ -1,25 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/logger/log_menu.dart';
+import 'package:flutter_app_component/debug/float_menu_controller.dart';
 
 import 'shake_detector.dart';
 
-class LogConsoleOnShake extends StatefulWidget {
-  final Widget child;
-  final bool dark;
-  final bool debugOnly;
-
-  LogConsoleOnShake({
+class MenuConsoleOnShake extends StatefulWidget {
+  const MenuConsoleOnShake({
     @required this.child,
     this.dark,
     this.debugOnly = true,
   });
 
+  final Widget child;
+  final bool dark;
+  final bool debugOnly;
+
   @override
-  _LogConsoleOnShakeState createState() => _LogConsoleOnShakeState();
+  _MenuConsoleOnShakeState createState() => _MenuConsoleOnShakeState();
 }
 
-class _LogConsoleOnShakeState extends State<LogConsoleOnShake> {
+class _MenuConsoleOnShakeState extends State<MenuConsoleOnShake> {
   ShakeDetector _detector;
 
   @override
@@ -41,13 +41,13 @@ class _LogConsoleOnShakeState extends State<LogConsoleOnShake> {
     return widget.child;
   }
 
-  _init() {
+  void _init() {
     _detector = ShakeDetector(onPhoneShake: _openLogConsole);
     _detector.startListening();
   }
 
-  _openLogConsole() async {
-    LogMenu.show(context);
+  void _openLogConsole() async {
+    FloatMenuController.show(context);
   }
 
   @override

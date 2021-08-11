@@ -79,12 +79,11 @@ class LogConsole extends StatefulWidget {
 }
 
 class RenderedEvent {
+  RenderedEvent(this.id, this.level, this.span, this.lowerCaseText);
   final int id;
   final Level level;
   final TextSpan span;
   final String lowerCaseText;
-
-  RenderedEvent(this.id, this.level, this.span, this.lowerCaseText);
 }
 
 class _LogConsoleState extends State<LogConsole> {
