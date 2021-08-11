@@ -59,19 +59,19 @@ class WaitingTimeOutException implements Exception {
         'GetIt: There was a timeout while waiting for an instance to signal ready');
     // ignore: avoid_print
     print('The following instance types where waiting for completion');
-    for (final entry in areWaitedBy.entries) {
+    for (final MapEntry<String, List<String>> entry in areWaitedBy.entries) {
       // ignore: avoid_print
       print('${entry.value} is waiting for ${entry.key}');
     }
     // ignore: avoid_print
     print('The following instance types have NOT signalled ready yet');
-    for (final entry in notReadyYet) {
+    for (final String entry in notReadyYet) {
       // ignore: avoid_print
       print(entry);
     }
     // ignore: avoid_print
     print('The following instance types HAVE signalled ready yet');
-    for (final entry in areReady) {
+    for (final String entry in areReady) {
       // ignore: avoid_print
       print(entry);
     }
