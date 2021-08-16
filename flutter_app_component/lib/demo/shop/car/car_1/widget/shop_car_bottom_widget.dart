@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/circle_check_box.dart';
 import 'package:flutter_app_component/demo/shop/car/car_1/vm/shop_car_view_model.dart';
-import 'package:flutter_app_component/demo/shop/car/shop_car2_page.dart';
+import 'package:flutter_app_component/demo/shop/car/car_2/shop_car2_page.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:jd_core/utils/jd_toast_utils.dart';
 import 'package:provider/provider.dart';
