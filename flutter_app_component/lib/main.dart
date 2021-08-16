@@ -28,7 +28,7 @@ void main() {
   //可以从编译参数获取环境变量，用以更改
   const String env = String.fromEnvironment('Env', defaultValue: 'prd');
   //初始化环境配置
-  Environments.init(environment: env);
+  environments.init(env: env);
 
   if (JDAppInfo.isAndroid || JDAppInfo.isIOS) {
     // Some android/ios specific code

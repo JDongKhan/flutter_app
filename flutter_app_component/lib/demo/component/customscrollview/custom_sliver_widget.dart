@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/rendering.dart';
 
@@ -14,10 +16,43 @@ class CustomSliverWidget extends SingleChildRenderObjectWidget {
 class CustomSliver extends RenderSliverSingleBoxAdapter {
   @override
   void performLayout() {
-    //将SliverConstraints转化为BoxConstraints ，对child进行layout
+    if (child == null) {
+      geometry = SliverGeometry.zero;
+      return;
+    }
+
+    final SliverConstraints constraints = this.constraints;
+    final bool active = constraints.overlap < 0.0;
+    //头部滑动的距离
+    final double overscrolledExtent =
+        constraints.overlap < 0.0 ? constraints.overlap.abs() : 0.0;
+
     child.layout(constraints.asBoxConstraints(), parentUsesSize: true);
-    //计算绘制大小
-    // final double paintedChildSize = calculatePaintOffset(constraints, from: 0.0, to: childExtent);
-    //计
+    double layoutExtent = child.size.height;
+    print('layoutExtent = $layoutExtent');
+    child.layout(
+        constraints.asBoxConstraints(
+            maxExtent: layoutExtent + overscrolledExtent),
+        parentUsesSize: true);
+    if (active) {
+      geometry = SliverGeometry(
+        scrollExtent: layoutExtent,
+        paintOrigin: min(overscrolledExtent - layoutExtent, 0),
+        paintExtent: max(max(child.size.height, layoutExtent), 0.0),
+        maxPaintExtent: max(max(child.size.height, layoutExtent), 0.0),
+        layoutExtent: min(overscrolledExtent, layoutExtent),
+      );
+    } else {
+      geometry = SliverGeometry.zero;
+      // geometry = SliverGeometry(
+      //   scrollExtent: layoutExtent,
+      //   paintOrigin: 0,
+      //   visible: true,
+      //   paintExtent: layoutExtent,
+      //   maxPaintExtent: layoutExtent,
+      //   layoutExtent: layoutExtent,
+      // );
+    }
+    setChildParentData(child, constraints, geometry);
   }
 }

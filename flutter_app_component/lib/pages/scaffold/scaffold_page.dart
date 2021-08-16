@@ -268,7 +268,7 @@ class ScaffoldPageState extends State<ScaffoldPage>
                           child: GestureDetector(
                             child: Container(
                               alignment: Alignment.center,
-                              color: Theme.of(context).primaryColor,
+                              color: Colors.blue,
                               child: const Text('同意'),
                             ),
                             onTap: () {

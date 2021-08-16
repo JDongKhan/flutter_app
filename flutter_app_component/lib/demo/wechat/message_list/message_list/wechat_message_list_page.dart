@@ -13,6 +13,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import '../../wechat_main_page.dart';
 import '../message_detail/wechat_message_detail_page.dart';
 import 'wechat_message_list_bottom_menu.dart';
+import 'wechat_scroll_controller.dart';
 
 /// @author jd
 
@@ -21,23 +22,56 @@ class WechatMessageListPage extends StatefulWidget {
   _WechatMessageListPageState createState() => _WechatMessageListPageState();
 }
 
-enum PageStatus {
-  onePage,
-  twoPage,
-}
-
 class _WechatMessageListPageState extends State<WechatMessageListPage>
     with AutomaticKeepAliveClientMixin, SingleTickerProviderStateMixin {
-  SlidableController _slidableController = SlidableController();
-  RefreshController _refreshController = RefreshController();
+  final SlidableController _slidableController = SlidableController();
+  final RefreshController _refreshController = RefreshController();
+  // final ScrollController _scrollController = ScrollController();
   double _offset = 0;
-  PageStatus _status = PageStatus.onePage;
-  bool _animaling = false; //是否正在动画
   double _opacity = 0;
+  bool _drag = false;
+
+  DraggableSheetExtent _extent;
+  DraggableScrollableSheetScrollController _scrollController;
 
   @override
   void initState() {
+    _extent = DraggableSheetExtent(
+      listener: _setExtent,
+      onEndListener: _onEnd,
+    );
+    _scrollController =
+        DraggableScrollableSheetScrollController(extent: _extent);
+
     super.initState();
+  }
+
+  //滑动过程
+  void _setExtent() {
+    setState(() {
+      _offset = _extent.currentExtent;
+      print('offset-1:$_offset');
+      if (_offset > 130) {
+        _handleOpacity(_offset);
+      }
+    });
+  }
+
+  //滑动结束
+  void _onEnd() {
+    setState(() {
+      _handlePullEnd();
+    });
+    print('_onEnd:$_offset');
+  }
+
+  //显示主页面
+  void _showMainPage() {
+    setState(() {
+      _offset = 0;
+      _opacity = 0;
+      hiddenBottomBar(false);
+    });
   }
 
   @override
@@ -47,16 +81,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
         WeChatMessageListBottomMenu(
           opacity: _opacity,
           onBack: () {
-            setState(() {
-              _offset = 0;
-              _opacity = 0;
-              _animaling = true;
-              hiddenBottomBar(false);
-              _status = PageStatus.onePage;
-            });
-            Future.delayed(const Duration(milliseconds: 1000), () {
-              _animaling = false;
-            });
+            _showMainPage();
           },
         ),
         AnimatedContainer(
@@ -67,7 +92,12 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
             appBar: AppBar(
               elevation: 1,
               automaticallyImplyLeading: false,
-              title: const Text('微信'),
+              title: GestureDetector(
+                onTap: () {
+                  _showMainPage();
+                },
+                child: const Text('微信'),
+              ),
               actions: [
                 Builder(
                   builder: (BuildContext context) => IconButton(
@@ -83,48 +113,30 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
               model: WechatMessageListViewModel(),
               builder:
                   (BuildContext context, WechatMessageListViewModel model) {
-                return SmartRefresher(
-                  enablePullUp: false,
-                  enablePullDown: false,
-                  onRefresh: _onRefresh,
-                  header: CustomHeader(
-                    completeDuration: const Duration(milliseconds: 300),
-                    onOffsetChange: (double offset) {
-                      if (_status == PageStatus.twoPage) return;
-                      //防抖动
-                      if (_animaling) return;
-                      if (offset < 0) return;
-
-                      print('---- $offset --- $_offset');
-                      setState(() {
-                        if (offset > 130 && (offset - _offset) < 10) {
-                          _handleOpacity(offset);
-                        }
-                        if (_offset >= offset) {
-                          //说明开始回退了，回退的第一次认为pull结束了
-                          _handlePullEnd();
-                        } else {
-                          _offset = offset;
-                        }
-                      });
-                    },
-                    builder: (BuildContext context, RefreshStatus mode) {
-                      return Container();
-                    },
+                return NotificationListener<ScrollUpdateNotification>(
+                  onNotification: (ScrollUpdateNotification notification) {
+                    // _didScroll(notification);
+                  },
+                  child: SmartRefresher(
+                    enablePullUp: false,
+                    enablePullDown: false,
+                    onRefresh: _onRefresh,
+                    controller: _refreshController,
+                    child: ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        controller: _scrollController,
+                        itemBuilder: (BuildContext context, int index) {
+                          Map item = model.list[index];
+                          return _buildListItem(model, item);
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            height: 1,
+                            color: Colors.grey,
+                          );
+                        },
+                        itemCount: model.list.length),
                   ),
-                  controller: _refreshController,
-                  child: ListView.separated(
-                      itemBuilder: (BuildContext context, int index) {
-                        Map item = model.list[index];
-                        return _buildListItem(model, item);
-                      },
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const Divider(
-                          height: 1,
-                          color: Colors.grey,
-                        );
-                      },
-                      itemCount: model.list.length),
                 );
               },
             ),
@@ -134,19 +146,66 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
     );
   }
 
+  ///滚动
+  void _didScroll(ScrollUpdateNotification notification) {
+    //为空，说明手势放开了
+    if (notification.dragDetails == null) {
+      // 防止多次调用
+      if (!_drag) return;
+      if (_offset > 300) {
+        debugPrint('菜单展示');
+        setState(() {
+          _handlePullEnd();
+          _drag = false;
+        });
+      } else {
+        debugPrint('菜单收回');
+        setState(() {
+          _offset = 0;
+          _opacity = 0;
+          _drag = false;
+        });
+      }
+    } else {
+      _drag = true;
+      print('${notification.dragDetails.delta} - $_offset');
+      setState(() {
+        if (_offset > 130) {
+          _handleOpacity(_offset);
+        }
+        _offset += notification.dragDetails.delta.dy;
+      });
+      Future.delayed(const Duration(milliseconds: 1), () {
+        // if (_scrollController.offset != 0.0) {
+        //   _scrollController.animateTo(
+        //     0.0,
+        //     duration: const Duration(milliseconds: 1),
+        //     curve: Curves.linear,
+        //   );
+        // }
+      });
+    }
+  }
+
+  //处理后面视图的透明度
   void _handleOpacity(double offset) {
     // print('status:${_refreshController.headerStatus}');
-    _opacity = 0.5 + offset / (jd_screenHeight() - 80);
+    _opacity = 0.2 + offset / (jd_screenHeight() - 80);
     _opacity = min(1, _opacity);
     _opacity = max(0, _opacity);
     print('opacity:$_opacity');
   }
 
+  //手势结束后的走向
   void _handlePullEnd() {
-    _status = PageStatus.twoPage;
-    _offset = jd_screenHeight() - 78;
-    hiddenBottomBar(true);
-    _opacity = 1;
+    if (_offset > 300) {
+      _offset = jd_screenHeight() - 78;
+      hiddenBottomBar(true);
+      _opacity = 1;
+    } else {
+      _offset = 0;
+      _opacity = 0;
+    }
     print('opacity1:$_opacity');
   }
 

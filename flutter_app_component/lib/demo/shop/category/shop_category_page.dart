@@ -14,7 +14,8 @@ class ShopCategoryPage extends StatefulWidget {
   _ShopCategoryPageState createState() => _ShopCategoryPageState();
 }
 
-class _ShopCategoryPageState extends State<ShopCategoryPage> {
+class _ShopCategoryPageState extends State<ShopCategoryPage>
+    with AutomaticKeepAliveClientMixin {
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -170,4 +171,7 @@ class _ShopCategoryPageState extends State<ShopCategoryPage> {
           );
         });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/shop/car/shop_car_page.dart';
+import 'package:flutter_app_component/demo/shop/car/car_1/shop_car_page.dart';
 import 'package:flutter_app_component/demo/shop/category/shop_category_page.dart';
 import 'package:flutter_app_component/demo/shop/home/shop_home_page.dart';
 import 'package:flutter_app_component/demo/shop/my/shop_my_page.dart';

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/component/customscrollview/section_customscrollview_page.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
+import 'custom_refresh_page.dart';
 import 'customscrollview_page_2.dart';
 import 'thirdparty_tableview_demo_page.dart';
 
@@ -22,7 +23,7 @@ class _CustomScrollViewPageState extends State<CustomScrollViewPage> {
   final ScrollController _controller = ScrollController();
   bool showToTopBtn = false; //是否显示“返回到顶部”按钮
 
-  List _menu = [
+  final List _menu = [
     {
       'title': 'SectionTableView',
       'page': SectionTableView(),
@@ -34,6 +35,10 @@ class _CustomScrollViewPageState extends State<CustomScrollViewPage> {
     {
       'title': 'CustomScrollView2Demo',
       'page': CustomScrollViewPage2(),
+    },
+    {
+      'title': 'CustomRefreshWidget',
+      'page': CustomRefreshPage(),
     },
   ];
 
@@ -93,7 +98,7 @@ class _CustomScrollViewPageState extends State<CustomScrollViewPage> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  Map map = _menu[index % 3];
+                  Map map = _menu[index % _menu.length];
                   //创建子widget
                   return InkWell(
                     onTap: () {

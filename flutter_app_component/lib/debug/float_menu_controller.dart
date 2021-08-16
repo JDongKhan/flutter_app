@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/debug/menu_page.dart';
 import 'package:jd_core/jd_core.dart';
 
-// ignore: avoid_classes_with_only_static_members
-class FloatMenuController {
-  static bool isShow = false;
-  static bool isShowLogConsole = false;
-  static OverlayEntry _overlayEntry;
+FloatMenuController floatMenuController = FloatMenuController();
 
-  static void show(BuildContext context) {
-    if (isShow == true) {
+class FloatMenuController {
+  FloatMenuController();
+
+  bool _isShow = false;
+  bool _isShowLogConsole = false;
+  OverlayEntry _overlayEntry;
+
+  void show(BuildContext context) {
+    if (_isShow == true) {
       return;
     }
     if (_overlayEntry != null) {
@@ -25,24 +28,24 @@ class FloatMenuController {
       },
     );
     Overlay.of(context).insert(_overlayEntry);
-    isShow = true;
+    _isShow = true;
   }
 
   // ignore: avoid_void_async
-  static void _gotoLogConsole(BuildContext context) async {
-    if (isShowLogConsole) {
+  void gotoLogConsole(BuildContext context) async {
+    if (_isShowLogConsole) {
       return;
     }
-    isShowLogConsole = true;
+    _isShowLogConsole = true;
     final MenuPage menu = MenuPage();
     await JDNavigationUtil.push(menu);
-    isShowLogConsole = false;
+    _isShowLogConsole = false;
   }
 
-  static void remove() {
+  void remove() {
     _overlayEntry.remove();
     _overlayEntry = null;
-    isShow = false;
+    _isShow = false;
   }
 }
 
@@ -72,10 +75,10 @@ class _FloatMenuWidgetState extends State<FloatMenuWidget> {
       height: _height,
       child: GestureDetector(
         onTap: () {
-          FloatMenuController._gotoLogConsole(context);
+          floatMenuController.gotoLogConsole(context);
         },
         onDoubleTap: () {
-          FloatMenuController.remove();
+          floatMenuController.remove();
         },
         onPanStart: (DragStartDetails details) {
           setState(() {

@@ -23,8 +23,8 @@ class ShakeDetector {
 
   ShakeDetector({
     this.onPhoneShake,
-    this.shakeThresholdGravity = 1.25,
-    this.minTimeBetweenShakes = 160,
+    this.shakeThresholdGravity = 3.5,
+    this.minTimeBetweenShakes = 300,
     this.shakeCountResetTime = 1500,
     this.minShakeCount = 2,
   });

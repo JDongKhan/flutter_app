@@ -13,18 +13,36 @@ class WeChatMessageListBottomMenu extends StatefulWidget {
 }
 
 class _WeChatMessageListBottomMenuState
-    extends State<WeChatMessageListBottomMenu> {
+    extends State<WeChatMessageListBottomMenu>
+    with SingleTickerProviderStateMixin {
+  AnimationController _animationController;
+
+  @override
+  void initState() {
+    _animationController = AnimationController(
+        duration: const Duration(milliseconds: 300), vsync: this);
+    super.initState();
+  }
+
+  @override
+  void didUpdateWidget(covariant WeChatMessageListBottomMenu oldWidget) {
+    _animationController.animateTo(widget.opacity);
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     final double width = (jd_screenWidth() - 100) / 3 - 10;
-    return Opacity(
-      opacity: widget.opacity,
-      child: Align(
+    return FadeTransition(
+      opacity: _animationController,
+      child: ScaleTransition(
         alignment: Alignment.topCenter,
+        scale: _animationController,
         child: Container(
-          transform: Matrix4.diagonal3Values(widget.opacity, widget.opacity, 0),
-          transformAlignment: Alignment.topCenter,
-          color: Colors.red,
+          // transform: Matrix4.diagonal3Values(
+          //     _opacityForContainer, _opacityForContainer, 0),
+          // transformAlignment: Alignment.topCenter,
+          color: Colors.blue[100],
           child: GridView.builder(
               padding: const EdgeInsets.all(10),
               physics: const BouncingScrollPhysics(
@@ -53,5 +71,11 @@ class _WeChatMessageListBottomMenuState
     if (widget.onBack != null) {
       widget.onBack();
     }
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }

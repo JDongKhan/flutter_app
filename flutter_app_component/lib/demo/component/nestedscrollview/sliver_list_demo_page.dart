@@ -26,7 +26,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
             curve: Curves.bounceInOut,
             duration: const Duration(milliseconds: 10),
           ),
-          child: new Container(
+          child: Container(
             color: Colors.redAccent,
           ),
         ),
@@ -54,34 +54,34 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                   child: Padding(
                     padding: EdgeInsets.only(
                         bottom: 10, left: lr, right: lr, top: lr),
-                    child: new Row(
+                    child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: <Widget>[
-                        new Expanded(
-                          child: new Container(
+                        Expanded(
+                          child: Container(
                             alignment: Alignment.center,
                             color: Colors.orangeAccent,
-                            child: new TextButton(
+                            child: TextButton(
                               onPressed: () {
                                 setState(() {
                                   listCount = 30;
                                 });
                               },
-                              child: new Text("按键1"),
+                              child: Text("按键1"),
                             ),
                           ),
                         ),
-                        new Expanded(
-                          child: new Container(
+                        Expanded(
+                          child: Container(
                             alignment: Alignment.center,
                             color: Colors.orangeAccent,
-                            child: new TextButton(
+                            child: TextButton(
                               onPressed: () {
                                 setState(() {
                                   listCount = 4;
                                 });
                               },
-                              child: new Text("按键2"),
+                              child: Text("按键2"),
                             ),
                           ),
                         ),
@@ -99,9 +99,9 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("SliverListDemoPage"),
+        title: const Text("SliverListDemoPage"),
       ),
-      body: new Container(
+      body: Container(
         child: NestedScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           headerSliverBuilder: _sliverBuilder,
@@ -118,15 +118,15 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
                 delegate: SliverChildBuilderDelegate(
                   (context, index) {
                     return Card(
-                      child: new Container(
+                      child: Container(
                         height: 60,
                         padding: EdgeInsets.only(left: 10),
                         alignment: Alignment.centerLeft,
-                        child: new Text("Item $index"),
+                        child: Text("Item $index"),
                       ),
                     );
                   },
-                  childCount: 100,
+                  childCount: listCount,
                 ),
               )
             ],

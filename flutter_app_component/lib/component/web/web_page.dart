@@ -10,12 +10,12 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 ///web page
 class WebPage extends StatefulWidget {
-  final String url;
-  final String title;
-  WebPage({
+  const WebPage({
     this.title,
     @required this.url,
   });
+  final String url;
+  final String title;
   @override
   _WebPageState createState() => _WebPageState();
 }
@@ -32,7 +32,7 @@ class _WebPageState extends State<WebPage> {
       WebView.platform = SurfaceAndroidWebView();
     }
     _title = widget.title;
-    bool isRemote =
+    final bool isRemote =
         widget.url.startsWith('http') || widget.url.startsWith('https');
     _isLocal = !isRemote;
     if (isRemote) {
@@ -49,6 +49,7 @@ class _WebPageState extends State<WebPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: Colors.white,
       child: Column(
         children: [
           //appbar
@@ -63,8 +64,7 @@ class _WebPageState extends State<WebPage> {
             child: WebView(
               initialUrl: _url,
               javascriptMode: JavascriptMode.unrestricted, //不限制js
-              javascriptChannels:
-                  <JavascriptChannel>[_jsBridge(context)].toSet(),
+              javascriptChannels: <JavascriptChannel>{_jsBridge(context)},
               onWebViewCreated: (WebViewController controller) {
                 _webViewController = controller;
                 if (_isLocal) {
@@ -75,15 +75,15 @@ class _WebPageState extends State<WebPage> {
                 }
               },
               navigationDelegate: (NavigationRequest navigation) {
-                print('navigationDelegate:$navigation');
+                debugPrint('navigationDelegate:$navigation');
                 return NavigationDecision.navigate;
               },
               onPageStarted: (String url) {
-                print('onPageStarted:$url');
+                debugPrint('onPageStarted:$url');
                 _controller.show();
               },
               onPageFinished: (String url) {
-                print('onPageFinished:$url');
+                debugPrint('onPageFinished:$url');
                 _controller.dismiss();
                 _webViewController.evaluateJavascript('document.title').then(
                       (value) => {
@@ -95,7 +95,7 @@ class _WebPageState extends State<WebPage> {
                     );
               },
               onWebResourceError: (error) {
-                print('onWebResourceError:$error');
+                debugPrint('onWebResourceError:$error');
                 _controller.dismiss();
               },
             ),

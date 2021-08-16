@@ -23,7 +23,7 @@ class Request {
 
   static Future<User> login(String account, String password) async {
     JDNetworkResponse r = await JDNetwork.post(
-        Environments.servicesPath.loginUrl,
+        environments.servicesPath.loginUrl,
         queryParameters: <String, dynamic>{
           'account': account,
           'password': password

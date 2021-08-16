@@ -47,7 +47,7 @@ class _MenuConsoleOnShakeState extends State<MenuConsoleOnShake> {
   }
 
   void _openLogConsole() async {
-    FloatMenuController.show(context);
+    floatMenuController.show(context);
   }
 
   @override

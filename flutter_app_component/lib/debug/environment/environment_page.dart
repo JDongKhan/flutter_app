@@ -36,7 +36,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
 
   @override
   void initState() {
-    _currentEnvironment = EnumUtils.enumValueToString(Environments.environment);
+    _currentEnvironment = EnumUtils.enumValueToString(environments.environment);
     super.initState();
   }
 
@@ -55,7 +55,7 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
                   setState(() {
                     _currentEnvironment = e;
                     //初始化环境配置
-                    Environments.init(environment: e);
+                    environments.init(env: e);
                   });
                 },
               ),
