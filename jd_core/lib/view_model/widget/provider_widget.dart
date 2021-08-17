@@ -12,6 +12,9 @@ class ProviderWidget<T extends ViewModel> extends StatefulWidget {
   ///根据model状态构建页面
   final T model;
 
+  //是否监听
+  final bool listener;
+
   ///model创建好后会调用此方法，根据需要传入
   final void Function(T) onModelReady;
 
@@ -19,6 +22,7 @@ class ProviderWidget<T extends ViewModel> extends StatefulWidget {
     Key key,
     @required this.builder,
     @required this.model,
+    this.listener = true,
     this.onModelReady,
   }) : super(key: key);
 
@@ -44,7 +48,12 @@ class _ProviderWidgetState<T extends ViewModel>
       create: (_) => widget.model,
       child: Builder(
         builder: (BuildContext c) {
-          ViewModel model = c.watch<T>();
+          ViewModel model = null;
+          if (widget.listener) {
+            model = c.watch<T>();
+          } else {
+            model = widget.model;
+          }
           Widget child;
           if (model.idle) {
             child = Container();

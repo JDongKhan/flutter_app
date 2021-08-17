@@ -32,9 +32,7 @@ class _ShopCarBottomWidgetState extends State<ShopCarBottomWidget> {
               CircleCheckBox(
                 value: viewModel.allChecked,
                 onChanged: (value) {
-                  viewModel.list.forEach((element) {
-                    element.checked = value;
-                  });
+                  viewModel.list.forEach((element) => element.checked = value);
                   viewModel.notifyListeners();
                 },
               ),

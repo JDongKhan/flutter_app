@@ -30,6 +30,7 @@ class _ShopCarItemState extends State<ShopCarItem> {
             value: checked,
             onChanged: (value) {
               widget.viewModel.checkItem(item, value);
+              setState(() {});
             },
           ),
           Image.asset(

@@ -7,8 +7,8 @@ import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 
-import 'vm/shop_car_view_model.dart';
-import 'widget/shop_car_bottom_widget.dart';
+import '../vm/shop_car_view_model.dart';
+import '../widget/shop_car_bottom_widget.dart';
 
 /// @author jd
 
@@ -53,6 +53,7 @@ class _ShopCarPageState extends State<ShopCarPage> {
         ),
         body: ProviderWidget<ShopCarViewModel>(
           model: _viewModel,
+          listener: true,
           builder: (BuildContext context, ShopCarViewModel viewModel) {
             return Column(
               children: <Widget>[

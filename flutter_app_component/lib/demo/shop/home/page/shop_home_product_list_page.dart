@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/shop/home/vm/custom_bouncing_scroll_physics.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/jd_core.dart';
@@ -7,8 +8,10 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 /// @author jd
 class ShopHomeProductListPage extends StatefulWidget {
-  const ShopHomeProductListPage({Key key, this.keyword}) : super(key: key);
+  const ShopHomeProductListPage({Key key, this.keyword, this.parsentController})
+      : super(key: key);
   final String keyword;
+  final ScrollController parsentController;
   @override
   _ShopHomeProductListPageState createState() =>
       _ShopHomeProductListPageState();
@@ -60,6 +63,7 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
       color: Colors.grey[100],
       child: _refreshWidget(
         child: StaggeredGridView.countBuilder(
+          physics: const CustomBouncingScrollPhysics(),
           padding: const EdgeInsets.all(1.0),
           crossAxisCount: 2,
           mainAxisSpacing: 10.0,
@@ -159,6 +163,24 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
       ),
     ]);
     setState(() {});
+  }
+
+  @override
+  void deactivate() {
+    print('deactivate');
+    super.deactivate();
+  }
+
+  @override
+  void didUpdateWidget(covariant ShopHomeProductListPage oldWidget) {
+    print('didUpdateWidget');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('didChangeDependencies');
+    super.didChangeDependencies();
   }
 
   @override

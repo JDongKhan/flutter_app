@@ -51,8 +51,13 @@ dependencies:
 #      #      ref:some-branch
 #      path: album_saver
 
+#  common_utils: ^2.0.2
+#  flustars: ^2.0.1
 
-
+  #  custom_refresh_plugin:
+#    git:
+#      url: https://github.com/zhaolongs/flutter_custom_refresh_plugin.git
+#      ref: master
 #  json_to_model: ^1.4.0
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

@@ -77,6 +77,7 @@ class _ShopHomePageState extends State<ShopHomePage>
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: _tabs.length);
+    //解决滚动问题
     _tabController.addListener(() {
       for (int i = 0; i < _tabs.length; i++) {
         GlobalKey<PrimaryScrollContainerState> key =
@@ -86,69 +87,90 @@ class _ShopHomePageState extends State<ShopHomePage>
         }
       }
     });
+
     super.initState();
+  }
+
+  Widget _refreshWidget({Widget child}) {
+    const bool refreshEnable = true;
+    if (refreshEnable) {
+      return RefreshIndicator(
+        notificationPredicate: (notification) {
+          return true;
+        },
+        onRefresh: () {
+          return Future.delayed(const Duration(seconds: 2), () {
+            return true;
+          });
+        },
+        child: child,
+      );
+    }
+    return child;
   }
 
   @override
   Widget build(BuildContext context) {
-    return NestedScrollView(
-      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-        return <Widget>[
-          SliverOverlapAbsorber(
-            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+    return _refreshWidget(
+      child: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverOverlapAbsorber(
+              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
 
-            ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
-            sliver: SliverAppBar(
-              backgroundColor: Colors.white,
-              automaticallyImplyLeading: false,
-              // foregroundColor: Colors.white,
-              forceElevated: innerBoxIsScrolled,
-              title: const Text(
-                '生产有限公司',
-                style: TextStyle(color: Colors.black, fontSize: 18),
-              ),
-              centerTitle: false,
-              pinned: true,
-              // floating: true,
-              elevation: 0,
-              actions: const <Widget>[
-                IconButton(
-                  icon: Icon(Icons.business),
-                )
-              ],
-            ),
-          ),
-          // const SliverPadding(
-          //   padding: EdgeInsets.only(top: 80),
-          // ),
-          const SliverToBoxAdapter(
-            child: SafeArea(
-              child: SizedBox(
-                height: 50,
+              ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
+              sliver: SliverAppBar(
+                backgroundColor: Colors.white,
+                automaticallyImplyLeading: false,
+                // foregroundColor: Colors.white,
+                forceElevated: innerBoxIsScrolled,
+                title: const Text(
+                  '生产有限公司',
+                  style: TextStyle(color: Colors.black, fontSize: 18),
+                ),
+                centerTitle: false,
+                pinned: true,
+                // floating: true,
+                elevation: 0,
+                actions: const <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.business),
+                  )
+                ],
               ),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: _buildSearch(),
-          ),
-          SliverToBoxAdapter(child: _buildSwiper()),
-          SliverToBoxAdapter(child: _buildGridView()),
+            // const SliverPadding(
+            //   padding: EdgeInsets.only(top: 80),
+            // ),
+            const SliverToBoxAdapter(
+              child: SafeArea(
+                child: SizedBox(
+                  height: 50,
+                ),
+              ),
+            ),
+            SliverToBoxAdapter(
+              child: _buildSearch(),
+            ),
+            SliverToBoxAdapter(child: _buildSwiper()),
+            SliverToBoxAdapter(child: _buildGridView()),
 
-          ///停留在顶部的TabBar
-          _buildPersistentHeader(),
-        ];
-      },
-      body: TabBarView(
-        controller: _tabController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: _tabs
-            .map((e) => PrimaryScrollContainer(
-                  e['key'] as GlobalKey<PrimaryScrollContainerState>,
-                  ShopHomeProductListPage(
-                    keyword: e['title'].toString(),
-                  ),
-                ))
-            .toList(),
+            ///停留在顶部的TabBar
+            _buildPersistentHeader(),
+          ];
+        },
+        body: TabBarView(
+          controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: _tabs
+              .map((e) => PrimaryScrollContainer(
+                    e['key'] as GlobalKey<PrimaryScrollContainerState>,
+                    ShopHomeProductListPage(
+                      keyword: e['title'].toString(),
+                    ),
+                  ))
+              .toList(),
+        ),
       ),
     );
   }
