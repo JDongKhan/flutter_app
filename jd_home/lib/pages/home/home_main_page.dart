@@ -15,12 +15,12 @@ import 'package:jd_core/widget/sliverpersistentheaderdelegate/jd_sliverpersisten
 import 'package:jd_home/models/home_model.dart';
 import 'package:jd_home/pages/detail/home_Info_detail_page.dart';
 import 'package:jd_home/pages/detail/home_main_detail_page.dart';
-import 'package:jd_home/pages/home_searchbar_delegate.dart';
+import 'home_searchbar_delegate.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'viewmodel/home_list_view_model.dart';
-import 'viewmodel/home_view_model.dart';
+import '../viewmodel/home_list_view_model.dart';
+import '../viewmodel/home_view_model.dart';
 
 /// jd
 

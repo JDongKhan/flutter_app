@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/sports/home/sports_tab_home_firstpage.dart';
+import 'package:flutter_app_component/demo/sports/home/model/sports_content.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -10,18 +10,18 @@ class MemberHomePage extends StatefulWidget {
 }
 
 class _MemberHomePageState extends State<MemberHomePage> {
-  List<Content> _allContents;
+  List<SportsContent> _allContents;
 
   @override
   void initState() {
     _allContents = List.generate(
       50,
-      (index) => Content(
+      (int index) => SportsContent(
           title: '梅西${index}年挣6.74亿>詹皇+布雷迪生涯总和KD：太疯狂！',
           source: '网易体育',
-          comment_num: '12${index}',
+          commentNum: '12${index}',
           img: 'bg_${index % 5}',
-          flag: 0),
+          flag: '0'),
     );
     super.initState();
   }
@@ -29,7 +29,7 @@ class _MemberHomePageState extends State<MemberHomePage> {
   Widget _buildBackHomeList() {
     return ListView.separated(
       itemBuilder: (c, idx) {
-        Content content = _allContents[idx];
+        SportsContent content = _allContents[idx];
         return ListTile(
           // dense: true,
           // visualDensity: VisualDensity(vertical: 10),
@@ -44,7 +44,7 @@ class _MemberHomePageState extends State<MemberHomePage> {
               top: 10,
             ),
             child: Text(
-              '${content.source}  ${content.comment_num}评论',
+              '${content.source}  ${content.commentNum}评论',
               style: const TextStyle(color: Colors.grey, fontSize: 12),
             ),
           ),

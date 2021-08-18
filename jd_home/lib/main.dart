@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:provider/provider.dart';
 
-import 'pages/home_page.dart';
+import 'pages/home/home_page.dart';
 
 void main() => runApp(
       MultiProvider(

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_home/demo/home_demo.dart';
-import 'package:jd_home/pages/home_main_page.dart';
+import 'home_main_page.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
-import 'viewmodel/home_view_model.dart';
+import '../viewmodel/home_view_model.dart';
 
 class HomePage extends StatefulWidget {
   @override

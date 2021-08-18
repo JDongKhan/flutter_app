@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home/sports_tab_home_firstpage.dart';
+import 'home/page/sports_home_page.dart';
 
 /**
  *
@@ -79,7 +79,7 @@ class _TabHomePageState extends State<TabHomePage>
           controller: _tabController,
           children: tabs.map((e) {
             //创建3个Tab页
-            return TabHomeFirstPage(e);
+            return SportsHomePage(e);
           }).toList(),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );

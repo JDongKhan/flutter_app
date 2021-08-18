@@ -3,10 +3,20 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+
 import '../view_model.dart';
 
 /// @author jd
 class ProviderWidget<T extends ViewModel> extends StatefulWidget {
+  const ProviderWidget({
+    Key key,
+    @required this.builder,
+    @required this.model,
+    this.listener = true,
+    this.onModelReady,
+    this.errorTextStyle,
+  }) : super(key: key);
+
   final Widget Function(BuildContext context, T model) builder;
 
   ///根据model状态构建页面
@@ -18,13 +28,7 @@ class ProviderWidget<T extends ViewModel> extends StatefulWidget {
   ///model创建好后会调用此方法，根据需要传入
   final void Function(T) onModelReady;
 
-  const ProviderWidget({
-    Key key,
-    @required this.builder,
-    @required this.model,
-    this.listener = true,
-    this.onModelReady,
-  }) : super(key: key);
+  final TextStyle errorTextStyle;
 
   _ProviderWidgetState<T> createState() => _ProviderWidgetState<T>();
 }
@@ -60,10 +64,14 @@ class _ProviderWidgetState<T extends ViewModel>
           } else if (model.busy) {
             child = CircleProgressWidget();
           } else if (model.error) {
-            child = Text(
-              model.errorMessage,
-              style: TextStyle(
-                color: Colors.white,
+            TextStyle errorTextStyle = widget.errorTextStyle ??
+                TextStyle(
+                  color: Colors.white,
+                );
+            child = Center(
+              child: Text(
+                model.errorMessage,
+                style: errorTextStyle,
               ),
             );
           } else {
@@ -199,8 +207,7 @@ class _Provider3WidgetState<T1 extends ViewModel, T2 extends ViewModel,
 
 class Provider4Widget<T1 extends ViewModel, T2 extends ViewModel,
     T3 extends ViewModel, T4 extends ViewModel> extends StatefulWidget {
-  final Widget Function(
-      BuildContext context) builder;
+  final Widget Function(BuildContext context) builder;
 
   ///根据model状态构建页面
   final T1 model1;
@@ -236,7 +243,7 @@ class _Provider4WidgetState<
     if (widget.onModelReady != null) {
       widget.onModelReady(
           widget.model1, widget.model2, widget.model3, widget.model4);
-    }else {
+    } else {
       widget.model1.initData();
     }
     super.initState();
