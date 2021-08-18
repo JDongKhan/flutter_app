@@ -5,27 +5,36 @@ import 'package:jd_core/jd_core.dart';
 /// @author jd
 
 class ShopDetailNavigatorController extends ChangeNotifier {
-  double alpha = 0.0;
-  int tabIndex = 0;
-  TabController _tabController;
-  void changeAlpha(double alpha) {
-    if (alpha != this.alpha) {
-      this.alpha = alpha;
+  ValueChanged<int> onClickTabItem;
+
+  int _tabIndex = 0;
+  set tabIndex(value) {
+    if (value != _tabIndex) {
+      _tabIndex = value;
       notifyListeners();
     }
   }
 
-  void changeTabIndex(int tabIndex) {
-    this.tabIndex = tabIndex;
-    _tabController.index = tabIndex;
+  int get tabIndex => _tabIndex;
+
+  double _alpha = 0.0;
+  set alpha(value) {
+    if (value != _alpha) {
+      _alpha = value;
+      notifyListeners();
+    }
   }
+
+  double get alpha => _alpha;
 }
 
 class ShopDetailNavigatorWidget extends StatefulWidget {
-  final ShopDetailNavigatorController controller;
-  ShopDetailNavigatorWidget({
-    @required this.controller,
+  const ShopDetailNavigatorWidget({
+    @required this.navigatorController,
   });
+
+  final ShopDetailNavigatorController navigatorController;
+
   @override
   _ShopDetailNavigatorWidgetState createState() =>
       _ShopDetailNavigatorWidgetState();
@@ -38,10 +47,11 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
   @override
   void initState() {
     _tabController = TabController(length: 3, vsync: this);
-    widget.controller.addListener(() {
-      setState(() {});
+    widget.navigatorController.addListener(() {
+      setState(() {
+        _tabController.index = widget.navigatorController.tabIndex;
+      });
     });
-    widget.controller._tabController = _tabController;
     super.initState();
   }
 
@@ -51,7 +61,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
     return Stack(
       children: [
         Opacity(
-          opacity: 1 - widget.controller.alpha,
+          opacity: 1 - widget.navigatorController.alpha,
           child: Container(
             child: SafeArea(
               child: Container(
@@ -81,7 +91,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
           ),
         ),
         Opacity(
-          opacity: widget.controller.alpha,
+          opacity: widget.navigatorController.alpha,
           child: Container(
             color: _backgroundColor,
             child: SafeArea(
@@ -109,6 +119,7 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
                       child: Container(
                         child: Center(
                           child: TabBar(
+                            onTap: _tap,
                             controller: _tabController,
                             tabs: const <Widget>[
                               Text('商品'),
@@ -150,5 +161,19 @@ class _ShopDetailNavigatorWidgetState extends State<ShopDetailNavigatorWidget>
         ),
       ],
     );
+  }
+
+  _tap(int index) {
+    print('点击:$index');
+    widget.navigatorController.tabIndex = _tabController.index;
+    if (widget.navigatorController.onClickTabItem != null) {
+      widget.navigatorController.onClickTabItem(index);
+    }
+  }
+
+  @override
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
   }
 }

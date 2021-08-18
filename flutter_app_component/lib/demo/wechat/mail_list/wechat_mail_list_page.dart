@@ -74,6 +74,7 @@ class _WechatMailListPageState extends State<WechatMailListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         elevation: 1,
         title: const Text('通讯录'),
       ),

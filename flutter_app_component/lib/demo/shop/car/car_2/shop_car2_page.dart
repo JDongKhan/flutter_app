@@ -18,61 +18,56 @@ class _ShopCar2PageState extends State<ShopCar2Page> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 1,
         title: const Text('确认订单'),
       ),
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            child: Container(
-              color: Colors.grey[100],
-              padding: const EdgeInsets.all(10),
-              child: CustomScrollView(
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                slivers: <Widget>[
-                  _buildAddress(),
-                  const SliverPadding(padding: EdgeInsets.only(top: 10)),
-                  _buildInfo(),
-                  const SliverPadding(padding: EdgeInsets.only(top: 10)),
-                  _buildPay(),
-                ],
-              ),
-            ),
+      body: Container(
+        color: Colors.grey[100],
+        padding: const EdgeInsets.all(10),
+        child: CustomScrollView(
+          controller: _scrollController,
+          physics: const BouncingScrollPhysics(),
+          slivers: <Widget>[
+            _buildAddress(),
+            const SliverPadding(padding: EdgeInsets.only(top: 10)),
+            _buildInfo(),
+            const SliverPadding(padding: EdgeInsets.only(top: 10)),
+            _buildPay(),
+          ],
+        ),
+      ),
+      bottomNavigationBar: SafeArea(
+        child: Container(
+          padding: const EdgeInsets.only(
+            left: 10,
+            right: 10,
           ),
-          SafeArea(
-            child: Container(
-              padding: const EdgeInsets.only(
-                left: 10,
-                right: 10,
-              ),
-              height: 60,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Text('实付金额  ￥0'),
-                  TextButton(
-                    onPressed: () {},
-                    style: TextButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        top: 10,
-                        bottom: 10,
-                        right: 20,
-                      ),
-                    ),
-                    child: const Text(
-                      '提交订单',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('实付金额  ￥0'),
+              TextButton(
+                onPressed: () {},
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue,
+                  padding: const EdgeInsets.only(
+                    left: 20,
+                    top: 10,
+                    bottom: 10,
+                    right: 20,
                   ),
-                ],
+                ),
+                child: const Text(
+                  '提交订单',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

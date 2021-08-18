@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/shop/detail/viewmodel/shop_detail_view_model.dart';
+import 'package:flutter_app_component/demo/shop/detail/vm/shop_detail_view_model.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 
-import 'shop_detail_bottom_bar.dart';
-import 'shop_detail_info_widget.dart';
-import 'shop_detail_navigator_widget.dart';
+import '../widget/shop_detail_bottom_bar.dart';
+import '../widget/shop_detail_info_widget.dart';
+import '../widget/shop_detail_navigator_widget.dart';
 
 /// @author jd
 
@@ -45,7 +45,7 @@ class _ShopDetailPageState extends State<ShopDetailPage> {
           navigatorController: _controller,
         ),
         ShopDetailNavigatorWidget(
-          controller: _controller,
+          navigatorController: _controller,
         ),
       ],
     );

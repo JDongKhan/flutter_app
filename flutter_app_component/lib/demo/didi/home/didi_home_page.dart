@@ -18,7 +18,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
   bool _hasPush = false;
   double _mapOffset = 0;
   double _menuOffset = 200;
-  List<Map<String, dynamic>> _menuList = [
+  final List<Map<String, dynamic>> _menuList = [
     {
       'title': '打车',
       'icon': 'user_head_0',
@@ -102,24 +102,24 @@ class _DidiHomePageState extends State<DidiHomePage> {
                   JDButton(
                     action: () {},
                     imageDirection: AxisDirection.left,
-                    text: Text(
+                    text: const Text(
                       '南京',
                       style: TextStyle(color: Colors.black, fontSize: 14),
                     ),
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.location_on_outlined,
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
-                  Icon(Icons.cloud_outlined),
+                  const Icon(Icons.cloud_outlined),
                 ],
               ),
               Row(
                 mainAxisSize: MainAxisSize.min,
-                children: [
+                children: const <Widget>[
                   Icon(Icons.notifications_none),
                   SizedBox(
                     width: 10,
@@ -135,15 +135,23 @@ class _DidiHomePageState extends State<DidiHomePage> {
   }
 
   Widget _buildMapWidget() {
-    return Container(
-      transform: Matrix4.translationValues(0.0, _mapOffset, 0.0),
-      margin: const EdgeInsets.only(left: 10, right: 10),
-      width: double.infinity,
-      color: Colors.orange,
-      height: 500,
+    return GestureDetector(
+      onTap: () {
+        print('map tap');
+      },
+      onPanUpdate: (DragUpdateDetails details) {
+        print('map pan');
+      },
       child: Container(
-        margin: const EdgeInsets.only(top: 150, left: 150),
-        child: Text('假装我是地图'),
+        transform: Matrix4.translationValues(0.0, _mapOffset, 0.0),
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        width: double.infinity,
+        color: Colors.orange,
+        height: 500,
+        child: Container(
+          margin: const EdgeInsets.only(top: 150, left: 150),
+          child: const Text('假装我是地图'),
+        ),
       ),
     );
   }
@@ -164,7 +172,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     print(offset);
 
     //如果下拉超过150则显示详情
-    if (offset < -150 && !_hasPush) {
+    if (offset < -100 && !_hasPush) {
       print('我跳转到详情');
       Navigator.of(context).push(JDNoAnimRouter(child: DidiHomeDetailPage()));
       _hasPush = true;
@@ -199,7 +207,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const <Widget>[
                 Icon(Icons.local_hospital_outlined),
                 Icon(Icons.my_location_outlined),
               ],
@@ -213,7 +221,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                   Container(
                     width: double.infinity,
                     height: 40,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.greenAccent,
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10),
@@ -221,9 +229,9 @@ class _DidiHomePageState extends State<DidiHomePage> {
                       ),
                     ),
                     padding: const EdgeInsets.only(left: 20),
-                    child: Align(
+                    child: const Align(
                       alignment: Alignment.centerLeft,
-                      child: const Text(
+                      child: Text(
                         '欢迎使用打车',
                         style: TextStyle(
                           color: Colors.orange,
@@ -240,7 +248,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Row(
-                        children: [
+                        children: const <Widget>[
                           Icon(
                             Icons.album_rounded,
                             size: 14,
@@ -275,7 +283,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         child: Row(
-                          children: [
+                          children: const <Widget>[
                             Icon(
                               Icons.album_rounded,
                               size: 14,
@@ -283,7 +291,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                             SizedBox(
                               width: 5,
                             ),
-                            const Text(
+                            Text(
                               '输入你的目的地',
                               style: TextStyle(
                                 color: Colors.black,
@@ -297,7 +305,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                   ),
                   Container(
                     width: double.infinity,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
                         bottomLeft: Radius.circular(10),
@@ -315,12 +323,12 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               JDButton(
                                 action: () {},
                                 imageDirection: AxisDirection.left,
-                                text: Text(
+                                text: const Text(
                                   '预约',
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.lock_clock,
                                   color: Colors.grey,
                                 ),
@@ -328,12 +336,12 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               JDButton(
                                 action: () {},
                                 imageDirection: AxisDirection.left,
-                                text: Text(
+                                text: const Text(
                                   '代叫',
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.call,
                                   color: Colors.grey,
                                 ),
@@ -341,12 +349,12 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               JDButton(
                                 action: () {},
                                 imageDirection: AxisDirection.left,
-                                text: Text(
+                                text: const Text(
                                   '接送机',
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.call_received,
                                   color: Colors.grey,
                                 ),
@@ -354,12 +362,12 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               JDButton(
                                 action: () {},
                                 imageDirection: AxisDirection.left,
-                                text: Text(
+                                text: const Text(
                                   '远途特价',
                                   style: TextStyle(
                                       color: Colors.grey, fontSize: 12),
                                 ),
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.money_off,
                                   color: Colors.grey,
                                 ),
@@ -367,7 +375,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                             ],
                           ),
                         ),
-                        Icon(
+                        const Icon(
                           Icons.more_vert,
                           color: Colors.grey,
                         ),
@@ -387,11 +395,13 @@ class _DidiHomePageState extends State<DidiHomePage> {
     return SliverToBoxAdapter(
       child: Container(
         color: _backgoundColor,
-        height: 200,
+        height: 180,
+        padding: const EdgeInsets.only(top: 20),
         child: GridView.builder(
             shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            padding: const EdgeInsets.all(10),
+            physics: const NeverScrollableScrollPhysics(),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 5,
             ),
             itemCount: _menuList.length,

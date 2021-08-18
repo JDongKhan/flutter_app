@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:badges/badges.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/wechat/message_list/message_list/wechat_message_list_view_model.dart';
@@ -287,7 +288,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
 
   void _clickAtIndex(BuildContext context, Map map) {
     Navigator.of(context).push(
-      MaterialPageRoute<WechatMessageDetailPage>(
+      CupertinoPageRoute<WechatMessageDetailPage>(
         builder: (BuildContext context) => WechatMessageDetailPage(),
       ),
     );

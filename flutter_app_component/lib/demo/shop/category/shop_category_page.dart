@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/search/shop_search_page.dart';
 import 'package:jd_core/jd_core.dart';
@@ -19,21 +20,27 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        color: Colors.white,
-        child: SafeArea(
-          child: Column(
-            children: [
-              _buildSearch(),
-              Expanded(
-                child: ProviderWidget<ShopCategoryViewModel>(
-                    model: ShopCategoryViewModel(),
-                    builder: (context, model) {
-                      return _buildSuggestions(model);
-                    }),
-              ),
-            ],
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.dark,
+      child: Scaffold(
+        body: Container(
+          color: Colors.white,
+          child: SafeArea(
+            child: Column(
+              children: [
+                _buildSearch(),
+                const SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  child: ProviderWidget<ShopCategoryViewModel>(
+                      model: ShopCategoryViewModel(),
+                      builder: (context, model) {
+                        return _buildSuggestions(model);
+                      }),
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -59,25 +66,16 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
 
   Widget _buildLeft(ShopCategoryViewModel viewModel) {
     List allMenuInfo = viewModel.list;
-    //下划线widget预定义以供复用。
-    Widget divider1 = Divider(
-      height: 1,
-      color: Colors.grey[100],
-    );
     return Container(
       width: 100,
       color: Colors.grey[100],
-      child: ListView.separated(
+      child: ListView.builder(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         itemCount: allMenuInfo.length,
         padding: const EdgeInsets.all(0),
         itemBuilder: (BuildContext context, int i) {
           return _buildRow(allMenuInfo[i], i);
-        },
-        //分割器构造器
-        separatorBuilder: (BuildContext context, int index) {
-          return divider1;
         },
       ),
     );

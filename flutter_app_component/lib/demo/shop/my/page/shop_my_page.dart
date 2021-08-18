@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/shop/my/vm/shop_my_vm.dart';
 import 'package:flutter_app_component/pages/logistics/logistics_page.dart';
 import 'package:flutter_app_component/pages/logistics/widget/ace_stepper.dart';
 import 'package:flutter_app_component/pages/my/member_home_page.dart';
@@ -17,84 +18,14 @@ class ShopMyPage extends StatefulWidget {
 
 class _ShopMyPageState extends State<ShopMyPage>
     with AutomaticKeepAliveClientMixin {
+  final ShopMyVm _shopMyVm = ShopMyVm();
   int _appBarStyle = 0;
   bool _showToTopBtn = false; //是否显示“返回到顶部”按钮
   final ScrollController _controller = ScrollController();
 
-  final List _headMenu = [
-    {
-      'icon': Icons.memory,
-      'title': '钻石',
-    },
-    {
-      'icon': Icons.filter_center_focus,
-      'title': '关注',
-    },
-    {
-      'icon': Icons.border_horizontal,
-      'title': '足迹',
-    },
-    {
-      'icon': Icons.contact_phone,
-      'title': '优惠券',
-    }
-  ];
-
-  final List _orderMenu = [
-    {
-      'icon': Icons.payment,
-      'title': '待支付',
-    },
-    {
-      'icon': Icons.send,
-      'title': '待发货',
-    },
-    {
-      'icon': Icons.receipt,
-      'title': '待收货',
-    },
-    {
-      'icon': Icons.comment,
-      'title': '待评价',
-    },
-    {
-      'icon': Icons.backpack,
-      'title': '退款/售后',
-    },
-  ];
-  final List _gridMenu = [
-    {
-      'icon': Icons.assignment,
-      'title': '发票',
-    },
-    {
-      'icon': Icons.contact_phone,
-      'title': '客服',
-    },
-    {
-      'icon': Icons.border_color,
-      'title': '意见反馈',
-    },
-    {
-      'icon': Icons.help,
-      'title': '帮助',
-    },
-    {
-      'icon': Icons.people,
-      'title': '合作伙伴',
-    },
-    {
-      'icon': Icons.color_lens,
-      'title': '我的余额',
-    },
-  ];
-
   @override
   void initState() {
     super.initState();
-    _controller.addListener(() {
-      _controller.offset;
-    });
   }
 
   @override
@@ -124,7 +55,7 @@ class _ShopMyPageState extends State<ShopMyPage>
       pinned: true,
 //      floating: true,
 //      snap: true,
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.blue[100],
       flexibleSpace: FlexibleSpaceBar(
         //视差效果
         collapseMode: CollapseMode.parallax,
@@ -150,6 +81,7 @@ class _ShopMyPageState extends State<ShopMyPage>
       expandedHeight: 250.0,
       leading: _buildLeading(),
       actions: _buildAction(),
+      backgroundColor: Colors.blue[100],
       flexibleSpace: FlexibleSpaceBar(
         title: InkWell(
           onTap: () {
@@ -204,7 +136,7 @@ class _ShopMyPageState extends State<ShopMyPage>
         shrinkWrap: true,
         padding: const EdgeInsets.all(0),
         physics: const NeverScrollableScrollPhysics(),
-        children: _headMenu
+        children: _shopMyVm.headMenu
             .map((e) => Container(
                   color: Colors.transparent,
                   child: InkWell(
@@ -265,7 +197,8 @@ class _ShopMyPageState extends State<ShopMyPage>
               padding: EdgeInsets.all(0),
               childAspectRatio: 1,
               shrinkWrap: true, //解决gridview不能在customScrollView显示的问题
-              children: _orderMenu.map((item) => _getItem(item)).toList(),
+              children:
+                  _shopMyVm.orderMenu.map((item) => _getItem(item)).toList(),
             )
           ],
         ),
@@ -301,7 +234,8 @@ class _ShopMyPageState extends State<ShopMyPage>
               padding: const EdgeInsets.all(0),
               childAspectRatio: 1,
               shrinkWrap: true, //解决gridview不能在customScrollView显示的问题
-              children: _gridMenu.map((item) => _getItem(item)).toList(),
+              children:
+                  _shopMyVm.gridMenu.map((item) => _getItem(item)).toList(),
             )
           ],
         ),
@@ -372,6 +306,7 @@ class _ShopMyPageState extends State<ShopMyPage>
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Material(
       child: NotificationListener(
           onNotification: (Notification scrollNotification) {

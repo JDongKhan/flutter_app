@@ -95,7 +95,7 @@ class _MyPageState extends State<MyPage>
       pinned: true,
 //      floating: true,
 //      snap: true,
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.blue[100],
       flexibleSpace: FlexibleSpaceBar(
         //视差效果
         collapseMode: CollapseMode.parallax,
@@ -119,6 +119,7 @@ class _MyPageState extends State<MyPage>
     return SliverAppBar(
       pinned: true,
       expandedHeight: 250.0,
+      backgroundColor: Colors.blue[100],
       leading: _buildLeading(),
       actions: _buildAction(),
       flexibleSpace: FlexibleSpaceBar(
@@ -314,7 +315,13 @@ class _MyPageState extends State<MyPage>
       },
       child: Tab(
         icon: Icon(item['icon'] as IconData),
-        text: item['title'].toString(),
+        child: Text(
+          item['title'].toString(),
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 12,
+          ),
+        ),
       ),
     );
   }

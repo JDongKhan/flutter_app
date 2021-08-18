@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/shop/detail/shop_detail_page.dart';
+import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/home/vm/shop_home_vm.dart';
 import 'package:flutter_app_component/demo/shop/home/widget/shop_home_appbar.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
@@ -60,12 +60,12 @@ class _ShopHomePageState extends State<ShopHomePage>
                   preferredSize: const Size.fromHeight(60),
                   child: _buildSearch(),
                 ),
-                leading: IconButton(
-                  icon: Icon(
-                    Icons.business,
-                    color: Colors.white,
-                  ),
-                ),
+                // leading: const IconButton(
+                //   icon: Icon(
+                //     Icons.home,
+                //     color: Colors.white,
+                //   ),
+                // ),
                 actions: const <Widget>[
                   IconButton(
                     icon: Icon(

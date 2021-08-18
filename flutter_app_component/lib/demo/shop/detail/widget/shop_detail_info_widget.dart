@@ -9,20 +9,21 @@ import 'shop_detail_navigator_widget.dart';
 /// @author jd
 
 class ShopDetailInfoWidget extends StatefulWidget {
-  final ShopInfo shopInfo;
-  final ShopDetailNavigatorController navigatorController;
-  ShopDetailInfoWidget(
+  const ShopDetailInfoWidget(
     this.shopInfo, {
     this.navigatorController,
   });
+  final ShopInfo shopInfo;
+  final ShopDetailNavigatorController navigatorController;
   @override
   _ShopDetailInfoWidgetState createState() => _ShopDetailInfoWidgetState();
 }
 
 class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
-  ScrollController _scrollController = ScrollController();
-  GlobalKey _commentKey = GlobalKey();
-  GlobalKey _productDetailKey = GlobalKey();
+  final ScrollController _scrollController = ScrollController();
+  final GlobalKey _commentKey = GlobalKey();
+  final GlobalKey _productDetailKey = GlobalKey();
+  int _currentIndex = 0;
   double _commentOffset = 0.0;
   double _productDetailOffset = 0.0;
   @override
@@ -37,9 +38,32 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
           _productDetailKey.currentContext.findRenderObject() as RenderBox;
       _productDetailOffset = renderObject2.localToGlobal(Offset.zero).dy;
     });
+    widget.navigatorController.onClickTabItem = (int index) {
+      _scrollAtIndex(index);
+    };
   }
 
-  void _onScroll(double offset) {
+  void _scrollAtIndex(int index) {
+    if (_currentIndex == index) {
+      return;
+    }
+    print('滚动到:$index');
+    double offset = 0;
+    if (index == 1) {
+      offset = _commentOffset;
+    } else if (index == 2) {
+      offset = _productDetailOffset;
+    }
+    _scrollController.animateTo(
+      offset,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
+    _currentIndex = index;
+  }
+
+  void _onScroll(double offset, bool userScroll) {
+    // if (userScroll) {
     //切换导航tabbar
     int tempIndex = 0;
     if (offset >= _commentOffset - jd_getHeight(110)) {
@@ -49,8 +73,8 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
       tempIndex = 2;
     }
 
-    widget.navigatorController.changeTabIndex(tempIndex);
-
+    widget.navigatorController.tabIndex = tempIndex;
+    // }
     //修改导航alpha
     double alpha = offset / 100.0;
     if (alpha < 0.0) {
@@ -58,7 +82,8 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
     } else if (alpha > 1.0) {
       alpha = 1.0;
     }
-    widget.navigatorController.changeAlpha(alpha);
+    // print('alpha:$alpha');
+    widget.navigatorController.alpha = alpha;
   }
 
   @override
@@ -69,7 +94,8 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
         onNotification: (ScrollUpdateNotification scrollNotification) {
           if (scrollNotification is ScrollUpdateNotification &&
               scrollNotification.depth == 0) {
-            _onScroll(scrollNotification.metrics.pixels);
+            _onScroll(scrollNotification.metrics.pixels,
+                scrollNotification.dragDetails != null);
           }
           return true;
         },
@@ -482,7 +508,11 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
           children: const <Widget>[
             Text('温馨提示'),
             Text(
-                '1、网站为您提供的送货、安装、维修等服务可能需要收取一定的服务费用和远程费。 \n2、服务中可能涉及的材料费请以服务工程师出示的报价单为准。 \n 3、如存在收费争议，可咨询在线客服或拨打客服电话110'),
+              '1、网站为您提供的送货、安装、维修等服务可能需要收取一定的服务费用和远程费。 \n2、服务中可能涉及的材料费请以服务工程师出示的报价单为准。\n3、如存在收费争议，可咨询在线客服或拨打客服电话110',
+              style: TextStyle(
+                fontSize: 12,
+              ),
+            ),
           ],
         ),
       ),

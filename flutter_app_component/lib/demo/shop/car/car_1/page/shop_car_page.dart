@@ -73,7 +73,7 @@ class _ShopCarPageState extends State<ShopCarPage> {
 
   Widget _buildListItem() {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       child: ListView.builder(
         itemCount: _viewModel.list.length,
         itemBuilder: (context, int index) {

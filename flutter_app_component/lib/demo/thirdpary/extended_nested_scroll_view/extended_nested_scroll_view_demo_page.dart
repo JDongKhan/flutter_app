@@ -1,6 +1,6 @@
 import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
 import 'package:flutter/material.dart' hide NestedScrollView;
-import 'package:flutter_app_component/demo/shop/detail/shop_detail_page.dart';
+import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/home/page/shop_home_product_list_page.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:flutter_app_component/global/widget_config.dart';

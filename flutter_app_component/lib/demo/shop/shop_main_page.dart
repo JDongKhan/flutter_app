@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/car/car_1/page/shop_car_page.dart';
 import 'package:flutter_app_component/demo/shop/category/shop_category_page.dart';
 import 'package:flutter_app_component/demo/shop/home/page/shop_home_page.dart';
-import 'package:flutter_app_component/demo/shop/my/shop_my_page.dart';
+import 'package:flutter_app_component/demo/shop/my/page/shop_my_page.dart';
 
 /// @author jd
 

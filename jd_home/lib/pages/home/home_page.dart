@@ -70,6 +70,7 @@ class _HomePageState extends State<HomePage>
           title: TabBar(
               //生成Tab菜单
               controller: _tabController,
+              indicatorSize:TabBarIndicatorSize.label,
               tabs: tabs.map((e) => Tab(text: e['title'])).toList()),
 
           actions: <Widget>[
@@ -83,6 +84,7 @@ class _HomePageState extends State<HomePage>
         ),
         body: TabBarView(
           controller: _tabController,
+          physics: const NeverScrollableScrollPhysics(),
           children: tabs.map((e) {
             //创建3个Tab页
             return e['page'] as Widget;

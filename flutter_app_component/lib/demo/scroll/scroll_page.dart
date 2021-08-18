@@ -49,39 +49,39 @@ class _ScrollPageWidgetState extends State<ScrollPageWidget> {
   void _handelNotification(notification) {
     switch (notification.runtimeType) {
       case ScrollNotification:
-        print('ScrollNotification');
+        debugPrint('ScrollNotification');
         break;
       case ScrollUpdateNotification:
-        print('ScrollUpdateNotification');
+        debugPrint('ScrollUpdateNotification');
         break;
       case ScrollStartNotification:
         _startScroll = true;
-        print('ScrollStartNotification');
+        debugPrint('ScrollStartNotification');
         break;
       case ScrollEndNotification:
         _startScroll = false;
-        print('ScrollEndNotification');
+        debugPrint('ScrollEndNotification');
         break;
       case OverscrollNotification:
         OverscrollNotification n = notification;
         setState(() {
           _dy = n.overscroll;
         });
-        print(notification);
+        debugPrint(notification);
         // print(n.dragDetails.primaryDelta);
 
         break;
       case LayoutChangedNotification:
-        print('LayoutChangedNotification');
+        debugPrint('LayoutChangedNotification');
         break;
       case SizeChangedLayoutNotification:
-        print('SizeChangedLayoutNotification');
+        debugPrint('SizeChangedLayoutNotification');
         break;
       case UserScrollNotification:
-        print('UserScrollNotification');
+        debugPrint('UserScrollNotification');
         break;
       case KeepAliveNotification:
-        print('KeepAliveNotification');
+        debugPrint('KeepAliveNotification');
         break;
     }
   }

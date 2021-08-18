@@ -25,6 +25,7 @@ import 'package:flutter_app_component/demo/component/draggable/draggable_grid_pa
 import 'package:flutter_app_component/demo/component/draggable/draggable_scrollablesheet.dart';
 import 'package:flutter_app_component/demo/component/pageview/pageview_page.dart';
 import 'package:flutter_app_component/demo/component/reorderableListView/reorderable_list_view_page.dart';
+import 'package:flutter_app_component/demo/component/textfield/textfield_page.dart';
 import 'package:flutter_app_component/demo/component/timepicker/timepicker_page.dart';
 import 'package:flutter_app_component/demo/custome_layout/customPainter/jd_custompainter.dart';
 import 'package:flutter_app_component/demo/custome_layout/renderbox/cloud/cloud_demo_page.dart';
@@ -36,6 +37,7 @@ import 'package:flutter_app_component/demo/databtransfer/inherited_widget_page.d
 import 'package:flutter_app_component/demo/databtransfer/notification_page.dart';
 import 'package:flutter_app_component/demo/databtransfer/stream_page.dart';
 import 'package:flutter_app_component/demo/didi/didi_main_page.dart';
+import 'package:flutter_app_component/demo/douyin/douyin_home_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/funcation/state/tapbox_a_page.dart';
@@ -47,11 +49,16 @@ import 'package:flutter_app_component/demo/login/login_demo_list_page.dart';
 import 'package:flutter_app_component/demo/pop/pop_demo_page.dart';
 import 'package:flutter_app_component/demo/qq/anim_progressImg_demo_page.dart';
 import 'package:flutter_app_component/demo/scroll/scroll_page.dart';
+import 'package:flutter_app_component/demo/shop/car/car_1/page/shop_car_page.dart';
 import 'package:flutter_app_component/demo/shop/shop_main_page.dart';
+import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.dart';
 import 'package:flutter_app_component/demo/stick/stick_demo_page.dart';
 import 'package:flutter_app_component/demo/stick/stick_demo_page2.dart';
 import 'package:flutter_app_component/demo/tantan/anim_scan_demo_page.dart';
+import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_page.dart';
 import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
+
+import 'discover_page.dart';
 
 /// @author jd
 
@@ -430,6 +437,45 @@ class DiscoverController extends ChangeNotifier {
         {
           'title': 'Get Demo List',
           'page': GetDemoListPage(),
+        },
+      ],
+    },
+
+    ///My的组件
+    {
+      'title': '我的组件',
+      'items': [
+        {
+          'title': 'BottomDragDemo',
+          'page': BottomDragDemo(),
+        },
+        {
+          'title': 'DropdownMenuDemoPage',
+          'page': JDDropdownMenuDemoPage(),
+        },
+        {
+          'title': 'InputMessageWidget',
+          'page': DouYinHomePage(),
+        },
+        {
+          'title': '蒙版提示',
+          'page': DiscoverPage(),
+        },
+        {
+          'title': 'Number Widget',
+          'page': ShopCarPage(),
+        },
+        {
+          'title': 'Pop 横向菜单',
+          'page': WechatFriendCirclePage(),
+        },
+        {
+          'title': 'AutoCompleteTextField',
+          'page': TextFieldPage(),
+        },
+        {
+          'title': '拖动进度条',
+          'page': SportsLiveDetailPage(),
         },
       ],
     },

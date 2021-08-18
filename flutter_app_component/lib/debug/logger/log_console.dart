@@ -338,7 +338,7 @@ class _LogConsoleState extends State<LogConsole> {
     var scrollPosition = _scrollController.position;
     await _scrollController.animateTo(
       scrollPosition.maxScrollExtent,
-      duration: new Duration(milliseconds: 400),
+      duration: Duration(milliseconds: 400),
       curve: Curves.easeOut,
     );
 

@@ -13,7 +13,7 @@ class DidiHomeDetailPage extends StatefulWidget {
 
 class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
     with TickerProviderStateMixin {
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
   final Color _backgoundColor = Colors.grey[100];
   AnimationController _animationController;
   Animation _animation;
@@ -58,36 +58,45 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
     print(offset);
     if (offset < 300) {
       print('回到底部-开始');
-      Future.delayed(Duration(seconds: 0), () {
+      Future.delayed(const Duration(seconds: 0), () {
         print('回到底部');
         _scrollController.animateTo(0,
-            duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+            duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
       });
     } else if (offset < 500) {
       print('回到顶部-开始');
-      Future.delayed(Duration(seconds: 0), () {
+      Future.delayed(const Duration(seconds: 0), () {
         print('回到顶部');
         _scrollController.animateTo(300,
-            duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+            duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
       });
     } else if (offset < 700) {
       print('回到顶部-开始');
-      Future.delayed(Duration(seconds: 0), () {
+      Future.delayed(const Duration(seconds: 0), () {
         print('回到顶部');
         _scrollController.animateTo(700,
-            duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+            duration: const Duration(milliseconds: 500), curve: Curves.easeOut);
       });
     }
   }
 
   Widget _buildMapWidget() {
-    return Container(
-      width: double.infinity,
-      height: double.infinity,
-      color: Colors.orange,
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        print('map tap');
+      },
+      onPanUpdate: (detail) {
+        print('map pan');
+      },
       child: Container(
-        margin: const EdgeInsets.only(top: 150, left: 150),
-        child: Text('假装我是地图'),
+        width: double.infinity,
+        height: double.infinity,
+        color: Colors.orange,
+        child: Container(
+          margin: const EdgeInsets.only(top: 150, left: 150),
+          child: const Text('假装我是地图'),
+        ),
       ),
     );
   }
@@ -116,11 +125,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                         Navigator.of(context).pop();
                       },
                       imageDirection: AxisDirection.left,
-                      text: Text(
+                      text: const Text(
                         '欢迎使用打车',
                         style: TextStyle(color: Colors.black, fontSize: 14),
                       ),
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.arrow_back_ios,
                         color: Colors.black,
                       ),
@@ -129,7 +138,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                 ),
                 Row(
                   mainAxisSize: MainAxisSize.min,
-                  children: [
+                  children: const <Widget>[
                     Icon(Icons.notifications_none),
                   ],
                 ),
@@ -141,6 +150,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
     );
   }
 
+  ///此种方案需要将更改scrollvie的behavior: HitTestBehavior.deferToChild,
   Widget _bottomSearchWidget() {
     return SlideTransition(
       position: _bottomAnimation,
@@ -173,12 +183,12 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 500,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
+                  children: const <Widget>[
                     Icon(Icons.local_hospital_outlined),
                     Icon(Icons.my_location_outlined),
                   ],
@@ -208,7 +218,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
           Container(
             width: double.infinity,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.greenAccent,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -216,9 +226,9 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
               ),
             ),
             padding: const EdgeInsets.only(left: 20),
-            child: Align(
+            child: const Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
+              child: Text(
                 '欢迎使用打车',
                 style: TextStyle(
                   color: Colors.orange,
@@ -235,7 +245,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
             child: Align(
               alignment: Alignment.centerLeft,
               child: Row(
-                children: [
+                children: const <Widget>[
                   Icon(
                     Icons.album_rounded,
                     size: 14,
@@ -269,7 +279,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Row(
-                  children: [
+                  children: const <Widget>[
                     Icon(
                       Icons.album_rounded,
                       size: 14,
@@ -277,7 +287,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                     SizedBox(
                       width: 5,
                     ),
-                    const Text(
+                    Text(
                       '输入你的目的地',
                       style: TextStyle(
                         color: Colors.black,
@@ -291,7 +301,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
           ),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
@@ -309,11 +319,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '预约',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.lock_clock,
                           color: Colors.grey,
                         ),
@@ -321,11 +331,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '代叫',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.call,
                           color: Colors.grey,
                         ),
@@ -333,11 +343,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '接送机',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.call_received,
                           color: Colors.grey,
                         ),
@@ -345,11 +355,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '远途特价',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.money_off,
                           color: Colors.grey,
                         ),
@@ -357,7 +367,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                     ],
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.more_vert,
                   color: Colors.grey,
                 ),
@@ -374,7 +384,9 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
       height: 200,
       margin: const EdgeInsets.only(top: 10),
       color: Colors.red,
-      child: Center(child: Text('我的菜单')),
+      child: const Center(
+        child: Text('我的菜单'),
+      ),
     );
   }
 }

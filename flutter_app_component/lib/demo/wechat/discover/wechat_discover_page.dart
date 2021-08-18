@@ -18,6 +18,7 @@ class _WechatDiscoverPageState extends State<WechatDiscoverPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 1,
+        automaticallyImplyLeading: false,
         title: const Text('发现'),
       ),
       body: Container(
