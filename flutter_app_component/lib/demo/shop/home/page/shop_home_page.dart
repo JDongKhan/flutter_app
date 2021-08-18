@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/detail/shop_detail_page.dart';
+import 'package:flutter_app_component/demo/shop/home/vm/shop_home_vm.dart';
+import 'package:flutter_app_component/demo/shop/home/widget/shop_home_appbar.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
+import 'package:flutter_app_component/global/widget_config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/jd_core.dart';
+import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
 import 'shop_home_product_list_page.dart';
 
@@ -17,96 +21,18 @@ class ShopHomePage extends StatefulWidget {
 
 class _ShopHomePageState extends State<ShopHomePage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
+  final ShopHomeVM _vm = ShopHomeVM();
   TabController _tabController;
-  String _searchText;
-  final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
-    {
-      'title': '推荐',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '投影仪',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '家用电器',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '服装',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '冰箱',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '其他',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-  ];
-
-  final List<ShopInfo> _recommendList = [
-    ShopInfo(
-      icon: JDAssetBundle.getImgPath('shop_0'),
-      shop_name: '洗发水-你值得拥有',
-      price: 18.80,
-    ),
-    ShopInfo(
-      icon: JDAssetBundle.getImgPath('shop_1'),
-      shop_name: '蛋糕-好吃到爆',
-      price: 8.80,
-    ),
-    ShopInfo(
-      icon: JDAssetBundle.getImgPath('shop_2'),
-      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
-      price: 48.80,
-    ),
-    ShopInfo(
-      icon: JDAssetBundle.getImgPath('shop_3'),
-      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
-      price: 48.80,
-    ),
-    ShopInfo(
-      icon: JDAssetBundle.getImgPath('shop_4'),
-      shop_name: '潘婷染烫修护润发精华素750ml修复烫染损伤受损干枯发质',
-      price: 48.80,
-    ),
-  ];
 
   @override
   void initState() {
-    _tabController = TabController(vsync: this, length: _tabs.length);
+    _tabController = TabController(vsync: this, length: _vm.tabs.length);
     //解决滚动问题
     _tabController.addListener(() {
-      for (int i = 0; i < _tabs.length; i++) {
-        GlobalKey<PrimaryScrollContainerState> key =
-            _tabs[i]['key'] as GlobalKey<PrimaryScrollContainerState>;
-        if (key != null && key.currentState != null) {
-          key.currentState.onPageChange(_tabController.index == i);
-        }
-      }
+      _vm.onPageChange(_tabController.index);
     });
 
     super.initState();
-  }
-
-  Widget _refreshWidget({Widget child}) {
-    const bool refreshEnable = true;
-    if (refreshEnable) {
-      return RefreshIndicator(
-        notificationPredicate: (notification) {
-          return true;
-        },
-        onRefresh: () {
-          return Future.delayed(const Duration(seconds: 2), () {
-            return true;
-          });
-        },
-        child: child,
-      );
-    }
-    return child;
   }
 
   @override
@@ -115,27 +41,38 @@ class _ShopHomePageState extends State<ShopHomePage>
       child: NestedScrollView(
         headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
           return <Widget>[
+            PullToRefreshContainer(
+                (info) => buildPulltoRefreshImage(context, info)),
             SliverOverlapAbsorber(
               handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
 
               ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
-              sliver: SliverAppBar(
-                backgroundColor: Colors.white,
-                automaticallyImplyLeading: false,
-                // foregroundColor: Colors.white,
-                forceElevated: innerBoxIsScrolled,
+              sliver: ShopHomeAppBar(
+                backgroundColor: Colors.blue,
                 title: const Text(
                   '生产有限公司',
-                  style: TextStyle(color: Colors.black, fontSize: 18),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 centerTitle: false,
-                pinned: true,
-                // floating: true,
-                elevation: 0,
+                expandedHeight: 130.0,
+                brightness: Brightness.light,
+                bottom: PreferredSize(
+                  preferredSize: const Size.fromHeight(60),
+                  child: _buildSearch(),
+                ),
+                leading: IconButton(
+                  icon: Icon(
+                    Icons.business,
+                    color: Colors.white,
+                  ),
+                ),
                 actions: const <Widget>[
                   IconButton(
-                    icon: Icon(Icons.business),
-                  )
+                    icon: Icon(
+                      Icons.business,
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -149,9 +86,9 @@ class _ShopHomePageState extends State<ShopHomePage>
                 ),
               ),
             ),
-            SliverToBoxAdapter(
-              child: _buildSearch(),
-            ),
+            // SliverToBoxAdapter(
+            //   child: _buildSearch(),
+            // ),
             SliverToBoxAdapter(child: _buildSwiper()),
             SliverToBoxAdapter(child: _buildGridView()),
 
@@ -162,9 +99,9 @@ class _ShopHomePageState extends State<ShopHomePage>
         body: TabBarView(
           controller: _tabController,
           physics: const NeverScrollableScrollPhysics(),
-          children: _tabs
+          children: _vm.tabs
               .map((e) => PrimaryScrollContainer(
-                    e['key'] as GlobalKey<PrimaryScrollContainerState>,
+                    e['key'] as LabeledGlobalKey<PrimaryScrollContainerState>,
                     ShopHomeProductListPage(
                       keyword: e['title'].toString(),
                     ),
@@ -175,16 +112,36 @@ class _ShopHomePageState extends State<ShopHomePage>
     );
   }
 
+  ///刷新
+  Widget _refreshWidget({Widget child}) {
+    const bool refreshEnable = true;
+    if (refreshEnable) {
+      return PullToRefreshNotification(
+        color: Theme.of(context).canvasColor,
+        // pullBackOnRefresh: true,
+        onRefresh: _vm.onRefresh,
+        armedDragUpCancel: false,
+        maxDragOffset: 200,
+        child: child,
+      );
+    }
+    return child;
+  }
+
+  ///Search
   Widget _buildSearch() {
     return Container(
-      margin: const EdgeInsets.only(top: 10),
+      // color: Colors.red,
+      // height: 60,
+      margin: const EdgeInsets.only(bottom: 10),
       child: JDSearchBar(
-        text: _searchText,
+        text: _vm.searchText,
         onTap: () {},
       ),
     );
   }
 
+  ///Swiper
   Widget _buildSwiper() {
     return Container(
       margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -212,6 +169,7 @@ class _ShopHomePageState extends State<ShopHomePage>
     );
   }
 
+  ///GridView
   Widget _buildGridView() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -236,9 +194,9 @@ class _ShopHomePageState extends State<ShopHomePage>
                   mainAxisSpacing: 15,
                   childAspectRatio: 1.4 //显示区域宽高相等
                   ),
-              itemCount: _recommendList.length,
+              itemCount: _vm.recommendList.length,
               itemBuilder: (context, index) {
-                ShopInfo shopInfo = _recommendList[index];
+                ShopInfo shopInfo = _vm.recommendList[index];
                 //如果显示到最后一个并且Icon总数小于200时继续获取数据
                 return _buildGirdItem(shopInfo);
               }),
@@ -247,6 +205,7 @@ class _ShopHomePageState extends State<ShopHomePage>
     );
   }
 
+  ///GridItem
   Widget _buildGirdItem(ShopInfo shopInfo) {
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -299,6 +258,7 @@ class _ShopHomePageState extends State<ShopHomePage>
     );
   }
 
+  ///tabbar
   Widget _buildPersistentHeader() => SliverPersistentHeader(
         pinned: true,
         delegate: JDSliverPersistentHeaderDelegate(
@@ -311,7 +271,8 @@ class _ShopHomePageState extends State<ShopHomePage>
                 isScrollable: true,
                 indicatorSize: TabBarIndicatorSize.label,
                 // These are the widgets to put in each tab in the tab bar.
-                tabs: _tabs.map((Map map) => Tab(text: map['title'])).toList(),
+                tabs:
+                    _vm.tabs.map((Map map) => Tab(text: map['title'])).toList(),
               ),
             )),
       );

@@ -4,6 +4,9 @@ import 'package:flutter_app_component/demo/fishredux/OnePage/page.dart';
 import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.dart';
 import 'package:jd_core/jd_core.dart';
 
+import 'extended_nested_scroll_view/extended_nested_scroll_view_demo_page.dart';
+import 'waterfall_flow/waterfall_flow_demo_page.dart';
+
 /**
  *
  * @author jd
@@ -51,6 +54,14 @@ class _ThirdpartyListPageState extends State<ThirdpartyListPage> {
     {
       'title': 'fishredux',
       'router': OnePagePage().buildPage({}),
+    },
+    {
+      'title': 'waterfall_flow',
+      'router': WaterfallFlowDemoPage(),
+    },
+    {
+      'title': 'extended_nested_scroll_view',
+      'router': ExtendedNestedScrollViewDemoPage(),
     },
   ];
 

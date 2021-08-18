@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/global/jd_appuserinfo.dart';
+import 'package:flutter_app_component/global/appuserinfo.dart';
 import 'package:flutter_app_component/service/request.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';

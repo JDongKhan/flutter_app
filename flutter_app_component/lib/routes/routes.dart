@@ -40,7 +40,7 @@ import 'package:flutter_app_component/demo/thirdpary/image/image_page.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player_demo_page.dart';
 import 'package:flutter_app_component/demo/thirdpary/thirdparty_list.dart';
 import 'package:flutter_app_component/demo/thirdpary/webview/webview_page.dart';
-import 'package:flutter_app_component/global/jd_notfind.dart';
+import 'package:flutter_app_component/global/notfind.dart';
 import 'package:flutter_app_component/pages/login/login_page.dart';
 import 'package:flutter_app_component/pages/scaffold/scaffold_page.dart';
 import 'package:jd_home/pages/home_page.dart';

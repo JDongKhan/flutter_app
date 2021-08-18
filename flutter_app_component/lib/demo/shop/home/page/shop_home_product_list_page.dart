@@ -64,7 +64,7 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
       child: _refreshWidget(
         child: StaggeredGridView.countBuilder(
           physics: const CustomBouncingScrollPhysics(),
-          padding: const EdgeInsets.all(1.0),
+          padding: const EdgeInsets.all(10.0),
           crossAxisCount: 2,
           mainAxisSpacing: 10.0,
           itemCount: _recommendList.length * 2,
@@ -118,16 +118,26 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
                 margin: const EdgeInsets.only(
                   left: 10,
                 ),
-                child: const Text(
-                  '商品名称',
+                child: Text(
+                  '每一个商品都有灵魂-$index',
                   overflow: TextOverflow.ellipsis,
                   maxLines: 2,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.bold,
+                  ),
                 )),
             Container(
                 margin: const EdgeInsets.only(
                   left: 10,
                 ),
-                child: const Text('￥100')),
+                child: const Text(
+                  '￥100',
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontSize: 12,
+                  ),
+                )),
           ],
         ),
       ),

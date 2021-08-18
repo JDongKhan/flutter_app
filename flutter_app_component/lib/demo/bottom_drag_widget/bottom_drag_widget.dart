@@ -190,7 +190,7 @@ class _DragContainerState extends State<DragContainer>
 
     ///easeOut 先快后慢
     final CurvedAnimation curve =
-        new CurvedAnimation(parent: animalController, curve: Curves.easeOut);
+        CurvedAnimation(parent: animalController, curve: Curves.easeOut);
     animation = Tween(begin: start, end: end).animate(curve)
       ..addListener(() {
         if (!onResetControllerValue) {

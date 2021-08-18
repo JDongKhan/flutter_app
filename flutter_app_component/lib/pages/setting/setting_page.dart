@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/global/jd_appuserinfo.dart';
+import 'package:flutter_app_component/global/appuserinfo.dart';
 import 'package:jd_core/style/jd_styles.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';

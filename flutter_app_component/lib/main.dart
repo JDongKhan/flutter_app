@@ -19,7 +19,7 @@ import 'app.dart';
 import 'debug/environment/environment_page.dart';
 import 'debug/ume_logger/logger_plugin.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
-import 'global/jd_appuserinfo.dart';
+import 'global/appuserinfo.dart';
 import 'pages/error/error_page.dart';
 
 ///入口类

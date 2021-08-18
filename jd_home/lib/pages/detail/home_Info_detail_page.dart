@@ -26,9 +26,11 @@ class _HomeInfoDetailPageState extends State<HomeInfoDetailPage>
     super.initState();
     showLoading();
     Future.delayed(const Duration(seconds: 2), () {
-      setState(() {
-        stopLoading();
-      });
+      if (mounted) {
+        setState(() {
+          stopLoading();
+        });
+      }
     });
   }
 
