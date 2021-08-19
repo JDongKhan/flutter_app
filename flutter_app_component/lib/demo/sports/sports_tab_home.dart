@@ -39,8 +39,9 @@ class _TabHomePageState extends State<TabHomePage>
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          elevation: 1,
-          backgroundColor: Colors.black,
+          elevation: 0,
+          titleSpacing: 0,
+          backgroundColor: Colors.blue,
           brightness: Brightness.dark,
           iconTheme: const IconThemeData(
             color: Colors.white,
@@ -57,6 +58,7 @@ class _TabHomePageState extends State<TabHomePage>
             }),
             indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.white,
+            indicatorColor: Colors.white,
             unselectedLabelStyle: const TextStyle(fontSize: 14),
             labelStyle: const TextStyle(fontSize: 16),
             controller: _tabController,

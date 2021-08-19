@@ -34,6 +34,11 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
 
             ///广告
             _buildAd(),
+
+            ///空隙
+            const SizedBox(
+              height: 20,
+            ),
           ],
         ),
       ),
@@ -43,13 +48,16 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
   Widget _buildMemberPayButton() {
     return Container(
       width: double.infinity,
-      height: 50,
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+      height: 40,
+      margin: const EdgeInsets.only(left: 10, right: 10, top: 20),
       child: TextButton(
         onPressed: () {},
         child: const Text(
           '开通体育会员，畅享精彩赛事',
-          style: TextStyle(color: Colors.red),
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+          ),
         ),
         style: TextButton.styleFrom(
           backgroundColor: Colors.orange,
@@ -63,12 +71,13 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
 
   Widget _buildTitleWidget() {
     return Container(
-      margin: const EdgeInsets.only(left: 10, top: 10, right: 10),
+      margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 10),
       child: Row(
-        children: [
+        children: const <Widget>[
           Icon(
             Icons.live_tv,
             color: Colors.red,
+            size: 18,
           ),
           SizedBox(
             width: 10,
@@ -78,7 +87,8 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
             '2021JJ斗地主冠军杯-秋季赛海选',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 16,
+              fontSize: 14,
+              fontWeight: FontWeight.bold,
             ),
           )),
         ],
@@ -104,16 +114,16 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
               color: Colors.red,
               margin: const EdgeInsets.only(right: 10),
             ),
-            Text(
+            const Text(
               '本场解说',
               style: TextStyle(
-                fontSize: 18,
+                fontSize: 16,
               ),
             ),
           ],
         ),
-        SizedBox(
-          height: 10,
+        const SizedBox(
+          height: 15,
         ),
         Row(
           children: [
@@ -127,7 +137,7 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
                   Center(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
+                      children: const <Widget>[
                         Text(
                           '直播中',
                           style: TextStyle(
@@ -145,7 +155,7 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
                     child: Container(
                       color: Colors.orange,
                       padding: const EdgeInsets.all(2),
-                      child: Text(
+                      child: const Text(
                         '免费',
                         style: TextStyle(
                           color: Colors.yellow,
@@ -158,6 +168,9 @@ class _SportsLiveIntroduceWidgetState extends State<SportsLiveIntroduceWidget> {
               ),
             ),
           ],
+        ),
+        const SizedBox(
+          height: 10,
         ),
       ],
     );

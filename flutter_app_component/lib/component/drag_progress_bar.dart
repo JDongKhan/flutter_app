@@ -103,7 +103,7 @@ class _DragProgressBarState extends State<DragProgressBar> {
                     },
                     child: const Icon(
                       Icons.circle,
-                      size: 18,
+                      size: 14,
                       color: Colors.white,
                     ),
                   ),

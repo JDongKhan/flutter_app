@@ -59,6 +59,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
   void dispose() {
     _bottomController.dispose();
     _playerController.dispose();
+    _animationController.dispose();
     super.dispose();
   }
 

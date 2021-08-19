@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 class LiveChatInputMessageController extends ChangeNotifier {
   bool _hiddenKeyboard = false;
 
-  hiddenKeyboard() {
+  void hiddenKeyboard() {
     _hiddenKeyboard = true;
     notifyListeners();
   }
 }
 
 class SportsLiveChatBottomWidget extends StatefulWidget {
-  SportsLiveChatBottomWidget({this.controller});
+  const SportsLiveChatBottomWidget({this.controller});
   final LiveChatInputMessageController controller;
   @override
   _SportsLiveChatBottomWidgetState createState() =>
@@ -35,7 +35,7 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
     });
 
     _animationController = AnimationController(
-        duration: Duration(
+        duration: const Duration(
           milliseconds: 250,
         ),
         vsync: this);
@@ -63,10 +63,10 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
 
   @override
   Widget build(BuildContext context) {
-    return bottom_input();
+    return _bottomInput();
   }
 
-  Widget bottom_input() {
+  Widget _bottomInput() {
     return SafeArea(
       top: false,
       child: Container(
@@ -88,7 +88,7 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
                   width: 10,
                 ),
                 Expanded(
-                  child: input(),
+                  child: _input(),
                 ),
                 const SizedBox(
                   width: 10,
@@ -118,13 +118,13 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
     );
   }
 
-  Widget input() {
+  Widget _input() {
     return Container(
       alignment: Alignment.topCenter,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: const Color(0x000000),
+          color: const Color(0x00000000),
         ),
       ),
       child: TextField(
@@ -132,8 +132,11 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
         maxLines: 5,
         minLines: 1,
         focusNode: _focusNode,
-        decoration: InputDecoration(
-          hintText: 'input message',
+        style: const TextStyle(
+          fontSize: 14,
+        ),
+        decoration: const InputDecoration(
+          hintText: '请输入你想说的话',
           filled: true,
           fillColor: Colors.white,
           border: InputBorder.none,
@@ -144,13 +147,13 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
     );
   }
 
-  Widget input2() {
+  Widget _input2() {
     return TextField(
       keyboardType: TextInputType.multiline,
       maxLines: 5,
       minLines: 1,
       focusNode: _focusNode,
-      decoration: InputDecoration(
+      decoration: const InputDecoration(
         hintText: 'input message',
         filled: true,
         fillColor: Colors.white,
@@ -172,44 +175,42 @@ class _SportsLiveChatBottomWidgetState extends State<SportsLiveChatBottomWidget>
     return SizeTransition(
       sizeFactor: _animation as Animation<double>,
       child: Container(
-        height: 310,
+        height: 260,
+        color: Colors.grey[100],
         child: GridView.count(
-          crossAxisCount: 4,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+          padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+          crossAxisCount: 3,
           children: [
             TextButton(
-              child: Text('Menu 1'),
+              child: const Text('Menu 1'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 2'),
+              child: const Text('Menu 2'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 3'),
+              child: const Text('Menu 3'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 4'),
+              child: const Text('Menu 4'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 5'),
+              child: const Text('Menu 5'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
             TextButton(
-              child: Text('Menu 6'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Menu 7'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Menu 8'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: Text('Menu 9'),
+              child: const Text('Menu 6'),
+              style: TextButton.styleFrom(backgroundColor: Colors.blue[100]),
               onPressed: () {},
             ),
           ],

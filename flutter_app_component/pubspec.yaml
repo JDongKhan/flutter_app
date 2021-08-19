@@ -75,6 +75,7 @@ dependencies:
 #  photo: ^0.4.8
   #wechat_assets_picker: ^6.0.1
 
+  expandable_text: ^2.0.2
   #二维码
   qr_flutter: ^3.1.0
 

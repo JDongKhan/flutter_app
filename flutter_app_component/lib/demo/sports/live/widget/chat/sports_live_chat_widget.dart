@@ -19,7 +19,7 @@ class SportsLiveChatWidget extends StatefulWidget {
 }
 
 class _SportsLiveChatWidgetState extends State<SportsLiveChatWidget> {
-  LiveChatInputMessageController _inputMessageController =
+  final LiveChatInputMessageController _inputMessageController =
       LiveChatInputMessageController();
   @override
   Widget build(BuildContext context) {

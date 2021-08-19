@@ -7,9 +7,9 @@ import 'package:provider/provider.dart';
 
 import 'sports_live_controller.dart';
 import 'widget/chat/sports_live_chat_widget.dart';
+import 'widget/introduce/sports_live_introduce_widget.dart';
 import 'widget/player/sports_live_player_widget.dart';
-import 'widget/sports_live_introduce_widget.dart';
-import 'widget/sports_live_store_widget.dart';
+import 'widget/store/sports_live_store_widget.dart';
 
 /// @author jd
 
@@ -21,9 +21,9 @@ class SportsLiveDetailPage extends StatefulWidget {
 class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
     with SingleTickerProviderStateMixin, OrientationAware, OrientationMixin {
   TabController _tabController; //需要定义一个Controller
-  GlobalKey _globalKey = GlobalKey();
+  final GlobalKey _globalKey = GlobalKey();
 
-  String _play_url = 'assets/videos/video_11.mp4';
+  final String _play_url = 'assets/videos/video_11.mp4';
   final List<Map<String, dynamic>> _tabs = [
     {
       'title': '概况',
@@ -39,14 +39,8 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
     }
   ];
 
-  SportsLivePlayerWidget _playerWidget;
-
   @override
   void initState() {
-    _playerWidget = SportsLivePlayerWidget(
-      url: _play_url,
-      key: _globalKey,
-    );
     _tabController = TabController(length: _tabs.length, vsync: this);
     super.initState();
   }
@@ -59,7 +53,7 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       body: MultiProvider(
         providers: [
           ChangeNotifierProvider<SportsLiveController>(
@@ -97,6 +91,7 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
           TabBar(
             //生成Tab菜单
             isScrollable: true,
+            indicatorSize: TabBarIndicatorSize.label,
             labelColor: Colors.black,
             controller: _tabController,
             tabs: _tabs

@@ -14,7 +14,8 @@ class SportsHomePage extends StatefulWidget {
   _SportsHomePageState createState() => _SportsHomePageState();
 }
 
-class _SportsHomePageState extends State<SportsHomePage> {
+class _SportsHomePageState extends State<SportsHomePage>
+    with AutomaticKeepAliveClientMixin {
   @override
   void initState() {
     super.initState();
@@ -34,7 +35,7 @@ class _SportsHomePageState extends State<SportsHomePage> {
 
   Widget _buildSearch() {
     return Container(
-      color: Colors.black,
+      color: Colors.blue,
       padding: const EdgeInsets.only(bottom: 5),
       child: Row(
         children: [
@@ -71,13 +72,23 @@ class _SportsHomePageState extends State<SportsHomePage> {
             itemBuilder: (c, idx) {
               SportsContent content = vm.list[idx];
               if (content.flag == '1') {
-                return SportsHomeItem2(content: content);
+                return SportsHomeItem1(content: content);
               }
               if (content.flag == '2') {
+                return SportsHomeItem2(content: content);
+              }
+              if (content.flag == '3') {
                 return SportsHomeItem3(content: content);
               }
+              if (content.flag == '4') {
+                return SportsHomeItem4(content: content);
+              }
 
-              return SportsHomeItem1(content: content);
+              if (content.flag == '5') {
+                return SportsHomeItem5(content: content);
+              }
+
+              return SportsHomeItem(content: content);
             },
             separatorBuilder: (c, idx) {
               return const Divider();
@@ -87,4 +98,7 @@ class _SportsHomePageState extends State<SportsHomePage> {
         },
         model: SportsHomeVm());
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

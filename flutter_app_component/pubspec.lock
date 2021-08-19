@@ -267,6 +267,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.1.5"
+  expandable_text:
+    dependency: "direct main"
+    description:
+      name: expandable_text
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.2.0"
   extended_list_library:
     dependency: transitive
     description:

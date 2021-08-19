@@ -67,7 +67,7 @@ class _SportsLivePlayerBottomWidgetState
             margin: const EdgeInsets.only(left: 8, right: 8),
             alignment: Alignment.centerLeft,
             child: Text(
-              duration_toString(widget.controller._position),
+              durationToString(widget.controller._position),
               style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
@@ -94,7 +94,7 @@ class _SportsLivePlayerBottomWidgetState
             margin: const EdgeInsets.only(left: 8, right: 8),
             alignment: Alignment.centerLeft,
             child: Text(
-              duration_toString(widget.controller._duration),
+              durationToString(widget.controller._duration),
               style: const TextStyle(color: Colors.white, fontSize: 12),
             ),
           ),
@@ -112,7 +112,7 @@ class _SportsLivePlayerBottomWidgetState
           widget.controller.playerController.pause();
         },
         child: const Icon(
-          Icons.pause_circle_outline_rounded,
+          Icons.pause,
           color: Colors.white,
           size: 28,
         ),
@@ -124,7 +124,7 @@ class _SportsLivePlayerBottomWidgetState
         widget.controller.playerController.play();
       },
       child: const Icon(
-        Icons.play_circle_outline_rounded,
+        Icons.play_arrow,
         color: Colors.white,
         size: 28,
       ),
@@ -132,7 +132,8 @@ class _SportsLivePlayerBottomWidgetState
   }
 
   Widget _buildFullWidget() {
-    SportsLiveController controller = context.watch<SportsLiveController>();
+    final SportsLiveController controller =
+        context.watch<SportsLiveController>();
     if (controller.orientation == Orientation.landscape) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -179,10 +180,10 @@ class _SportsLivePlayerBottomWidgetState
   }
 
   Duration _seek_toDuration(double value) {
-    double durationMilliseconds =
+    final double durationMilliseconds =
         widget.controller._duration.inMilliseconds.toDouble();
-    int position = (durationMilliseconds * value).toInt();
-    Duration duration = Duration(milliseconds: position);
+    final int position = (durationMilliseconds * value).toInt();
+    final Duration duration = Duration(milliseconds: position);
     return duration;
   }
 
@@ -195,9 +196,11 @@ class _SportsLivePlayerBottomWidgetState
     return d;
   }
 
-  String duration_toString(Duration duration) {
+  String durationToString(Duration duration) {
     String twoDigits(int n) {
-      if (n >= 10) return '$n';
+      if (n >= 10) {
+        return '$n';
+      }
       return '0$n';
     }
 
@@ -205,21 +208,21 @@ class _SportsLivePlayerBottomWidgetState
       return '00:00';
     }
 
-    String twoDigitSeconds = twoDigits(
+    final String twoDigitSeconds = twoDigits(
         duration.inSeconds.remainder(Duration.secondsPerMinute) as int);
 
     if (duration.inMicroseconds < 0) {
-      return "${twoDigitSeconds}";
+      return twoDigitSeconds;
     }
 
-    String twoDigitMinutes =
+    final String twoDigitMinutes =
         twoDigits(duration.inMinutes.remainder(Duration.minutesPerHour) as int);
 
     if (duration.inHours <= 0) {
       return '$twoDigitMinutes:$twoDigitSeconds';
     }
 
-    String twoHours = '${duration.inHours}';
-    return '${twoHours}:$twoDigitMinutes:$twoDigitSeconds';
+    final String twoHours = '${duration.inHours}';
+    return '$twoHours:$twoDigitMinutes:$twoDigitSeconds';
   }
 }

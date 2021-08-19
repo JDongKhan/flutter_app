@@ -79,7 +79,7 @@ class _SportsLiveStoreWidgetState extends State<SportsLiveStoreWidget> {
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
                 Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 40),
+                  margin: const EdgeInsets.only(top: 10, bottom: 20),
                   child: const LinearProgressIndicator(
                     value: 0.5,
                     backgroundColor: Colors.grey,
@@ -99,7 +99,7 @@ class _SportsLiveStoreWidgetState extends State<SportsLiveStoreWidget> {
                           style: TextStyle(color: Colors.red, fontSize: 20),
                         ),
                         SizedBox(
-                          width: 10,
+                          width: 5,
                         ),
                         Text(
                           '99',

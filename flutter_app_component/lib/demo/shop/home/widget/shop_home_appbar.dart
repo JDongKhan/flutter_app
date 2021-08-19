@@ -20,7 +20,7 @@ class ShopHomeAppBar extends StatefulWidget {
     this.centerTitle,
     this.collapsedHeight,
     this.expandedHeight,
-    this.leadingPadding = 0,
+    this.titleSpacing = 0,
   }) : super(key: key);
 
   final Widget leading;
@@ -41,7 +41,7 @@ class ShopHomeAppBar extends StatefulWidget {
 
   final double expandedHeight;
 
-  final double leadingPadding;
+  final double titleSpacing;
 
   @override
   _ShopHomeAppBarState createState() => _ShopHomeAppBarState();
@@ -69,7 +69,7 @@ class _ShopHomeAppBarState extends State<ShopHomeAppBar>
         expandedHeight: widget.expandedHeight,
         collapsedHeight: collapsedHeight,
         topPadding: topPadding,
-        leadingPadding: widget.leadingPadding,
+        titleSpacing: widget.titleSpacing,
         centerTitle: widget.centerTitle,
       ),
     );
@@ -89,7 +89,7 @@ class _ShopHomeSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
     @required this.collapsedHeight,
     @required this.topPadding,
     @required this.vsync,
-    @required this.leadingPadding,
+    @required this.titleSpacing,
     this.centerTitle,
   }) : _bottomHeight = bottom?.preferredSize?.height ?? 0.0;
 
@@ -103,7 +103,7 @@ class _ShopHomeSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   final double expandedHeight;
   final double collapsedHeight;
   final double topPadding;
-  final double leadingPadding;
+  final double titleSpacing;
   final double _bottomHeight;
   final bool centerTitle;
 
@@ -155,7 +155,7 @@ class _ShopHomeSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
                               ? Alignment.center
                               : Alignment.centerLeft,
                           margin: EdgeInsets.only(
-                              left: leading != null ? leadingPadding : 10),
+                              left: leading != null ? titleSpacing : 10),
                           child: title,
                         ),
                       ),
@@ -195,7 +195,7 @@ class _ShopHomeSliverAppBarDelegate extends SliverPersistentHeaderDelegate {
         snapConfiguration != oldDelegate.snapConfiguration ||
         stretchConfiguration != oldDelegate.stretchConfiguration ||
         showOnScreenConfiguration != oldDelegate.showOnScreenConfiguration ||
-        leadingPadding != oldDelegate.leadingPadding;
+        titleSpacing != oldDelegate.titleSpacing;
   }
 
   @override
