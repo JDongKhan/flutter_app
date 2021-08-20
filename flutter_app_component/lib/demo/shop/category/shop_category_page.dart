@@ -2,7 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/shop/search/shop_search_page.dart';
+import 'package:flutter_app_component/demo/shop/search/page/shop_search_page.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 

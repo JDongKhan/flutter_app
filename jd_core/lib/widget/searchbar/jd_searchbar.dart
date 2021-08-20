@@ -48,6 +48,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
       alignment: Alignment.centerLeft,
       padding: widget.padding,
       child: Container(
+        alignment: Alignment.centerLeft,
         decoration: BoxDecoration(
           color: widget.color,
           borderRadius: BorderRadius.all(
@@ -65,7 +66,9 @@ class _JDSearchBarState extends State<JDSearchBar> {
 //              enabled: false,
       controller: _controller,
       focusNode: _focusNode,
-      style:TextStyle(fontSize: 14,),
+      style: TextStyle(
+        fontSize: 14,
+      ),
       maxLines: 1,
       onChanged: (text) {
         if (text.length > 0) {
@@ -81,12 +84,16 @@ class _JDSearchBarState extends State<JDSearchBar> {
         }
       },
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.only(top: 8),
+        contentPadding: EdgeInsets.only(
+          top: 8,
+          bottom: 8,
+        ),
         hintText: widget.hintText ?? '查找',
         filled: true,
+        // isDense: true,
         fillColor: Colors.transparent,
         border: InputBorder.none,
-        isCollapsed: true,//相当于高度包裹的意思，必须为true，不然有默认的最小高度
+        isCollapsed: true, //相当于高度包裹的意思，必须为true，不然有默认的最小高度
         prefixIcon: Icon(
           Icons.search,
           color: Colors.grey,

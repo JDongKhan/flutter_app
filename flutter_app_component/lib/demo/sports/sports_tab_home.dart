@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'home/page/sports_home_page.dart';
+import 'home/page/sports_home_video_page.dart';
 
 /**
  *
@@ -18,14 +19,42 @@ class TabHomePage extends StatefulWidget {
 class _TabHomePageState extends State<TabHomePage>
     with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   TabController _tabController; //需要定义一个Controller
-
-  List<String> tabs = <String>["关注", "推荐", "视频", "热榜", "快讯", "中国足球", "国际足球"];
+  final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
+    {
+      'title': '关注',
+      'page': SportsHomePage('关注'),
+    },
+    {
+      'title': '推荐',
+      'page': SportsHomePage('推荐'),
+    },
+    {
+      'title': '视频',
+      'page': SportsHomeVideoPage(),
+    },
+    {
+      'title': '热榜',
+      'page': SportsHomePage('热榜'),
+    },
+    {
+      'title': '快讯',
+      'page': SportsHomePage('快讯'),
+    },
+    {
+      'title': '中国足球',
+      'page': SportsHomePage('中国足球'),
+    },
+    {
+      'title': '国际足球',
+      'page': SportsHomePage('国际足球'),
+    }
+  ];
 
   @override
   void initState() {
     super.initState();
     // 创建Controller
-    _tabController = TabController(length: tabs.length, vsync: this);
+    _tabController = TabController(length: _tabs.length, vsync: this);
   }
 
   @override
@@ -62,7 +91,7 @@ class _TabHomePageState extends State<TabHomePage>
             unselectedLabelStyle: const TextStyle(fontSize: 14),
             labelStyle: const TextStyle(fontSize: 16),
             controller: _tabController,
-            tabs: tabs.map((e) => Tab(text: e)).toList(),
+            tabs: _tabs.map((e) => Tab(text: e['title'].toString())).toList(),
           ),
           actions: [
             IconButton(
@@ -79,9 +108,9 @@ class _TabHomePageState extends State<TabHomePage>
         ),
         body: TabBarView(
           controller: _tabController,
-          children: tabs.map((e) {
+          children: _tabs.map((e) {
             //创建3个Tab页
-            return SportsHomePage(e);
+            return e['page'] as Widget;
           }).toList(),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );

@@ -4,6 +4,7 @@ import 'package:flutter_app_component/demo/sports/home/vm/sports_home_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/widget/sports_home_item.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SportsHomePage extends StatefulWidget {
   const SportsHomePage(this.title);
@@ -68,32 +69,42 @@ class _SportsHomePageState extends State<SportsHomePage>
           color: Colors.black,
         ),
         builder: (BuildContext context, SportsHomeVm vm) {
-          return ListView.separated(
-            itemBuilder: (c, idx) {
-              SportsContent content = vm.list[idx];
-              if (content.flag == '1') {
-                return SportsHomeItem1(content: content);
-              }
-              if (content.flag == '2') {
-                return SportsHomeItem2(content: content);
-              }
-              if (content.flag == '3') {
-                return SportsHomeItem3(content: content);
-              }
-              if (content.flag == '4') {
-                return SportsHomeItem4(content: content);
-              }
+          return SmartRefresher(
+            enablePullDown: true,
+            enablePullUp: true,
+            footer: JDCustomFooter(),
+            header: BezierHeader(
+                child: const Center(child: Icon(Icons.wallet_giftcard))),
+            controller: vm.refreshController,
+            onLoading: vm.loadMore,
+            onRefresh: vm.refresh,
+            child: ListView.separated(
+              itemBuilder: (c, idx) {
+                SportsContent content = vm.list[idx];
+                if (content.flag == '1') {
+                  return SportsHomeItem1(content: content);
+                }
+                if (content.flag == '2') {
+                  return SportsHomeItem2(content: content);
+                }
+                if (content.flag == '3') {
+                  return SportsHomeItem3(content: content);
+                }
+                if (content.flag == '4') {
+                  return SportsHomeItem4(content: content);
+                }
 
-              if (content.flag == '5') {
-                return SportsHomeItem5(content: content);
-              }
+                if (content.flag == '5') {
+                  return SportsHomeItem5(content: content);
+                }
 
-              return SportsHomeItem(content: content);
-            },
-            separatorBuilder: (c, idx) {
-              return const Divider();
-            },
-            itemCount: vm.list.length,
+                return SportsHomeItem(content: content);
+              },
+              separatorBuilder: (c, idx) {
+                return const Divider();
+              },
+              itemCount: vm.list.length,
+            ),
           );
         },
         model: SportsHomeVm());

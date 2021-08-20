@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
+import 'package:flutter_app_component/demo/shop/search/widget/shop_search_filter_widget.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -32,9 +33,7 @@ class _ShopSearchPageState extends State<ShopSearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       endDrawer: Drawer(
-        child: Container(
-          color: Colors.red,
-        ),
+        child: ShopSearchFilterWidget(),
       ),
       appBar: AppBar(
         elevation: 1,
