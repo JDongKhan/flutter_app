@@ -72,7 +72,7 @@ class _RegisterPageState extends State<RegisterPage> {
             //居中
             child: Text(
               '注册',
-              style: TextStyle(fontSize: 30.0, color: Colors.white),
+              style: TextStyle(fontSize: 24.0, color: Colors.white),
             ),
           ),
           const SizedBox(height: 50.0),
@@ -83,6 +83,7 @@ class _RegisterPageState extends State<RegisterPage> {
               controller: _nameController,
               obscureText: false,
               textInputAction: TextInputAction.next,
+              style: const TextStyle(fontSize: 14),
               validator: (String v) {
                 // 校验用户名
                 return v.trim().length > 0 ? null : '手机号不能为空';
@@ -117,6 +118,7 @@ class _RegisterPageState extends State<RegisterPage> {
               focusNode: _pw1focusNode,
               controller: _pw1Controller,
               obscureText: true,
+              style: const TextStyle(fontSize: 14),
               textInputAction: TextInputAction.done,
               validator: (String v) {
                 //校验密码
@@ -147,6 +149,7 @@ class _RegisterPageState extends State<RegisterPage> {
               focusNode: _pw2focusNode,
               controller: _pw2Controller,
               obscureText: true,
+              style: const TextStyle(fontSize: 14),
               textInputAction: TextInputAction.done,
               validator: (String v) {
                 //校验密码
@@ -187,7 +190,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () {
                     _registAction();
                   },
-                  child: const Text('确定'),
+                  child: const Text(
+                    '确定',
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
               ),
             ],

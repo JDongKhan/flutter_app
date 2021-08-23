@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.white,
                   )),
@@ -79,21 +79,21 @@ class _LoginPageState extends State<LoginPage> {
             //居中
             child: Text(
               '登录',
-              style: TextStyle(fontSize: 30.0, color: Colors.white),
+              style: TextStyle(fontSize: 24.0, color: Colors.white),
             ),
           ),
           const SizedBox(height: 50.0),
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontSize: 14),
               focusNode: _namefocusNode,
               controller: _nameController,
               obscureText: false,
               textInputAction: TextInputAction.next,
               validator: (String v) {
                 // 校验用户名
-                return v.trim().length > 0 ? null : '手机号不能为空';
+                return v.trim().isNotEmpty ? null : '手机号不能为空';
               },
               onFieldSubmitted: (String input) {
                 _namefocusNode.unfocus();
@@ -123,7 +123,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: TextFormField(
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white, fontSize: 14),
               focusNode: _pwfocusNode,
               controller: _pwController,
               obscureText: true,
@@ -187,7 +187,10 @@ class _LoginPageState extends State<LoginPage> {
                   onPressed: () {
                     _registAction();
                   },
-                  child: const Text('注册'),
+                  child: const Text(
+                    '注册',
+                    style: TextStyle(fontSize: 14),
+                  ),
                 ),
               ),
               SizedBox(
@@ -201,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(5.0)),
                   onPressed: () {},
-                  child: const Text('忘记密码'),
+                  child: const Text('忘记密码', style: TextStyle(fontSize: 14)),
                 ),
               ),
             ],
