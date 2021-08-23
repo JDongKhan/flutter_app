@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:jd_core/jd_core.dart';
 
-import 'didi_home_detail_page.dart';
+import '../detail/didi_home_detail_page.dart';
 
 /// @author jd
 
