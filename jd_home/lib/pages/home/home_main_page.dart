@@ -287,8 +287,8 @@ class _HomeMainPageState extends State<HomeMainPage>
                   borderRadius: BorderRadius.circular(30),
                   child: Image.asset(
                     JDAssetBundle.getImgPath(itm['icon']),
-                    width: 60,
-                    height: 60,
+                    width: 50,
+                    height: 50,
                   ),
                 ),
                 Expanded(

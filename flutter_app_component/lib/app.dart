@@ -21,7 +21,7 @@ import 'routes/routes.dart';
  * 二、Row和mainAxisAlignment.spaceBetween
  *
  * flutter 绝对布局
- * 1、Flutter和Positioned配合
+ * 1、Stack和Positioned配合
  */
 class MyApp extends StatefulWidget {
   @override

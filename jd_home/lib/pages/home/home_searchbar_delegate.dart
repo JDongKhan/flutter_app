@@ -10,9 +10,9 @@ import 'package:flutter/material.dart';
 
 class JDHomeSearchBarDelegate extends SearchDelegate<String> {
   var dataSource = [
-    "哈哈哈哈哈呵呵呵呵嘻嘻嘻嘻嘻",
-    "hahahahahahehehehehehxixixixix",
-    "呵呵呵呵嘻嘻嘻嘻嘻哈哈哈哈哈"
+    '哈哈哈哈哈呵呵呵呵嘻嘻嘻嘻嘻',
+    'hahahahahahehehehehehxixixixix',
+    '呵呵呵呵嘻嘻嘻嘻嘻哈哈哈哈哈'
   ];
 
   @override

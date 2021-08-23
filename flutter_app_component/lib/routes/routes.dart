@@ -45,73 +45,71 @@ import 'package:flutter_app_component/pages/login/login_page.dart';
 import 'package:flutter_app_component/pages/scaffold/scaffold_page.dart';
 import 'package:jd_home/pages/home/home_page.dart';
 
-final Map<String, Widget> _routes = <String, Widget>{
-  '/': ScaffoldPage(),
+final Map<String, WidgetBuilder> _routes = <String, WidgetBuilder>{
+  '/': (BuildContext context) => ScaffoldPage(),
 
   //基础类
-  '/text': TextPage(),
-  '/button': ButtonPage(),
-  '/image': ImagePage(),
-  '/checkbox': CheckboxPage(),
-  '/textfield': TextFieldPage(),
-  '/linearprogressindicator': LinearProgressIndicatorPage(),
+  '/text': (BuildContext context) => TextPage(),
+  '/button': (BuildContext context) => ButtonPage(),
+  '/image': (BuildContext context) => ImagePage(),
+  '/checkbox': (BuildContext context) => CheckboxPage(),
+  '/textfield': (BuildContext context) => TextFieldPage(),
+  '/linearprogressindicator': (BuildContext context) =>
+      LinearProgressIndicatorPage(),
 
   //布局类
-  '/rowcolumn': RowColumnPage(),
-  '/flex': FlexPage(),
-  '/wrapflow': WrapFlowPage(),
-  '/flow': FlowPage(),
-  '/stackpositioned': StackPositionedPage(),
-  '/align': AlignPage(),
-  '/expanded': ExpandedPage(),
+  '/rowcolumn': (BuildContext context) => RowColumnPage(),
+  '/flex': (BuildContext context) => FlexPage(),
+  '/wrapflow': (BuildContext context) => WrapFlowPage(),
+  '/flow': (BuildContext context) => FlowPage(),
+  '/stackpositioned': (BuildContext context) => StackPositionedPage(),
+  '/align': (BuildContext context) => AlignPage(),
+  '/expanded': (BuildContext context) => ExpandedPage(),
 
   //容器类
-  '/padding': PaddingPage(),
-  '/constrainedbox': ConstrainedBoxPage(),
-  '/decoratedbox': DecoratedBoxPage(),
-  '/transform': TransformPage(),
-  '/container': ContainerPage(),
+  '/padding': (BuildContext context) => PaddingPage(),
+  '/constrainedbox': (BuildContext context) => ConstrainedBoxPage(),
+  '/decoratedbox': (BuildContext context) => DecoratedBoxPage(),
+  '/transform': (BuildContext context) => TransformPage(),
+  '/container': (BuildContext context) => ContainerPage(),
 
   //滚动类
-  '/singlechildscrollview': SingleChildScrollViewPage(),
-  '/listview': ListViewPage(),
-  '/gridview': GridViewPage(),
-  '/customscrollview': CustomScrollViewPage(),
-  '/nestedscrollview': NestedScrollViewPage(),
-  '/nestedscrollview_list': NestedScrollViewListPage(),
+  '/singlechildscrollview': (BuildContext context) =>
+      SingleChildScrollViewPage(),
+  '/listview': (BuildContext context) => ListViewPage(),
+  '/gridview': (BuildContext context) => GridViewPage(),
+  '/customscrollview': (BuildContext context) => CustomScrollViewPage(),
+  '/nestedscrollview': (BuildContext context) => NestedScrollViewPage(),
+  '/nestedscrollview_list': (BuildContext context) =>
+      NestedScrollViewListPage(),
 
   //其他
-  '/demo.funcation.state': StateListPage(),
+  '/demo.funcation.state': (BuildContext context) => StateListPage(),
   //数据传递
-  '/data': DataTransferIndexPage(),
-  '/inheritedwidget': InheritedWdgetPage(),
-  '/notification': NotificationPage(),
-  '/eventbus': EventBusPage(),
-  '/stream': StreamPage(),
+  '/data': (BuildContext context) => DataTransferIndexPage(),
+  '/inheritedwidget': (BuildContext context) => InheritedWdgetPage(),
+  '/notification': (BuildContext context) => NotificationPage(),
+  '/eventbus': (BuildContext context) => EventBusPage(),
+  '/stream': (BuildContext context) => StreamPage(),
 
   //三方
-  '/webview': WebViewPage(),
-  '/imageView': ImageViewPage(),
-  '/stacked_card': StackedCardDemo(),
-  '/player': PlayerDemoPage(),
+  '/webview': (BuildContext context) => WebViewPage(),
+  '/imageView': (BuildContext context) => ImageViewPage(),
+  '/stacked_card': (BuildContext context) => StackedCardDemo(),
+  '/player': (BuildContext context) => PlayerDemoPage(),
 
-  '/login': LoginPage(),
-  '/scaffold': ScaffoldPage(),
-  '/home': HomePage(),
-  '/tabbar': SportsTabbarPage(),
-  '/tabbar_component': TabbarPage(),
-  '/douyin': DouyinMainPage(),
-  '/pickImage': PickImagePage(),
-  '/camera': CameraExampleHome(),
-  '/thirdparty_list': ThirdpartyListPage(),
+  '/login': (BuildContext context) => LoginPage(),
+  '/scaffold': (BuildContext context) => ScaffoldPage(),
+  '/home': (BuildContext context) => HomePage(),
+  '/tabbar': (BuildContext context) => SportsTabbarPage(),
+  '/tabbar_component': (BuildContext context) => TabbarPage(),
+  '/douyin': (BuildContext context) => DouyinMainPage(),
+  '/pickImage': (BuildContext context) => PickImagePage(),
+  '/camera': (BuildContext context) => CameraExampleHome(),
+  '/thirdparty_list': (BuildContext context) => ThirdpartyListPage(),
 };
 
-final Map<String, WidgetBuilder> routes = _routes.map(
-  (String key, Widget value) => MapEntry<String, WidgetBuilder>(
-    key,
-    (BuildContext context) => value,
-  ),
-);
+Map<String, WidgetBuilder> get routes => _routes;
 
 class JDRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
