@@ -227,3 +227,10 @@ Execution failed for task ':app:packageXiaomiRelease'.
 ```
 
 16、hero组件在tab下多次使用造成重复，建议少用
+
+
+
+```
+注：部分资源和代码来自百度随便搜索的
+```
+
