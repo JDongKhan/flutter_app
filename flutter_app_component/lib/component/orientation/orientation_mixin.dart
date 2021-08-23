@@ -12,7 +12,9 @@ mixin OrientationMixin<T extends StatefulWidget> on State<T>, OrientationAware {
     super.didChangeDependencies();
     _orientationObserver = OrientationObserver.internalGet(context);
     final route = ModalRoute.of(context);
-    if (route == null) return;
+    if (route == null) {
+      return;
+    }
     _orientationObserver.subscribe(this, route);
   }
 

@@ -92,10 +92,13 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        color: Colors.orange,
+        color: Colors.blue[100],
         child: Container(
-          margin: const EdgeInsets.only(top: 150, left: 150),
-          child: const Text('假装我是地图'),
+          margin: const EdgeInsets.only(
+            top: 150,
+          ),
+          alignment: Alignment.topCenter,
+          child: const Text('SDK太大，假装我是地图'),
         ),
       ),
     );

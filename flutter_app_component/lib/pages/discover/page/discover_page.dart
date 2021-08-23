@@ -6,7 +6,7 @@ import 'package:flutter_app_component/global/widget_config.dart';
 import 'package:jd_core/style/jd_styles.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
-import 'discover_controller.dart';
+import '../vm/discover_controller.dart';
 
 class DiscoverPage extends StatefulWidget {
   @override
@@ -77,20 +77,21 @@ class _DiscoverPageState extends State<DiscoverPage>
       appBar: myAppBar(
         title: const Text(
           '发现',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black),
         ),
-        leading: homeButtonIcon(context),
-        backgroundColor: Colors.green,
+        leading: homeButtonIcon(context, color: Colors.black),
+        backgroundColor: Colors.white,
+        elevation: 0,
         centerTitle: true,
         actions: <Widget>[
           ///分享按钮
-          shareButtonIcon(context),
+          shareButtonIcon(context, color: Colors.black),
           //菜单按钮
           PopupMenuButton<String>(
             color: Colors.white,
             icon: const Icon(
               Icons.more_horiz,
-              color: Colors.white,
+              color: Colors.black,
             ),
             onSelected: (String item) {
               if (item == 'download') {
@@ -299,7 +300,7 @@ class _DiscoverPageState extends State<DiscoverPage>
     var map = JDNavigationUtil.pushNamed(router, arguments: {'title': title});
     //带有返回值
 //    var map = await Navigator.of(context).pushNamed(router, arguments: {'title' : title});
-    debugPrint(map.toString());
+//     debugPrint(map.toString());
 
 //
 //  //此种方法可传参

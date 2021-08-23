@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/pages/buiness/business_page.dart';
-import 'package:flutter_app_component/pages/discover/discover_page.dart';
+import 'package:flutter_app_component/pages/discover/page/discover_page.dart';
 import 'package:flutter_app_component/pages/my/my_page.dart';
 import 'package:jd_home/pages/home/home_page.dart';
 

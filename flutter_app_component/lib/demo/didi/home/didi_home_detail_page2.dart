@@ -76,10 +76,13 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
     return Container(
       width: double.infinity,
       height: double.infinity,
-      color: Colors.orange,
+      color: Colors.blue[100],
       child: Container(
-        margin: const EdgeInsets.only(top: 150, left: 150),
-        child: Text('假装我是地图'),
+        margin: const EdgeInsets.only(
+          top: 150,
+        ),
+        alignment: Alignment.topCenter,
+        child: const Text('SDK太大，假装我是地图'),
       ),
     );
   }
@@ -298,7 +301,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
               ),
             ),
             padding:
-            const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
+                const EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
             child: Row(
               children: [
                 Expanded(

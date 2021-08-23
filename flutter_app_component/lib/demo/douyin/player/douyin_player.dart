@@ -1,35 +1,85 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/component/tabbar_view/tabbar_life_cycle.dart';
+import 'package:flutter_app_component/utils/logger_util.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:video_player/video_player.dart';
 
 /// @author jd
 
+class DouyinPlayerController extends ChangeNotifier {
+  DouyinPlayerController(bool playing) : _playing = playing;
+
+  bool _playing;
+
+  void pause() {
+    _playing = false;
+    notifyListeners();
+  }
+
+  void play() {
+    _playing = true;
+    notifyListeners();
+  }
+}
+
 class DouyinPlayer extends StatefulWidget {
-  DouyinPlayer({this.url, this.loop = true});
+  const DouyinPlayer({
+    this.url,
+    this.loop = true,
+    this.source,
+    this.douyinPlayerController,
+  });
   final String url;
   final bool loop;
+  final String source;
+  final DouyinPlayerController douyinPlayerController;
   @override
   _DouyinPlayerState createState() => _DouyinPlayerState();
 }
 
 class _DouyinPlayerState extends State<DouyinPlayer>
-    with WidgetsBindingObserver, LifecycleAware, LifecycleMixin {
+    with
+        WidgetsBindingObserver,
+        LifecycleAware,
+        LifecycleMixin,
+        TabBarLifecycle {
   VideoPlayerController _videoPlayerController;
   bool _isPlaying;
   Future _videoPlayerFuture;
   @override
   void initState() {
     super.initState();
-    print('initState');
+    logger.d('(${widget.url}) - player initState');
     WidgetsBinding.instance.addObserver(this);
-    //准备
-    _prepare();
+    if (widget.douyinPlayerController != null) {
+      widget.douyinPlayerController.addListener(() {
+        if (widget.douyinPlayerController._playing == true) {
+          _play();
+        } else {
+          _pause();
+        }
+      });
+
+      Function callBack;
+      if (widget.douyinPlayerController._playing) {
+        callBack = () {
+          _play();
+        };
+      }
+      _prepare(callBack);
+    } else {
+      //准备
+      _prepare(() {
+        _play();
+      });
+    }
   }
 
   @override
   void dispose() {
-    print('dispose');
+    logger.d('(${widget.url}) - player dispose');
     _videoPlayerController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -37,42 +87,42 @@ class _DouyinPlayerState extends State<DouyinPlayer>
 
   @override
   void didChangeDependencies() {
-    print('didChangeDependencies');
+    logger.d('(${widget.url}) - player didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant DouyinPlayer oldWidget) {
-    print('didUpdateWidget');
+    logger.d('(${widget.url}) - player didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
-    print('deactivate');
+    logger.d('(${widget.url}) - player deactivate');
     super.deactivate();
   }
 
   @override
   void didChangeMetrics() {
-    print('didChangeMetrics');
+    logger.d('(${widget.url}) - player didChangeMetrics');
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    print('didPushRoute');
+    logger.d('(${widget.url}) - player didPushRoute');
     return super.didPushRoute(route);
   }
 
   @override
   Future<bool> didPopRoute() {
-    print('didPopRoute');
+    logger.d('(${widget.url}) - player didPopRoute');
     return super.didPopRoute();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print('didChangeAppLifecycleState');
+    logger.d('(${widget.url}) - player didChangeAppLifecycleState');
   }
 
   void _listener() {
@@ -87,10 +137,12 @@ class _DouyinPlayerState extends State<DouyinPlayer>
     }
   }
 
-  void _prepare() {
+  void _prepare(Function callback) {
     _videoPlayerController = VideoPlayerController.asset(widget.url);
     _videoPlayerFuture = _videoPlayerController.initialize().then((value) {
-      _play();
+      if (callback != null) {
+        callback();
+      }
     });
     _videoPlayerController.setLooping(widget.loop);
     _videoPlayerController.addListener(_listener);
@@ -98,21 +150,27 @@ class _DouyinPlayerState extends State<DouyinPlayer>
 
   void _play() {
     _videoPlayerController.play();
-    setState(() {
-      _isPlaying = true;
-    });
+    if (mounted) {
+      setState(() {
+        _isPlaying = true;
+      });
+    }
   }
 
-  void _stop() {
+  void _pause() {
     _videoPlayerController.pause();
-    setState(() {
-      _isPlaying = false;
-    });
+    if (mounted) {
+      setState(() {
+        _isPlaying = false;
+      });
+    }
   }
+
+  void _stop() {}
 
   @override
   Widget build(BuildContext context) {
-    print('build');
+    logger.d('(${widget.url}) - build');
     return FutureBuilder(
       future: _videoPlayerFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -122,7 +180,7 @@ class _DouyinPlayerState extends State<DouyinPlayer>
             onTap: () {
               final bool isPlaying = _videoPlayerController.value.isPlaying;
               if (isPlaying) {
-                _stop();
+                _pause();
               } else {
                 _play();
               }
@@ -135,8 +193,8 @@ class _DouyinPlayerState extends State<DouyinPlayer>
                   opacity: _isPlaying ? 0 : 1.0,
                   child: const Center(
                     child: Icon(
-                      Icons.play_arrow,
-                      size: 80,
+                      Icons.play_arrow_rounded,
+                      size: 40,
                       color: Colors.white,
                     ),
                   ),
@@ -148,7 +206,9 @@ class _DouyinPlayerState extends State<DouyinPlayer>
         return GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            _prepare();
+            _prepare(() {
+              _play();
+            });
           },
           child: const Center(
             child: Text(
@@ -166,19 +226,21 @@ class _DouyinPlayerState extends State<DouyinPlayer>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      print(' -- push -- ');
+      logger.d('(${widget.url}) - player push ');
     } else if (event == LifecycleEvent.visible) {
-      print(' -- visible -- ');
+      logger.d('(${widget.url}) - player visible ');
+      _play();
     } else if (event == LifecycleEvent.active) {
       _play();
-      print(' -- active -- ');
+      logger.d('(${widget.url}) - player active ');
     } else if (event == LifecycleEvent.inactive) {
-      print(' -- inactive -- ');
+      logger.d('(${widget.url}) - player inactive ');
     } else if (event == LifecycleEvent.invisible) {
-      _stop();
-      print(' -- invisible -- ');
+      _pause();
+      logger.d('(${widget.url}) - player invisible ');
     } else if (event == LifecycleEvent.pop) {
-      print(' -- pop -- ');
+      _pause();
+      logger.d('(${widget.url}) - player pop ');
     }
   }
 }

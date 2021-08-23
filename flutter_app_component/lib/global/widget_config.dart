@@ -9,10 +9,11 @@ import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 /// @author jd
 
 ///回到首页button
-IconButton homeButtonIcon(BuildContext context) => IconButton(
-      icon: const Icon(
+IconButton homeButtonIcon(BuildContext context, {Color color = Colors.white}) =>
+    IconButton(
+      icon: Icon(
         Icons.home,
-        color: Colors.white,
+        color: color,
       ),
       onPressed: () {
         ScaffoldPage.of(context).switchTabbarIndex(0);
@@ -20,8 +21,10 @@ IconButton homeButtonIcon(BuildContext context) => IconButton(
     );
 
 ///分享按钮
-IconButton shareButtonIcon(BuildContext context) => IconButton(
-      icon: const Icon(Icons.share, color: Colors.white),
+IconButton shareButtonIcon(BuildContext context,
+        {Color color = Colors.white}) =>
+    IconButton(
+      icon: Icon(Icons.share, color: color),
       onPressed: () {
         showShareBottomSheet(context);
       },

@@ -16,6 +16,7 @@ class JDSearchBar extends StatefulWidget {
     this.color = Colors.white,
     this.padding =
         const EdgeInsets.only(left: 10, top: 5, right: 10, bottom: 0),
+    this.radius = 20,
   });
 
   final ValueChanged<String> onSubmitted;
@@ -25,6 +26,7 @@ class JDSearchBar extends StatefulWidget {
   final Color color;
   final double height;
   final EdgeInsets padding;
+  final double radius;
 
   @override
   State createState() => _JDSearchBarState();
@@ -52,7 +54,7 @@ class _JDSearchBarState extends State<JDSearchBar> {
         decoration: BoxDecoration(
           color: widget.color,
           borderRadius: BorderRadius.all(
-            Radius.circular((widget.height) / 2),
+            Radius.circular(widget.radius),
           ),
         ),
         height: widget.height,

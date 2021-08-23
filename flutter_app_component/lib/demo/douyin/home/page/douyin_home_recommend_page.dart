@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_app_component/demo/douyin/comment_widget.dart';
-import 'package:flutter_app_component/demo/douyin/like_gesture_widget.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:jd_core/jd_core.dart';
+import 'package:flutter_app_component/demo/douyin/home/widget/comment_widget.dart';
+import 'package:flutter_app_component/demo/douyin/people_detail/page/doiyin_people_detail_page.dart';
+import 'package:flutter_app_component/demo/douyin/player/douyin_player.dart';
+import 'package:flutter_app_component/demo/douyin/player/like_gesture_widget.dart';
+import 'package:flutter_app_component/demo/douyin/player/vinyl_disk.dart';
+import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:marquee/marquee.dart';
 
-import 'doiyin_people_detail_page.dart';
-import 'douyin_player.dart';
-import 'vinyl_disk.dart';
-
 /// @author jd
 
-class DouYinHomePage extends StatefulWidget {
+class DouyinHomeRecommendPage extends StatefulWidget {
+  const DouyinHomeRecommendPage({this.source});
+  final String source; //来源
   @override
-  _DouYinHomePageState createState() => _DouYinHomePageState();
+  _DouyinHomeRecommendPageState createState() =>
+      _DouyinHomeRecommendPageState();
 }
 
-class _DouYinHomePageState extends State<DouYinHomePage>
-    with SingleTickerProviderStateMixin {
-  TabController _tabController;
-  List<Map<String, dynamic>> _list = [
+class _DouyinHomeRecommendPageState extends State<DouyinHomeRecommendPage>
+    with AutomaticKeepAliveClientMixin {
+  final PageController _pageController = PageController();
+  final List<Map<String, dynamic>> _list = [
     {
       'video_url': 'assets/videos/video_1.mp4',
       'author_name': 'JD_1',
@@ -54,135 +54,59 @@ class _DouYinHomePageState extends State<DouYinHomePage>
     },
   ];
 
+  int _currentIndex = 0;
+  List<DouyinPlayerController> _pageControllerList;
+
   @override
   void initState() {
+    _pageControllerList = List.generate(
+      _list.length,
+      (index) => DouyinPlayerController(index == 0),
+    ).toList();
     super.initState();
-    _tabController = TabController(length: 2, vsync: this, initialIndex: 1);
   }
 
   @override
   Widget build(BuildContext context) {
-    return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle.light,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            _buildBackground(),
-            LikeGestureWidget(
-              onAddFavorite: () {
-                debugPrint('我在双击');
-              },
-              onSingleTap: () {
-                debugPrint('我在单击');
-              },
-              child: _buildPage(),
-            ),
-            _buildTopMenu(),
-          ],
-        ),
-      ),
+    return LikeGestureWidget(
+      onAddFavorite: () {
+        debugPrint('我在双击');
+      },
+      onSingleTap: () {
+        debugPrint('我在单击');
+      },
+      child: PageView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: _list.length,
+          controller: _pageController,
+          // allowImplicitScrolling: true,
+          // dragStartBehavior: DragStartBehavior.down,
+          onPageChanged: (int index) {
+            print('index:$index');
+            DouyinPlayerController preController =
+                _pageControllerList[_currentIndex];
+            DouyinPlayerController currentController =
+                _pageControllerList[index];
+            preController.pause();
+            currentController.play();
+            _currentIndex = index;
+          },
+          // layout: SwiperLayout.STACK,
+          itemBuilder: (BuildContext context, int index) {
+            return _buildPage(index);
+          }),
     );
   }
 
-  /******  背景 ********/
-  Widget _buildBackground() {
-    return Container(
-      color: Colors.black,
-    );
-  }
-
-  @override
-  void deactivate() {
-    debugPrint('deactivate');
-    super.deactivate();
-  }
-  /******  顶部菜单 ********/
-
-  Widget _buildTopMenu() {
-    return SafeArea(
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Container(
-                width: 80,
-              ),
-              _buildTabbar(),
-              Container(
-                child: IconButton(
-                  icon: Icon(
-                    Icons.search,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTabbar() {
-    return Container(
-      width: 200,
-      child: TabBar(
-        controller: _tabController,
-        indicatorColor: Colors.white,
-        tabs: const <Widget>[
-          Tab(
-            child: Text(
-              '关注',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-          Tab(
-            child: Text(
-              '推荐',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPage() {
-    return TabBarView(
-      controller: _tabController,
-      children: <Widget>[
-        Container(
-          color: Colors.red,
-          child: const Center(
-            child: Text(
-              '需要登录',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
-        ),
-        _buildPlayPage(),
-      ],
-    );
-  }
-
-  Widget _buildPlayPage() {
-    return Swiper(
-        scrollDirection: Axis.vertical,
-        itemCount: _list.length,
-        itemBuilder: (BuildContext context, int index) {
-          Map item = _list[index];
-          return _buildPage1(item);
-        });
-  }
-
-  Widget _buildPage1(Map item) {
+  ///页面布局
+  Widget _buildPage(int index) {
+    Map item = _list[index];
+    DouyinPlayerController douyinPlayerController = _pageControllerList[index];
     return Container(
       color: Colors.black,
       child: Stack(
         children: <Widget>[
-          _buildPlayer(item),
+          _buildPlayer(item, douyinPlayerController),
           _buildRightMenu(item),
           _buildBottom(item),
         ],
@@ -190,16 +114,20 @@ class _DouYinHomePageState extends State<DouYinHomePage>
     );
   }
 
-  Widget _buildPlayer(Map item) {
+  ///播放器布局
+  Widget _buildPlayer(Map item, DouyinPlayerController douyinPlayerController) {
     return Container(
       height: double.infinity,
       width: double.infinity,
       child: DouyinPlayer(
+        douyinPlayerController: douyinPlayerController,
+        source: widget.source,
         url: item['video_url'],
       ),
     );
   }
 
+  ///播放器上面的右侧菜单
   Widget _buildRightMenu(Map item) {
     return Container(
       alignment: Alignment.centerRight,
@@ -214,7 +142,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
           child: Column(
             children: <Widget>[
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.add,
                   color: Colors.white,
                 ),
@@ -226,7 +154,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                 padding: EdgeInsets.only(top: 10),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.favorite,
                   color: Colors.white,
                 ),
@@ -238,7 +166,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                 padding: EdgeInsets.only(top: 10),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.comment,
                   color: Colors.white,
                 ),
@@ -251,7 +179,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                 padding: EdgeInsets.only(top: 10),
               ),
               IconButton(
-                icon: Icon(
+                icon: const Icon(
                   Icons.share,
                   color: Colors.white,
                 ),
@@ -266,13 +194,14 @@ class _DouYinHomePageState extends State<DouYinHomePage>
     );
   }
 
+  ///播放器上面的底部信息布局
   Widget _buildBottom(Map item) {
     return Positioned(
       bottom: 0,
       left: 0,
       right: 0,
       child: Container(
-        margin: const EdgeInsets.only(bottom: 64),
+        // margin: const EdgeInsets.only(bottom: 0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
@@ -290,7 +219,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                         },
                         child: Text(
                           item['author_name'].toString(),
-                          style: TextStyle(color: Colors.white),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -299,7 +228,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                       alignment: Alignment.topLeft,
                       child: Text(
                         item['content'].toString(),
-                        style: TextStyle(color: Colors.white),
+                        style: const TextStyle(color: Colors.white),
                       ),
                     ),
                     Container(
@@ -312,7 +241,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                         children: [
                           Text(
                             item['source'].toString(),
-                            style: TextStyle(color: Colors.white),
+                            style: const TextStyle(color: Colors.white),
                           ),
                           Expanded(
                             child: Container(
@@ -320,7 +249,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
                               margin: const EdgeInsets.only(left: 10),
                               child: Marquee(
                                 text: '隐形的翅膀-张韶涵',
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 15,
                                   color: Colors.white,
                                 ),
@@ -345,6 +274,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
     );
   }
 
+  ///评论点击
   void _commentAction() {
     showModalBottomSheet(
         context: context,
@@ -352,4 +282,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
           return CommentWidget();
         });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }

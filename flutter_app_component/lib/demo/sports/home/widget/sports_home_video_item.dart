@@ -17,7 +17,7 @@ class SportsHomeVideoItem extends StatelessWidget {
         children: [
           Expanded(
             child: Image.asset(
-              JDAssetBundle.getImgPath(video['img'], format: 'jpg'),
+              JDAssetBundle.getImgPath(video['img'], format: 'png'),
               fit: BoxFit.fitHeight,
               width: 200,
             ),

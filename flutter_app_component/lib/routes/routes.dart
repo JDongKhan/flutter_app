@@ -32,7 +32,7 @@ import 'package:flutter_app_component/demo/databtransfer/event_bus/event_bus_pag
 import 'package:flutter_app_component/demo/databtransfer/inherited_widget_page.dart';
 import 'package:flutter_app_component/demo/databtransfer/notification_page.dart';
 import 'package:flutter_app_component/demo/databtransfer/stream_page.dart';
-import 'package:flutter_app_component/demo/douyin/douyin_page.dart';
+import 'package:flutter_app_component/demo/douyin/douyin_main_page.dart';
 import 'package:flutter_app_component/demo/funcation/state/state_list_page.dart';
 import 'package:flutter_app_component/demo/sports/sports_tabbar.dart';
 import 'package:flutter_app_component/demo/style_card/stacked_card_demo.dart';
@@ -100,7 +100,7 @@ final Map<String, Widget> _routes = <String, Widget>{
   '/home': HomePage(),
   '/tabbar': SportsTabbarPage(),
   '/tabbar_component': TabbarPage(),
-  '/douyin': DouyinPage(),
+  '/douyin': DouyinMainPage(),
   '/pickImage': PickImagePage(),
   '/camera': CameraExampleHome(),
   '/thirdparty_list': ThirdpartyListPage(),

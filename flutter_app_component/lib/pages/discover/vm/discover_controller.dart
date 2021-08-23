@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/input/pin_input_widget.dart';
 import 'package:flutter_app_component/component/input/vercode_input_widget.dart';
 import 'package:flutter_app_component/component/mask/bubble_demo_page.dart';
@@ -37,7 +35,7 @@ import 'package:flutter_app_component/demo/databtransfer/inherited_widget_page.d
 import 'package:flutter_app_component/demo/databtransfer/notification_page.dart';
 import 'package:flutter_app_component/demo/databtransfer/stream_page.dart';
 import 'package:flutter_app_component/demo/didi/didi_main_page.dart';
-import 'package:flutter_app_component/demo/douyin/douyin_home_page.dart';
+import 'package:flutter_app_component/demo/douyin/home/page/douyin_home_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/drop_select_menu/drop_select_demo_page.dart';
 import 'package:flutter_app_component/demo/dropmenu/jd_dropmenu_demo_page.dart';
 import 'package:flutter_app_component/demo/funcation/state/tapbox_a_page.dart';
@@ -57,12 +55,13 @@ import 'package:flutter_app_component/demo/stick/stick_demo_page2.dart';
 import 'package:flutter_app_component/demo/tantan/anim_scan_demo_page.dart';
 import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_page.dart';
 import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
+import 'package:jd_core/view_model/single_view_model.dart';
 
-import 'discover_page.dart';
+import '../page/discover_page.dart';
 
 /// @author jd
 
-class DiscoverController extends ChangeNotifier {
+class DiscoverController extends SingleViewModel {
   int currentIndex = 0;
 
   ///用map代替model
@@ -480,4 +479,12 @@ class DiscoverController extends ChangeNotifier {
       ],
     },
   ];
+
+  @override
+  Future loadData() async {
+    return true;
+  }
+
+  @override
+  void onCompleted(data) {}
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/pages/discover/discover_page.dart';
+import 'package:flutter_app_component/pages/discover/page/discover_page.dart';
 
 import 'sports_tab_home.dart';
 
@@ -41,15 +41,15 @@ class _SportsTabbarPageState extends State<SportsTabbarPage>
           TabHomePage(),
           DiscoverPage(),
         ],
-        physics: NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
       ),
       bottomNavigationBar: BottomAppBar(
         color: Colors.white,
-        shape: CircularNotchedRectangle(), // 底部导航栏打一个圆形的洞
+        shape: const CircularNotchedRectangle(), // 底部导航栏打一个圆形的洞
         child: Row(
           children: [
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               color: _index == 0 ? Colors.lightBlue : Colors.black,
               onPressed: () {
                 _controller.jumpToPage(0);
@@ -58,25 +58,27 @@ class _SportsTabbarPageState extends State<SportsTabbarPage>
                 });
               },
             ),
-            SizedBox(), //中间位置空出
+            const SizedBox(), //中间位置空出
             IconButton(
-                icon: Icon(Icons.business),
-                color: _index == 1 ? Colors.lightBlue : Colors.black,
-                onPressed: () {
-                  _controller.jumpToPage(1);
-                  setState(() {
-                    _index = 1;
-                  });
-                }),
+              icon: const Icon(Icons.business),
+              color: _index == 1 ? Colors.lightBlue : Colors.black,
+              onPressed: () {
+                _controller.jumpToPage(1);
+                setState(() {
+                  _index = 1;
+                });
+              },
+            ),
           ],
           mainAxisAlignment: MainAxisAlignment.spaceAround, //均分底部导航栏横向空间
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-          //悬浮按钮
-          child: Icon(Icons.add),
-          onPressed: () {}),
+        //悬浮按钮
+        child: const Icon(Icons.add),
+        onPressed: () {},
+      ),
     );
   }
 }

@@ -7,6 +7,7 @@ var logger = Logger(
     methodCount: 1,
     printTime: true,
     colors: false,
+    // printEmojis: false,
   ),
   output: UIAndConsoleOutput.instance,
 );

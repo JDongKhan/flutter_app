@@ -7,7 +7,7 @@ import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import 'sports_home_item4_footer.dart';
+import 'sports_home_item_4_footer.dart';
 
 /// @author jd
 

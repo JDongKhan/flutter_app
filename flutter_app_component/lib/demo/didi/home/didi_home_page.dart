@@ -146,11 +146,12 @@ class _DidiHomePageState extends State<DidiHomePage> {
         transform: Matrix4.translationValues(0.0, _mapOffset, 0.0),
         margin: const EdgeInsets.only(left: 10, right: 10),
         width: double.infinity,
-        color: Colors.orange,
+        color: Colors.blue[100],
         height: 500,
         child: Container(
-          margin: const EdgeInsets.only(top: 150, left: 150),
-          child: const Text('假装我是地图'),
+          margin: const EdgeInsets.only(top: 150),
+          alignment: Alignment.topCenter,
+          child: const Text('SDK太大，假装我是地图'),
         ),
       ),
     );

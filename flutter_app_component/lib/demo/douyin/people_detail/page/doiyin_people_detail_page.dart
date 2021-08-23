@@ -1,6 +1,8 @@
 // import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
 //     as extended;
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/shop/home/vm/custom_bouncing_scroll_physics.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/widget//sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
 
@@ -43,19 +45,9 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            _buildBackground(),
-            _buildScaffoldBody(),
-          ],
-        ),
+        backgroundColor: Colors.black,
+        body: _buildScaffoldBody(),
       ),
-    );
-  }
-
-  Widget _buildBackground() {
-    return Container(
-      color: Colors.black,
     );
   }
 
@@ -64,27 +56,32 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
     return NestedScrollView(
       key: _key,
       controller: _scrollController,
-      headerSliverBuilder: (BuildContext c, bool f) {
+      headerSliverBuilder: (BuildContext context, bool f) {
         return <Widget>[
-          SliverAppBar(
-            pinned: true,
-            expandedHeight: 300.0,
-            iconTheme: const IconThemeData(color: Colors.white),
-            backgroundColor: appAlpha < 0.5 ? Colors.transparent : Colors.black,
-            actions: <Widget>[
-              _buildMoreAction(),
-            ],
-            title: _buildAppBar(),
-            flexibleSpace: FlexibleSpaceBar(
-              // centerTitle: true,
-              collapseMode: CollapseMode.parallax,
-              background: _buildHead(),
+          SliverOverlapAbsorber(
+            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+            sliver: SliverAppBar(
+              pinned: true,
+              expandedHeight: 300.0,
+              iconTheme: const IconThemeData(color: Colors.white),
+              backgroundColor:
+                  appAlpha < 0.5 ? Colors.transparent : Colors.black,
+              actions: <Widget>[
+                _buildMoreAction(),
+              ],
+              title: _buildAppBar(),
+              flexibleSpace: FlexibleSpaceBar(
+                // centerTitle: true,
+                collapseMode: CollapseMode.parallax,
+                background: _buildHead(),
+              ),
             ),
           ),
           _buildPersistentHeader(),
         ];
       },
       body: const TabBarView(
+        physics: NeverScrollableScrollPhysics(),
         children: <Widget>[
           TabViewItem(PageStorageKey('Tab1')),
           TabViewItem(PageStorageKey('Tab2')),
@@ -161,11 +158,14 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Image.asset(
-                        JDAssetBundle.getImgPath('head'),
-                        fit: BoxFit.fill,
-                        width: 60,
-                        height: 60,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(30),
+                        child: Image.asset(
+                          JDAssetBundle.getImgPath('user_head_0'),
+                          fit: BoxFit.fill,
+                          width: 60,
+                          height: 60,
+                        ),
                       ),
                       Expanded(
                         child: Container(
@@ -173,7 +173,7 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
                           child: TextButton(
                             style: TextButton.styleFrom(
                               primary: Colors.white,
-                              shadowColor: Colors.blue,
+                              shadowColor: Colors.blue[100],
                               backgroundColor: Colors.blue,
                             ),
                             child: const Text('+关注'),
@@ -200,7 +200,7 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 5),
+                    margin: const EdgeInsets.only(top: 5, bottom: 10),
                     alignment: Alignment.centerLeft,
                     child: Row(
                       children: const <Widget>[
@@ -220,7 +220,7 @@ class _DouyinPeopleDetailPageState extends State<DouyinPeopleDetailPage>
                     color: Colors.grey,
                   ),
                   Container(
-                    margin: const EdgeInsets.only(top: 5),
+                    margin: const EdgeInsets.only(top: 10),
                     alignment: Alignment.centerLeft,
                     child: const Text(
                       '是谁这么优秀想要关注团团',
@@ -294,39 +294,47 @@ class TabViewItem extends StatefulWidget {
 }
 
 class _TabViewItemState extends State<TabViewItem> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
+  final List<String> _list = [
+    'video_0',
+    'video_1',
+    'video_2',
+    'video_3',
+    'video_4',
+    'video_5',
+    'video_6',
+    'video_7',
+    'video_8',
+    'video_9',
+    'video_10',
+    'video_11',
+    'video_12',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final Widget child = MediaQuery.removePadding(
-      context: context,
-      removeTop: true,
-      child: ListView.separated(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text(
-                'List-$index',
-                style: const TextStyle(color: Colors.white),
-              ),
-            );
-          },
-          separatorBuilder: (context, index) => const Divider(
-                height: 1,
-                color: Colors.white,
-              ),
-          itemCount: 100),
-    );
     return Container(
       key: widget.tabKey,
-      child: child,
+      margin: EdgeInsets.only(
+        top: kToolbarHeight + MediaQuery.of(context).padding.top,
+      ),
+      child: StaggeredGridView.countBuilder(
+        physics: const CustomBouncingScrollPhysics(),
+        padding: const EdgeInsets.all(2.0),
+        crossAxisCount: 2,
+        mainAxisSpacing: 2.0,
+        itemCount: _list.length * 2,
+        crossAxisSpacing: 2.0,
+        itemBuilder: (BuildContext context, int index) {
+          return _buildItem(index);
+        },
+        staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
+      ),
+    );
+  }
+
+  Widget _buildItem(int index) {
+    return Image.asset(
+      JDAssetBundle.getImgPath(_list[index % _list.length]),
     );
   }
 }

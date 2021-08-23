@@ -32,10 +32,10 @@ class _VinylDiskState extends State<VinylDisk> with TickerProviderStateMixin {
 
   final _vinylGradient = LinearGradient(
       colors: [
-        Colors.grey[800],
-        Colors.grey[900],
-        Colors.grey[900],
-        Colors.grey[800],
+        Colors.blue[200],
+        Colors.blue[300],
+        Colors.blue[400],
+        Colors.blue[100],
       ],
       begin: Alignment.bottomCenter,
       end: Alignment.topLeft,

@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/tabbar_view/tabbar_life_cycle.dart';
 
-import 'douyin_home_page.dart';
+import 'city/page/douyin_friend_page.dart';
+import 'home/page/douyin_home_page.dart';
 
 /// @author jd
 
-class DouyinPage extends StatefulWidget {
+class DouyinMainPage extends StatefulWidget {
   @override
-  _DouyinPageState createState() => _DouyinPageState();
+  _DouyinMainPageState createState() => _DouyinMainPageState();
 }
 
-class _DouyinPageState extends State<DouyinPage>
+class _DouyinMainPageState extends State<DouyinMainPage>
     with SingleTickerProviderStateMixin {
   final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[];
   TabController _tabController;
@@ -23,11 +25,9 @@ class _DouyinPageState extends State<DouyinPage>
     _tabs.add({'title': '首页', 'icon': Icons.home, 'page': DouYinHomePage()});
 
     _tabs.add({
-      'title': '南京',
-      'icon': Icons.business,
-      'page': Container(
-        color: Colors.blue,
-      )
+      'title': '朋友',
+      'icon': Icons.child_friendly,
+      'page': DouyinFriendPage(),
     });
 
     _tabs.add({
@@ -52,26 +52,33 @@ class _DouyinPageState extends State<DouyinPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: <Widget>[
-          _buildTabBarView(),
-          Container(
-            alignment: Alignment.bottomCenter,
-            child: _bottomNavigationBar(),
-          ),
-        ],
+      body: _buildTabBarView(),
+      bottomNavigationBar: _bottomNavigationBar(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey[100],
+        mini: true,
+        //悬浮按钮
+        child: const Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
 
   Widget _buildTabBarView() {
-    return TabBarView(
+    return TabbarViewLifeCycle(
+      tabController: _tabController,
+      child: TabBarView(
 //          index: _selectedIndex,
-      controller: _tabController,
-      physics: const NeverScrollableScrollPhysics(),
-      children: _tabs.map((e) {
-        return e['page'] as Widget;
-      }).toList(),
+        controller: _tabController,
+        physics: const NeverScrollableScrollPhysics(),
+        children: _tabs.map((e) {
+          return TabbarItemLifecycle(
+            index: _tabs.indexOf(e),
+            child: e['page'] as Widget,
+          );
+        }).toList(),
+      ),
     );
   }
 
@@ -79,17 +86,18 @@ class _DouyinPageState extends State<DouyinPage>
     return BottomNavigationBar(
       // 底部导航
       items: _tabs
-          .map((Map<String, dynamic> e) => BottomNavigationBarItem(
+          .map(
+            (Map<String, dynamic> e) => BottomNavigationBarItem(
               icon: Icon(
                 e['icon'] as IconData,
               ),
-              title: Text(
-                e['title'].toString(),
-              )))
+              label: e['title'].toString(),
+            ),
+          )
           .toList(),
       currentIndex: _selectedIndex,
       type: BottomNavigationBarType.fixed,
-      backgroundColor: Colors.transparent,
+      backgroundColor: Colors.black,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.grey[350],
       onTap: _onItemTapped,

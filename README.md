@@ -136,9 +136,7 @@
 
 1、BottomNavigationBar 超过4个底部控制颜色变白：https://www.jianshu.com/p/946f1e476ca5
 
-2、BottomNavigationBar不能保存状态的问题：https://www.cnblogs.com/hupo376787/p/10624636.html
-
-3、shrinkWrap 解决gridview不能在customScrollView显示的问题
+2、shrinkWrap 解决gridview不能在customScrollView显示的问题
 
 4、
 
