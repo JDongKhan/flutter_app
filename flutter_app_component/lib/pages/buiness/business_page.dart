@@ -102,10 +102,13 @@ class ImagePreViewWidget extends StatelessWidget {
         child: Hero(
           tag: '$source-$index-$url',
           child: isNetwork
-              ? CachedNetworkImage(imageUrl: url)
+              ? CachedNetworkImage(
+                  imageUrl: url,
+                  fit: BoxFit.fill,
+                )
               : Image.asset(
                   JDAssetBundle.getImgPath(url),
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.fill,
                 ),
         ),
       ),
