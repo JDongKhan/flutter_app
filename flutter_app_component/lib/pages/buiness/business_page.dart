@@ -104,11 +104,11 @@ class ImagePreViewWidget extends StatelessWidget {
           child: isNetwork
               ? CachedNetworkImage(
                   imageUrl: url,
-                  fit: BoxFit.fill,
+                  // fit: BoxFit.fill,
                 )
               : Image.asset(
                   JDAssetBundle.getImgPath(url),
-                  fit: BoxFit.fill,
+                  // fit: BoxFit.fill,
                 ),
         ),
       ),
