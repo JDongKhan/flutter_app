@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 /// @author jd
+/// 关注
 
 class DouyinHomeoFocusPage extends StatefulWidget {
   @override

@@ -7,6 +7,7 @@ import 'douyin_home_focus_page.dart';
 import 'douyin_home_recommend_page.dart';
 
 /// @author jd
+/// 首页
 
 class DouYinHomePage extends StatefulWidget {
   @override

@@ -3,11 +3,11 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/component/pop/pop_route.dart';
-import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_navigator.dart';
+import 'package:flutter_app_component/demo/wechat/discover/friend_circle/widget/wechat_friend_circle_navigator.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 
-import 'wechat_friend_circle_view_model.dart';
+import '../vm/wechat_friend_circle_view_model.dart';
 
 /// @author jd
 class WechatFriendCirclePage extends StatefulWidget {

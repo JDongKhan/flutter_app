@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_page.dart';
+import 'package:flutter_app_component/demo/wechat/discover/friend_circle/page/wechat_friend_circle_page.dart';
 
 import '../../../extension/string_extension.dart';
 

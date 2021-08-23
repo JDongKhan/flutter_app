@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'discover/wechat_discover_page.dart';
 import 'mail_list/wechat_mail_list_page.dart';
-import 'message_list/message_list/wechat_message_list_page.dart';
+import 'message_list/message_list/page/wechat_message_list_page.dart';
 import 'mine/wechat_mine_page.dart';
 
 /// @author jd

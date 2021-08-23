@@ -4,17 +4,17 @@ import 'package:badges/badges.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/wechat/message_list/message_list/wechat_message_list_view_model.dart';
+import 'package:flutter_app_component/demo/wechat/message_list/message_list/vm/wechat_message_list_view_model.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:jd_dropdowm_menu_widget/jd_pop_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../../wechat_main_page.dart';
-import '../message_detail/page/wechat_message_detail_page.dart';
-import 'wechat_message_list_bottom_menu.dart';
-import 'wechat_scroll_controller.dart';
+import '../../../wechat_main_page.dart';
+import '../../message_detail/page/wechat_message_detail_page.dart';
+import '../vm/wechat_scroll_controller.dart';
+import '../widget/wechat_message_list_bottom_menu.dart';
 
 /// @author jd
 
@@ -79,12 +79,15 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
   Widget build(BuildContext context) {
     return Stack(
       children: [
+        ///底部的菜单
         WeChatMessageListBottomMenu(
           opacity: _opacity,
           onBack: () {
             _showMainPage();
           },
         ),
+
+        ///上层的列表
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
           curve: Curves.linear,
@@ -219,6 +222,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
     WechatMainPage.of(context).hiddenBottomNavigationBar(hidden);
   }
 
+  ///cell布局
   Widget _buildListItem(WechatMessageListViewModel model, Map item) {
     return Slidable(
       controller: _slidableController,
@@ -286,6 +290,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
     );
   }
 
+  ///行点击事件
   void _clickAtIndex(BuildContext context, Map map) {
     Navigator.of(context).push(
       CupertinoPageRoute<WechatMessageDetailPage>(
@@ -294,6 +299,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
     );
   }
 
+  ///下拉菜单
   void _showMenu(BuildContext context) {
     showPop(
       right: 10,

@@ -9,6 +9,7 @@ import 'package:jd_core/utils/jd_navigation_util.dart';
 import 'package:marquee/marquee.dart';
 
 /// @author jd
+/// 推荐
 
 class DouyinHomeRecommendPage extends StatefulWidget {
   const DouyinHomeRecommendPage({this.source});

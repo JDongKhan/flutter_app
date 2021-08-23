@@ -53,7 +53,7 @@ import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.d
 import 'package:flutter_app_component/demo/stick/stick_demo_page.dart';
 import 'package:flutter_app_component/demo/stick/stick_demo_page2.dart';
 import 'package:flutter_app_component/demo/tantan/anim_scan_demo_page.dart';
-import 'package:flutter_app_component/demo/wechat/discover/friend_circle/wechat_friend_circle_page.dart';
+import 'package:flutter_app_component/demo/wechat/discover/friend_circle/page/wechat_friend_circle_page.dart';
 import 'package:flutter_app_component/demo/wechat/wechat_main_page.dart';
 import 'package:jd_core/view_model/single_view_model.dart';
 
