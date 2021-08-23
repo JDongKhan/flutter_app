@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-import 'wechat_input_message_widget.dart';
-import 'wechat_message_list_widget.dart';
+import '../widget/wechat_input_message_widget.dart';
+import '../widget/wechat_message_list_widget.dart';
 
 /// @author jd
 

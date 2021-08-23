@@ -21,7 +21,7 @@ class Demo1 extends DemoSuperClass with D_1, D_2, D_3 {
 mixin D_1 on DemoSuperClass {
   @override
   void printMessage() {
-    print('D_1 printMessage');
+    debugPrint('D_1 printMessage');
     super.printMessage();
   }
 }
@@ -29,7 +29,7 @@ mixin D_1 on DemoSuperClass {
 mixin D_2 on DemoSuperClass {
   @override
   void printMessage() {
-    print('D_2 printMessage');
+    debugPrint('D_2 printMessage');
     super.printMessage();
   }
 }

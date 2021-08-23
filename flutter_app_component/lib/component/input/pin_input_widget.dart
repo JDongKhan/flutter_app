@@ -605,18 +605,19 @@ abstract class CodeInputBuilders {
     Alignment alignment: Alignment.center,
   }) {
     return (bool hasFocus, String char, int index) => Container(
-        width: totalSize.width,
-        height: totalSize.height,
-        alignment: alignment,
-        child: AnimatedContainer(
-          duration: Duration(milliseconds: 100),
-          decoration: char.isEmpty ? emptyDecoration : filledDecoration,
-          width: char.isEmpty ? emptySize.width : filledSize.width,
-          height: char.isEmpty ? emptySize.height : filledSize.height,
-          alignment: Alignment.center,
-          child: Text(char,
-              style: char.isEmpty ? emptyTextStyle : filledTextStyle),
-        ));
+          width: totalSize.width,
+          height: totalSize.height,
+          alignment: alignment,
+          child: AnimatedContainer(
+            duration: const Duration(milliseconds: 100),
+            decoration: char.isEmpty ? emptyDecoration : filledDecoration,
+            width: char.isEmpty ? emptySize.width : filledSize.width,
+            height: char.isEmpty ? emptySize.height : filledSize.height,
+            alignment: Alignment.center,
+            child: Text(char,
+                style: char.isEmpty ? emptyTextStyle : filledTextStyle),
+          ),
+        );
   }
 
   /// Builds the input inside a circle.
@@ -627,20 +628,21 @@ abstract class CodeInputBuilders {
       @required Border border,
       @required Color color,
       @required TextStyle textStyle}) {
-    final decoration = BoxDecoration(
+    final BoxDecoration decoration = BoxDecoration(
       shape: BoxShape.circle,
       border: border,
       color: color,
     );
 
     return containerized(
-        totalSize: Size.fromRadius(totalRadius),
-        emptySize: Size.fromRadius(emptyRadius),
-        filledSize: Size.fromRadius(filledRadius),
-        emptyDecoration: decoration,
-        filledDecoration: decoration,
-        emptyTextStyle: textStyle.copyWith(fontSize: 0.0),
-        filledTextStyle: textStyle);
+      totalSize: Size.fromRadius(totalRadius),
+      emptySize: Size.fromRadius(emptyRadius),
+      filledSize: Size.fromRadius(filledRadius),
+      emptyDecoration: decoration,
+      filledDecoration: decoration,
+      emptyTextStyle: textStyle.copyWith(fontSize: 0.0),
+      filledTextStyle: textStyle,
+    );
   }
 
   /// Builds the input inside a rectangle.
@@ -654,21 +656,22 @@ abstract class CodeInputBuilders {
     @required TextStyle textStyle,
     Alignment alignment: Alignment.center,
   }) {
-    final decoration = BoxDecoration(
+    final BoxDecoration decoration = BoxDecoration(
       border: border,
       borderRadius: borderRadius,
       color: color,
     );
 
     return containerized(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        emptyDecoration: decoration,
-        filledDecoration: decoration,
-        emptyTextStyle: textStyle.copyWith(fontSize: 0.0),
-        alignment: alignment,
-        filledTextStyle: textStyle);
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      emptyDecoration: decoration,
+      filledDecoration: decoration,
+      emptyTextStyle: textStyle.copyWith(fontSize: 0.0),
+      alignment: alignment,
+      filledTextStyle: textStyle,
+    );
   }
 
   /// Builds the input inside a light circle.
@@ -678,13 +681,17 @@ abstract class CodeInputBuilders {
     double filledRadius = 25.0,
   }) {
     return circle(
-        totalRadius: totalRadius,
-        emptyRadius: emptyRadius,
-        filledRadius: filledRadius,
-        border: Border.all(color: Colors.white, width: 2.0),
-        color: Colors.white10,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalRadius: totalRadius,
+      emptyRadius: emptyRadius,
+      filledRadius: filledRadius,
+      border: Border.all(color: Colors.white, width: 2.0),
+      color: Colors.white10,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a light circle.
@@ -694,13 +701,17 @@ abstract class CodeInputBuilders {
     double filledRadius = 25.0,
   }) {
     return circle(
-        totalRadius: totalRadius,
-        emptyRadius: emptyRadius,
-        filledRadius: filledRadius,
-        border: Border.all(color: Colors.black, width: 2.0),
-        color: Colors.black12,
-        textStyle: TextStyle(
-            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalRadius: totalRadius,
+      emptyRadius: emptyRadius,
+      filledRadius: filledRadius,
+      border: Border.all(color: Colors.black, width: 2.0),
+      color: Colors.black12,
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a light rectangle.
@@ -711,14 +722,18 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.white, width: 2.0),
-        color: Colors.white10,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.white, width: 2.0),
+      color: Colors.white10,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   static CodeInputBuilder staticRectangle({
@@ -728,14 +743,18 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.white, width: 1.0),
-        color: Colors.transparent,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.white, width: 1.0),
+      color: Colors.transparent,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a dark rectangle.
@@ -746,13 +765,17 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.black, width: 2.0),
-        color: Colors.black12,
-        textStyle: TextStyle(
-            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.black, width: 2.0),
+      color: Colors.black12,
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }

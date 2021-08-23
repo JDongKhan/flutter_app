@@ -12,7 +12,7 @@ import 'package:jd_dropdowm_menu_widget/jd_pop_widget.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../wechat_main_page.dart';
-import '../message_detail/wechat_message_detail_page.dart';
+import '../message_detail/page/wechat_message_detail_page.dart';
 import 'wechat_message_list_bottom_menu.dart';
 import 'wechat_scroll_controller.dart';
 

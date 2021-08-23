@@ -89,11 +89,12 @@ class _InputMessageWidgetState extends State<InputMessageWidget> {
           Row(
             children: <Widget>[
               IconButton(
-                  icon: const Icon(Icons.message),
+                  icon: const Icon(Icons.insert_comment_outlined),
                   onPressed: () {
                     dismissInputMessage();
                   }),
-              IconButton(icon: const Icon(Icons.face), onPressed: () {}),
+              IconButton(
+                  icon: const Icon(Icons.face_outlined), onPressed: () {}),
             ],
           ),
         ],
@@ -123,7 +124,7 @@ class _InputMessageWidgetState extends State<InputMessageWidget> {
           filled: true,
           fillColor: Colors.white,
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          // contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           // isDense: true,
         ),
       ),

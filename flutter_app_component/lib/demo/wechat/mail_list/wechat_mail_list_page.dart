@@ -4,7 +4,7 @@ import 'package:azlistview/azlistview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/demo/wechat/message_list/message_detail/wechat_message_detail_page.dart';
+import 'package:flutter_app_component/demo/wechat/message_list/message_detail/page/wechat_message_detail_page.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_screen_utils.dart';
 import 'package:lpinyin/lpinyin.dart';

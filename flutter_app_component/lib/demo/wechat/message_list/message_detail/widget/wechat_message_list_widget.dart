@@ -1,23 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/sports/live/widget/chat/sports_live_chat_widget.dart';
 import 'package:jd_core/jd_core.dart';
 
 import 'bubble_widget.dart';
 
 /// @author jd
-
-class Message {
-  const Message({
-    this.time,
-    this.message,
-    this.isMe,
-    this.name,
-  });
-  final String time;
-  final String message;
-  final bool isMe;
-  final String name;
-}
 
 class WechatMessageListWidget extends StatefulWidget {
   @override
@@ -119,6 +107,7 @@ class _WechatMessageListWidgetState extends State<WechatMessageListWidget> {
 
   Widget _myMessage(Message m) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Expanded(
           child: Container(

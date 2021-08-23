@@ -9,26 +9,26 @@ class VerificationCodeInputDemoPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: new Text("VerificationCodeInputDemoPage"),
+        title: const Text('VerificationCodeInputDemoPage'),
       ),
-      body: new GestureDetector(
+      body: GestureDetector(
         behavior: HitTestBehavior.translucent,
         onTap: () {
           FocusScope.of(context).requestFocus(new FocusNode());
         },
         child: Container(
-          child: new Center(
+          child: Center(
             child: VerCodeInput(
               ctx: context,
               length: 6,
               keyboardType: TextInputType.number,
-              builder: staticRectangle(context),
-              onChanged: (value) {
-                print(value ?? "");
+              builder: _staticRectangle(context),
+              onChanged: (String value) {
+                print(value ?? '');
               },
 
               ///输入完成时
-              onFilled: (value) {
+              onFilled: (String value) {
                 //print('Your input is $value.');
               },
             ),
@@ -38,21 +38,25 @@ class VerificationCodeInputDemoPage extends StatelessWidget {
     );
   }
 
-  staticRectangle(BuildContext context) {
-    var codeSize = 6;
-    double padding = 16;
-    double width = MediaQuery.of(context).size.width;
-    double codeFullSize = ((width - 2 * padding) / codeSize);
-    double codeNormalSize = codeFullSize - 20;
+  CodeInputBuilder _staticRectangle(BuildContext context) {
+    const double codeSize = 6;
+    const double padding = 16;
+    final double width = MediaQuery.of(context).size.width;
+    final double codeFullSize = (width - 2 * padding) / codeSize;
+    final double codeNormalSize = codeFullSize - 20;
     return CodeInputBuilders.rectangle(
-        totalSize: Size(codeFullSize, codeFullSize),
-        emptySize: Size(codeNormalSize, codeNormalSize),
-        filledSize: Size(codeNormalSize, codeNormalSize),
-        borderRadius: BorderRadius.zero,
-        border: Border.all(color: Colors.black, width: 1.0),
-        color: Colors.transparent,
-        textStyle: TextStyle(
-            color: Colors.black, fontSize: 16.0, fontWeight: FontWeight.bold));
+      totalSize: Size(codeFullSize, codeFullSize),
+      emptySize: Size(codeNormalSize, codeNormalSize),
+      filledSize: Size(codeNormalSize, codeNormalSize),
+      borderRadius: BorderRadius.zero,
+      border: Border.all(color: Colors.black, width: 1.0),
+      color: Colors.transparent,
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 16.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }
 
@@ -72,6 +76,7 @@ class VerCodeInput extends StatefulWidget {
     this.onFilled,
   }) : super(key: key);
 
+  // ignore: sort_unnamed_constructors_first
   factory VerCodeInput({
     Key key,
     @required int length,
@@ -161,7 +166,7 @@ class VerCodeInput extends StatefulWidget {
   /// keyboardType.
   static List<TextInputFormatter> _createInputFormatters(
       int length, TextInputType keyboardType) {
-    final formatters = <TextInputFormatter>[
+    final List<TextInputFormatter> formatters = <TextInputFormatter>[
       LengthLimitingTextInputFormatter(length)
     ];
 
@@ -180,8 +185,8 @@ class VerCodeInput extends StatefulWidget {
 }
 
 class _VerCodeInputState extends State<VerCodeInput> {
-  final node = FocusNode();
-  final controller = TextEditingController();
+  final FocusNode node = FocusNode();
+  final TextEditingController controller = TextEditingController();
 
   String get text => controller.text;
 
@@ -318,7 +323,7 @@ abstract class CodeInputBuilders {
     @required Color color,
     @required TextStyle textStyle,
   }) {
-    final decoration = BoxDecoration(
+    final BoxDecoration decoration = BoxDecoration(
       border: border,
       borderRadius: borderRadius,
       color: color,
@@ -341,13 +346,17 @@ abstract class CodeInputBuilders {
     double filledRadius = 25.0,
   }) {
     return circle(
-        totalRadius: totalRadius,
-        emptyRadius: emptyRadius,
-        filledRadius: filledRadius,
-        border: Border.all(color: Colors.white, width: 2.0),
-        color: Colors.white10,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalRadius: totalRadius,
+      emptyRadius: emptyRadius,
+      filledRadius: filledRadius,
+      border: Border.all(color: Colors.white, width: 2.0),
+      color: Colors.white10,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a light circle.
@@ -357,13 +366,17 @@ abstract class CodeInputBuilders {
     double filledRadius = 25.0,
   }) {
     return circle(
-        totalRadius: totalRadius,
-        emptyRadius: emptyRadius,
-        filledRadius: filledRadius,
-        border: Border.all(color: Colors.black, width: 2.0),
-        color: Colors.black12,
-        textStyle: TextStyle(
-            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalRadius: totalRadius,
+      emptyRadius: emptyRadius,
+      filledRadius: filledRadius,
+      border: Border.all(color: Colors.black, width: 2.0),
+      color: Colors.black12,
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a light rectangle.
@@ -374,14 +387,18 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.white, width: 2.0),
-        color: Colors.white10,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.white, width: 2.0),
+      color: Colors.white10,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   static CodeInputBuilder staticRectangle({
@@ -391,14 +408,18 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.white, width: 1.0),
-        color: Colors.transparent,
-        textStyle: TextStyle(
-            color: Colors.white, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.white, width: 1.0),
+      color: Colors.transparent,
+      textStyle: const TextStyle(
+        color: Colors.white,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 
   /// Builds the input inside a dark rectangle.
@@ -409,13 +430,17 @@ abstract class CodeInputBuilders {
     BorderRadius borderRadius = BorderRadius.zero,
   }) {
     return rectangle(
-        totalSize: totalSize,
-        emptySize: emptySize,
-        filledSize: filledSize,
-        borderRadius: borderRadius,
-        border: Border.all(color: Colors.black, width: 2.0),
-        color: Colors.black12,
-        textStyle: TextStyle(
-            color: Colors.black, fontSize: 20.0, fontWeight: FontWeight.bold));
+      totalSize: totalSize,
+      emptySize: emptySize,
+      filledSize: filledSize,
+      borderRadius: borderRadius,
+      border: Border.all(color: Colors.black, width: 2.0),
+      color: Colors.black12,
+      textStyle: const TextStyle(
+        color: Colors.black,
+        fontSize: 20.0,
+        fontWeight: FontWeight.bold,
+      ),
+    );
   }
 }
