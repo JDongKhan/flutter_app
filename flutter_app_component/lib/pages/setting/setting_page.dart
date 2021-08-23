@@ -16,7 +16,7 @@ import 'feedback/feedback_page.dart';
 import 'message_setting_page.dart';
 import 'privacy_setting_page.dart';
 
-/**
+/*
  *
  * @author jd
  *
@@ -54,7 +54,7 @@ class _SettingPageState extends State {
             _buildCell('隐私设置', onTap: () {
               JDNavigationUtil.push(PrivacySettingPage());
             }),
-            SettingThemeWidget(),
+            const SettingThemeWidget(),
             const Divider(
               height: 1,
             ),
@@ -70,7 +70,7 @@ class _SettingPageState extends State {
             _buildCell2(
               '锁定开关',
               rightWidget: Builder(builder: (context) {
-                JDTheme theme = context.watch<JDTheme>();
+                final JDTheme theme = context.watch<JDTheme>();
                 return Switch(value: true, onChanged: (value) {});
               }),
             ),
@@ -181,26 +181,27 @@ class _SettingPageState extends State {
 
   void _showDialog() {
     PackageInfo.fromPlatform().then((PackageInfo packageInfo) {
-      String appName = packageInfo.appName;
-      String packageName = packageInfo.packageName;
-      String version = packageInfo.version;
-      String buildNumber = packageInfo.buildNumber;
+      final String appName = packageInfo.appName;
+      final String packageName = packageInfo.packageName;
+      final String version = packageInfo.version;
+      final String buildNumber = packageInfo.buildNumber;
       showDialog<dynamic>(
-          context: context,
-          builder: (context) =>
-              _buildAboutDialog(appName, version, buildNumber));
+        context: context,
+        builder: (BuildContext context) =>
+            _buildAboutDialog(appName, version, buildNumber),
+      );
     });
   }
 
   Widget _buildAboutDialog(String appName, String version, String buildNumber) {
     return AboutDialog(
-      applicationIcon: FlutterLogo(),
+      applicationIcon: const FlutterLogo(),
       applicationName: appName,
       applicationVersion: version,
       applicationLegalese: 'Copyright JD',
       children: <Widget>[
         Container(
-          margin: EdgeInsets.only(top: 20),
+          margin: const EdgeInsets.only(top: 20),
           width: 80,
           height: 80,
           child: Image.asset(JDAssetBundle.getImgPath('head')),
@@ -215,7 +216,10 @@ class _SettingPageState extends State {
               fontSize: 20,
               shadows: [
                 Shadow(
-                    color: Colors.blue, offset: Offset(.5, .5), blurRadius: 3)
+                  color: Colors.blue,
+                  offset: Offset(.5, .5),
+                  blurRadius: 3,
+                )
               ],
             ),
           ),
@@ -227,7 +231,7 @@ class _SettingPageState extends State {
   void _logoutAction() {
     showDialog<dynamic>(
         context: context,
-        builder: (context) {
+        builder: (BuildContext context) {
           return AlertDialog(
             title: const Text('提示'),
             content: const Text('您确定要退出登录？?'),
@@ -325,7 +329,7 @@ class _SettingPageState extends State {
     if (null == value) {
       return '0';
     }
-    List<String> unitArr = List()..add('B')..add('K')..add('M')..add('G');
+    final List<String> unitArr = []..add('B')..add('K')..add('M')..add('G');
     int index = 0;
     while (value > 1024) {
       index++;
@@ -337,15 +341,15 @@ class _SettingPageState extends State {
 }
 
 class SettingThemeWidget extends StatelessWidget {
-  SettingThemeWidget();
+  const SettingThemeWidget();
 
   @override
   Widget build(BuildContext context) {
-    JDTheme theme = context.watch<JDTheme>();
+    final JDTheme theme = context.watch<JDTheme>();
     return Container(
       color: Colors.white,
       child: ExpansionTile(
-        title: Text("主题"),
+        title: const Text("主题"),
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
@@ -371,7 +375,8 @@ class SettingThemeWidget extends StatelessWidget {
                 Material(
                   child: InkWell(
                     onTap: () {
-                      var brightness = Theme.of(context).brightness;
+                      final Brightness brightness =
+                          Theme.of(context).brightness;
                       theme.switchRandomTheme(brightness: brightness);
                     },
                     child: Container(
@@ -382,7 +387,7 @@ class SettingThemeWidget extends StatelessWidget {
                       width: 40,
                       height: 40,
                       child: Text(
-                        "?",
+                        '?',
                         style: TextStyle(
                             fontSize: 20, color: Theme.of(context).accentColor),
                       ),

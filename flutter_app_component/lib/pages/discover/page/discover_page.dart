@@ -17,7 +17,7 @@ class _DiscoverPageState extends State<DiscoverPage>
     with TickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   ///业务controller
   final DiscoverController _controller = DiscoverController();
-
+  final ScrollController _rightScrollController = ScrollController();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -179,6 +179,7 @@ class _DiscoverPageState extends State<DiscoverPage>
         ),
       ),
       onTap: () {
+        _rightScrollController.jumpTo(0);
         setState(() {
           _controller.currentIndex = index;
         });
@@ -204,6 +205,7 @@ class _DiscoverPageState extends State<DiscoverPage>
     return Container(
       // color: Colors.grey[100],
       child: ListView.separated(
+        controller: _rightScrollController,
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
         itemCount: currentList?.length,
