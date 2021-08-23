@@ -8,7 +8,7 @@ import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:jd_core/widget//blurRect/jd_blurrect.dart';
 import 'package:provider/provider.dart';
 
-import 'viewmodel/cityinfo_view_model.dart';
+import 'vm/cityinfo_view_model.dart';
 
 /**
  *

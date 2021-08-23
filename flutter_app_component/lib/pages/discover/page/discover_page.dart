@@ -142,10 +142,10 @@ class _DiscoverPageState extends State<DiscoverPage>
       child: ListView.builder(
         physics: const BouncingScrollPhysics(
             parent: AlwaysScrollableScrollPhysics()),
-        itemCount: _controller.module_list.length,
+        itemCount: _controller.moduleList.length,
         padding: const EdgeInsets.all(0),
         itemBuilder: (BuildContext context, int i) {
-          return _buildRow(_controller.module_list[i], i);
+          return _buildRow(_controller.moduleList[i], i);
         },
       ),
     );
@@ -200,7 +200,7 @@ class _DiscoverPageState extends State<DiscoverPage>
 
   ///右边菜单
   Widget _buildRightMenu() {
-    Map map = _controller.module_list[_controller.currentIndex];
+    Map map = _controller.moduleList[_controller.currentIndex];
     List currentList = map['items'];
     return Container(
       // color: Colors.grey[100],

@@ -65,7 +65,7 @@ class DiscoverController extends SingleViewModel {
   int currentIndex = 0;
 
   ///用map代替model
-  final List<Map<String, dynamic>> module_list = <Map<String, dynamic>>[
+  final List<Map<String, dynamic>> moduleList = <Map<String, dynamic>>[
     ///demo
     {
       'title': 'Demo',
