@@ -58,7 +58,7 @@ class _BusinessPageState extends State<BusinessPage>
       onTap: () {
         Navigator.push(
           context,
-          JDNoAnimRouter<dynamic>(
+          JDFadeRouter<dynamic>(
             child: ImagePreViewWidget(
               url: images.url,
               source: widget.source,
@@ -93,18 +93,20 @@ class ImagePreViewWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bool isNetwork = url?.startsWith('http') || url?.startsWith('https');
-    return Scaffold(
-      body: Center(
-        child: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Hero(
-            tag: '$source-$index-$url',
-            child: isNetwork
-                ? CachedNetworkImage(imageUrl: url)
-                : Image.asset(JDAssetBundle.getImgPath(url)),
-          ),
+    return Material(
+      color: Colors.transparent,
+      child: GestureDetector(
+        onTap: () {
+          Navigator.pop(context);
+        },
+        child: Hero(
+          tag: '$source-$index-$url',
+          child: isNetwork
+              ? CachedNetworkImage(imageUrl: url)
+              : Image.asset(
+                  JDAssetBundle.getImgPath(url),
+                  fit: BoxFit.fitHeight,
+                ),
         ),
       ),
     );
