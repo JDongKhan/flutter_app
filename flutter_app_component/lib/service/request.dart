@@ -1,3 +1,4 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter_app_component/models/image_model.dart';
 import 'package:flutter_app_component/models/models.dart';
 import 'package:flutter_app_component/models/user.dart';
@@ -33,9 +34,31 @@ class Request {
   }
 
   static Future<List<JDImage>> imageList() async {
+    final ConnectivityResult connResult =
+        await Connectivity().checkConnectivity();
+    if (connResult != null && connResult == ConnectivityResult.none) {
+      List<JDImage> _list = [
+        JDImage(url: 'video_0'),
+        JDImage(url: 'video_1'),
+        JDImage(url: 'video_2'),
+        JDImage(url: 'video_3'),
+        JDImage(url: 'video_4'),
+        JDImage(url: 'video_5'),
+        JDImage(url: 'video_6'),
+        JDImage(url: 'video_7'),
+        JDImage(url: 'video_8'),
+        JDImage(url: 'video_9'),
+        JDImage(url: 'video_10'),
+        JDImage(url: 'video_11'),
+        JDImage(url: 'video_12'),
+      ];
+      return _list;
+      // throw DioError(error: JDUnreachableNetworkException());
+    }
+
     JDNetworkResponse r =
         await JDNetwork.get('http://gank.io/api/random/data/福利/100');
     List list = r.data['results'];
-    return list?.map((e) => JDImage.fromJson(e)).toList();
+    return list?.map((e) => JDImage.fromJson(e))?.toList();
   }
 }

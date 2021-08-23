@@ -4,6 +4,7 @@ import 'package:flutter_app_component/models/image_model.dart';
 import 'package:flutter_app_component/service/request.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/style/jd_push_animation.dart';
+import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/widget//async/jd_futurebuilder.dart';
 
 /// @author jd
@@ -50,6 +51,9 @@ class _BusinessPageState extends State<BusinessPage>
   }
 
   Widget _buildImageItem(JDImage images, int index) {
+    final bool isNetwork =
+        images?.url?.startsWith('http') || images?.url?.startsWith('https');
+
     return InkWell(
       onTap: () {
         Navigator.push(
@@ -58,14 +62,17 @@ class _BusinessPageState extends State<BusinessPage>
             child: ImagePreViewWidget(
               url: images.url,
               source: widget.source,
+              index: index,
             ),
           ),
         );
       },
       child: Hero(
-        tag: '${widget.source}-${index}-${images.url}',
+        tag: '${widget.source}-$index-${images.url}',
         // child: CachedNetworkImage(imageUrl: images.url),
-        child: Image.network(images.url),
+        child: isNetwork
+            ? Image.network(images.url)
+            : Image.asset(JDAssetBundle.getImgPath(images.url)),
       ),
     );
   }
@@ -76,22 +83,30 @@ class ImagePreViewWidget extends StatelessWidget {
     Key key,
     @required this.url,
     @required this.source,
+    this.index,
   }) : super(key: key);
 
   final String url;
   final String source;
+  final int index;
 
   @override
   Widget build(BuildContext context) {
+    final bool isNetwork = url?.startsWith('http') || url?.startsWith('https');
     return Scaffold(
-        body: Center(
-            child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Hero(
-                  tag: '${source}-${url}',
-                  child: CachedNetworkImage(imageUrl: url),
-                ))));
+      body: Center(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Hero(
+            tag: '$source-$index-$url',
+            child: isNetwork
+                ? CachedNetworkImage(imageUrl: url)
+                : Image.asset(JDAssetBundle.getImgPath(url)),
+          ),
+        ),
+      ),
+    );
   }
 }
