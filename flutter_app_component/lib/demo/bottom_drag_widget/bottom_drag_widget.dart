@@ -219,11 +219,11 @@ typedef FlingListener = void Function(bool isFling);
 ///1.监听child的位置更新
 ///2.判断child在手松的那一刻是否是出于fling状态
 class MyVerticalDragGestureRecognizer extends VerticalDragGestureRecognizer {
-  final FlingListener flingListener;
-
   /// Create a gesture recognizer for interactions in the vertical axis.
   MyVerticalDragGestureRecognizer({Object debugOwner, this.flingListener})
       : super(debugOwner: debugOwner);
+
+  final FlingListener flingListener;
 
   final Map<int, VelocityTracker> _velocityTrackers = <int, VelocityTracker>{};
 

@@ -191,10 +191,10 @@ class _ShopMyPageState extends State<ShopMyPage>
             const Divider(),
             GridView.count(
               crossAxisCount: 5,
-              physics: NeverScrollableScrollPhysics(),
+              physics: const NeverScrollableScrollPhysics(),
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              padding: EdgeInsets.all(0),
+              padding: const EdgeInsets.all(0),
               childAspectRatio: 1,
               shrinkWrap: true, //解决gridview不能在customScrollView显示的问题
               children:
@@ -256,7 +256,10 @@ class _ShopMyPageState extends State<ShopMyPage>
       },
       child: Tab(
         icon: Icon(item['icon'] as IconData),
-        text: item['title'].toString(),
+        child: Text(
+          item['title'].toString(),
+          style: const TextStyle(fontSize: 12),
+        ),
       ),
     );
   }
@@ -265,6 +268,7 @@ class _ShopMyPageState extends State<ShopMyPage>
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.center,
+        margin: const EdgeInsets.only(bottom: 10),
         child: const Text(
           '--- 为您推荐-人气商品 ---',
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
@@ -331,17 +335,17 @@ class _ShopMyPageState extends State<ShopMyPage>
                     _buildStyle1AppBar(),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildOrder(),
                   ),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildMenu(),
                   ),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildRecommend(),
                   ),
                   _buildGrid(),

@@ -11,6 +11,7 @@ import 'package:jd_core/jd_core.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
 import 'shop_home_product_list_page.dart';
+import 'shop_home_product_list_page_1.dart';
 
 /// @author jd
 
@@ -102,13 +103,23 @@ class _ShopHomePageState extends State<ShopHomePage>
           children: _vm.tabs
               .map((e) => PrimaryScrollContainer(
                     e['key'] as LabeledGlobalKey<PrimaryScrollContainerState>,
-                    ShopHomeProductListPage(
-                      keyword: e['title'].toString(),
-                    ),
+                    _buildContentPage(e),
                   ))
               .toList(),
         ),
       ),
+    );
+  }
+
+  Widget _buildContentPage(Map e) {
+    final int index = _vm.tabs.indexOf(e);
+    if (index == 1) {
+      return ShopHomeProductListPage1(
+        keyword: e['title'].toString(),
+      );
+    }
+    return ShopHomeProductListPage(
+      keyword: e['title'].toString(),
     );
   }
 

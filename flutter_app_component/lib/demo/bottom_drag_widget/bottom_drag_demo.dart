@@ -28,7 +28,7 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
             color: Colors.brown,
             child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
-                return Text('我是listview下面一层的东东，index=$index');
+                return Text('占地方的,index=$index');
               },
               itemCount: 100,
             ),

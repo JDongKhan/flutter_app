@@ -237,5 +237,5 @@ class JDNoAnimRouter<T> extends PageRouteBuilder<T> {
             pageBuilder: (BuildContext context, Animation<dynamic> animation, Animation<dynamic> secondaryAnimation) => child,
             transitionDuration: const Duration(milliseconds: 0),
             transitionsBuilder:
-                (BuildContext context, Animation<dynamic> animation, Animation<dynamic> secondaryAnimation,Widget child) => child);
+                (BuildContext context, Animation<dynamic> animation, Animation<dynamic> secondaryAnimation,Widget child) => child,);
 }

@@ -231,7 +231,11 @@ class _MyPageState extends State<MyPage>
             ),
             const Divider(),
             ListTile(
-              leading: Image.asset(JDAssetBundle.getImgPath('head')),
+              leading: Image.asset(
+                JDAssetBundle.getImgPath('head'),
+                width: 40,
+                height: 40,
+              ),
               title: Container(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: const Text(
@@ -253,6 +257,7 @@ class _MyPageState extends State<MyPage>
                   style: TextStyle(fontSize: 12),
                 ),
                 style: TextButton.styleFrom(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
                   shape: const RoundedRectangleBorder(
                     side: BorderSide(color: Color(0xFFAAAAAA)),
                     borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -330,6 +335,7 @@ class _MyPageState extends State<MyPage>
     return SliverToBoxAdapter(
       child: Container(
         alignment: Alignment.center,
+        margin: const EdgeInsets.only(bottom: 10),
         child: const Text(
           '--- 为您推荐-人气店铺 ---',
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
@@ -344,7 +350,7 @@ class _MyPageState extends State<MyPage>
       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
         //创建列表项
         return Container(
-          margin: const EdgeInsets.symmetric(horizontal: 10),
+          margin: const EdgeInsets.symmetric(horizontal: 5),
           color: Colors.white,
           child: InkWell(
             onTap: () {},
@@ -406,17 +412,17 @@ class _MyPageState extends State<MyPage>
                     _buildStyle1AppBar(),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildOrder(),
                   ),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildMenu(),
                   ),
 
                   SliverPadding(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.only(top: 10),
                     sliver: _buildRecommend(),
                   ),
                   _buildList(),

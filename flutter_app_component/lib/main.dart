@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:isolate';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -97,6 +98,12 @@ void _initProject() async {
         details.exception.toString() + "\n " + details.stack.toString(),
         details);
   };
+
+  Isolate.current.addErrorListener(RawReceivePort(
+    (dynamic pair) async {
+      //上报isolate里面的异常。
+    },
+  ).sendPort);
 
   //初始化
   JDAppInfo.init(() {

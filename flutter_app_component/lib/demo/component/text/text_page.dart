@@ -21,12 +21,12 @@ class _TextPageState extends State<TextPage> {
   int _counter = 0;
 
   String textContent =
-      "Today I was amazed to see the usually positive and friendly VueJS community descend into a bitter war. Two weeks ago Vue creator Evan You released a Request for Comment (RFC) for a new function-based way of writing Vue components in the upcoming Vue 3.0. Today a critical "
-      "Reddit thread followed by similarly "
-      "critical comments in a Hacker News thread caused a "
-      "flood of developers to flock to the original RFC to "
-      "voice their outrage, some of which were borderline abusive. "
-      "It was claimed in various places that";
+      'Today I was amazed to see the usually positive and friendly VueJS community descend into a bitter war. Two weeks ago Vue creator Evan You released a Request for Comment (RFC) for a new function-based way of writing Vue components in the upcoming Vue 3.0. Today a critical '
+      'Reddit thread followed by similarly '
+      'critical comments in a Hacker News thread caused a '
+      'flood of developers to flock to the original RFC to '
+      'voice their outrage, some of which were borderline abusive. '
+      'It was claimed in various places that';
 
   final double leading = 0.9;
 
@@ -46,12 +46,12 @@ class _TextPageState extends State<TextPage> {
   @override
   void initState() {
     super.initState();
-    debugPrint("initState");
+    debugPrint('initState');
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("build");
+    debugPrint('build');
     // 在Widget树中向上查找最近的父级`Scaffold` widget
     // Scaffold scaffold = context.ancestorWidgetOfExactType(Scaffold);
 
@@ -61,9 +61,9 @@ class _TextPageState extends State<TextPage> {
       var args = ModalRoute.of(context).settings.arguments;
       Map map = args as Map;
       if (map != null) {
-        widget.title = map["title"] as String;
+        widget.title = map['title'] as String;
       } else {
-        widget.title = "Default Text Page";
+        widget.title = 'Default Text Page';
       }
     }
     // This method is rerun every time setState is called, for instance as done
@@ -100,7 +100,7 @@ class _TextPageState extends State<TextPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                "Hello world " * 10, //字符串重复六次
+                'Hello world ' * 10, //字符串重复六次
                 textAlign: TextAlign.center,
               ),
 
@@ -111,28 +111,28 @@ class _TextPageState extends State<TextPage> {
               ),
 
               //MediaQueryData.textScaleFactor
-              Text(
-                "Hello world",
+              const Text(
+                'Hello world',
                 textScaleFactor: 1.5,
               ),
 
-              Text("Hello world",
+              Text('Hello world',
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: 18.0,
                       height: 1.2,
-                      fontFamily: "Courier",
-                      background: new Paint()..color = Colors.yellow,
+                      fontFamily: 'Courier',
+                      background: Paint()..color = Colors.yellow,
                       decoration: TextDecoration.underline,
                       decorationStyle: TextDecorationStyle.dashed)),
 
-              Text.rich(TextSpan(children: [
+              const Text.rich(TextSpan(children: [
                 WidgetSpan(
                   child: Icon(Icons.people),
                 ),
-                TextSpan(text: "Home: "),
+                TextSpan(text: 'Home: '),
                 TextSpan(
-                  text: "https://flutterchina.club",
+                  text: 'https://flutterchina.club',
                   style: TextStyle(color: Colors.blue),
 //                      recognizer: _tapRecognizer
                 ),
@@ -140,18 +140,18 @@ class _TextPageState extends State<TextPage> {
 
               DefaultTextStyle(
                 //1.设置文本默认样式
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.red,
                   fontSize: 20.0,
                 ),
                 textAlign: TextAlign.start,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text("hello world"),
-                    Text("I am Jack"),
+                  children: const <Widget>[
+                    Text('hello world'),
+                    Text('I am Jack'),
                     Text(
-                      "I am Jack",
+                      'I am Jack',
                       style: TextStyle(
                           inherit: false, //2.不继承默认样式
                           color: Colors.grey),
@@ -160,7 +160,7 @@ class _TextPageState extends State<TextPage> {
                 ),
               ),
 
-              Text(
+              const Text(
                 'You have pushed the button this many times:',
               ),
               Text(
@@ -170,12 +170,12 @@ class _TextPageState extends State<TextPage> {
 
               Container(
                 color: Colors.blueGrey,
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
 
                 ///利用 Transform 偏移将对应权重部分位置
                 child: Transform.translate(
                   offset: Offset(0, -fontSize * leading / 2),
-                  child: new Text(
+                  child: Text(
                     textContent,
                     strutStyle: StrutStyle(
                         forceStrutHeight: true, height: 1, leading: leading),
@@ -194,7 +194,7 @@ class _TextPageState extends State<TextPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
@@ -204,30 +204,30 @@ class _TextPageState extends State<TextPage> {
   @override
   void didUpdateWidget(TextPage oldWidget) {
     super.didUpdateWidget(oldWidget);
-    debugPrint("didUpdateWidget");
+    debugPrint('didUpdateWidget');
   }
 
   @override
   void deactivate() {
     super.deactivate();
-    debugPrint("deactive");
+    debugPrint('deactive');
   }
 
   @override
   void dispose() {
     super.dispose();
-    debugPrint("dispose");
+    debugPrint('dispose');
   }
 
   @override
   void reassemble() {
     super.reassemble();
-    debugPrint("reassemble");
+    debugPrint('reassemble');
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    debugPrint("didChangeDependencies");
+    debugPrint('didChangeDependencies');
   }
 }
