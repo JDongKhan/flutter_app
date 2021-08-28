@@ -83,7 +83,7 @@ class ShopHomeVM extends SingleViewModel {
 
   @override
   Future loadData() {
-    return Future.delayed(const Duration(seconds: 2), () {
+    return Future.delayed(const Duration(seconds: 1), () {
       print('请求完数据');
     });
   }

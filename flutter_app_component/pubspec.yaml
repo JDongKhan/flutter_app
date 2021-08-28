@@ -76,6 +76,7 @@ dependencies:
 #  photo: ^0.4.8
   #wechat_assets_picker: ^6.0.1
 
+  #可展开text
   expandable_text: ^2.0.2
   #二维码
   qr_flutter: ^3.1.0
@@ -83,6 +84,7 @@ dependencies:
   #网络图片库
   cached_network_image: ^2.2.0
 
+  #堆叠卡片
   stacked_card_carousel: ^0.0.2+1
   get: 4.1.4
   #logger
@@ -100,8 +102,10 @@ dependencies:
   rxdart: ^0.24.1
   #国际化
   #  fluintl: ^0.1.3
-
-
+  #状态栏颜色更改
+  flutter_statusbarcolor: ^0.2.3
+  #图片压缩
+  #flutter_luban: ^0.1.13
   #fish_redux
   fish_redux: ^0.3.4
   #html
@@ -110,9 +114,17 @@ dependencies:
   widget_chain: ^0.1.0
   #升级
   flutter_app_upgrade: ^1.1.0
+  #滑动删除
   flutter_slidable: any
-
+  #微信sdk
+  #fluwx: ^2.1.0
+  #阿里支付
+  #alipay_kit:^2.0.0
+  #城市选择
+  city_pickers: ^1.0.1
+  #拍照
   camera: ^0.5.8+2
+  #播放器
   video_player: ^2.1.6
 
   #keframe

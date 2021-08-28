@@ -60,7 +60,7 @@ Widget buildPulltoRefreshImage(
         break;
     }
   }
-
+  print('pull-offset:$offset');
   return SliverToBoxAdapter(
     child: Stack(
       alignment: Alignment.center,

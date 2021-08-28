@@ -54,9 +54,11 @@ class _WechatMainPageState extends State<WechatMainPage>
   }
 
   void hiddenBottomNavigationBar(bool hidden) {
-    setState(() {
-      _hiddenBottomBar = hidden;
-    });
+    if (_hiddenBottomBar != hidden) {
+      setState(() {
+        _hiddenBottomBar = hidden;
+      });
+    }
   }
 
   @override

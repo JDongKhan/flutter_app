@@ -5,6 +5,8 @@ import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dar
 import 'package:flutter_app_component/demo/shop/home/vm/shop_home_vm.dart';
 import 'package:flutter_app_component/demo/shop/home/widget/shop_home_appbar.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
+import 'package:flutter_app_component/demo/shop/shop_main_page.dart';
+import 'package:flutter_app_component/demo/wechat/message_list/message_list/widget/wechat_message_list_bottom_menu.dart';
 import 'package:flutter_app_component/global/widget_config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:jd_core/jd_core.dart';
@@ -24,6 +26,9 @@ class _ShopHomePageState extends State<ShopHomePage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   final ShopHomeVM _vm = ShopHomeVM();
   TabController _tabController;
+  double _offset = 0;
+  final WeChatMessageListBottomMenuController _bottomMenuController =
+      WeChatMessageListBottomMenuController(animal: true);
 
   @override
   void initState() {
@@ -38,76 +43,95 @@ class _ShopHomePageState extends State<ShopHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return _refreshWidget(
-      child: NestedScrollView(
-        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-          return <Widget>[
-            PullToRefreshContainer(
-                (info) => buildPulltoRefreshImage(context, info)),
-            SliverOverlapAbsorber(
-              handle: NestedScrollView.sliverOverlapAbsorberHandleFor(context),
+    return Stack(
+      children: [
+        WeChatMessageListBottomMenu(
+          controller: _bottomMenuController,
+          onBack: () {
+            _showMainPage();
+          },
+        ),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.linear,
+          transform: Matrix4.translationValues(0.0, _offset, 0.0),
+          child: _refreshWidget(
+            child: NestedScrollView(
+              headerSliverBuilder:
+                  (BuildContext context, bool innerBoxIsScrolled) {
+                return <Widget>[
+                  PullToRefreshContainer(
+                    (info) => buildPulltoRefreshImage(context, info),
+                  ),
+                  SliverOverlapAbsorber(
+                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                        context),
 
-              ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
-              sliver: ShopHomeAppBar(
-                backgroundColor: Colors.blue,
-                title: const Text(
-                  '生产有限公司',
-                  style: TextStyle(color: Colors.white, fontSize: 18),
-                ),
-                centerTitle: false,
-                expandedHeight: 130.0,
-                brightness: Brightness.light,
-                bottom: PreferredSize(
-                  preferredSize: const Size.fromHeight(60),
-                  child: _buildSearch(),
-                ),
-                // leading: const IconButton(
-                //   icon: Icon(
-                //     Icons.home,
-                //     color: Colors.white,
-                //   ),
-                // ),
-                actions: const <Widget>[
-                  IconButton(
-                    icon: Icon(
-                      Icons.business,
-                      color: Colors.white,
+                    ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
+                    sliver: ShopHomeAppBar(
+                      backgroundColor: Colors.blue,
+                      title: const Text(
+                        '生产有限公司',
+                        style: TextStyle(color: Colors.white, fontSize: 18),
+                      ),
+                      centerTitle: false,
+                      expandedHeight: 130.0,
+                      brightness: Brightness.light,
+                      bottom: PreferredSize(
+                        preferredSize: const Size.fromHeight(60),
+                        child: _buildSearch(),
+                      ),
+                      // leading: const IconButton(
+                      //   icon: Icon(
+                      //     Icons.home,
+                      //     color: Colors.white,
+                      //   ),
+                      // ),
+                      actions: const <Widget>[
+                        IconButton(
+                          icon: Icon(
+                            Icons.business,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
-            ),
-            // const SliverPadding(
-            //   padding: EdgeInsets.only(top: 80),
-            // ),
-            const SliverToBoxAdapter(
-              child: SafeArea(
-                child: SizedBox(
-                  height: 50,
-                ),
-              ),
-            ),
-            // SliverToBoxAdapter(
-            //   child: _buildSearch(),
-            // ),
-            SliverToBoxAdapter(child: _buildSwiper()),
-            SliverToBoxAdapter(child: _buildGridView()),
+                  // const SliverPadding(
+                  //   padding: EdgeInsets.only(top: 80),
+                  // ),
+                  const SliverToBoxAdapter(
+                    child: SafeArea(
+                      child: SizedBox(
+                        height: 50,
+                      ),
+                    ),
+                  ),
+                  // SliverToBoxAdapter(
+                  //   child: _buildSearch(),
+                  // ),
+                  SliverToBoxAdapter(child: _buildSwiper()),
+                  SliverToBoxAdapter(child: _buildGridView()),
 
-            ///停留在顶部的TabBar
-            _buildPersistentHeader(),
-          ];
-        },
-        body: TabBarView(
-          controller: _tabController,
-          physics: const NeverScrollableScrollPhysics(),
-          children: _vm.tabs
-              .map((e) => PrimaryScrollContainer(
-                    e['key'] as LabeledGlobalKey<PrimaryScrollContainerState>,
-                    _buildContentPage(e),
-                  ))
-              .toList(),
+                  ///停留在顶部的TabBar
+                  _buildPersistentHeader(),
+                ];
+              },
+              body: TabBarView(
+                controller: _tabController,
+                physics: const NeverScrollableScrollPhysics(),
+                children: _vm.tabs
+                    .map((e) => PrimaryScrollContainer(
+                          e['key']
+                              as LabeledGlobalKey<PrimaryScrollContainerState>,
+                          _buildContentPage(e),
+                        ))
+                    .toList(),
+              ),
+            ),
+          ),
         ),
-      ),
+      ],
     );
   }
 
@@ -123,6 +147,31 @@ class _ShopHomePageState extends State<ShopHomePage>
     );
   }
 
+  void hiddenBottomBar(bool hidden) {
+    ShopMainPage.of(context).hiddenBottomNavigationBar(hidden);
+  }
+
+  //显示主页面
+  void _showMainPage() {
+    hiddenBottomBar(false);
+    setState(() {
+      _offset = 0;
+      _bottomMenuController.opacity = 0;
+    });
+  }
+
+  Future<bool> _onRefresh() async {
+    print('开始刷新了');
+    // _globalKey.currentState.show(notificationDragOffset: 200);
+    await _vm.onRefresh();
+    setState(() {
+      _offset = jd_screenHeight();
+      _bottomMenuController.opacity = 1;
+      hiddenBottomBar(true);
+    });
+    return true;
+  }
+
   ///刷新
   Widget _refreshWidget({Widget child}) {
     const bool refreshEnable = true;
@@ -130,7 +179,7 @@ class _ShopHomePageState extends State<ShopHomePage>
       return PullToRefreshNotification(
         color: Theme.of(context).canvasColor,
         // pullBackOnRefresh: true,
-        onRefresh: _vm.onRefresh,
+        onRefresh: _onRefresh,
         armedDragUpCancel: false,
         maxDragOffset: 200,
         child: child,

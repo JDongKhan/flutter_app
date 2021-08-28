@@ -1,16 +1,18 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/utils/logger_util.dart';
 
 ///上拉抽屉
 class BottomDragWidget extends StatelessWidget {
-  final Widget body;
-  final DragContainer dragContainer;
-
-  BottomDragWidget({Key key, @required this.body, @required this.dragContainer})
-      : assert(body != null),
+  const BottomDragWidget({
+    Key key,
+    @required this.body,
+    @required this.dragContainer,
+  })  : assert(body != null),
         assert(dragContainer != null),
         super(key: key);
+
+  final Widget body;
+  final DragContainer dragContainer;
 
   @override
   Widget build(BuildContext context) {
@@ -26,77 +28,133 @@ class BottomDragWidget extends StatelessWidget {
   }
 }
 
-typedef DragListener = void Function(
-    double dragDistance, ScrollNotificationListener isDragEnd);
-
-class DragController {
-  DragListener _dragListener;
-
-  setDrag(DragListener l) {
-    _dragListener = l;
-  }
-
-  void updateDragDistance(
-      double dragDistance, ScrollNotificationListener isDragEnd) {
-    if (_dragListener != null) {
-      _dragListener(dragDistance, isDragEnd);
-    }
+class DragContainerController extends ChangeNotifier {
+  double _childSize;
+  set childSize(double value) {
+    _childSize = value;
+    notifyListeners();
   }
 }
 
-class DragContainer extends StatefulWidget {
-  final Widget drawer;
-  final double defaultShowHeight;
-  final double height;
+class DragContainer extends StatelessWidget {
+  const DragContainer({
+    Key key,
+    @required this.child,
+    this.initialChildSize = 0.2,
+    this.minChildSize = 0.2,
+    this.maxChildSize = 1,
+    this.maxHeight,
+    this.onChanged,
+    this.onBottom,
+    this.controller,
+  })  : assert(child != null),
+        super(key: key);
 
-  DragContainer(
-      {Key key,
-      @required this.drawer,
-      @required this.defaultShowHeight,
-      @required this.height})
-      : assert(drawer != null),
-        assert(defaultShowHeight != null),
-        assert(height != null),
-        super(key: key) {
-    _controller = DragController();
+  final Widget child;
+  final double initialChildSize;
+  final double minChildSize;
+  final double maxChildSize;
+  final ValueChanged<double> onChanged;
+  final Function onBottom;
+  final double maxHeight;
+  final DragContainerController controller;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      return _DragContainer(
+        child: child,
+        minChildSize: minChildSize,
+        maxChildSize: maxChildSize,
+        initialChildSize: initialChildSize,
+        maxHeight: maxHeight ?? constraints.maxHeight,
+        onChanged: onChanged,
+        onBottom: onBottom,
+        controller: controller,
+      );
+    });
   }
+}
+
+class _DragContainer extends StatefulWidget {
+  const _DragContainer({
+    Key key,
+    @required this.child,
+    @required this.initialChildSize,
+    @required this.minChildSize,
+    @required this.maxChildSize,
+    @required this.maxHeight,
+    this.onChanged,
+    this.onBottom,
+    this.controller,
+  })  : assert(child != null),
+        assert(initialChildSize != null),
+        assert(minChildSize != null),
+        assert(maxChildSize != null),
+        assert(maxHeight != null),
+        super(key: key);
+
+  final Widget child;
+  final double initialChildSize;
+  final double minChildSize;
+  final double maxChildSize;
+  final double maxHeight;
+  final ValueChanged<double> onChanged;
+  final Function onBottom;
+  final DragContainerController controller;
 
   @override
   _DragContainerState createState() => _DragContainerState();
 }
 
-class _DragContainerState extends State<DragContainer>
+class _DragContainerState extends State<_DragContainer>
     with TickerProviderStateMixin {
-  AnimationController animalController;
+  AnimationController _animalController;
 
-  ///滑动位置超过这个位置，会滚到顶部；小于，会滚动底部。
-  double maxOffsetDistance;
-  bool onResetControllerValue = false;
-  double offsetDistance;
-  Animation<double> animation;
-  bool offstage = false;
+  bool _onResetControllerValue = false;
+
+  Animation<double> _animation;
+  //是否显示顶层的手势widget
+  bool _offstage = false;
+
   bool _isFling = false;
 
-  double get defaultOffsetDistance => widget.height - widget.defaultShowHeight;
+  //对上的偏移量
+  double _offset;
+
+  set offset(double value) {
+    _offset = value;
+    if (widget.onChanged != null) {
+      widget.onChanged(value);
+    }
+  }
+
+  double get offset => _offset;
+
+  ///中间边界位置 滑动位置超过这个位置，会滚到顶部；小于，会滚动底部。
+  double get centerOffset => widget.maxHeight * (1 - widget.minChildSize) * 0.5;
+
+  //最大偏移量
+  double get maxOffset => widget.maxHeight * (1 - widget.minChildSize);
+  double get minOffset => widget.maxHeight * (1 - widget.maxChildSize);
+  //默认显示的偏移
+  double get defaultOffset => widget.maxHeight * (1 - widget.initialChildSize);
 
   @override
   void initState() {
-    animalController = AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 250));
-    maxOffsetDistance = (widget.height + widget.defaultShowHeight) * 0.5;
-
-//    if (controller != null) {
-    _controller
-        .setDrag((double value, ScrollNotificationListener notification) {
-      if (notification != ScrollNotificationListener.edge) {
-        _handleDragEnd(null);
-      } else {
-        setState(() {
-          offsetDistance = offsetDistance + value * 3.5;
-        });
-      }
-    });
-//    }
+    _animalController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 300));
+    if (widget.controller != null) {
+      widget.controller.addListener(() {
+        _animalController.value = 0.0;
+        double end = widget.maxHeight * (1 - widget.controller._childSize);
+        _animalTo(end);
+        // setState(() {
+        //
+        // });
+      });
+    }
     super.initState();
   }
 
@@ -119,37 +177,53 @@ class _DragContainerState extends State<DragContainer>
 
   @override
   void dispose() {
-    animalController.dispose();
+    _animalController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    if (offsetDistance == null || onResetControllerValue) {
+    if (offset == null || _onResetControllerValue) {
       ///说明是第一次加载,由于BottomDragWidget中 alignment: Alignment.bottomCenter,故直接设置
-      offsetDistance = defaultOffsetDistance;
+      offset = defaultOffset;
     }
 
     ///偏移值在这个范围内
-    offsetDistance = offsetDistance.clamp(0.0, defaultOffsetDistance);
-    offstage = offsetDistance < maxOffsetDistance;
+    offset = offset.clamp(minOffset, maxOffset);
+    _offstage = offset < centerOffset;
     return Transform.translate(
-      offset: Offset(0.0, offsetDistance),
+      offset: Offset(0.0, offset),
       child: RawGestureDetector(
         gestures: {MyVerticalDragGestureRecognizer: getRecognizer()},
         child: Stack(
           children: <Widget>[
-            Container(
-              child: widget.drawer,
-              height: widget.height,
+            OverscrollNotificationWidget(
+              notification:
+                  (double value, ScrollNotificationListener notification) {
+                if (notification == ScrollNotificationListener.start) {
+                  _handleDragEnd(null);
+                } else if (notification == ScrollNotificationListener.end) {
+                  _handleDragEnd(null);
+                } else if (notification == ScrollNotificationListener.update) {
+                  // widget.controller.childSize = 1;
+                } else if (notification == ScrollNotificationListener.edge) {
+                  setState(() {
+                    offset = offset + value * 2.5;
+                  });
+                }
+              },
+              child: Container(
+                child: widget.child,
+                height: widget.maxHeight,
+              ),
             ),
             Offstage(
               child: Container(
                 ///使用图层来解决当抽屉露出头时，上拉抽屉上移。解决的方案最佳
                 color: Colors.transparent,
-                height: widget.height,
+                height: widget.maxHeight,
               ),
-              offstage: offstage,
+              offstage: _offstage,
             )
           ],
         ),
@@ -161,21 +235,25 @@ class _DragContainerState extends State<DragContainer>
 
   ///当拖拽结束时调用
   void _handleDragEnd(DragEndDetails details) {
-    onResetControllerValue = true;
+    _onResetControllerValue = true;
 
     ///很重要！！！动画完毕后，controller.value = 1.0， 这里要将value的值重置为0.0，才会再次运行动画
     ///重置value的值时，会刷新UI，故这里使用[onResetControllerValue]来进行过滤。
-    animalController.value = 0.0;
-    onResetControllerValue = false;
+    _animalController.value = 0.0;
+    _onResetControllerValue = false;
     double start;
     double end;
-    if (offsetDistance <= maxOffsetDistance) {
+
+    if (offset <= centerOffset) {
       ///这个判断通过，说明已经child位置超过警戒线了，需要滚动到顶部了
-      start = offsetDistance;
+      start = offset;
       end = 0.0;
     } else {
-      start = offsetDistance;
-      end = defaultOffsetDistance;
+      start = offset;
+      end = maxOffset;
+      if (widget.onBottom != null) {
+        widget.onBottom();
+      }
     }
 
     if (_isFling &&
@@ -184,27 +262,30 @@ class _DragContainerState extends State<DragContainer>
         details.velocity.pixelsPerSecond != null &&
         details.velocity.pixelsPerSecond.dy < 0) {
       ///这个判断通过，说明是快速向上滑动，此时需要滚动到顶部了
-      start = offsetDistance;
+      start = offset;
       end = 0.0;
     }
+    _animalTo(end);
+  }
 
+  void _animalTo(double end) {
     ///easeOut 先快后慢
     final CurvedAnimation curve =
-        CurvedAnimation(parent: animalController, curve: Curves.easeOut);
-    animation = Tween(begin: start, end: end).animate(curve)
+        CurvedAnimation(parent: _animalController, curve: Curves.easeOut);
+    _animation = Tween(begin: offset, end: end).animate(curve)
       ..addListener(() {
-        if (!onResetControllerValue) {
-          offsetDistance = animation.value;
+        if (!_onResetControllerValue) {
+          offset = _animation.value;
           setState(() {});
         }
       });
 
     ///自己滚动
-    animalController.forward();
+    _animalController.forward();
   }
 
   void _handleDragUpdate(DragUpdateDetails details) {
-    offsetDistance = offsetDistance + details.delta.dy;
+    offset = offset + details.delta.dy;
     setState(() {});
   }
 
@@ -278,8 +359,6 @@ class MyVerticalDragGestureRecognizer extends VerticalDragGestureRecognizer {
 typedef ScrollListener = void Function(
     double dragDistance, ScrollNotificationListener notification);
 
-DragController _controller;
-
 ///监听手指在child处于边缘时的滑动
 ///例如：当child滚动到顶部时，此时下拉，会回调[ScrollNotificationListener.edge],
 ///或者child滚动到底部时，此时下拉，会回调[ScrollNotificationListener.edge],
@@ -314,11 +393,14 @@ class OverscrollNotificationWidget extends StatefulWidget {
   const OverscrollNotificationWidget({
     Key key,
     @required this.child,
+    this.notification,
 //    this.scrollListener,
   })  : assert(child != null),
         super(key: key);
 
   final Widget child;
+  final Function(double value, ScrollNotificationListener notification)
+      notification;
 //  final ScrollListener scrollListener;
 
   @override
@@ -343,7 +425,6 @@ class OverscrollNotificationWidgetState
 
   @override
   Widget build(BuildContext context) {
-    logger.d('NotificationListener build');
     final Widget child = NotificationListener<ScrollStartNotification>(
       key: _key,
       child: NotificationListener<ScrollUpdateNotification>(
@@ -351,26 +432,35 @@ class OverscrollNotificationWidgetState
           child: NotificationListener<ScrollEndNotification>(
             child: widget.child,
             onNotification: (ScrollEndNotification notification) {
-              _controller.updateDragDistance(
-                  0.0, ScrollNotificationListener.end);
+              if (widget.notification != null) {
+                widget.notification(0.0, ScrollNotificationListener.end);
+              }
               return false;
             },
           ),
           onNotification: (OverscrollNotification notification) {
             if (notification.dragDetails != null &&
                 notification.dragDetails.delta != null) {
-              _controller.updateDragDistance(notification.dragDetails.delta.dy,
-                  ScrollNotificationListener.edge);
+              if (widget.notification != null) {
+                widget.notification(notification.dragDetails.delta.dy,
+                    ScrollNotificationListener.edge);
+              }
             }
             return false;
           },
         ),
         onNotification: (ScrollUpdateNotification notification) {
+          if (widget.notification != null) {
+            widget.notification(notification.dragDetails?.delta?.dy,
+                ScrollNotificationListener.update);
+          }
           return false;
         },
       ),
       onNotification: (ScrollStartNotification scrollUpdateNotification) {
-        _controller.updateDragDistance(0.0, ScrollNotificationListener.start);
+        if (widget.notification != null) {
+          widget.notification(0.0, ScrollNotificationListener.start);
+        }
         return false;
       },
     );
@@ -387,7 +477,10 @@ enum ScrollNotificationListener {
   end,
 
   ///滑动时，控件在边缘（最上面显示或者最下面显示）位置
-  edge
+  edge,
+
+  ///滑动
+  update,
 }
 
 /// -----------------------DEMO-----------------------

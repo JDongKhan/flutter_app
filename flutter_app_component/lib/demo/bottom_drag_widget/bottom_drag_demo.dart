@@ -13,12 +13,8 @@ class BottomDragDemo extends StatefulWidget {
 
 class _BottomDragDemoState extends State<BottomDragDemo> {
   bool _canScroll = false;
-
-  DragController controller = DragController();
-
   @override
   Widget build(BuildContext context) {
-    double showHeight = jd_screenHeight() - jd_navigationHeight();
     return Scaffold(
       appBar: AppBar(
         title: const Text('BottomDrag'),
@@ -34,9 +30,10 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
             ),
           ),
           dragContainer: DragContainer(
-            drawer: getListView(),
-            defaultShowHeight: 150.0,
-            height: showHeight,
+            child: getListView(),
+            initialChildSize: 1,
+            maxChildSize: 1,
+            minChildSize: 0.2,
           )),
     );
   }
@@ -74,36 +71,40 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
               ],
             ),
           ),
-          Expanded(child: Container(color: Colors.white, child: newListView()))
+          Expanded(
+            child: Container(
+              color: Colors.white,
+              child: newListView(),
+            ),
+          )
         ],
       ),
     );
   }
 
   Widget newListView() {
-    return OverscrollNotificationWidget(
-      child: ListView.builder(
-        itemBuilder: (BuildContext context, int index) {
-          return ListTile(
-            leading: Icon(Icons.people),
-            title: Text('data=$index'),
-            trailing: Icon(Icons.arrow_forward_ios_outlined),
-          );
-        },
-        itemCount: 100,
+    return ListView.builder(
+      itemBuilder: (BuildContext context, int index) {
+        return ListTile(
+          leading: Icon(Icons.people),
+          title: Text('data=$index'),
+          trailing: Icon(Icons.arrow_forward_ios_outlined),
+        );
+      },
+      itemCount: 100,
 
-        ///这个属性是用来断定滚动的部件的物理特性，例如：
-        ///scrollStart
-        ///ScrollUpdate
-        ///Overscroll
-        ///ScrollEnd
-        ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
+      ///这个属性是用来断定滚动的部件的物理特性，例如：
+      ///scrollStart
+      ///ScrollUpdate
+      ///Overscroll
+      ///ScrollEnd
+      ///在Android和ios等平台，其默认值是不同的。我们可以在scroll_configuration.dart中看到如下配置
 
-        ///下面代码是我在翻源码找到的解决方案
-        /// The scroll physics to use for the platform given by [getPlatform].
-        ///
-        /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
-        /// Android.
+      ///下面代码是我在翻源码找到的解决方案
+      /// The scroll physics to use for the platform given by [getPlatform].
+      ///
+      /// Defaults to [BouncingScrollPhysics] on iOS and [ClampingScrollPhysics] on
+      /// Android.
 //  ScrollPhysics getScrollPhysics(BuildContext context) {
 //    switch (getPlatform(context)) {
 //    case TargetPlatform.iOS:/*/
@@ -114,12 +115,11 @@ class _BottomDragDemoState extends State<BottomDragDemo> {
 //    }
 //    return null;
 //  }
-        ///在ios中，默认返回BouncingScrollPhysics，对于[BouncingScrollPhysics]而言，
-        ///由于   double applyBoundaryConditions(ScrollMetrics position, double value) => 0.0;
-        ///会导致：当listview的第一条目显示时，继续下拉时，不会调用上面提到的Overscroll监听。
-        ///故这里，设定为[ClampingScrollPhysics]
-        physics: const ClampingScrollPhysics(),
-      ),
+      ///在ios中，默认返回BouncingScrollPhysics，对于[BouncingScrollPhysics]而言，
+      ///由于   double applyBoundaryConditions(ScrollMetrics position, double value) => 0.0;
+      ///会导致：当listview的第一条目显示时，继续下拉时，不会调用上面提到的Overscroll监听。
+      ///故这里，设定为[ClampingScrollPhysics]
+      physics: const ClampingScrollPhysics(),
     );
   }
 

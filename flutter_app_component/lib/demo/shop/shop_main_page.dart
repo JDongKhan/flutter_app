@@ -8,6 +8,10 @@ import 'package:flutter_app_component/demo/shop/my/page/shop_my_page.dart';
 /// @author jd
 
 class ShopMainPage extends StatefulWidget {
+  static _ShopMainPageState of(BuildContext context) {
+    return context.findAncestorStateOfType<_ShopMainPageState>();
+  }
+
   @override
   _ShopMainPageState createState() => _ShopMainPageState();
 }
@@ -17,6 +21,7 @@ class _ShopMainPageState extends State<ShopMainPage>
   final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[];
   TabController _tabController;
   int _selectedIndex = 0;
+  bool _hiddenBottomBar = false;
   @override
   void initState() {
     //初始化工具
@@ -50,6 +55,12 @@ class _ShopMainPageState extends State<ShopMainPage>
     super.initState();
   }
 
+  void hiddenBottomNavigationBar(bool hidden) {
+    setState(() {
+      _hiddenBottomBar = hidden;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,24 +71,24 @@ class _ShopMainPageState extends State<ShopMainPage>
           return e['page'] as Widget;
         }).toList(),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        // 底部导航
-        items: _tabs
-            .map(
-              (e) => BottomNavigationBarItem(
-                icon: Icon(e['icon'] as IconData),
-                title: Text(
-                  e['title'].toString(),
-                ),
-              ),
-            )
-            .toList(),
-        currentIndex: _selectedIndex,
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.red,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: _hiddenBottomBar
+          ? null
+          : BottomNavigationBar(
+              // 底部导航
+              items: _tabs
+                  .map(
+                    (e) => BottomNavigationBarItem(
+                      icon: Icon(e['icon'] as IconData),
+                      label: e['title'].toString(),
+                    ),
+                  )
+                  .toList(),
+              currentIndex: _selectedIndex,
+              type: BottomNavigationBarType.fixed,
+              selectedItemColor: Colors.blue,
+              unselectedItemColor: Colors.red,
+              onTap: _onItemTapped,
+            ),
     );
   }
 
