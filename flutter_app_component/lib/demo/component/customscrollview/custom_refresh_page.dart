@@ -13,6 +13,9 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
+          SliverToBoxAdapter(
+            child: Container(),
+          ),
           CustomSliverWidget(
             child: Container(
               color: Colors.red,

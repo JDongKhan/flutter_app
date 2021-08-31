@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/component/tabbar_view/tabbar_life_cycle.dart';
+import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 import 'package:flutter_app_component/utils/logger_util.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:video_player/video_player.dart';
@@ -9,30 +9,65 @@ import 'package:video_player/video_player.dart';
 /// @author jd
 
 class DouyinPlayerController extends ChangeNotifier {
-  DouyinPlayerController(bool playing) : _playing = playing;
+  DouyinPlayerController({
+    this.url,
+    this.isPlaying = false,
+    this.loop = true,
+  }) : videoPlayerController = VideoPlayerController.asset(url);
 
-  bool _playing;
+  String url;
+  bool isPlaying;
+  bool loop;
 
-  void pause() {
-    _playing = false;
+  VideoPlayerController videoPlayerController;
+  Future _videoPlayerFuture;
+
+  ///准备
+  void prepare() {
+    _videoPlayerFuture = videoPlayerController.initialize().then((value) {
+      if (isPlaying) {
+        play();
+      }
+    });
+    videoPlayerController.setLooping(loop);
+    videoPlayerController.addListener(_listener);
+  }
+
+  ///播放
+  void play() {
+    isPlaying = true;
+    videoPlayerController.play();
     notifyListeners();
   }
 
-  void play() {
-    _playing = true;
+  ///暂停
+  void pause() {
+    isPlaying = false;
+    videoPlayerController.pause();
     notifyListeners();
+  }
+
+  void _listener() {
+    final bool isPlaying = videoPlayerController.value.isPlaying;
+    if (isPlaying != isPlaying) {
+      this.isPlaying = isPlaying;
+      notifyListeners();
+    }
+  }
+
+  @override
+  void dispose() {
+    debugPrint('player-dispose');
+    videoPlayerController.dispose();
+    super.dispose();
   }
 }
 
 class DouyinPlayer extends StatefulWidget {
   const DouyinPlayer({
-    this.url,
-    this.loop = true,
     this.source,
-    this.douyinPlayerController,
+    @required this.douyinPlayerController,
   });
-  final String url;
-  final bool loop;
   final String source;
   final DouyinPlayerController douyinPlayerController;
   @override
@@ -45,152 +80,100 @@ class _DouyinPlayerState extends State<DouyinPlayer>
         LifecycleAware,
         LifecycleMixin,
         TabBarLifecycle {
-  VideoPlayerController _videoPlayerController;
-  bool _isPlaying;
-  Future _videoPlayerFuture;
   @override
   void initState() {
     super.initState();
-    logger.d('(${widget.url}) - player initState');
+    logger.d('(${widget.douyinPlayerController.url}) - player initState');
     WidgetsBinding.instance.addObserver(this);
     if (widget.douyinPlayerController != null) {
-      widget.douyinPlayerController.addListener(() {
-        if (widget.douyinPlayerController._playing == true) {
-          _play();
-        } else {
-          _pause();
-        }
-      });
+      widget.douyinPlayerController.addListener(_listener);
+      widget.douyinPlayerController.prepare();
+    }
+  }
 
-      Function callBack;
-      if (widget.douyinPlayerController._playing) {
-        callBack = () {
-          _play();
-        };
-      }
-      _prepare(callBack);
-    } else {
-      //准备
-      _prepare(() {
-        _play();
-      });
+  ///监听
+  void _listener() {
+    if (mounted) {
+      setState(() {});
     }
   }
 
   @override
   void dispose() {
-    logger.d('(${widget.url}) - player dispose');
-    _videoPlayerController.dispose();
+    logger.d('(${widget.douyinPlayerController.url}) - player dispose');
+    widget.douyinPlayerController.removeListener(_listener);
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void didChangeDependencies() {
-    logger.d('(${widget.url}) - player didChangeDependencies');
+    logger.d(
+        '(${widget.douyinPlayerController.url}) - player didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant DouyinPlayer oldWidget) {
-    logger.d('(${widget.url}) - player didUpdateWidget');
+    logger.d('(${widget.douyinPlayerController.url}) - player didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
-    logger.d('(${widget.url}) - player deactivate');
+    logger.d('(${widget.douyinPlayerController.url}) - player deactivate');
     super.deactivate();
   }
 
   @override
   void didChangeMetrics() {
-    logger.d('(${widget.url}) - player didChangeMetrics');
+    logger
+        .d('(${widget.douyinPlayerController.url}) - player didChangeMetrics');
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    logger.d('(${widget.url}) - player didPushRoute');
+    logger.d('(${widget.douyinPlayerController.url}) - player didPushRoute');
     return super.didPushRoute(route);
   }
 
   @override
   Future<bool> didPopRoute() {
-    logger.d('(${widget.url}) - player didPopRoute');
+    logger.d('(${widget.douyinPlayerController.url}) - player didPopRoute');
     return super.didPopRoute();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    logger.d('(${widget.url}) - player didChangeAppLifecycleState');
+    logger.d(
+        '(${widget.douyinPlayerController.url}) - player didChangeAppLifecycleState');
   }
-
-  void _listener() {
-    if (!mounted) {
-      return;
-    }
-    final bool isPlaying = _videoPlayerController.value.isPlaying;
-    if (isPlaying != _isPlaying) {
-      setState(() {
-        _isPlaying = isPlaying;
-      });
-    }
-  }
-
-  void _prepare(Function callback) {
-    _videoPlayerController = VideoPlayerController.asset(widget.url);
-    _videoPlayerFuture = _videoPlayerController.initialize().then((value) {
-      if (callback != null) {
-        callback();
-      }
-    });
-    _videoPlayerController.setLooping(widget.loop);
-    _videoPlayerController.addListener(_listener);
-  }
-
-  void _play() {
-    _videoPlayerController.play();
-    if (mounted) {
-      setState(() {
-        _isPlaying = true;
-      });
-    }
-  }
-
-  void _pause() {
-    _videoPlayerController.pause();
-    if (mounted) {
-      setState(() {
-        _isPlaying = false;
-      });
-    }
-  }
-
-  void _stop() {}
 
   @override
   Widget build(BuildContext context) {
-    logger.d('(${widget.url}) - build');
+    logger.d('(${widget.douyinPlayerController.url}) - build');
     return FutureBuilder(
-      future: _videoPlayerFuture,
+      future: widget.douyinPlayerController._videoPlayerFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
           return GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: () {
-              final bool isPlaying = _videoPlayerController.value.isPlaying;
+              final bool isPlaying = widget
+                  .douyinPlayerController.videoPlayerController.value.isPlaying;
               if (isPlaying) {
-                _pause();
+                widget.douyinPlayerController.pause();
               } else {
-                _play();
+                widget.douyinPlayerController.play();
               }
             },
             child: Stack(
               children: [
-                VideoPlayer(_videoPlayerController),
+                VideoPlayer(
+                    widget.douyinPlayerController.videoPlayerController),
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
-                  opacity: _isPlaying ? 0 : 1.0,
+                  opacity: widget.douyinPlayerController.isPlaying ? 0 : 1.0,
                   child: const Center(
                     child: Icon(
                       Icons.play_arrow_rounded,
@@ -206,9 +189,7 @@ class _DouyinPlayerState extends State<DouyinPlayer>
         return GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            _prepare(() {
-              _play();
-            });
+            widget.douyinPlayerController.prepare();
           },
           child: const Center(
             child: Text(
@@ -226,21 +207,21 @@ class _DouyinPlayerState extends State<DouyinPlayer>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      logger.d('(${widget.url}) - player push ');
+      logger.d('(${widget.douyinPlayerController.url}) - player push ');
     } else if (event == LifecycleEvent.visible) {
-      logger.d('(${widget.url}) - player visible ');
-      _play();
+      logger.d('(${widget.douyinPlayerController.url}) - player visible ');
+      widget.douyinPlayerController.play();
     } else if (event == LifecycleEvent.active) {
-      _play();
-      logger.d('(${widget.url}) - player active ');
+      widget.douyinPlayerController.play();
+      logger.d('(${widget.douyinPlayerController.url}) - player active ');
     } else if (event == LifecycleEvent.inactive) {
-      logger.d('(${widget.url}) - player inactive ');
+      logger.d('(${widget.douyinPlayerController.url}) - player inactive ');
     } else if (event == LifecycleEvent.invisible) {
-      _pause();
-      logger.d('(${widget.url}) - player invisible ');
+      widget.douyinPlayerController.pause();
+      logger.d('(${widget.douyinPlayerController.url}) - player invisible ');
     } else if (event == LifecycleEvent.pop) {
-      _pause();
-      logger.d('(${widget.url}) - player pop ');
+      widget.douyinPlayerController.pause();
+      logger.d('(${widget.douyinPlayerController.url}) - player pop ');
     }
   }
 }

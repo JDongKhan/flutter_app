@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/tabbar_view/tabbar_life_cycle.dart';
+import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 
 import 'city/page/douyin_friend_page.dart';
 import 'home/page/douyin_home_page.dart';

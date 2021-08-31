@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/pages/discover/page/discover_page.dart';
 
-import 'sports_tab_home.dart';
+import 'home/sports_tab_home.dart';
 
 /**
  *
@@ -38,7 +38,7 @@ class _SportsTabbarPageState extends State<SportsTabbarPage>
       body: PageView(
         controller: _controller,
         children: <Widget>[
-          TabHomePage(),
+          TabHomePage.build(),
           DiscoverPage(),
         ],
         physics: const NeverScrollableScrollPhysics(),

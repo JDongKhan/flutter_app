@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
+import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
+import 'package:provider/provider.dart';
 
-import 'home/page/sports_home_page.dart';
-import 'home/page/sports_home_video_page.dart';
+import 'page/sports_home_page.dart';
+import 'page/sports_home_tv_page.dart';
+import 'page/sports_home_video_page.dart';
 
 /**
  *
@@ -10,7 +14,20 @@ import 'home/page/sports_home_video_page.dart';
  */
 
 class TabHomePage extends StatefulWidget {
-  final String title = "jd_tab_home";
+  const TabHomePage();
+
+  final String title = 'jd_tab_home';
+
+  static build() {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<SportsTabHomeVM>(
+          create: (BuildContext context) => SportsTabHomeVM(),
+        ),
+      ],
+      child: const TabHomePage(),
+    );
+  }
 
   @override
   State createState() => _TabHomePageState();
@@ -26,11 +43,11 @@ class _TabHomePageState extends State<TabHomePage>
     },
     {
       'title': '推荐',
-      'page': SportsHomePage('推荐'),
+      'page': SportsHomeVideoPage(),
     },
     {
       'title': '视频',
-      'page': SportsHomeVideoPage(),
+      'page': SportsHomeTvPage(),
     },
     {
       'title': '热榜',
@@ -65,12 +82,13 @@ class _TabHomePageState extends State<TabHomePage>
 
   @override
   Widget build(BuildContext context) {
+    SportsTabHomeVM vm = context.watch<SportsTabHomeVM>();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
           titleSpacing: 0,
-          backgroundColor: Colors.blue,
+          backgroundColor: vm.appBarBackgroundColor,
           brightness: Brightness.dark,
           iconTheme: const IconThemeData(
             color: Colors.white,
@@ -106,12 +124,18 @@ class _TabHomePageState extends State<TabHomePage>
             ),
           ],
         ),
-        body: TabBarView(
-          controller: _tabController,
-          children: _tabs.map((e) {
-            //创建3个Tab页
-            return e['page'] as Widget;
-          }).toList(),
+        body: TabbarViewLifeCycle(
+          tabController: _tabController,
+          child: TabBarView(
+            controller: _tabController,
+            children: _tabs.map((e) {
+              //创建3个Tab页
+              return TabbarItemLifecycle(
+                index: _tabs.indexOf(e),
+                child: e['page'] as Widget,
+              );
+            }).toList(),
+          ),
         ) // This trailing comma makes auto-formatting nicer for build methods.
         );
   }

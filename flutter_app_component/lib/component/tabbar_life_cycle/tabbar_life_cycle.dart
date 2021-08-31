@@ -123,6 +123,7 @@ mixin TabBarLifecycle<T extends StatefulWidget> on State<T>, LifecycleAware {
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       _tabbarViewLifeCycleState = TabbarViewLifeCycle.of(context);
       _tabbarViewLifeCycleState?.register(context, this);
+      // onLifecycleEvent(LifecycleEvent.push);
     });
     super.initState();
   }

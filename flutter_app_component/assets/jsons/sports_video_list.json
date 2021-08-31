@@ -1,0 +1,58 @@
+[
+  {
+    "face" : "user_head_0",
+    "name" : "张维为",
+    "foucs" : "1",
+    "title" : "看看现在的美国，就会知道为什么希特勒当年能上台",
+    "cover" : "cover_0",
+    "video_url" : "assets/videos/video_1.mp4",
+    "comment_num" : "103",
+    "thumbs" : "20000",
+    "search_keywork" : "大家都在搜：希特勒恶魔的崛起"
+  },
+
+  {
+    "face" : "user_head_1",
+    "name" : "咪咕看见味道",
+    "foucs" : "0",
+    "title" : "这就是中国：西方的民主制度注定是昙花一现，张为维说得太有道理",
+    "cover" : "cover_1",
+    "video_url" : "assets/videos/video_2.mp4",
+    "comment_num" : "4",
+    "thumbs" : "1079",
+    "search_keywork" : ""
+  },
+
+  {
+    "face" : "user_head_2",
+    "name" : "南京工大科技产业园",
+    "foucs" : "1",
+    "title" : "南京工大科技产业园盛大招商中，欢迎广大企业入驻！",
+    "cover" : "cover_2",
+    "video_url" : "assets/videos/video_3.mp4",
+    "comment_num" : "",
+    "thumbs" : ""
+  },
+
+  {
+    "face" : "user_head_3",
+    "name" : "博览历史",
+    "foucs" : "1",
+    "title" : "美国默不作声，日本不敢相信，朝鲜战争结束后各国反应如何？",
+    "cover" : "cover_3",
+    "video_url" : "assets/videos/video_4.mp4",
+    "comment_num" : "4293",
+    "thumbs" : "51000"
+  },
+
+  {
+    "face" : "user_head_4",
+    "name" : "艾编程",
+    "foucs" : "0",
+    "title" : "Jenkins持续集成自动部署安装篇",
+    "cover" : "cover_4",
+    "video_url" : "assets/videos/video_5.mp4",
+    "comment_num" : "30",
+    "thumbs" : "65"
+  }
+]

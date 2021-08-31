@@ -2,6 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/didi/widget/single_child_scroll_view.dart';
 import 'package:jd_core/jd_core.dart';
 
 /// @author jd
@@ -159,7 +160,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
       position: _bottomAnimation,
       child: Container(
         margin: const EdgeInsets.only(left: 10, right: 10),
-        child: NotificationListener(
+        child: NotificationListener<ScrollNotification>(
           onNotification: (notification) {
             if (notification is ScrollUpdateNotification) {
               if (notification.dragDetails == null) {
@@ -180,7 +181,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
               }
             }
           },
-          child: SingleChildScrollView(
+          child: DiDiSingleChildScrollView(
             clipBehavior: Clip.none,
             controller: _scrollController,
             child: Column(
@@ -214,7 +215,10 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
   Widget _searchWidget() {
     return Container(
       margin: const EdgeInsets.only(top: 10),
-      color: _backgoundColor,
+      decoration: BoxDecoration(
+        color: _backgoundColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

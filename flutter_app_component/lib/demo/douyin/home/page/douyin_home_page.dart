@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_component/component/tabbar_view/tabbar_life_cycle.dart';
+import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 
 import 'douyin_home_cicy_page.dart';
 import 'douyin_home_focus_page.dart';

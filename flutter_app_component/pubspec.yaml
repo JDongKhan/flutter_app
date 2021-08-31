@@ -94,6 +94,12 @@ dependencies:
   #大图预览
   photo_view: ^0.10.1
 
+  #wechat相册
+#  wechat_assets_picker: ^4.0.0
+  #文件打开
+  open_file: ^3.2.1
+  #音频录制
+#  flutter_sound: ^8.3.9
   # 走马灯
   marquee: ^2.1.0
   # 视频播放
@@ -127,8 +133,10 @@ dependencies:
   #播放器
   video_player: ^2.1.6
 
-  #keframe
-#  keframe: ^ 2.0.2
+  #keframe 性能优化
+  keframe: ^ 2.0.2
+  #sliver组件
+  sliver_tools: ^0.2.5
   waterfall_flow: ^3.0.1
   extended_nested_scroll_view: ^3.0.0
   pull_to_refresh_notification: ^2.2.0

@@ -204,13 +204,17 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
     return Container(
       margin: const EdgeInsets.only(top: 10),
       color: _backgoundColor,
+      decoration: BoxDecoration(
+        color: _backgoundColor,
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             width: double.infinity,
             height: 40,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.greenAccent,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10),
@@ -218,9 +222,9 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
               ),
             ),
             padding: const EdgeInsets.only(left: 20),
-            child: Align(
+            child: const Align(
               alignment: Alignment.centerLeft,
-              child: const Text(
+              child: Text(
                 '欢迎使用打车',
                 style: TextStyle(
                   color: Colors.orange,
@@ -237,7 +241,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
             child: Align(
               alignment: Alignment.centerLeft,
               child: Row(
-                children: [
+                children: const <Widget>[
                   Icon(
                     Icons.album_rounded,
                     size: 14,
@@ -271,7 +275,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                   borderRadius: BorderRadius.circular(15),
                 ),
                 child: Row(
-                  children: [
+                  children: const <Widget>[
                     Icon(
                       Icons.album_rounded,
                       size: 14,
@@ -279,7 +283,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                     SizedBox(
                       width: 5,
                     ),
-                    const Text(
+                    Text(
                       '输入你的目的地',
                       style: TextStyle(
                         color: Colors.black,
@@ -293,7 +297,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
           ),
           Container(
             width: double.infinity,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(10),
@@ -311,11 +315,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '预约',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.lock_clock,
                           color: Colors.grey,
                         ),
@@ -323,11 +327,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '代叫',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.call,
                           color: Colors.grey,
                         ),
@@ -335,11 +339,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '接送机',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.call_received,
                           color: Colors.grey,
                         ),
@@ -347,11 +351,11 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                       JDButton(
                         action: () {},
                         imageDirection: AxisDirection.left,
-                        text: Text(
+                        text: const Text(
                           '远途特价',
                           style: TextStyle(color: Colors.grey, fontSize: 12),
                         ),
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.money_off,
                           color: Colors.grey,
                         ),
@@ -359,7 +363,7 @@ class _DidiHomeDetailPageState extends State<DidiHomeDetailPage>
                     ],
                   ),
                 ),
-                Icon(
+                const Icon(
                   Icons.more_vert,
                   color: Colors.grey,
                 ),

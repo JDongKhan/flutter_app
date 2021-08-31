@@ -83,6 +83,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///导航栏
   Widget _buildNavigatorWidget() {
     return Container(
       color: _backgoundColor,
@@ -134,6 +135,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///地图
   Widget _buildMapWidget() {
     return GestureDetector(
       onTap: () {
@@ -157,6 +159,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///滚动事件
   void _scroll(offset) {
     //处理map偏移
     if (offset >= 0) {
@@ -183,6 +186,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     }
   }
 
+  ///滚动组件
   Widget _buildScrollWidget() {
     return NotificationListener<ScrollUpdateNotification>(
       onNotification: (notification) {
@@ -200,6 +204,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///search组件
   Widget _buildSearchWidget() {
     return SliverToBoxAdapter(
       child: Container(
@@ -215,7 +220,13 @@ class _DidiHomePageState extends State<DidiHomePage> {
             ),
             Container(
               margin: const EdgeInsets.only(top: 10),
-              color: _backgoundColor,
+              decoration: BoxDecoration(
+                color: _backgoundColor,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  topRight: Radius.circular(10),
+                ),
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -392,6 +403,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///菜单
   Widget _buildMenuWidget() {
     return SliverToBoxAdapter(
       child: Container(
@@ -421,7 +433,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                         child: Text(
                           item['title'],
                           maxLines: 1,
-                          style: TextStyle(fontSize: 14),
+                          style: const TextStyle(fontSize: 14),
                         )),
                   ],
                 ),
@@ -431,6 +443,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///公交
   Widget _buildBusWidget() {
     return SliverToBoxAdapter(
       child: Container(
@@ -481,7 +494,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                         Expanded(child: Container()),
                         TextButton(
                           onPressed: () {},
-                          child: Text('查看更多'),
+                          child: const Text('查看更多'),
                         ),
                       ],
                     ),
@@ -497,10 +510,9 @@ class _DidiHomePageState extends State<DidiHomePage> {
                         color: Colors.grey[100],
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const <Widget>[
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, top: 8.0),
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
                               child: Text(
                                 '绿色交通 低碳出行',
                                 style:
@@ -508,8 +520,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, top: 8.0),
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
                               child: Text(
                                 '地铁图',
                                 style: TextStyle(
@@ -529,10 +540,9 @@ class _DidiHomePageState extends State<DidiHomePage> {
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
+                          children: const <Widget>[
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, top: 8.0),
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
                               child: Text(
                                 '定制路线 路况早知道',
                                 style:
@@ -540,8 +550,7 @@ class _DidiHomePageState extends State<DidiHomePage> {
                               ),
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 8.0, top: 8.0),
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
                               child: Text(
                                 '路线查询',
                                 style: TextStyle(
@@ -565,128 +574,138 @@ class _DidiHomePageState extends State<DidiHomePage> {
     );
   }
 
+  ///骑行
   Widget _buildBicycleWidget() {
     return SliverToBoxAdapter(
       child: Container(
-        margin: const EdgeInsets.only(top: 10),
-        padding: const EdgeInsets.all(10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text(
-              '骑行',
-              style: TextStyle(fontSize: 20),
-            ),
-            Row(
-              children: [
-                Container(
-                  height: 210,
-                  width: 150,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
+        color: _backgoundColor,
+        child: Container(
+          margin: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(10)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                '骑行',
+                style: TextStyle(fontSize: 20),
+              ),
+              Row(
+                children: [
+                  Container(
+                    height: 210,
+                    width: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                            padding: const EdgeInsets.only(left: 10, top: 10),
+                            child: const Text(
+                              '公交多久到，一查就知道',
+                              style: TextStyle(fontSize: 12),
+                            )),
+                        Container(
                           padding: const EdgeInsets.only(left: 10, top: 10),
                           child: const Text(
-                            '公交多久到，一查就知道',
-                            style: TextStyle(fontSize: 12),
-                          )),
-                      Container(
-                        padding: const EdgeInsets.only(left: 10, top: 10),
-                        child: const Text(
-                          '实时公交',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
+                            '实时公交',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
+                        Expanded(child: Container()),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text('查看更多'),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Expanded(
+                      child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        margin: const EdgeInsets.only(left: 10, bottom: 10),
+                        color: Colors.grey[100],
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                '绿色交通 低碳出行',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                '地铁图',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      Expanded(child: Container()),
-                      TextButton(
-                        onPressed: () {},
-                        child: Text('查看更多'),
+                      Container(
+                        width: double.infinity,
+                        height: 100,
+                        margin: const EdgeInsets.only(
+                          left: 10,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const <Widget>[
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                '定制路线 路况早知道',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: Colors.grey,
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(left: 8.0, top: 8.0),
+                              child: Text(
+                                '路线查询',
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        color: Colors.grey[100],
                       ),
                     ],
-                  ),
-                ),
-                Expanded(
-                    child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 100,
-                      margin: const EdgeInsets.only(left: 10, bottom: 10),
-                      color: Colors.grey[100],
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                            child: Text(
-                              '绿色交通 低碳出行',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                            child: Text(
-                              '地铁图',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 100,
-                      margin: const EdgeInsets.only(
-                        left: 10,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                            child: Text(
-                              '定制路线 路况早知道',
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                            child: Text(
-                              '路线查询',
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                          ),
-                        ],
-                      ),
-                      color: Colors.grey[100],
-                    ),
-                  ],
-                )),
-              ],
-            ),
-          ],
+                  )),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

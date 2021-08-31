@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 
 /// @author jd
-class SportsHomeVideoItem extends StatelessWidget {
-  const SportsHomeVideoItem(this.video);
+class SportsHomeTVItem extends StatelessWidget {
+  const SportsHomeTVItem(this.video);
   final Map video;
   @override
   Widget build(BuildContext context) {

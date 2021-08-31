@@ -630,6 +630,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.5.1"
+  keframe:
+    dependency: "direct main"
+    description:
+      name: keframe
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.2"
   lifecycle:
     dependency: "direct main"
     description:
@@ -714,6 +721,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.0"
+  open_file:
+    dependency: "direct main"
+    description:
+      name: open_file
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.2.1"
   package_config:
     dependency: transitive
     description:
@@ -985,6 +999,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  sliver_tools:
+    dependency: "direct main"
+    description:
+      name: sliver_tools
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.2.5"
   source_gen:
     dependency: transitive
     description:

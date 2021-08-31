@@ -62,9 +62,21 @@ class _DouyinHomeRecommendPageState extends State<DouyinHomeRecommendPage>
   void initState() {
     _pageControllerList = List.generate(
       _list.length,
-      (index) => DouyinPlayerController(index == 0),
+      (index) => DouyinPlayerController(
+          url: _list[index]['video_url'], isPlaying: index == 0),
     ).toList();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageControllerList.forEach((element) {
+      if (element != null) {
+        element.dispose();
+      }
+    });
+    _pageControllerList.clear();
+    super.dispose();
   }
 
   @override
@@ -123,7 +135,6 @@ class _DouyinHomeRecommendPageState extends State<DouyinHomeRecommendPage>
       child: DouyinPlayer(
         douyinPlayerController: douyinPlayerController,
         source: widget.source,
-        url: item['video_url'],
       ),
     );
   }

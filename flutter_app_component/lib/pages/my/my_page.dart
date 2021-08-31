@@ -322,7 +322,7 @@ class _MyPageState extends State<MyPage>
         icon: Icon(item['icon'] as IconData),
         child: Text(
           item['title'].toString(),
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.black,
             fontSize: 12,
           ),

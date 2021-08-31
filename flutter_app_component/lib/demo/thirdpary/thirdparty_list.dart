@@ -5,6 +5,7 @@ import 'package:flutter_app_component/demo/link_scroll_menu/jd_link_scroll_menu.
 import 'package:jd_core/jd_core.dart';
 
 import 'extended_nested_scroll_view/extended_nested_scroll_view_demo_page.dart';
+import 'sliver/sliver_demo.dart';
 import 'waterfall_flow/waterfall_flow_demo_page.dart';
 
 /**
@@ -62,6 +63,10 @@ class _ThirdpartyListPageState extends State<ThirdpartyListPage> {
     {
       'title': 'extended_nested_scroll_view',
       'router': ExtendedNestedScrollViewDemoPage(),
+    },
+    {
+      'title': 'SliverPageDemo',
+      'router': SliverPageDemo(),
     },
   ];
 

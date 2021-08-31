@@ -4,6 +4,7 @@ import 'dart:ui';
 // import 'package:albumsaver/albumsaver.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/style/jd_styles.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -72,6 +73,11 @@ class _MyQRcodePageState extends State<MyQRcodePage> {
                       ),
                       QrImage(
                         data: _qr_string,
+                        embeddedImage:
+                            AssetImage(JDAssetBundle.getImgPath('user_head_0')),
+                        embeddedImageStyle: QrEmbeddedImageStyle(
+                          size: const Size(30, 30),
+                        ),
                         size: 200,
                       ),
                     ],
