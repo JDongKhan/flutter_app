@@ -9,6 +9,16 @@ class TabbarViewLifeCycle extends StatefulWidget {
   final TabController tabController;
   final Widget child;
 
+  static bool isShow(BuildContext context) {
+    _TabbarViewLifeCycleState state = TabbarViewLifeCycle.of(context);
+    TabbarItemLifecycle item =
+        context.dependOnInheritedWidgetOfExactType<TabbarItemLifecycle>();
+    if (item.index == state._currentIndex) {
+      return true;
+    }
+    return false;
+  }
+
   static _TabbarViewLifeCycleState of(BuildContext context) {
     _TabbarViewLifeCycleState state =
         context.findAncestorStateOfType<_TabbarViewLifeCycleState>();

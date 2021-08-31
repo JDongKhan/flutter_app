@@ -643,7 +643,7 @@ packages:
       name: lifecycle
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.2.0"
+    version: "0.3.0"
   link_scroll_menu:
     dependency: "direct main"
     description:
