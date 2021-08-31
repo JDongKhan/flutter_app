@@ -170,7 +170,8 @@ class _DouyinPlayerState extends State<DouyinPlayer>
             child: Stack(
               children: [
                 VideoPlayer(
-                    widget.douyinPlayerController.videoPlayerController),
+                  widget.douyinPlayerController.videoPlayerController,
+                ),
                 AnimatedOpacity(
                   duration: const Duration(milliseconds: 300),
                   opacity: widget.douyinPlayerController.isPlaying ? 0 : 1.0,
@@ -193,7 +194,7 @@ class _DouyinPlayerState extends State<DouyinPlayer>
           },
           child: const Center(
             child: Text(
-              '请求失败，请稍后',
+              '加载中，请稍后',
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -211,14 +212,13 @@ class _DouyinPlayerState extends State<DouyinPlayer>
     } else if (event == LifecycleEvent.visible) {
       logger.d('(${widget.douyinPlayerController.url}) - player visible ');
       widget.douyinPlayerController.play();
-    } else if (event == LifecycleEvent.active) {
-      widget.douyinPlayerController.play();
-      logger.d('(${widget.douyinPlayerController.url}) - player active ');
-    } else if (event == LifecycleEvent.inactive) {
-      logger.d('(${widget.douyinPlayerController.url}) - player inactive ');
     } else if (event == LifecycleEvent.invisible) {
       widget.douyinPlayerController.pause();
       logger.d('(${widget.douyinPlayerController.url}) - player invisible ');
+    } else if (event == LifecycleEvent.active) {
+      logger.d('(${widget.douyinPlayerController.url}) - player active ');
+    } else if (event == LifecycleEvent.inactive) {
+      logger.d('(${widget.douyinPlayerController.url}) - player inactive ');
     } else if (event == LifecycleEvent.pop) {
       widget.douyinPlayerController.pause();
       logger.d('(${widget.douyinPlayerController.url}) - player pop ');

@@ -35,18 +35,25 @@ class _TabbarViewLifeCycleState extends State<TabbarViewLifeCycle>
       _configList[i] = {};
     }
     _currentIndex = widget.tabController.index;
-    widget.tabController.addListener(() {
-      final int index = widget.tabController.index;
-      notification(index);
-      _currentIndex = index;
-    });
-
+    widget.tabController.addListener(_listener);
     //获取上层的布局，可能存在嵌套的情况
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       TabbarViewLifeCycle.of(context)?.register(context, this);
     });
 
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    widget.tabController.removeListener(_listener);
+    super.dispose();
+  }
+
+  void _listener() {
+    final int index = widget.tabController.index;
+    notification(index);
+    _currentIndex = index;
   }
 
   //通知index页面将要显示，对上个页面进行消失操作

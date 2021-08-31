@@ -113,8 +113,9 @@ class _DouyinHomeRecommendPageState extends State<DouyinHomeRecommendPage>
 
   ///页面布局
   Widget _buildPage(int index) {
-    Map item = _list[index];
-    DouyinPlayerController douyinPlayerController = _pageControllerList[index];
+    final Map item = _list[index];
+    final DouyinPlayerController douyinPlayerController =
+        _pageControllerList[index];
     return Container(
       color: Colors.black,
       child: Stack(
