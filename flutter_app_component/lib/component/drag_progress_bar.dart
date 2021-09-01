@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/utils/logger_util.dart';
 
 /// @author jd
 
@@ -41,7 +42,7 @@ class _DragProgressBarState extends State<DragProgressBar> {
     double v = _value > 0 ? _value : widget.value;
     v = min(1, v);
     v = max(0, v);
-    print(v);
+    logger.d('_DragProgressBarState:$v');
     return Container(
       child: Stack(
         alignment: Alignment.centerLeft,

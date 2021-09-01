@@ -42,25 +42,27 @@ class _EnvironmentPageState extends State<EnvironmentPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: ListView(
-        children: _environments
-            .map(
-              (e) => ListTile(
-                title: Text(e),
-                trailing:
-                    _currentEnvironment == e ? const Icon(Icons.check) : null,
-                onTap: () {
-                  setState(() {
-                    _currentEnvironment = e;
-                    //初始化环境配置
-                    environments.init(env: e);
-                  });
-                },
-              ),
-            )
-            .toList(),
+    return Scaffold(
+      body: Container(
+        color: Colors.white,
+        child: ListView(
+          children: _environments
+              .map(
+                (e) => ListTile(
+                  title: Text(e),
+                  trailing:
+                      _currentEnvironment == e ? const Icon(Icons.check) : null,
+                  onTap: () {
+                    setState(() {
+                      _currentEnvironment = e;
+                      //初始化环境配置
+                      environments.init(env: e);
+                    });
+                  },
+                ),
+              )
+              .toList(),
+        ),
       ),
     );
   }

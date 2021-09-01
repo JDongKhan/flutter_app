@@ -6,6 +6,7 @@ import 'package:flutter_app_component/demo/douyin/player/like_gesture_widget.dar
 import 'package:flutter_app_component/demo/douyin/player/vinyl_disk.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'package:marquee/marquee.dart';
 
 /// @author jd
@@ -88,26 +89,33 @@ class _DouyinHomeRecommendPageState extends State<DouyinHomeRecommendPage>
       onSingleTap: () {
         debugPrint('我在单击');
       },
-      child: PageView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: _list.length,
-          controller: _pageController,
-          // allowImplicitScrolling: true,
-          // dragStartBehavior: DragStartBehavior.down,
-          onPageChanged: (int index) {
-            print('index:$index');
-            DouyinPlayerController preController =
-                _pageControllerList[_currentIndex];
-            DouyinPlayerController currentController =
-                _pageControllerList[index];
-            preController.pause();
-            currentController.play();
-            _currentIndex = index;
-          },
-          // layout: SwiperLayout.STACK,
-          itemBuilder: (BuildContext context, int index) {
-            return _buildPage(index);
-          }),
+      child: ParentPageLifecycleWrapper(
+        controller: _pageController,
+        child: PageView.builder(
+            scrollDirection: Axis.vertical,
+            itemCount: _list.length,
+            controller: _pageController,
+            // allowImplicitScrolling: true,
+            // dragStartBehavior: DragStartBehavior.down,
+            onPageChanged: (int index) {
+              // print('index:$index');
+              // DouyinPlayerController preController =
+              //     _pageControllerList[_currentIndex];
+              // DouyinPlayerController currentController =
+              //     _pageControllerList[index];
+              // preController.pause();
+              // currentController.play();
+              // _currentIndex = index;
+            },
+            // layout: SwiperLayout.STACK,
+            itemBuilder: (BuildContext context, int index) {
+              return ChildPageLifecycleWrapper(
+                wantKeepAlive: true,
+                index: index,
+                child: _buildPage(index),
+              );
+            }),
+      ),
     );
   }
 
