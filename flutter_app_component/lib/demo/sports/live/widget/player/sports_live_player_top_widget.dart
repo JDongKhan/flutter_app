@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-import '../../sports_live_controller.dart';
+import '../../vm/sports_live_controller.dart';
 
 /// @author jd
 class SportsLivePlayerTopWidget extends StatefulWidget {
@@ -28,7 +28,7 @@ class _SportsLivePlayerTopWidgetState extends State<SportsLivePlayerTopWidget> {
   }
 
   Widget _buildTitleWidget() {
-    SportsLiveController controller = context.watch<SportsLiveController>();
+    SportsLiveController controller = Get.find<SportsLiveController>();
     if (controller.orientation == Orientation.landscape) {
       return const Text(
         '我是播放器',
@@ -46,14 +46,16 @@ class _SportsLivePlayerTopWidgetState extends State<SportsLivePlayerTopWidget> {
       mainAxisSize: MainAxisSize.min,
       children: [
         IconButton(
-          icon: Icon(
+          onPressed: () {},
+          icon: const Icon(
             Icons.tv,
             size: 20,
             color: Colors.white,
           ),
         ),
         IconButton(
-          icon: Icon(
+          onPressed: () {},
+          icon: const Icon(
             Icons.more_horiz,
             size: 20,
             color: Colors.white,

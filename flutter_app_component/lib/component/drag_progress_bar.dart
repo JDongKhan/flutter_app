@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 class DragProgressBar extends StatefulWidget {
   const DragProgressBar({
     Key key,
-    this.value,
+    this.value = 0,
     this.inactiveColor = Colors.grey,
     this.activeColor = Colors.white,
     this.height = 3,
@@ -16,7 +16,10 @@ class DragProgressBar extends StatefulWidget {
     this.onPanStart,
     this.onPanEnd,
     this.onPanChanged,
-  }) : super(key: key);
+  })  : assert(
+          value >= 0,
+        ),
+        super(key: key);
   final double value;
   final double height;
   final Color inactiveColor;

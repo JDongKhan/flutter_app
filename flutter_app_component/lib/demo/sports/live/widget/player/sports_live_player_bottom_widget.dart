@@ -2,32 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_component/component/drag_progress_bar.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-import '../../sports_live_controller.dart';
+import '../../vm/sports_live_controller.dart';
 
 /// @author jd
 
-class SportsLivePlayerBottomController extends ChangeNotifier {
-  SportsLivePlayerBottomController({
-    @required this.playerController,
-  });
-  Duration _position, _duration;
-
-  final PlayerController playerController;
-
-  void changeDuration(Duration position, Duration duration) {
-    _position = position;
-    _duration = duration;
-    notifyListeners();
-  }
-}
-
 class SportsLivePlayerBottomWidget extends StatefulWidget {
   const SportsLivePlayerBottomWidget({
-    @required this.controller,
+    @required this.playerController,
   });
-  final SportsLivePlayerBottomController controller;
+  final PlayerController playerController;
   @override
   _SportsLivePlayerBottomWidgetState createState() =>
       _SportsLivePlayerBottomWidgetState();
@@ -35,14 +20,12 @@ class SportsLivePlayerBottomWidget extends StatefulWidget {
 
 class _SportsLivePlayerBottomWidgetState
     extends State<SportsLivePlayerBottomWidget> {
-  bool _isPanStart = false;
+  final SportsLiveController _sportsLiveController =
+      Get.find<SportsLiveController>();
+
   double _tempSeekValue = 0;
   @override
   void initState() {
-    widget.controller.addListener(() {
-      if (_isPanStart) return;
-      setState(() {});
-    });
     super.initState();
   }
 
@@ -66,36 +49,39 @@ class _SportsLivePlayerBottomWidgetState
             height: double.infinity,
             margin: const EdgeInsets.only(left: 8, right: 8),
             alignment: Alignment.centerLeft,
-            child: Text(
-              durationToString(widget.controller._position),
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+            child: Obx(
+              () => Text(
+                durationToString(_sportsLiveController.position.value),
+                style: const TextStyle(color: Colors.white, fontSize: 12),
+              ),
             ),
           ),
           Expanded(
-            child: DragProgressBar(
-              value: _getValueFromDuration(),
-              inactiveColor: Colors.grey,
-              activeColor: Colors.white,
-              onPanStart: () {
-                _isPanStart = true;
-              },
-              onPanEnd: () {
-                _isPanStart = false;
-                widget.controller.playerController
-                    .seek(_seek_toDuration(_tempSeekValue));
-              },
-              onPanChanged: (double value) {
-                _tempSeekValue = value;
-              },
+            child: Obx(
+              () => DragProgressBar(
+                value: _getValueFromDuration(),
+                inactiveColor: Colors.grey,
+                activeColor: Colors.white,
+                onPanStart: () {},
+                onPanEnd: () {
+                  widget.playerController
+                      .seek(_seek_toDuration(_tempSeekValue));
+                },
+                onPanChanged: (double value) {
+                  _tempSeekValue = value;
+                },
+              ),
             ),
           ),
           Container(
             height: double.infinity,
             margin: const EdgeInsets.only(left: 8, right: 8),
             alignment: Alignment.centerLeft,
-            child: Text(
-              durationToString(widget.controller._duration),
-              style: const TextStyle(color: Colors.white, fontSize: 12),
+            child: Obx(
+              () => Text(
+                durationToString(_sportsLiveController.duration.value),
+                style: const TextStyle(color: Colors.white, fontSize: 12),
+              ),
             ),
           ),
           _buildFullWidget(),
@@ -105,11 +91,11 @@ class _SportsLivePlayerBottomWidgetState
   }
 
   Widget _buildPlayOrNotWidget() {
-    if (widget.controller.playerController.isPlaying) {
+    if (widget.playerController.isPlaying) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
-          widget.controller.playerController.pause();
+          widget.playerController.pause();
         },
         child: const Icon(
           Icons.pause,
@@ -121,7 +107,7 @@ class _SportsLivePlayerBottomWidgetState
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
       onTap: () {
-        widget.controller.playerController.play();
+        widget.playerController.play();
       },
       child: const Icon(
         Icons.play_arrow,
@@ -132,8 +118,7 @@ class _SportsLivePlayerBottomWidgetState
   }
 
   Widget _buildFullWidget() {
-    final SportsLiveController controller =
-        context.watch<SportsLiveController>();
+    SportsLiveController controller = Get.find<SportsLiveController>();
     if (controller.orientation == Orientation.landscape) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
@@ -181,18 +166,22 @@ class _SportsLivePlayerBottomWidgetState
 
   Duration _seek_toDuration(double value) {
     final double durationMilliseconds =
-        widget.controller._duration.inMilliseconds.toDouble();
+        _sportsLiveController.duration.value.inMilliseconds.toDouble();
     final int position = (durationMilliseconds * value).toInt();
     final Duration duration = Duration(milliseconds: position);
     return duration;
   }
 
   double _getValueFromDuration() {
-    if (widget.controller._position == null) {
+    if (_sportsLiveController.position == null) {
       return 0.0;
     }
-    double d = widget.controller._position.inSeconds /
-        widget.controller._duration.inSeconds;
+    int positionSeconds = _sportsLiveController.position.value.inSeconds;
+    if (positionSeconds == 0) {
+      return 0.0;
+    }
+    double d = _sportsLiveController.position.value.inSeconds /
+        _sportsLiveController.duration.value.inSeconds;
     return d;
   }
 

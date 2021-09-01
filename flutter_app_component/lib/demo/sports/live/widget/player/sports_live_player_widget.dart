@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-import '../../sports_live_controller.dart';
+import '../../vm/sports_live_controller.dart';
 import 'sports_live_player_bottom_widget.dart';
 import 'sports_live_player_top_widget.dart';
 
@@ -23,17 +23,15 @@ class SportsLivePlayerWidget extends StatefulWidget {
 class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
     with TickerProviderStateMixin {
   final PlayerController _playerController = PlayerController();
-  SportsLivePlayerBottomController _bottomController;
   AnimationController _animationController;
   Animation _slideTopAnimation, _slideBottomAnimation, _slideRightAnimation;
   bool _isShowMenuAnimal = false;
   bool _isLocked = false;
+
+  final SportsLiveController _sportsLiveController =
+      Get.find<SportsLiveController>();
   @override
   void initState() {
-    _bottomController =
-        SportsLivePlayerBottomController(playerController: _playerController);
-    _bottomController.addListener(() {});
-
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     _slideTopAnimation = Tween(
@@ -57,7 +55,6 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
 
   @override
   void dispose() {
-    _bottomController.dispose();
     _playerController.dispose();
     _animationController.dispose();
     super.dispose();
@@ -93,7 +90,8 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
               showMenu();
             },
             onChange: (position, duration) {
-              _bottomController.changeDuration(position, duration);
+              _sportsLiveController.changeDuration(position, duration);
+              // _bottomController.changeDuration(position, duration);
             },
           ),
           _buildTopMenuWidget(),
@@ -133,8 +131,8 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
               right: 8,
               child: SlideTransition(
                 position: _slideBottomAnimation,
-                child:
-                    SportsLivePlayerBottomWidget(controller: _bottomController),
+                child: SportsLivePlayerBottomWidget(
+                    playerController: _playerController),
               ),
             ),
             Positioned(
@@ -153,7 +151,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
   Widget _buildBackWidget() {
     return IconButton(
       onPressed: () {
-        SportsLiveController controller = context.read<SportsLiveController>();
+        SportsLiveController controller = Get.find<SportsLiveController>();
         if (controller.orientation == Orientation.landscape) {
           SystemChrome.setPreferredOrientations([
             DeviceOrientation.portraitUp,
@@ -171,7 +169,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
   }
 
   Widget _buildLockWidget() {
-    SportsLiveController controller = context.watch<SportsLiveController>();
+    SportsLiveController controller = Get.find<SportsLiveController>();
     if (controller.orientation == Orientation.portrait) {
       return Container();
     }

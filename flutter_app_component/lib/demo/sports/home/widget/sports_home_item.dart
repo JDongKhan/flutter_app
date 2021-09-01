@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/sports/home/model/sports_content.dart';
 import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.dart';
 import 'package:flutter_app_component/utils/relative_date_format_utils.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -68,11 +69,12 @@ class _SportsHomeItem1State extends State<SportsHomeItem1> {
     String fileSuffix = splitString.last;
     return GestureDetector(
       onTap: () {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (BuildContext context) => SportsLiveDetailPage(),
-          ),
-        );
+        Get.to(() => SportsLiveDetailPage());
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (BuildContext context) => SportsLiveDetailPage(),
+        //   ),
+        // );
       },
       child: ListTile(
         // dense: true,

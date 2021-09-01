@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_component/component/orientation/orientation_mixin.dart';
 import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
-import 'package:provider/provider.dart';
 
-import 'sports_live_controller.dart';
+import 'vm/sports_live_controller.dart';
 import 'widget/chat/sports_live_chat_widget.dart';
 import 'widget/introduce/sports_live_introduce_widget.dart';
 import 'widget/player/sports_live_player_widget.dart';
@@ -22,7 +22,7 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
     with SingleTickerProviderStateMixin, OrientationAware, OrientationMixin {
   TabController _tabController; //需要定义一个Controller
   final GlobalKey _globalKey = GlobalKey();
-
+  final SportsLiveController _liveController = Get.put(SportsLiveController());
   final String _play_url = 'assets/videos/video_11.mp4';
   final List<Map<String, dynamic>> _tabs = [
     {
@@ -54,32 +54,25 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      body: MultiProvider(
-        providers: [
-          ChangeNotifierProvider<SportsLiveController>(
-              create: (context) => SportsLiveController()),
-        ],
-        child: OrientationBuilder(builder: (context, orientation) {
-          //修改屏幕方向
-          SportsLiveController controller =
-              context.read<SportsLiveController>();
-          controller.changeOrientation(orientation);
-          return Column(
-            children: [
-              Container(
-                height: orientation == Orientation.landscape
-                    ? jd_screenHeight()
-                    : jd_screenWidth() / 9 * 6,
-                child: SportsLivePlayerWidget(
-                  url: _play_url,
-                  key: _globalKey,
-                ),
+      body: OrientationBuilder(builder: (context, orientation) {
+        //修改屏幕方向
+        SportsLiveController controller = Get.find<SportsLiveController>();
+        controller.changeOrientation(orientation);
+        return Column(
+          children: [
+            Container(
+              height: orientation == Orientation.landscape
+                  ? jd_screenHeight()
+                  : jd_screenWidth() / 9 * 6,
+              child: SportsLivePlayerWidget(
+                url: _play_url,
+                key: _globalKey,
               ),
-              Expanded(child: _buildContentWidget()),
-            ],
-          );
-        }),
-      ),
+            ),
+            Expanded(child: _buildContentWidget()),
+          ],
+        );
+      }),
     );
   }
 
