@@ -125,7 +125,7 @@ class _TabHomePageState extends State<TabHomePage>
           ],
         ),
         body: TabbarViewLifeCycle(
-          tabController: _tabController,
+          controller: _tabController,
           child: TabBarView(
             controller: _tabController,
             children: _tabs.map((e) {
@@ -133,6 +133,12 @@ class _TabHomePageState extends State<TabHomePage>
               return TabbarItemLifecycle(
                 index: _tabs.indexOf(e),
                 child: e['page'] as Widget,
+                // onLifecycleEvent: (LifecycleEvent event) {
+                //   if (event == LifecycleEvent.active) {
+                //     setState(() {});
+                //   }
+                //   print('Page@0#${event.toString()}');
+                // },
               );
             }).toList(),
           ),

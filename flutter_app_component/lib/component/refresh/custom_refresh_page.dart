@@ -15,6 +15,19 @@ enum RefreshState {
 }
 
 class CustomRefreshPage extends StatefulWidget {
+  CustomRefreshPage({
+    @required this.child,
+    this.customRefreshController,
+    this.isRefreshLog = false,
+    this.useShowLoadMore = false,
+    this.progressIconSize = 28,
+    this.progressColor,
+    this.backgroundColor,
+    this.progressFooterIconSize = 28,
+    this.progressFooterColor,
+    this.backgroundFooterColor,
+  });
+
   ///子控件
   Widget child;
 
@@ -37,19 +50,6 @@ class CustomRefreshPage extends StatefulWidget {
 
   ///是否需要显示加载加载更多圆圈
   bool useShowLoadMore = false;
-
-  CustomRefreshPage({
-    @required this.child,
-    this.customRefreshController,
-    this.isRefreshLog = false,
-    this.useShowLoadMore = false,
-    this.progressIconSize = 28,
-    this.progressColor,
-    this.backgroundColor,
-    this.progressFooterIconSize = 28,
-    this.progressFooterColor,
-    this.backgroundFooterColor,
-  });
 
   @override
   State<StatefulWidget> createState() {
@@ -88,7 +88,7 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
 
   RefreshState currentRefreshState = RefreshState.normal;
 
-  ScrollController scrollController = new ScrollController();
+  ScrollController scrollController = ScrollController();
 
   Widget buildScroll(Widget childWidget) {
     return Scrollbar(
@@ -181,8 +181,7 @@ class _CustomRefreshPageState extends State<CustomRefreshPage> {
   ///结束下拉刷新
   void closeRefresh() {
     ///创建计时 TimerUtil
-    TimerUtil timerUtil =
-        new TimerUtil(mInterval: 100, mTotalTime: animationTime);
+    TimerUtil timerUtil = TimerUtil(mInterval: 100, mTotalTime: animationTime);
 
     ///设置计时回调
     timerUtil.setOnTimerTickCallback((value) {

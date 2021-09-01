@@ -5,8 +5,8 @@ import 'package:lifecycle/lifecycle.dart';
 /// @author jd
 
 class TabbarViewLifeCycle extends StatefulWidget {
-  const TabbarViewLifeCycle({this.tabController, this.child});
-  final TabController tabController;
+  const TabbarViewLifeCycle({this.controller, this.child});
+  final TabController controller;
   final Widget child;
 
   static bool isShow(BuildContext context) {
@@ -41,11 +41,11 @@ class _TabbarViewLifeCycleState extends State<TabbarViewLifeCycle>
   void initState() {
     //初始化子布局信息，监听子布局的变化，并通知对应的子页面
     _configList = {};
-    for (int i = 0; i < widget.tabController.length; i++) {
+    for (int i = 0; i < widget.controller.length; i++) {
       _configList[i] = {};
     }
-    _currentIndex = widget.tabController.index;
-    widget.tabController.addListener(_listener);
+    _currentIndex = widget.controller.index;
+    widget.controller.addListener(_listener);
     //获取上层的布局，可能存在嵌套的情况
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       TabbarViewLifeCycle.of(context)?.register(context, this);
@@ -56,12 +56,12 @@ class _TabbarViewLifeCycleState extends State<TabbarViewLifeCycle>
 
   @override
   void dispose() {
-    widget.tabController.removeListener(_listener);
+    widget.controller.removeListener(_listener);
     super.dispose();
   }
 
   void _listener() {
-    final int index = widget.tabController.index;
+    final int index = widget.controller.index;
     notification(index);
     _currentIndex = index;
   }

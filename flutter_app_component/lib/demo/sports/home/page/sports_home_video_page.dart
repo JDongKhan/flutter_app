@@ -240,18 +240,18 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
+    } else if (event == LifecycleEvent.visible) {
       SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
         SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
         vm.changAppBarBackgroundColor(Colors.black);
       });
-    } else if (event == LifecycleEvent.visible) {
-      SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
-      vm.changAppBarBackgroundColor(Colors.black);
+    } else if (event == LifecycleEvent.invisible) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
+        vm.changAppBarBackgroundColor(Colors.blue);
+      });
     } else if (event == LifecycleEvent.active) {
     } else if (event == LifecycleEvent.inactive) {
-    } else if (event == LifecycleEvent.invisible) {
-      SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
-      vm.changAppBarBackgroundColor(Colors.blue);
     } else if (event == LifecycleEvent.pop) {}
   }
 }

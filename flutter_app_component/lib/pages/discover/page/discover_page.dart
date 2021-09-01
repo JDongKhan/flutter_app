@@ -23,99 +23,101 @@ class _DiscoverPageState extends State<DiscoverPage>
   @override
   void initState() {
     super.initState();
+  }
 
-    ///显示蒙版提示
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      MarkUtils.showMark(context, [
-        MarkEntry(
-          widget: BubbleWidget(
-            child: const Text(
-              '标题',
-              style: TextStyle(
-                color: Colors.white,
-              ),
+  List<MarkEntry> _entryList() {
+    return [
+      MarkEntry(
+        widget: BubbleWidget(
+          child: const Text(
+            '标题',
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
-          left: 100,
-          top: 80,
         ),
-        MarkEntry(
-          widget: BubbleWidget(
-            position: BubbleArrowDirection.right,
-            child: const Text(
-              '内容',
-              style: TextStyle(
-                color: Colors.white,
-              ),
+        left: 100,
+        top: 80,
+      ),
+      MarkEntry(
+        widget: BubbleWidget(
+          position: BubbleArrowDirection.right,
+          child: const Text(
+            '内容',
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
-          left: 100,
-          top: 100,
         ),
-        MarkEntry(
-          widget: BubbleWidget(
-            position: BubbleArrowDirection.left,
-            child: const Text(
-              '列表',
-              style: TextStyle(
-                color: Colors.white,
-              ),
+        left: 100,
+        top: 100,
+      ),
+      MarkEntry(
+        widget: BubbleWidget(
+          position: BubbleArrowDirection.left,
+          child: const Text(
+            '列表',
+            style: TextStyle(
+              color: Colors.white,
             ),
           ),
-          left: 10,
-          top: 200,
         ),
-      ]);
-    });
+        left: 10,
+        top: 200,
+      ),
+    ];
   }
 
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      key: _scaffoldKey,
-      appBar: myAppBar(
-        title: const Text(
-          '发现',
-          style: TextStyle(color: Colors.black),
+    return MarkWidget(
+      entryList: _entryList(),
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: myAppBar(
+          title: const Text(
+            '发现',
+            style: TextStyle(color: Colors.black),
+          ),
+          leading: homeButtonIcon(context, color: Colors.black),
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
+          actions: <Widget>[
+            ///分享按钮
+            shareButtonIcon(context, color: Colors.black),
+            //菜单按钮
+            PopupMenuButton<String>(
+              color: Colors.white,
+              icon: const Icon(
+                Icons.more_horiz,
+                color: Colors.black,
+              ),
+              onSelected: (String item) {
+                if (item == 'download') {
+                  _download();
+                } else {
+                  _share();
+                }
+              },
+              itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+                //菜单项
+                const PopupMenuItem<String>(
+                  value: 'friend',
+                  child: Text('分享到朋友圈'),
+                ),
+                const PopupMenuItem<String>(
+                  value: 'download',
+                  child: Text('下载到本地'),
+                ),
+              ],
+            )
+          ],
         ),
-        leading: homeButtonIcon(context, color: Colors.black),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        actions: <Widget>[
-          ///分享按钮
-          shareButtonIcon(context, color: Colors.black),
-          //菜单按钮
-          PopupMenuButton<String>(
-            color: Colors.white,
-            icon: const Icon(
-              Icons.more_horiz,
-              color: Colors.black,
-            ),
-            onSelected: (String item) {
-              if (item == 'download') {
-                _download();
-              } else {
-                _share();
-              }
-            },
-            itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
-              //菜单项
-              const PopupMenuItem<String>(
-                value: 'friend',
-                child: Text('分享到朋友圈'),
-              ),
-              const PopupMenuItem<String>(
-                value: 'download',
-                child: Text('下载到本地'),
-              ),
-            ],
-          )
-        ],
+        body:
+            _buildSuggestions(), // This trailing comma makes auto-formatting nicer for build methods.
       ),
-      body:
-          _buildSuggestions(), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
@@ -188,7 +190,7 @@ class _DiscoverPageState extends State<DiscoverPage>
   }
 
   ///圆角
-  BorderRadius _borderRadius(index) {
+  BorderRadius _borderRadius(int index) {
     if (index == _controller.currentIndex + 1) {
       return const BorderRadius.only(topRight: Radius.circular(10));
     }
@@ -200,8 +202,8 @@ class _DiscoverPageState extends State<DiscoverPage>
 
   ///右边菜单
   Widget _buildRightMenu() {
-    Map map = _controller.moduleList[_controller.currentIndex];
-    List currentList = map['items'];
+    final Map map = _controller.moduleList[_controller.currentIndex];
+    final List currentList = map['items'];
     return Container(
       // color: Colors.grey[100],
       child: ListView.separated(
@@ -211,8 +213,8 @@ class _DiscoverPageState extends State<DiscoverPage>
         itemCount: currentList?.length,
         padding: const EdgeInsets.all(0),
         itemBuilder: (BuildContext context, int i) {
-          Map item = currentList[i];
-          String text = item['title'];
+          final Map item = currentList[i];
+          final String text = item['title'];
           return InkWell(
             child: Container(
               alignment: Alignment.centerLeft,
@@ -292,7 +294,7 @@ class _DiscoverPageState extends State<DiscoverPage>
   }
 
   ///跳转
-  void _pushSaved(String title, String router, Widget page) async {
+  void _pushSaved(String title, String router, Widget page) {
     if (page != null) {
       JDNavigationUtil.push(page);
       return;

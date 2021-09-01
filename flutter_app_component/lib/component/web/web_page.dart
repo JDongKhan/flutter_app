@@ -21,7 +21,7 @@ class WebPage extends StatefulWidget {
 }
 
 class _WebPageState extends State<WebPage> {
-  WebViewProgressController _controller = WebViewProgressController();
+  final WebViewProgressController _controller = WebViewProgressController();
   WebViewController _webViewController;
   bool _isLocal = false;
   String _url;
@@ -145,7 +145,7 @@ class _WebPageState extends State<WebPage> {
     Color bgColor = Colors.white,
   }) {
     return Container(
-      color: bgColor ?? Color.fromRGBO(241, 241, 241, 1),
+      color: bgColor ?? const Color.fromRGBO(241, 241, 241, 1),
       child: SafeArea(
         bottom: false,
         child: Container(

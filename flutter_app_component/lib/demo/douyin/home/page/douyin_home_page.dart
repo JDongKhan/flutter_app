@@ -126,7 +126,7 @@ class _DouYinHomePageState extends State<DouYinHomePage>
 
   Widget _buildContentPage() {
     return TabbarViewLifeCycle(
-      tabController: _tabController,
+      controller: _tabController,
       child: TabBarView(
         controller: _tabController,
         children: _tabs

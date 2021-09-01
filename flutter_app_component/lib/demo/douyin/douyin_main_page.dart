@@ -67,7 +67,7 @@ class _DouyinMainPageState extends State<DouyinMainPage>
 
   Widget _buildTabBarView() {
     return TabbarViewLifeCycle(
-      tabController: _tabController,
+      controller: _tabController,
       child: TabBarView(
 //          index: _selectedIndex,
         controller: _tabController,
