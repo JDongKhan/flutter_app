@@ -122,7 +122,7 @@ void _initProject() async {
         ..register(LoggerPlugin())
         ..register(EnvironmentPage());
       runApp(
-        injectUMEWidget(child: _mainApp(), enable: true),
+        injectUMEWidget(child: _mainApp(), enable: false),
       );
     } else {
       runApp(

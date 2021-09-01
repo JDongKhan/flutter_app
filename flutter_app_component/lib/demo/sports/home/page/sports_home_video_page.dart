@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_home_video_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
@@ -18,11 +17,8 @@ class SportsHomeVideoPage extends StatefulWidget {
 }
 
 class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
-    with
-        AutomaticKeepAliveClientMixin,
-        LifecycleAware,
-        LifecycleMixin,
-        TabBarLifecycle {
+    with AutomaticKeepAliveClientMixin, LifecycleAware, LifecycleMixin {
+  final ScrollController _scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
@@ -46,6 +42,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
         model: SportsHomeVideoVM(),
         builder: (BuildContext context, SportsHomeVideoVM vm) {
           return ListView.builder(
+            controller: _scrollController,
             itemBuilder: (BuildContext context, int index) {
               return _buildItem(vm, index % 5);
             },
@@ -175,7 +172,31 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
               ),
             ),
             imageDirection: AxisDirection.left,
-            action: () {},
+            action: () {
+              showDialog(
+                  context: context,
+                  useRootNavigator: false,
+                  builder: (BuildContext context) {
+                    return AlertDialog(
+                      title: const Text('分享'),
+                      content: const Text('确定分享吗?'),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('取消'),
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('确认'),
+                        ),
+                      ],
+                    );
+                  });
+            },
           ),
           JDButton(
             icon: const Icon(
@@ -241,15 +262,13 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
     } else if (event == LifecycleEvent.visible) {
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-        SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
-        vm.changAppBarBackgroundColor(Colors.black);
-      });
+      SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
+      vm.changAppBarBackgroundColor(Colors.black);
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {});
     } else if (event == LifecycleEvent.invisible) {
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-        SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
-        vm.changAppBarBackgroundColor(Colors.blue);
-      });
+      SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
+      vm.changAppBarBackgroundColor(Colors.blue);
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {});
     } else if (event == LifecycleEvent.active) {
     } else if (event == LifecycleEvent.inactive) {
     } else if (event == LifecycleEvent.pop) {}

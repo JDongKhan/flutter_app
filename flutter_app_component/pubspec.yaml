@@ -152,7 +152,10 @@ dependencies:
   cupertino_icons: ^1.0.0
   badges: ^2.0.1
 
-  lifecycle: 0.3.0
+  lifecycle:
+    git:
+      url: https://github.com/chenenyu/lifecycle
+      ref: dev
 
   simple_animations: 2.4.2
 #  flutterlifecyclehooks: 1.0.1

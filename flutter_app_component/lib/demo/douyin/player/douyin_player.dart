@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 import 'package:flutter_app_component/utils/logger_util.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:video_player/video_player.dart';
@@ -75,11 +74,7 @@ class DouyinPlayer extends StatefulWidget {
 }
 
 class _DouyinPlayerState extends State<DouyinPlayer>
-    with
-        WidgetsBindingObserver,
-        LifecycleAware,
-        LifecycleMixin,
-        TabBarLifecycle {
+    with WidgetsBindingObserver, LifecycleAware, LifecycleMixin {
   @override
   void initState() {
     super.initState();

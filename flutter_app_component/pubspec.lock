@@ -640,9 +640,11 @@ packages:
   lifecycle:
     dependency: "direct main"
     description:
-      name: lifecycle
-      url: "https://pub.flutter-io.cn"
-    source: hosted
+      path: "."
+      ref: dev
+      resolved-ref: "024ad6283a30c9213282e544350482c507641d67"
+      url: "https://github.com/chenenyu/lifecycle"
+    source: git
     version: "0.3.0"
   link_scroll_menu:
     dependency: "direct main"

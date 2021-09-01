@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
+import 'package:lifecycle/lifecycle.dart';
 
 import 'douyin_home_cicy_page.dart';
 import 'douyin_home_focus_page.dart';
@@ -125,12 +125,12 @@ class _DouYinHomePageState extends State<DouYinHomePage>
   }
 
   Widget _buildContentPage() {
-    return TabbarViewLifeCycle(
+    return ParentPageLifecycleWrapper(
       controller: _tabController,
       child: TabBarView(
         controller: _tabController,
         children: _tabs
-            .map((e) => TabbarItemLifecycle(
+            .map((e) => ChildPageLifecycleWrapper(
                   index: _tabs.indexOf(e),
                   child: e['page'] as Widget,
                 ))

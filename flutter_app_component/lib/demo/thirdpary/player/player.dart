@@ -262,9 +262,9 @@ class _PlayerState extends State<Player>
       widget.controller.play();
       debugPrint('player[${widget.url}]-onLifecycleEvent active ');
     } else if (event == LifecycleEvent.inactive) {
+      widget.controller.pause();
       debugPrint('player[${widget.url}]-onLifecycleEvent inactive ');
     } else if (event == LifecycleEvent.invisible) {
-      widget.controller.pause();
       debugPrint('player[${widget.url}]-onLifecycleEvent invisible ');
     } else if (event == LifecycleEvent.pop) {
       debugPrint('player[${widget.url}]-onLifecycleEvent pop ');

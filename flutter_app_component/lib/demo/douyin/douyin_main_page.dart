@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
+import 'package:lifecycle/lifecycle.dart';
 
 import 'city/page/douyin_friend_page.dart';
 import 'home/page/douyin_home_page.dart';
@@ -66,14 +66,14 @@ class _DouyinMainPageState extends State<DouyinMainPage>
   }
 
   Widget _buildTabBarView() {
-    return TabbarViewLifeCycle(
+    return ParentPageLifecycleWrapper(
       controller: _tabController,
       child: TabBarView(
 //          index: _selectedIndex,
         controller: _tabController,
         physics: const NeverScrollableScrollPhysics(),
         children: _tabs.map((e) {
-          return TabbarItemLifecycle(
+          return ChildPageLifecycleWrapper(
             index: _tabs.indexOf(e),
             child: e['page'] as Widget,
           );

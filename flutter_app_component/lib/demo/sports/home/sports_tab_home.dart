@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/tabbar_life_cycle/tabbar_life_cycle.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'package:provider/provider.dart';
 
 import 'page/sports_home_page.dart';
@@ -39,7 +39,7 @@ class _TabHomePageState extends State<TabHomePage>
   final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
     {
       'title': '关注',
-      'page': SportsHomePage('关注'),
+      'page': const SportsHomePage('关注'),
     },
     {
       'title': '推荐',
@@ -51,19 +51,19 @@ class _TabHomePageState extends State<TabHomePage>
     },
     {
       'title': '热榜',
-      'page': SportsHomePage('热榜'),
+      'page': const SportsHomePage('热榜'),
     },
     {
       'title': '快讯',
-      'page': SportsHomePage('快讯'),
+      'page': const SportsHomePage('快讯'),
     },
     {
       'title': '中国足球',
-      'page': SportsHomePage('中国足球'),
+      'page': const SportsHomePage('中国足球'),
     },
     {
       'title': '国际足球',
-      'page': SportsHomePage('国际足球'),
+      'page': const SportsHomePage('国际足球'),
     }
   ];
 
@@ -124,13 +124,13 @@ class _TabHomePageState extends State<TabHomePage>
             ),
           ],
         ),
-        body: TabbarViewLifeCycle(
+        body: ParentPageLifecycleWrapper(
           controller: _tabController,
           child: TabBarView(
             controller: _tabController,
             children: _tabs.map((e) {
               //创建3个Tab页
-              return TabbarItemLifecycle(
+              return ChildPageLifecycleWrapper(
                 index: _tabs.indexOf(e),
                 child: e['page'] as Widget,
                 // onLifecycleEvent: (LifecycleEvent event) {

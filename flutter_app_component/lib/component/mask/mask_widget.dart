@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 
+OverlayEntry overlayEntry;
+
 class MarkEntry {
   const MarkEntry({
     this.widget,
@@ -15,46 +17,38 @@ class MarkEntry {
   final double left;
 }
 
-class MarkWidget extends StatelessWidget {
-  const MarkWidget({
-    this.child,
-    this.entryList,
-  });
-  final Widget child;
-  final List<MarkEntry> entryList;
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        child,
-        _MarkWidget(
+class MarkUtils {
+  static void showMark(BuildContext context, List<MarkEntry> entryList) {
+    overlayEntry = OverlayEntry(
+      builder: (BuildContext context) {
+        return MarkWidget(
           entryList: entryList,
-        ),
-      ],
+        );
+      },
     );
+    Overlay.of(context).insert(overlayEntry);
   }
 }
 
-class _MarkWidget extends StatefulWidget {
-  const _MarkWidget({
-    this.entryList,
-  });
+class MarkWidget extends StatefulWidget {
+  const MarkWidget({this.entryList});
   final List<MarkEntry> entryList;
   @override
   _MarkWidgetState createState() => _MarkWidgetState();
 }
 
-class _MarkWidgetState extends State<_MarkWidget> {
+class _MarkWidgetState extends State<MarkWidget> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    if (currentIndex > widget.entryList.length - 1) {
-      currentIndex = widget.entryList.length;
-      return const SizedBox.shrink();
-    }
     final MarkEntry entry = widget.entryList[currentIndex];
     return GestureDetector(
       onTap: () {
+        if (currentIndex >= (widget.entryList.length - 1)) {
+          overlayEntry?.remove();
+          overlayEntry = null;
+          return;
+        }
         setState(() {
           currentIndex++;
         });

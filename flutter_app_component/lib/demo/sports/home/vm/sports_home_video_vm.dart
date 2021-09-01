@@ -7,6 +7,8 @@ import 'package:jd_core/view_model/refresh_list_view_model.dart';
 
 class SportsHomeVideoVM extends RefreshListViewModel<SportsVideo> {
   bool isPlaying;
+
+  ///作为当前播放的标示，也可以是url，担心url会重复，用实例靠谱点
   State playingState;
 
   void play(State from) {
