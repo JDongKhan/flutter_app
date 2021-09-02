@@ -22,7 +22,7 @@ class SportsLivePlayerWidget extends StatefulWidget {
 
 class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
     with TickerProviderStateMixin {
-  final PlayerController _playerController = PlayerController();
+  PlayerController _playerController;
   AnimationController _animationController;
   Animation _slideTopAnimation, _slideBottomAnimation, _slideRightAnimation;
   bool _isShowMenuAnimal = false;
@@ -32,6 +32,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
       Get.find<SportsLiveController>();
   @override
   void initState() {
+    _playerController = PlayerController(initPlaying: true, url: widget.url);
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     _slideTopAnimation = Tween(
@@ -83,7 +84,6 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
       child: Stack(
         children: [
           Player(
-            url: widget.url,
             controller: _playerController,
             onTap: () {
               if (_isLocked) return;

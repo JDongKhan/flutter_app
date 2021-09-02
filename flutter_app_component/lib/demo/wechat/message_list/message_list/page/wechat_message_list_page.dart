@@ -30,6 +30,8 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
 
   bool _hasSubTitle = true;
 
+  bool _showBackMenu = false;
+
   final WeChatMessageListBottomMenuController _bottomMenuController =
       WeChatMessageListBottomMenuController(initOpacity: 0);
 
@@ -44,7 +46,11 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
 
   //显示主页面
   void _showMainPage() {
+    if (!_showBackMenu) {
+      return;
+    }
     setState(() {
+      _showBackMenu = false;
       _animationController.animateTo(1);
       hiddenBottomBar(false);
     });
@@ -57,6 +63,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
         ///底部的菜单
         WeChatMessageListBottomMenu(
           controller: _bottomMenuController,
+          onChange: (double value) {},
           onBack: () {
             _showMainPage();
           },
@@ -66,6 +73,7 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
           onNotification: (DraggableScrollableNotification notification) {
             _bottomMenuController.opacity = 1 - notification.extent;
             if (notification.extent < 0.1) {
+              _showBackMenu = true;
               hiddenBottomBar(true);
             }
           },

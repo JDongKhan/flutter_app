@@ -76,6 +76,11 @@ dependencies:
 #  photo: ^0.4.8
   #wechat_assets_picker: ^6.0.1
 
+  #滚动播放
+  inview_notifier_list: ^2.0.0
+  #埋点
+  flutter_sliver_tracker: ^3.0.5
+
   #可展开text
   expandable_text: ^2.0.2
   #二维码

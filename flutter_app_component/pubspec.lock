@@ -417,6 +417,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.0"
+  flutter_sliver_tracker:
+    dependency: "direct main"
+    description:
+      name: flutter_sliver_tracker
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.5"
   flutter_smart_dialog:
     dependency: "direct main"
     description:
@@ -588,6 +595,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.17.0"
+  inview_notifier_list:
+    dependency: "direct main"
+    description:
+      name: inview_notifier_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   jd_core:
     dependency: "direct main"
     description:
@@ -1057,6 +1071,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.1.0"
+  stream_transform:
+    dependency: transitive
+    description:
+      name: stream_transform
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.0"
   string_scanner:
     dependency: transitive
     description:

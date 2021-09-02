@@ -20,30 +20,64 @@ class SportsListPlayer extends StatefulWidget {
 }
 
 class _SportsListPlayerState extends State<SportsListPlayer> {
+  PlayerController _playerController;
+  bool _playing = false;
   @override
   void initState() {
+    _playerController =
+        PlayerController(initPlaying: true, url: widget.videoUrl);
+    _playerController.addListener(_listener);
+    _playing = widget.playing;
     super.initState();
   }
 
   @override
   void dispose() {
+    _clearController();
     super.dispose();
+  }
+
+  void _clearController() {
+    if (_playerController != null) {
+      _playerController.dispose();
+      _playerController = null;
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant SportsListPlayer oldWidget) {
+    _clearController();
+    _playerController =
+        PlayerController(initPlaying: true, url: widget.videoUrl);
+    _playerController.addListener(_listener);
+    _playing = widget.playing;
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void _listener() {
+    if (_playing != _playerController.isPlaying) {
+      setState(() {
+        _playing = _playerController.isPlaying;
+      });
+    }
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    SportsHomeVideoVM vm = context.watch<SportsHomeVideoVM>();
-    bool isPlaying = vm.isPlaying;
-    if (vm.playingState != this) {
-      isPlaying = false;
-    } else {
-      isPlaying = true;
+    debugPrint('SportsListPlayer-playing:$_playing');
+    SportsHomeVideoVM vm = context.read<SportsHomeVideoVM>();
+    if (_playing) {
+      vm.playingPlayerController = _playerController;
     }
-    return isPlaying
+    return _playing
         ? Container(
             child: Player(
-              controller: PlayerController(initPlaying: true),
-              url: widget.videoUrl,
+              controller: _playerController,
             ),
           )
         : Container(
@@ -61,9 +95,8 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
                     size: 40,
                   ),
                   onPressed: () {
-                    setState(() {
-                      vm.play(this);
-                    });
+                    vm.toPlay(_playerController);
+                    // _playerController.play();
                   },
                 ),
               ],

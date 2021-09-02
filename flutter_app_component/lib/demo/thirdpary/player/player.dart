@@ -8,10 +8,17 @@ import 'package:video_player/video_player.dart';
 typedef PlayerValueChanged<T1, T2> = void Function(T1 value1, T2 value2);
 
 class PlayerController extends ChangeNotifier {
-  PlayerController({bool initPlaying = false}) : isPlaying = initPlaying;
+  PlayerController({
+    bool initPlaying = false,
+    @required this.url,
+    this.loop = true,
+  }) : isPlaying = initPlaying;
 
   bool isPlaying = false;
   Duration seekDuration;
+  String url;
+  final bool loop;
+
   void play() {
     isPlaying = true;
     notifyListeners();
@@ -26,21 +33,23 @@ class PlayerController extends ChangeNotifier {
     seekDuration = duration;
     notifyListeners();
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 }
 
 class Player extends StatefulWidget {
   const Player({
     Key key,
-    @required this.url,
-    this.loop = true,
     this.onTap,
     this.onChange,
     this.playStatus,
     @required this.controller,
-  }) : super(key: key);
+  })  : assert(controller != null),
+        super(key: key);
 
-  final String url;
-  final bool loop;
   final ValueChanged<bool> playStatus;
   final Function onTap;
   final PlayerValueChanged<Duration, Duration> onChange;
@@ -59,20 +68,10 @@ class _PlayerState extends State<Player>
   @override
   void initState() {
     super.initState();
-    debugPrint('player[${widget.url}]-initState');
+    debugPrint('player[${widget.controller.url}]-initState');
     WidgetsBinding.instance.addObserver(this);
     if (widget.controller != null) {
-      widget.controller.addListener(() {
-        if (widget.controller.isPlaying) {
-          _play();
-        } else {
-          _pause();
-        }
-
-        if (widget.controller.seekDuration != null) {
-          _videoPlayerController.seekTo(widget.controller.seekDuration);
-        }
-      });
+      widget.controller.addListener(_outListener);
     }
     //准备
     _prepare(() {
@@ -82,9 +81,24 @@ class _PlayerState extends State<Player>
     });
   }
 
+  void _outListener() {
+    if (!mounted) {
+      return;
+    }
+    if (widget.controller.isPlaying) {
+      _play();
+    } else {
+      _pause();
+    }
+
+    if (widget.controller.seekDuration != null) {
+      _videoPlayerController.seekTo(widget.controller.seekDuration);
+    }
+  }
+
   @override
   void dispose() {
-    debugPrint('player[${widget.url}]-dispose');
+    debugPrint('player[${widget.controller.url}]-dispose');
     _videoPlayerController.dispose();
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
@@ -92,48 +106,48 @@ class _PlayerState extends State<Player>
 
   @override
   void reassemble() {
-    debugPrint('player[${widget.url}]-reassemble');
+    debugPrint('player[${widget.controller.url}]-reassemble');
     super.reassemble();
   }
 
   @override
   void didChangeDependencies() {
-    debugPrint('player[${widget.url}]-didChangeDependencies');
+    debugPrint('player[${widget.controller.url}]-didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant Player oldWidget) {
-    debugPrint('player[${widget.url}]-didUpdateWidget');
+    debugPrint('player[${widget.controller.url}]-didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
-    debugPrint('player[${widget.url}]-deactivate');
+    debugPrint('player[${widget.controller.url}]-deactivate');
     super.deactivate();
   }
 
   @override
   void didChangeMetrics() {
-    debugPrint('player[${widget.url}]-didChangeMetrics');
+    debugPrint('player[${widget.controller.url}]-didChangeMetrics');
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    debugPrint('player[${widget.url}]-didPushRoute');
+    debugPrint('player[${widget.controller.url}]-didPushRoute');
     return super.didPushRoute(route);
   }
 
   @override
   Future<bool> didPopRoute() {
-    debugPrint('player[${widget.url}]-didPopRoute');
+    debugPrint('player[${widget.controller.url}]-didPopRoute');
     return super.didPopRoute();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    debugPrint('player[${widget.url}]-didChangeAppLifecycleState');
+    debugPrint('player[${widget.controller.url}]-didChangeAppLifecycleState');
   }
 
   void _listener() {
@@ -157,27 +171,29 @@ class _PlayerState extends State<Player>
   }
 
   void _prepare(Function callback) {
-    _videoPlayerController = VideoPlayerController.asset(widget.url);
+    _videoPlayerController = VideoPlayerController.asset(widget.controller.url);
     _videoPlayerFuture = _videoPlayerController.initialize().then((value) {
       callback();
     });
-    _videoPlayerController.setLooping(widget.loop);
+    _videoPlayerController.setLooping(widget.controller.loop);
     _videoPlayerController.addListener(_listener);
   }
 
   void _play() {
     if (isPlaying) return;
     _videoPlayerController.play();
+    debugPrint('player[${widget.controller.url}]-play() ');
   }
 
   void _pause() {
     if (!isPlaying) return;
     _videoPlayerController.pause();
+    debugPrint('player[${widget.controller.url}]-pause() ');
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('player[${widget.url}]-build');
+    debugPrint('player[${widget.controller.url}]-build');
     return FutureBuilder(
       future: _videoPlayerFuture,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
@@ -255,19 +271,20 @@ class _PlayerState extends State<Player>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      debugPrint('player[${widget.url}]-onLifecycleEvent push ');
+      debugPrint('player[${widget.controller.url}]-onLifecycleEvent push ');
     } else if (event == LifecycleEvent.visible) {
-      debugPrint('player[${widget.url}]-onLifecycleEvent visible ');
+      debugPrint('player[${widget.controller.url}]-onLifecycleEvent visible ');
     } else if (event == LifecycleEvent.active) {
       widget.controller.play();
-      debugPrint('player[${widget.url}]-onLifecycleEvent active ');
+      debugPrint('player[${widget.controller.url}]-onLifecycleEvent active ');
     } else if (event == LifecycleEvent.inactive) {
       widget.controller.pause();
-      debugPrint('player[${widget.url}]-onLifecycleEvent inactive ');
+      debugPrint('player[${widget.controller.url}]-onLifecycleEvent inactive ');
     } else if (event == LifecycleEvent.invisible) {
-      debugPrint('player[${widget.url}]-onLifecycleEvent invisible ');
+      debugPrint(
+          'player[${widget.controller.url}]-onLifecycleEvent invisible ');
     } else if (event == LifecycleEvent.pop) {
-      debugPrint('player[${widget.url}]-onLifecycleEvent pop ');
+      debugPrint('player[${widget.controller.url}]-onLifecycleEvent pop ');
     }
   }
 }

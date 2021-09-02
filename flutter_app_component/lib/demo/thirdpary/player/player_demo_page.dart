@@ -17,7 +17,7 @@ class _PlayerDemoPageState extends State<PlayerDemoPage> {
         title: Text('播放器'),
       ),
       body: Player(
-        url: 'assets/videos/video_1.mp4',
+        controller: PlayerController(url: 'assets/videos/video_1.mp4'),
       ),
     );
   }

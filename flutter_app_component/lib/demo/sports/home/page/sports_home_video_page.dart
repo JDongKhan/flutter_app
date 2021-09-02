@@ -4,6 +4,7 @@ import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_home_video_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/widget/sports_list_player.dart';
+import 'package:inview_notifier_list/inview_notifier_list.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -41,10 +42,29 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
       child: ProviderWidget<SportsHomeVideoVM>(
         model: SportsHomeVideoVM(),
         builder: (BuildContext context, SportsHomeVideoVM vm) {
-          return ListView.builder(
+          return InViewNotifierList(
+            isInViewPortCondition: (
+              double deltaTop,
+              double deltaBottom,
+              double viewPortDimension,
+            ) {
+              print(
+                  'deltaTop:$deltaTop - deltaBottom:$deltaBottom - viewPortDimension:$viewPortDimension');
+              return deltaTop < (0.5 * viewPortDimension) &&
+                  deltaBottom > (0.5 * viewPortDimension);
+            },
+            initialInViewIds: const <String>['0'],
             controller: _scrollController,
-            itemBuilder: (BuildContext context, int index) {
-              return _buildItem(vm, index % 5);
+            builder: (BuildContext context, int index) {
+              return InViewNotifierWidget(
+                id: '$index',
+                builder: (BuildContext context, bool isInView, Widget Child) {
+                  index = index % 5;
+                  SportsVideo video = vm.list[index];
+                  print('index:$index - isInView:$isInView');
+                  return _buildItem(vm, video, isInView);
+                },
+              );
             },
             itemCount: vm.list.length * 5,
           );
@@ -53,9 +73,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
     );
   }
 
-  Widget _buildItem(SportsHomeVideoVM vm, int index) {
-    SportsVideo video = vm.list[index];
-
+  Widget _buildItem(SportsHomeVideoVM vm, SportsVideo video, bool isPlaying) {
     List<Widget> columnChildren = [];
 
     ///个人信息
@@ -122,6 +140,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
       child: SportsListPlayer(
         cover: video.cover,
         videoUrl: video.videoUrl,
+        playing: isPlaying,
       ),
     ));
 

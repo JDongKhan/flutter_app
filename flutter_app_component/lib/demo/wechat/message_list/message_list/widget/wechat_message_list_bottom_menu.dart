@@ -18,9 +18,14 @@ class WeChatMessageListBottomMenuController extends ChangeNotifier {
 }
 
 class WeChatMessageListBottomMenu extends StatefulWidget {
-  const WeChatMessageListBottomMenu({this.controller, this.onBack});
+  const WeChatMessageListBottomMenu({
+    this.controller,
+    this.onBack,
+    this.onChange,
+  });
   final WeChatMessageListBottomMenuController controller;
   final VoidCallback onBack;
+  final ValueChanged<double> onChange;
   @override
   _WeChatMessageListBottomMenuState createState() =>
       _WeChatMessageListBottomMenuState();
@@ -30,6 +35,7 @@ class _WeChatMessageListBottomMenuState
     extends State<WeChatMessageListBottomMenu>
     with SingleTickerProviderStateMixin {
   AnimationController _animationController;
+  final ScrollController _scrollController = ScrollController();
 
   double _bottomHeight = 40;
 
@@ -67,25 +73,37 @@ class _WeChatMessageListBottomMenuState
             children: [
               Expanded(
                 child: SafeArea(
-                  child: GridView.builder(
-                      padding: const EdgeInsets.all(10),
-                      physics: const BouncingScrollPhysics(
-                        parent: AlwaysScrollableScrollPhysics(),
-                      ),
-                      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                        maxCrossAxisExtent: width, //每个宽100
-                        crossAxisSpacing: 10,
-                        mainAxisExtent: 50,
-                      ),
-                      itemCount: 10,
-                      itemBuilder: (context, i) {
-                        return GestureDetector(
-                          child: Text('菜单$i'),
-                          onTap: () {
-                            _onBack();
-                          },
-                        );
-                      }),
+                  child: NotificationListener<ScrollNotification>(
+                    onNotification: (ScrollNotification notification) {
+                      if (notification is ScrollUpdateNotification &&
+                          notification.dragDetails == null) {
+                        if (notification.metrics.pixels >
+                            notification.metrics.maxScrollExtent) {
+                          _onBack();
+                        }
+                      }
+                    },
+                    child: GridView.builder(
+                        controller: _scrollController,
+                        padding: const EdgeInsets.all(10),
+                        physics: const BouncingScrollPhysics(
+                          parent: AlwaysScrollableScrollPhysics(),
+                        ),
+                        gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                          maxCrossAxisExtent: width, //每个宽100
+                          crossAxisSpacing: 10,
+                          mainAxisExtent: 50,
+                        ),
+                        itemCount: 10,
+                        itemBuilder: (context, i) {
+                          return GestureDetector(
+                            child: Text('菜单$i'),
+                            onTap: () {
+                              _onBack();
+                            },
+                          );
+                        }),
+                  ),
                 ),
               ),
               GestureDetector(

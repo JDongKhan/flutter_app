@@ -1,26 +1,19 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
+import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:jd_core/network/jd_network_utils.dart';
 import 'package:jd_core/view_model/refresh_list_view_model.dart';
 
 /// @author jd
 
 class SportsHomeVideoVM extends RefreshListViewModel<SportsVideo> {
-  bool isPlaying;
+  PlayerController playingPlayerController;
 
-  ///作为当前播放的标示，也可以是url，担心url会重复，用实例靠谱点
-  State playingState;
-
-  void play(State from) {
-    playingState = from;
-    isPlaying = true;
-    notifyListeners();
-  }
-
-  void pause(State from) {
-    playingState = from;
-    isPlaying = false;
-    notifyListeners();
+  void toPlay(PlayerController playerController) {
+    if (playingPlayerController != null) {
+      playingPlayerController.pause();
+    }
+    playingPlayerController = playerController;
+    playingPlayerController.play();
   }
 
   @override
