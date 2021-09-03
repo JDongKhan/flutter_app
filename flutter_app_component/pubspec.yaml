@@ -76,10 +76,11 @@ dependencies:
 #  photo: ^0.4.8
   #wechat_assets_picker: ^6.0.1
 
-  #滚动播放
-  flutter_tracker_wdiget: ^0.0.1
-  #埋点
-  flutter_sliver_tracker: ^3.0.5
+
+  #滚动播放 埋点
+  flutter_tracker_widget: ^0.0.1
+  #滚动到index
+  scrollable_positioned_list: ^0.1.10
 
   #可展开text
   expandable_text: ^2.0.2

@@ -180,13 +180,13 @@ class _PlayerState extends State<Player>
   }
 
   void _play() {
-    if (isPlaying) return;
+    if (isPlaying || !mounted) return;
     _videoPlayerController.play();
     debugPrint('player[${widget.controller.url}]-play() ');
   }
 
   void _pause() {
-    if (!isPlaying) return;
+    if (!isPlaying || !mounted) return;
     _videoPlayerController.pause();
     debugPrint('player[${widget.controller.url}]-pause() ');
   }

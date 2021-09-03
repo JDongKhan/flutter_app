@@ -14,6 +14,8 @@ import 'widget/store/sports_live_store_widget.dart';
 /// @author jd
 
 class SportsLiveDetailPage extends StatefulWidget {
+  const SportsLiveDetailPage({this.videoUrl = 'assets/videos/video_11.mp4'});
+  final String videoUrl;
   @override
   _SportsLiveDetailPageState createState() => _SportsLiveDetailPageState();
 }
@@ -23,7 +25,6 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
   TabController _tabController; //需要定义一个Controller
   final GlobalKey _globalKey = GlobalKey();
   final SportsLiveController _liveController = Get.put(SportsLiveController());
-  final String _play_url = 'assets/videos/video_11.mp4';
   final List<Map<String, dynamic>> _tabs = [
     {
       'title': '概况',
@@ -65,7 +66,7 @@ class _SportsLiveDetailPageState extends State<SportsLiveDetailPage>
                   ? jd_screenHeight()
                   : jd_screenWidth() / 9 * 6,
               child: SportsLivePlayerWidget(
-                url: _play_url,
+                url: widget.videoUrl,
                 key: _globalKey,
               ),
             ),

@@ -6,6 +6,35 @@ import 'package:provider/provider.dart';
 
 /// @author jd
 
+class SportsListPlayerController extends ChangeNotifier {
+  SportsListPlayerController({
+    this.videoUrl,
+    this.playing,
+  }) : playerController = PlayerController(initPlaying: true, url: videoUrl);
+
+  PlayerController playerController;
+  final String videoUrl;
+  bool playing;
+
+  void play() {
+    playing = true;
+    playerController.play();
+  }
+
+  void pause() {
+    playing = false;
+    playerController.pause();
+  }
+
+  @override
+  void dispose() {
+    if (playerController != null) {
+      playerController.dispose();
+    }
+    super.dispose();
+  }
+}
+
 class SportsListPlayer extends StatefulWidget {
   const SportsListPlayer({
     this.videoUrl,
@@ -20,13 +49,13 @@ class SportsListPlayer extends StatefulWidget {
 }
 
 class _SportsListPlayerState extends State<SportsListPlayer> {
-  PlayerController _playerController;
+  SportsListPlayerController _sportsListPlayerController;
   bool _playing = false;
   @override
   void initState() {
-    _playerController =
-        PlayerController(initPlaying: true, url: widget.videoUrl);
-    _playerController.addListener(_listener);
+    _sportsListPlayerController = SportsListPlayerController(
+        videoUrl: widget.videoUrl, playing: widget.playing);
+    _sportsListPlayerController.addListener(_listener);
     _playing = widget.playing;
     super.initState();
   }
@@ -38,26 +67,26 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
   }
 
   void _clearController() {
-    if (_playerController != null) {
-      _playerController.dispose();
-      _playerController = null;
+    if (_sportsListPlayerController != null) {
+      _sportsListPlayerController.dispose();
+      _sportsListPlayerController = null;
     }
   }
 
   @override
   void didUpdateWidget(covariant SportsListPlayer oldWidget) {
     _clearController();
-    _playerController =
-        PlayerController(initPlaying: true, url: widget.videoUrl);
-    _playerController.addListener(_listener);
+    _sportsListPlayerController = SportsListPlayerController(
+        videoUrl: widget.videoUrl, playing: widget.playing);
+    _sportsListPlayerController.addListener(_listener);
     _playing = widget.playing;
     super.didUpdateWidget(oldWidget);
   }
 
   void _listener() {
-    if (_playing != _playerController.isPlaying) {
+    if (_playing != _sportsListPlayerController.playing) {
       setState(() {
-        _playing = _playerController.isPlaying;
+        _playing = _sportsListPlayerController.playing;
       });
     }
   }
@@ -72,12 +101,12 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
     debugPrint('SportsListPlayer-playing:$_playing');
     SportsHomeVideoVM vm = context.read<SportsHomeVideoVM>();
     if (_playing) {
-      vm.playingPlayerController = _playerController;
+      vm.sportsListPlayerController = _sportsListPlayerController;
     }
     return _playing
         ? Container(
             child: Player(
-              controller: _playerController,
+              controller: _sportsListPlayerController.playerController,
             ),
           )
         : Container(
@@ -95,7 +124,7 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
                     size: 40,
                   ),
                   onPressed: () {
-                    vm.toPlay(_playerController);
+                    vm.toPlay(_sportsListPlayerController);
                     // _playerController.play();
                   },
                 ),

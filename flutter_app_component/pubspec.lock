@@ -417,13 +417,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.6.0"
-  flutter_sliver_tracker:
-    dependency: "direct main"
-    description:
-      name: flutter_sliver_tracker
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "3.0.5"
   flutter_smart_dialog:
     dependency: "direct main"
     description:
@@ -464,13 +457,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_tracker_wdiget:
+  flutter_tracker_widget:
     dependency: "direct main"
     description:
-      name: flutter_tracker_wdiget
+      name: flutter_tracker_widget
       url: "https://pub.flutter-io.cn"
     source: hosted
-    version: "0.0.1"
+    version: "0.0.2"
   flutter_ume:
     dependency: "direct dev"
     description:
@@ -932,7 +925,7 @@ packages:
     source: hosted
     version: "1.1.2"
   scrollable_positioned_list:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: scrollable_positioned_list
       url: "https://pub.flutter-io.cn"

@@ -4,7 +4,8 @@ import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_home_video_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/widget/sports_list_player.dart';
-import 'package:flutter_tracker_wdiget/flutter_tracker_wdiget.dart';
+import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.dart';
+import 'package:flutter_tracker_widget/flutter_tracker_widget.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -43,7 +44,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
         model: SportsHomeVideoVM(),
         builder: (BuildContext context, SportsHomeVideoVM vm) {
           return TrackerScrollWidget(
-            isInViewPortCondition: (
+            hitViewPortCondition: (
               double deltaTop,
               double deltaBottom,
               double viewPortDimension,
@@ -53,7 +54,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
               return deltaTop < (0.5 * viewPortDimension) &&
                   deltaBottom > (0.5 * viewPortDimension);
             },
-            initialInViewIds: const <String>['0'],
+            initHitIds: const <String>['0'],
             child: ListView.builder(
               itemBuilder: (BuildContext context, int index) {
                 return TrackerItemWidget(
@@ -269,9 +270,20 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
         ],
       ),
     ));
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: columnChildren,
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (_) => SportsLiveDetailPage(
+              videoUrl: video.videoUrl,
+            ),
+          ),
+        );
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: columnChildren,
+      ),
     );
   }
 

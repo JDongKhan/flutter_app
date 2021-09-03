@@ -1,19 +1,19 @@
 import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
-import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
+import 'package:flutter_app_component/demo/sports/home/widget/sports_list_player.dart';
 import 'package:jd_core/network/jd_network_utils.dart';
 import 'package:jd_core/view_model/refresh_list_view_model.dart';
 
 /// @author jd
 
 class SportsHomeVideoVM extends RefreshListViewModel<SportsVideo> {
-  PlayerController playingPlayerController;
+  SportsListPlayerController sportsListPlayerController;
 
-  void toPlay(PlayerController playerController) {
-    if (playingPlayerController != null) {
-      playingPlayerController.pause();
+  void toPlay(SportsListPlayerController playerController) {
+    if (sportsListPlayerController != null) {
+      sportsListPlayerController.pause();
     }
-    playingPlayerController = playerController;
-    playingPlayerController.play();
+    sportsListPlayerController = playerController;
+    sportsListPlayerController.play();
   }
 
   @override

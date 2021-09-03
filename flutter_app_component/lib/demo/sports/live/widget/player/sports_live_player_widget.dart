@@ -64,6 +64,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
   void showMenu({bool immediately}) {
     if (_isShowMenuAnimal) return;
     Future.delayed(const Duration(seconds: 0), () {
+      if (!mounted) return;
       _isShowMenuAnimal = true;
       _animationController.forward();
     });
@@ -74,6 +75,9 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
   }
 
   void dissmisMenu() {
+    if (!mounted) {
+      return;
+    }
     _animationController.reverse();
     _isShowMenuAnimal = false;
   }
