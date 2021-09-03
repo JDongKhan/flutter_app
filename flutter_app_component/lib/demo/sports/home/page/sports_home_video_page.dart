@@ -4,7 +4,7 @@ import 'package:flutter_app_component/demo/sports/home/model/sports_video.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_home_video_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/sports_tab_home_vm.dart';
 import 'package:flutter_app_component/demo/sports/home/widget/sports_list_player.dart';
-import 'package:inview_notifier_list/inview_notifier_list.dart';
+import 'package:flutter_tracker_wdiget/flutter_tracker_wdiget.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
 import 'package:lifecycle/lifecycle.dart';
@@ -42,7 +42,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
       child: ProviderWidget<SportsHomeVideoVM>(
         model: SportsHomeVideoVM(),
         builder: (BuildContext context, SportsHomeVideoVM vm) {
-          return InViewNotifierList(
+          return TrackerScrollWidget(
             isInViewPortCondition: (
               double deltaTop,
               double deltaBottom,
@@ -54,19 +54,20 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
                   deltaBottom > (0.5 * viewPortDimension);
             },
             initialInViewIds: const <String>['0'],
-            controller: _scrollController,
-            builder: (BuildContext context, int index) {
-              return InViewNotifierWidget(
-                id: '$index',
-                builder: (BuildContext context, bool isInView, Widget Child) {
-                  index = index % 5;
-                  SportsVideo video = vm.list[index];
-                  print('index:$index - isInView:$isInView');
-                  return _buildItem(vm, video, isInView);
-                },
-              );
-            },
-            itemCount: vm.list.length * 5,
+            child: ListView.builder(
+              itemBuilder: (BuildContext context, int index) {
+                return TrackerItemWidget(
+                  id: '$index',
+                  builder: (BuildContext context, bool isInView, Widget Child) {
+                    index = index % 5;
+                    SportsVideo video = vm.list[index];
+                    print('index:$index - isInView:$isInView');
+                    return _buildItem(vm, video, isInView);
+                  },
+                );
+              },
+              itemCount: vm.list.length * 5,
+            ),
           );
         },
       ),
@@ -280,14 +281,16 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
+        vm.changAppBarBackgroundColor(Colors.black);
+      });
     } else if (event == LifecycleEvent.visible) {
       SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
       vm.changAppBarBackgroundColor(Colors.black);
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {});
     } else if (event == LifecycleEvent.invisible) {
       SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
       vm.changAppBarBackgroundColor(Colors.blue);
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {});
     } else if (event == LifecycleEvent.active) {
     } else if (event == LifecycleEvent.inactive) {
     } else if (event == LifecycleEvent.pop) {}

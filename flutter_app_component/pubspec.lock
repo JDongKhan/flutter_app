@@ -464,6 +464,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_tracker_wdiget:
+    dependency: "direct main"
+    description:
+      name: flutter_tracker_wdiget
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.0.1"
   flutter_ume:
     dependency: "direct dev"
     description:
@@ -595,13 +602,6 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.17.0"
-  inview_notifier_list:
-    dependency: "direct main"
-    description:
-      name: inview_notifier_list
-      url: "https://pub.flutter-io.cn"
-    source: hosted
-    version: "2.0.0"
   jd_core:
     dependency: "direct main"
     description:
@@ -654,12 +654,10 @@ packages:
   lifecycle:
     dependency: "direct main"
     description:
-      path: "."
-      ref: dev
-      resolved-ref: "024ad6283a30c9213282e544350482c507641d67"
-      url: "https://github.com/chenenyu/lifecycle"
-    source: git
-    version: "0.3.0"
+      name: lifecycle
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.1"
   link_scroll_menu:
     dependency: "direct main"
     description:

@@ -77,7 +77,7 @@ dependencies:
   #wechat_assets_picker: ^6.0.1
 
   #滚动播放
-  inview_notifier_list: ^2.0.0
+  flutter_tracker_wdiget: ^0.0.1
   #埋点
   flutter_sliver_tracker: ^3.0.5
 
@@ -157,10 +157,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   badges: ^2.0.1
 
-  lifecycle:
-    git:
-      url: https://github.com/chenenyu/lifecycle
-      ref: dev
+  lifecycle: ^0.3.1
 
   simple_animations: 2.4.2
 #  flutterlifecyclehooks: 1.0.1
