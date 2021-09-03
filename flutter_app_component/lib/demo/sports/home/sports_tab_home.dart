@@ -43,11 +43,11 @@ class _TabHomePageState extends State<TabHomePage>
     },
     {
       'title': '推荐',
-      'page': SportsHomeVideoPage(),
+      'page': SportsHomeTvPage(),
     },
     {
       'title': '视频',
-      'page': SportsHomeTvPage(),
+      'page': SportsHomeVideoPage(),
     },
     {
       'title': '热榜',
