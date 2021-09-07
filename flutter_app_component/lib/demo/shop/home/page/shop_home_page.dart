@@ -75,7 +75,7 @@ class _ShopHomePageState extends State<ShopHomePage>
                         style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                       centerTitle: false,
-                      expandedHeight: 130.0,
+                      expandedHeight: 140.0,
                       brightness: Brightness.light,
                       bottom: PreferredSize(
                         preferredSize: const Size.fromHeight(60),

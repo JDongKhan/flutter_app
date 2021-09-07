@@ -35,6 +35,10 @@
 	<string>APP需要您的同意才能访问相册进行选择照片/视频发布信息，如禁止将无法发布照片/视频信息</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>APP需要您的同意才能访问相册进行选择照片/视频发布信息，如禁止将无法发布照片/视频信息</string>
+	<key>NSBonjourServices</key>
+	<array>
+		<string>_dartobservatory._tcp</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

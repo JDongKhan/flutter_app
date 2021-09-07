@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:jd_core/jd_core.dart';
 
 /// @author jd
+
+enum WechatInputMessageStatus {
+  text,
+  voice,
+}
 
 class WechatInputMessageController extends ChangeNotifier {
   bool _hiddenKeyboard = false;
@@ -26,6 +32,25 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
   final FocusNode _focusNode = FocusNode();
   Animation _animation;
   AnimationController _animationController;
+  final TextEditingController _textEditingController = TextEditingController();
+
+  WechatInputMessageStatus _status = WechatInputMessageStatus.text;
+  final PageController _pageController = PageController();
+  int _currentPageIndex = 0;
+
+  final List<String> _list = [
+    '照片',
+    '拍摄',
+    '视频通话',
+    '位置',
+    '红包',
+    '转账',
+    '语音输入',
+    '收藏',
+    '个人名片',
+    '文件',
+    '卡券',
+  ];
 
   @override
   void initState() {
@@ -84,13 +109,25 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
                     // FocusScope.of(context).requestFocus(FocusNode());
                     _focusNode.unfocus();
                     _animationController.reverse(from: 0);
+                    setState(() {
+                      if (_status == WechatInputMessageStatus.text) {
+                        _status = WechatInputMessageStatus.voice;
+                      } else if (_status == WechatInputMessageStatus.voice) {
+                        _status = WechatInputMessageStatus.text;
+                      }
+                    });
                   },
                 ),
                 const SizedBox(
                   width: 10,
                 ),
                 Expanded(
-                  child: _input(),
+                  child: Container(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    child: _status == WechatInputMessageStatus.voice
+                        ? _voiceWidget()
+                        : _input(),
+                  ),
                 ),
                 const SizedBox(
                   width: 10,
@@ -101,6 +138,11 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
                     // FocusScope.of(context).requestFocus(FocusNode());
                     _focusNode.unfocus();
                     _animationController.forward();
+                    if (_status == WechatInputMessageStatus.voice) {
+                      setState(() {
+                        _status = WechatInputMessageStatus.text;
+                      });
+                    }
                   },
                 ),
                 IconButton(
@@ -109,11 +151,16 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
                     // FocusScope.of(context).requestFocus(FocusNode());
                     _focusNode.unfocus();
                     _animationController.forward();
+                    if (_status == WechatInputMessageStatus.voice) {
+                      setState(() {
+                        _status = WechatInputMessageStatus.text;
+                      });
+                    }
                   },
                 ),
               ],
             ),
-            menu(),
+            _menu(),
           ],
         ),
       ),
@@ -126,7 +173,7 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(4),
         border: Border.all(
-          color: const Color(0x000000),
+          color: const Color(0xffeeeeee),
         ),
       ),
       child: TextField(
@@ -135,12 +182,14 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
         minLines: 1,
         textInputAction: TextInputAction.send,
         focusNode: _focusNode,
+        controller: _textEditingController,
         decoration: const InputDecoration(
           hintText: 'input message',
           filled: true,
           fillColor: Colors.white,
           border: InputBorder.none,
-          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          isCollapsed: true, //相当于高度包裹的意思，必须为true，不然有默认的最小高度
+          contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
           // isDense: true,
         ),
       ),
@@ -171,49 +220,82 @@ class _WechatInputMessageWidgetState extends State<WechatInputMessageWidget>
     );
   }
 
-  Widget menu() {
+  Widget _voiceWidget() {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.grey[100],
+        borderRadius: BorderRadius.circular(5),
+      ),
+      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      child: const Center(
+        child: Text('按住 说话'),
+      ),
+    );
+  }
+
+  Widget _menu() {
+    const int maxMenuCountOfPage = 8;
+    int _pageCount = _list.length ~/ maxMenuCountOfPage;
+    if (_list.length % maxMenuCountOfPage > 0) {
+      _pageCount++;
+    }
+    List<Widget> pageChildren = [];
+    for (int i = 0; i < _pageCount; i++) {
+      int startIndex = i * maxMenuCountOfPage;
+      int endIndex = (i + 1) * maxMenuCountOfPage;
+      if (endIndex > _list.length) {
+        endIndex = _list.length;
+      }
+
+      List<Widget> gridChildren = [];
+      for (int j = startIndex; j < endIndex; j++) {
+        gridChildren.add(JDButton(
+          text: Text(_list[j]),
+          icon: Icon(Icons.camera),
+          middlePadding: 20,
+          action: () {},
+        ));
+      }
+      pageChildren.add(GridView.count(
+        crossAxisCount: 4,
+        children: gridChildren,
+      ));
+    }
     return SizeTransition(
       sizeFactor: _animation as Animation<double>,
       child: Container(
-        height: 310,
-        child: GridView.count(
-          crossAxisCount: 4,
+        height: 260,
+        padding: const EdgeInsets.only(top: 10),
+        child: Column(
           children: [
-            TextButton(
-              child: const Text('Menu 1'),
-              onPressed: () {},
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                children: pageChildren,
+                onPageChanged: (int page) {
+                  setState(() {
+                    _currentPageIndex = page;
+                  });
+                },
+              ),
             ),
-            TextButton(
-              child: const Text('Menu 2'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 3'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 4'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 5'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 6'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 7'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 8'),
-              onPressed: () {},
-            ),
-            TextButton(
-              child: const Text('Menu 9'),
-              onPressed: () {},
+            Container(
+              height: 40,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(pageChildren.length, (int index) {
+                  return Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 5),
+                    width: 10,
+                    height: 10,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: _currentPageIndex == index
+                            ? Colors.blue
+                            : Colors.grey),
+                  );
+                }),
+              ),
             ),
           ],
         ),

@@ -4,6 +4,7 @@ import 'package:lifecycle/lifecycle.dart';
 
 /// @author jd
 
+@Deprecated('use lifecycle instead')
 class TabbarViewLifeCycle extends StatefulWidget {
   const TabbarViewLifeCycle({this.controller, this.child});
   final TabController controller;

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/sports/home/vm/sports_home_video_vm.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter_app_component/demo/sports/home/vm/player_manager.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:jd_core/jd_core.dart';
-import 'package:provider/provider.dart';
+import 'package:lifecycle/lifecycle.dart';
 
 /// @author jd
 
@@ -18,12 +19,14 @@ class SportsListPlayerController extends ChangeNotifier {
 
   void play() {
     playing = true;
+    notifyListeners();
     playerController.play();
   }
 
   void pause() {
     playing = false;
     playerController.pause();
+    notifyListeners();
   }
 
   @override
@@ -48,7 +51,8 @@ class SportsListPlayer extends StatefulWidget {
   _SportsListPlayerState createState() => _SportsListPlayerState();
 }
 
-class _SportsListPlayerState extends State<SportsListPlayer> {
+class _SportsListPlayerState extends State<SportsListPlayer>
+    with LifecycleAware, LifecycleMixin {
   SportsListPlayerController _sportsListPlayerController;
   bool _playing = false;
   @override
@@ -99,9 +103,8 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
   @override
   Widget build(BuildContext context) {
     debugPrint('SportsListPlayer-playing:$_playing');
-    SportsHomeVideoVM vm = context.read<SportsHomeVideoVM>();
     if (_playing) {
-      vm.sportsListPlayerController = _sportsListPlayerController;
+      playerManaer.sportsListPlayerController = _sportsListPlayerController;
     }
     return _playing
         ? Container(
@@ -124,12 +127,25 @@ class _SportsListPlayerState extends State<SportsListPlayer> {
                     size: 40,
                   ),
                   onPressed: () {
-                    vm.toPlay(_sportsListPlayerController);
+                    playerManaer.to(_sportsListPlayerController);
                     // _playerController.play();
                   },
                 ),
               ],
             ),
           );
+  }
+
+  @override
+  void onLifecycleEvent(LifecycleEvent event) {
+    if (event == LifecycleEvent.push) {
+      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
+        playerManaer.to(_sportsListPlayerController);
+      });
+    } else if (event == LifecycleEvent.visible) {
+    } else if (event == LifecycleEvent.active) {
+    } else if (event == LifecycleEvent.inactive) {
+    } else if (event == LifecycleEvent.invisible) {
+    } else if (event == LifecycleEvent.pop) {}
   }
 }

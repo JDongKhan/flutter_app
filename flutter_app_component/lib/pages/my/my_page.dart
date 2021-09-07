@@ -78,6 +78,7 @@ class _MyPageState extends State<MyPage>
     return SliverAppBar(
       expandedHeight: 250,
       centerTitle: true,
+      brightness: Brightness.dark,
       leading: _buildLeading(),
       actions: _buildAction(),
       title: InkWell(

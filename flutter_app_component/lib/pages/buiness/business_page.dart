@@ -1,5 +1,5 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/component/image_loader.dart';
 import 'package:flutter_app_component/models/image_model.dart';
 import 'package:flutter_app_component/service/request.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -71,8 +71,12 @@ class _BusinessPageState extends State<BusinessPage>
         tag: '${widget.source}-$index-${images.url}',
         // child: CachedNetworkImage(imageUrl: images.url),
         child: isNetwork
-            ? Image.network(images.url)
-            : Image.asset(JDAssetBundle.getImgPath(images.url)),
+            ? ImageLoader(
+                imageUrl: images.url,
+              )
+            : Image.asset(
+                JDAssetBundle.getImgPath(images.url),
+              ),
       ),
     );
   }
@@ -102,7 +106,7 @@ class ImagePreViewWidget extends StatelessWidget {
         child: Hero(
           tag: '$source-$index-$url',
           child: isNetwork
-              ? CachedNetworkImage(
+              ? ImageLoader(
                   imageUrl: url,
                   // fit: BoxFit.fill,
                 )

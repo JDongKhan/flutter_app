@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/home/vm/custom_bouncing_scroll_physics.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 /// @author jd
 class ShopHomeProductListPage extends StatefulWidget {
@@ -63,17 +63,22 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
     return Container(
       color: Colors.grey[100],
       child: _refreshWidget(
-        child: StaggeredGridView.countBuilder(
+        child: WaterfallFlow.builder(
+          itemCount: _recommendList.length * 2,
+          gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5.0,
+            mainAxisSpacing: 5.0,
+            lastChildLayoutTypeBuilder: (int index) =>
+                index == _recommendList.length * 2
+                    ? LastChildLayoutType.foot
+                    : LastChildLayoutType.none,
+          ),
           physics: const CustomBouncingScrollPhysics(),
           padding: const EdgeInsets.all(10.0),
-          crossAxisCount: 2,
-          mainAxisSpacing: 10.0,
-          itemCount: _recommendList.length * 2,
-          crossAxisSpacing: 10.0,
           itemBuilder: (BuildContext context, int index) {
             return _buildProductItem(index);
           },
-          staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
         ),
       ),
     );
