@@ -1,6 +1,6 @@
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/refresh_list_view_model.dart';
-import 'package:jd_home/models/home_model.dart';
+import 'package:jd_home/pages/home/model/home_model.dart';
 
 /// @author jd
 

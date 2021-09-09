@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/privacy_widget.dart';
-import 'package:flutter_app_component/component/web/web_page.dart';
 import 'package:flutter_app_component/pages/scaffold/scaffold_page.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/utils/jd_share_utils.dart';
+import 'package:jd_core/widget/webview/web_page.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
 /// @author jd

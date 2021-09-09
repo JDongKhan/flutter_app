@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/circle_check_box.dart';
-import 'package:flutter_app_component/component/number_controller/step_number_widget.dart';
 import 'package:flutter_app_component/demo/shop/car/car_1/vm/shop_car_view_model.dart';
 import 'package:flutter_app_component/demo/shop/model/carI_item.dart';
+import 'package:jd_core/widget/number_controller/jd_step_number_widget.dart';
 
 /// @author jd
 class ShopCarItem extends StatefulWidget {
@@ -75,7 +75,7 @@ class _ShopCarItemState extends State<ShopCarItem> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    StepNumberWidget(
+                    JDStepNumberWidget(
                       min: 0,
                       max: 10,
                       value: item.count,

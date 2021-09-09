@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_home/demo/home_demo.dart';
-import 'home_main_page.dart';
 import 'package:provider/provider.dart';
 import 'package:share/share.dart';
 
-import '../viewmodel/home_view_model.dart';
+import 'home_main_page.dart';
+import '../vm/home_view_model.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -70,7 +70,7 @@ class _HomePageState extends State<HomePage>
           title: TabBar(
               //生成Tab菜单
               controller: _tabController,
-              indicatorSize:TabBarIndicatorSize.label,
+              indicatorSize: TabBarIndicatorSize.label,
               tabs: tabs.map((e) => Tab(text: e['title'])).toList()),
 
           actions: <Widget>[

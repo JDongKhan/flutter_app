@@ -12,15 +12,15 @@ import 'package:jd_core/widget/footerrefresh/jd_customfooter.dart';
 import 'package:jd_core/widget/loading/jd_loading.dart';
 import 'package:jd_core/widget/searchbar/jd_searchbar.dart';
 import 'package:jd_core/widget/sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
-import 'package:jd_home/models/home_model.dart';
 import 'package:jd_home/pages/detail/home_Info_detail_page.dart';
 import 'package:jd_home/pages/detail/home_main_detail_page.dart';
-import 'home_searchbar_delegate.dart';
+import 'package:jd_home/pages/home/model/home_model.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
-import '../viewmodel/home_list_view_model.dart';
-import '../viewmodel/home_view_model.dart';
+import '../vm/home_list_view_model.dart';
+import '../vm/home_view_model.dart';
+import '../widget/home_searchbar_delegate.dart';
 
 /// jd
 

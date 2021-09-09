@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app_component/component/star_rating_widget.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:jd_core/jd_core.dart';
+import 'package:jd_core/widget/startrating/jd_star_rating_widget.dart';
 
 import 'shop_detail_navigator_widget.dart';
 
@@ -383,7 +383,7 @@ class _ShopDetailInfoWidgetState extends State<ShopDetailInfoWidget> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const [
                   Text('1*****0'),
-                  StarRatingWidget(
+                  JDStarRatingWidget(
                     value: 4.5,
                   ),
                 ],

@@ -9,10 +9,10 @@ import 'package:get/get.dart';
 import 'package:jd_core/style/jd_colors.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
+import 'package:jd_core/widget/orientation/orientation_observer.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:provider/provider.dart';
 
-import 'component/orientation/orientation_observer.dart';
 import 'routes/routes.dart';
 
 /*

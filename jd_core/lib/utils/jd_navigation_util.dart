@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:jd_core/widget/webview/web_scaffold.dart';
+import 'package:jd_core/widget/webview/web_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'jd_object_utils.dart';
@@ -72,12 +72,14 @@ class JDNavigationUtil {
     if (url.endsWith(".apk")) {
       launchInBrowser(url, title: title ?? titleId);
     } else {
-      navigatorKey.currentState.push(CupertinoPageRoute<void>(
-          builder: (BuildContext ctx) => WebScaffold(
-                title: title,
-                titleId: titleId,
-                url: url,
-              )));
+      navigatorKey.currentState.push(
+        CupertinoPageRoute<void>(
+          builder: (BuildContext ctx) => WebPage(
+            title: title,
+            url: url,
+          ),
+        ),
+      );
     }
   }
 

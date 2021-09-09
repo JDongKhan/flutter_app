@@ -5,7 +5,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'likebtn/like_button.dart';
 
-// @deprecated('will be delete')
+@Deprecated('will be delete')
 class WebScaffold extends StatefulWidget {
   const WebScaffold({
     Key key,

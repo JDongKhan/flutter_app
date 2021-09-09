@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 /// @author jd
 
 ///五星 评价
-class StarRatingWidget extends StatelessWidget {
-  const StarRatingWidget({
+class JDStarRatingWidget extends StatelessWidget {
+  const JDStarRatingWidget({
     Key key,
     this.value = 0.0,
     this.maxValue = 5,

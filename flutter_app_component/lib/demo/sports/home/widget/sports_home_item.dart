@@ -2,10 +2,10 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/sports/home/model/sports_content.dart';
 import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.dart';
-import 'package:flutter_app_component/utils/relative_date_format_utils.dart';
 import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
+import 'package:jd_core/utils/jd_relative_date_format_utils.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'sports_home_item_4_footer.dart';
@@ -168,7 +168,7 @@ class _SportsHomeItem2State extends State<SportsHomeItem2> {
 
     // ignore: null_aware_in_condition
     if (widget.content.time?.isNotEmpty) {
-      tips += RelativeDateFormatUtils.formatFromString(widget.content.time);
+      tips += JDRelativeDateFormatUtils.formatFromString(widget.content.time);
     }
 
     return Container(
@@ -253,7 +253,8 @@ class _SportsHomeItem3State extends State<SportsHomeItem3> {
                   ),
                 ),
                 Text(
-                  RelativeDateFormatUtils.formatFromString(widget.content.time),
+                  JDRelativeDateFormatUtils.formatFromString(
+                      widget.content.time),
                   style: const TextStyle(
                     fontSize: 12,
                     color: Colors.grey,

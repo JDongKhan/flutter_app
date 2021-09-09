@@ -43,7 +43,7 @@ import 'package:flutter_app_component/demo/thirdpary/webview/webview_page.dart';
 import 'package:flutter_app_component/global/notfind.dart';
 import 'package:flutter_app_component/pages/login/login_page.dart';
 import 'package:flutter_app_component/pages/scaffold/scaffold_page.dart';
-import 'package:jd_home/pages/home/home_page.dart';
+import 'package:jd_home/pages/home/page/home_page.dart';
 
 final Map<String, WidgetBuilder> _routes = <String, WidgetBuilder>{
   '/': (BuildContext context) => ScaffoldPage(),

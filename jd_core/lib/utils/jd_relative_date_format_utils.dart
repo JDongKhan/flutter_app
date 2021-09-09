@@ -1,6 +1,6 @@
 // ignore: avoid_classes_with_only_static_members
 
-class RelativeDateFormatUtils {
+class JDRelativeDateFormatUtils {
   static const num ONE_MINUTE = 60000;
   static const num ONE_HOUR = 3600000;
   static const num ONE_DAY = 86400000;

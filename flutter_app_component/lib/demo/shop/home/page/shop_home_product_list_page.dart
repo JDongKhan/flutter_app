@@ -66,6 +66,12 @@ class _ShopHomeProductListPageState extends State<ShopHomeProductListPage>
         child: WaterfallFlow.builder(
           itemCount: _recommendList.length * 2,
           gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+            collectGarbage: (List<int> garbages) {
+              print('garbages:$garbages');
+            },
+            viewportBuilder: (int firstIndex, int lastIndex) {
+              print('viewport:[$firstIndex, $lastIndex]');
+            },
             crossAxisCount: 2,
             crossAxisSpacing: 5.0,
             mainAxisSpacing: 5.0,

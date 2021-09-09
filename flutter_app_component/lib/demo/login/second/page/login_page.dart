@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/component/web/web_page.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/view_model/widget/provider_widget.dart';
+import 'package:jd_core/widget/webview/web_page.dart';
 
 import '../vm/login_vm.dart';
 import '../widget/logo_widget.dart';

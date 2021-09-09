@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_component/component/orientation/orientation_mixin.dart';
-import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
 import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
+import 'package:jd_core/widget/orientation/orientation_mixin.dart';
+import 'package:jd_core/widget/orientation/orientation_observer.dart';
 
 import 'vm/sports_live_controller.dart';
 import 'widget/chat/sports_live_chat_widget.dart';

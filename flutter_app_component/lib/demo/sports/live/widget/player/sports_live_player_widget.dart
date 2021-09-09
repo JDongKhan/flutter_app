@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app_component/component/orientation/orientation_observer.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:get/get.dart';
+import 'package:jd_core/widget/orientation/orientation_observer.dart';
 
 import '../../vm/sports_live_controller.dart';
 import 'sports_live_player_bottom_widget.dart';

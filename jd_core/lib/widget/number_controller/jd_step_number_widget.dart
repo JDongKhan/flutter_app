@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 
 /// @author jd
 /// + - 输入编辑框
-class StepNumberWidget extends StatefulWidget {
-  const StepNumberWidget({
+class JDStepNumberWidget extends StatefulWidget {
+  const JDStepNumberWidget({
     Key key,
     this.height = 30,
     this.width = 40,
@@ -24,10 +24,10 @@ class StepNumberWidget extends StatefulWidget {
   final ValueChanged onChanged;
 
   @override
-  _StepNumberWidgetState createState() => _StepNumberWidgetState();
+  _JDStepNumberWidgetState createState() => _JDStepNumberWidgetState();
 }
 
-class _StepNumberWidgetState extends State<StepNumberWidget> {
+class _JDStepNumberWidgetState extends State<JDStepNumberWidget> {
   final TextEditingController _textEditingController = TextEditingController();
   int value;
   @override
