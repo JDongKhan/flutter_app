@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/image_loader.dart';
 import 'package:flutter_app_component/models/image_model.dart';
 import 'package:flutter_app_component/service/request.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:jd_core/style/jd_push_animation.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 import 'package:jd_core/widget//async/jd_futurebuilder.dart';
+import 'package:waterfall_flow/waterfall_flow.dart';
 
 /// @author jd
 
@@ -33,18 +33,19 @@ class _BusinessPageState extends State<BusinessPage>
       },
       complete: (BuildContext context, dynamic obj) {
         final List<JDImage> list = obj as List<JDImage>;
-        return StaggeredGridView.countBuilder(
+        return WaterfallFlow.builder(
           padding: const EdgeInsets.all(1.0),
-          crossAxisCount:
-              MediaQuery.of(context).orientation == Orientation.portrait
-                  ? 2
-                  : 4,
-          mainAxisSpacing: 1.0,
           itemCount: list.length,
-          crossAxisSpacing: 1.0,
+          gridDelegate: SliverWaterfallFlowDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 5.0,
+            mainAxisSpacing: 5.0,
+            lastChildLayoutTypeBuilder: (int index) => index == list.length
+                ? LastChildLayoutType.foot
+                : LastChildLayoutType.none,
+          ),
           itemBuilder: (BuildContext context, int index) =>
               _buildImageItem(list.elementAt(index), index),
-          staggeredTileBuilder: (int index) => const StaggeredTile.fit(1),
         );
       },
     );
