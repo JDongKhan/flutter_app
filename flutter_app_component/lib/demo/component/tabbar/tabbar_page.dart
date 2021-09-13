@@ -25,14 +25,17 @@ class _JDTabbarPageState extends State<TabbarPage> {
       child: Scaffold(
         appBar: AppBar(
           primary: true, //为false的时候会影响leading，actions、titile组件，导致向上偏移
-          textTheme: TextTheme(//设置AppBar上面各种字体主题色
+          textTheme: const TextTheme(//设置AppBar上面各种字体主题色
 //            title: TextStyle(color: Colors.red),
               ),
-          actionsIconTheme: IconThemeData(
-              color: Colors.blue,
-              opacity: 0.6), //设置导航右边图标的主题色，此时iconTheme对于右边图标颜色会失效
-          iconTheme: IconThemeData(
-              color: Colors.black, opacity: 0.6), //设置AppBar上面Icon的主题颜色
+          actionsIconTheme: const IconThemeData(
+            color: Colors.blue,
+            opacity: 0.6,
+          ), //设置导航右边图标的主题色，此时iconTheme对于右边图标颜色会失效
+          iconTheme: const IconThemeData(
+            color: Colors.black,
+            opacity: 0.6,
+          ), //设置AppBar上面Icon的主题颜色
           brightness: Brightness.dark, //设置导航条上面的状态栏显示字体颜色
           backgroundColor: Colors.amber, //设置背景颜色
 //          shape: CircleBorder(side: BorderSide(color: Colors.red, width: 5, style: BorderStyle.solid)),//设置appbar形状
@@ -45,11 +48,12 @@ class _JDTabbarPageState extends State<TabbarPage> {
             },
             unselectedLabelColor: Colors.black, //设置未选中时的字体颜色，tabs里面的字体样式优先级最高
             unselectedLabelStyle:
-                TextStyle(fontSize: 20), //设置未选中时的字体样式，tabs里面的字体样式优先级最高
+                const TextStyle(fontSize: 14), //设置未选中时的字体样式，tabs里面的字体样式优先级最高
             labelColor: Colors.red, //设置选中时的字体颜色，tabs里面的字体样式优先级最高
-            labelStyle: TextStyle(
-                fontSize: 25.0,
-                color: Colors.blue), //设置选中时的字体样式，tabs里面的字体样式优先级最高
+            labelStyle: const TextStyle(
+              fontSize: 18.0,
+              color: Colors.blue,
+            ), //设置选中时的字体样式，tabs里面的字体样式优先级最高
             isScrollable: true, //允许左右滚动
             indicatorColor: Colors.red, //选中下划线的颜色
             indicatorSize: TabBarIndicatorSize
@@ -58,7 +62,7 @@ class _JDTabbarPageState extends State<TabbarPage> {
 //                indicator: BoxDecoration(),//用于设定选中状态下的展示样式
             tabs: list
                 .map((e) => Text(
-                      e["title"],
+                      e['title'],
                       // style: TextStyle(color: Colors.green, fontSize: 16.0),
                     ))
                 .toList(),
