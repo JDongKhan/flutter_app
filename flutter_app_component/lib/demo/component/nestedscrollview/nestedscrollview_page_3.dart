@@ -1,6 +1,6 @@
-// import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart'
-//     as extended;
-import 'package:flutter/material.dart';
+import 'package:extended_nested_scroll_view/extended_nested_scroll_view.dart';
+import 'package:flutter/material.dart' hide NestedScrollView;
+import 'package:jd_core/utils/jd_asset_bundle.dart';
 
 class LoadMoreDemo extends StatefulWidget {
   @override
@@ -9,9 +9,17 @@ class LoadMoreDemo extends StatefulWidget {
 
 class _LoadMoreDemoState extends State<LoadMoreDemo>
     with TickerProviderStateMixin {
+  final List<Map<String, String>> _tabs = [
+    {
+      'title': '第一栏',
+      'key': 'Tab0',
+    },
+    {
+      'title': '第二栏',
+      'key': 'Tab1',
+    },
+  ];
   TabController primaryTC;
-  final GlobalKey<NestedScrollViewState> _key =
-      GlobalKey<NestedScrollViewState>();
   @override
   void initState() {
     primaryTC = TabController(length: 2, vsync: this);
@@ -27,79 +35,81 @@ class _LoadMoreDemoState extends State<LoadMoreDemo>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text('第三方未适配flutter 2.0，暂时把该组件移除了'),
+      body: _buildScaffoldBody(),
+    );
+  }
+
+  Widget _buildScaffoldBody() {
+    final double statusBarHeight = MediaQuery.of(context).padding.top;
+    final double pinnedHeaderHeight =
+        //statusBar height
+        statusBarHeight +
+            //pinned SliverAppBar height in header
+            kToolbarHeight;
+    return NestedScrollView(
+      headerSliverBuilder: (BuildContext c, bool f) {
+        return <Widget>[
+          SliverAppBar(
+            pinned: true,
+            expandedHeight: 200.0,
+            title: const Text('NestedScrollView Page'),
+            flexibleSpace: FlexibleSpaceBar(
+              //centerTitle: true,
+              collapseMode: CollapseMode.pin,
+              background: Image.asset(
+                JDAssetBundle.getImgPath('bg_personal_real_name'),
+                fit: BoxFit.fill,
+              ),
+            ),
+          ),
+        ];
+      },
+      //1.[pinned sliver header issue](https://github.com/flutter/flutter/issues/22393)
+      pinnedHeaderSliverHeightBuilder: () {
+        return pinnedHeaderHeight;
+      },
+      //2.[inner scrollables in tabview sync issue](https://github.com/flutter/flutter/issues/21868)
+      innerScrollPositionKeyBuilder: () {
+        String index = 'Tab';
+
+        index += primaryTC.index.toString();
+
+        return Key(index);
+      },
+      body: Column(
+        children: <Widget>[
+          TabBar(
+            controller: primaryTC,
+            labelColor: Colors.blue,
+            indicatorColor: Colors.blue,
+            indicatorSize: TabBarIndicatorSize.label,
+            indicatorWeight: 2.0,
+            isScrollable: false,
+            unselectedLabelColor: Colors.grey,
+            tabs: _tabs
+                .map(
+                  (e) => Tab(
+                    text: e['title'],
+                  ),
+                )
+                .toList(),
+          ),
+          Expanded(
+            child: TabBarView(
+              controller: primaryTC,
+              children: _tabs
+                  .map(
+                    (e) => TabViewItem(
+                      Key(e['key']),
+                    ),
+                  )
+                  .toList(),
+            ),
+          )
+        ],
       ),
     );
-    // return Scaffold(
-    //   body: _buildScaffoldBody(),
-    // );
   }
-  //
-  // Widget _buildScaffoldBody() {
-  //   final double statusBarHeight = MediaQuery.of(context).padding.top;
-  //   final double pinnedHeaderHeight =
-  //       //statusBar height
-  //       statusBarHeight +
-  //           //pinned SliverAppBar height in header
-  //           kToolbarHeight;
-  //   return extended.NestedScrollView(
-  //     key: _key,
-  //     headerSliverBuilder: (BuildContext c, bool f) {
-  //       return <Widget>[
-  //         SliverAppBar(
-  //             pinned: true,
-  //             expandedHeight: 200.0,
-  //             title: const Text('load more list'),
-  //             flexibleSpace: FlexibleSpaceBar(
-  //                 //centerTitle: true,
-  //                 collapseMode: CollapseMode.pin,
-  //                 background: Image.asset(
-  //                   JDAssetBundle.getImgPath('bg_personal_real_name'),
-  //                   fit: BoxFit.fill,
-  //                 )))
-  //       ];
-  //     },
-  //     //1.[pinned sliver header issue](https://github.com/flutter/flutter/issues/22393)
-  //     pinnedHeaderSliverHeightBuilder: () {
-  //       return pinnedHeaderHeight;
-  //     },
-  //     //2.[inner scrollables in tabview sync issue](https://github.com/flutter/flutter/issues/21868)
-  //     innerScrollPositionKeyBuilder: () {
-  //       String index = 'Tab';
-  //
-  //       index += primaryTC.index.toString();
-  //
-  //       return Key(index);
-  //     },
-  //     body: Column(
-  //       children: <Widget>[
-  //         TabBar(
-  //           controller: primaryTC,
-  //           labelColor: Colors.blue,
-  //           indicatorColor: Colors.blue,
-  //           indicatorSize: TabBarIndicatorSize.label,
-  //           indicatorWeight: 2.0,
-  //           isScrollable: false,
-  //           unselectedLabelColor: Colors.grey,
-  //           tabs: const <Tab>[
-  //             Tab(text: 'Tab0'),
-  //             Tab(text: 'Tab1'),
-  //           ],
-  //         ),
-  //         Expanded(
-  //           child: TabBarView(
-  //             controller: primaryTC,
-  //             children: const <Widget>[
-  //               TabViewItem(Key('Tab0')),
-  //               TabViewItem(Key('Tab1')),
-  //             ],
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
 }
 
 class TabViewItem extends StatefulWidget {
@@ -128,19 +138,19 @@ class _TabViewItemState extends State<TabViewItem>
       context: context,
       removeTop: true,
       child: ListView.separated(
-          itemBuilder: (context, index) {
-            return ListTile(
-              title: Text('List-$index'),
-            );
-          },
-          separatorBuilder: (context, index) => const Divider(
-                height: 1,
-              ),
-          itemCount: 100),
+        itemBuilder: (context, index) {
+          return ListTile(
+            title: Text('List-$index'),
+          );
+        },
+        separatorBuilder: (context, index) => const Divider(
+          height: 1,
+        ),
+        itemCount: 100,
+      ),
     );
 
-    // return extended.NestedScrollViewInnerScrollPositionKeyWidget(
-    //     widget.tabKey, child);
+    return NestedScrollViewInnerScrollPositionKeyWidget(widget.tabKey, child);
   }
 
   @override

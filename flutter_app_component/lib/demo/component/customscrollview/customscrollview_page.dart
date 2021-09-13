@@ -3,6 +3,7 @@ import 'package:flutter_app_component/demo/component/customscrollview/section_cu
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
 import 'custom_refresh_page.dart';
+import 'custom_scrollview_study.dart';
 import 'customscrollview_page_2.dart';
 import 'thirdparty_tableview_demo_page.dart';
 
@@ -39,6 +40,10 @@ class _CustomScrollViewPageState extends State<CustomScrollViewPage> {
     {
       'title': 'CustomRefreshWidget',
       'page': CustomRefreshPage(),
+    },
+    {
+      'title': 'CustomScrollViewStudy',
+      'page': CustomScrollViewStudy(),
     },
   ];
 

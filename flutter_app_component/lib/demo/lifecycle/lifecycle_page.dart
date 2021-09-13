@@ -12,7 +12,7 @@ class LifeCyclePage extends StatefulWidget {
 }
 
 class _LifeCyclePageState extends State<LifeCyclePage> {
-  LifeCyclController _controller = LifeCyclController();
+  final LifeCyclController _controller = LifeCyclController();
   @override
   Widget build(BuildContext context) {
     debugPrint('Page A build');

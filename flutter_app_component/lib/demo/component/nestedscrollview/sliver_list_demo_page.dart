@@ -99,7 +99,7 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("SliverListDemoPage"),
+        title: const Text('SliverListDemoPage'),
       ),
       body: Container(
         child: NestedScrollView(

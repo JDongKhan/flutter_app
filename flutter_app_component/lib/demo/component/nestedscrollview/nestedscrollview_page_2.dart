@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/component/nestedscrollview/customrefresh_page.dart';
 
-/**
+/*
  *
  * @author jd
  *
