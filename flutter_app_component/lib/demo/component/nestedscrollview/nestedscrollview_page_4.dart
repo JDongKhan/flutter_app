@@ -10,7 +10,7 @@ class NestedScrollView4Demo extends StatefulWidget {
 }
 
 class _NestedScrollView4DemoState extends State<NestedScrollView4Demo> {
-  List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
+  final List<Map<String, dynamic>> _tabs = <Map<String, dynamic>>[
     {
       'title': '热点',
     },
@@ -23,7 +23,7 @@ class _NestedScrollView4DemoState extends State<NestedScrollView4Demo> {
     {'title': '社会'}
   ];
 
-  List _data_menus = [
+  final List _data_menus = [
     {'title': '菜单一', 'img': ''},
     {'title': '菜单二', 'img': ''},
     {'title': '菜单三', 'img': ''},

@@ -8,14 +8,14 @@ class NestedScrollView5Demo extends StatefulWidget {
 }
 
 class _NestedScrollView5DemoState extends State<NestedScrollView5Demo> {
-  List<String> _tabs = <String>[
+  final List<String> _tabs = <String>[
     '热点',
     '地方',
     '直播',
     '社会',
   ];
 
-  List _data_menus = [
+  final List _data_menus = [
     {'title': '菜单一', 'img': ''},
     {'title': '菜单二', 'img': ''},
     {'title': '菜单三', 'img': ''},

@@ -8,7 +8,7 @@ import 'package:jd_core/jd_core.dart';
  */
 
 class NestedScrollViewPage1 extends StatefulWidget {
-  final String title = "nestedscrollview_1";
+  final String title = 'nestedscrollview_1';
 
   @override
   State createState() => _NestedScrollViewPageState1();

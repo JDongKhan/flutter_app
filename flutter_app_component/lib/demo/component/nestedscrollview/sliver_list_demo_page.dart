@@ -139,14 +139,15 @@ class _SliverListDemoPageState extends State<SliverListDemoPage>
 
 ///动态头部处理
 class SliverHeaderDelegate extends SliverPersistentHeaderDelegate {
-  SliverHeaderDelegate(
-      {@required this.minHeight,
-      @required this.maxHeight,
-      @required this.snapConfig,
-      @required this.vSync,
-      this.child,
-      this.builder,
-      this.changeSize = false});
+  SliverHeaderDelegate({
+    @required this.minHeight,
+    @required this.maxHeight,
+    @required this.snapConfig,
+    @required this.vSync,
+    this.child,
+    this.builder,
+    this.changeSize = false,
+  });
 
   final double minHeight;
   final double maxHeight;

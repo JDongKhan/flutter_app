@@ -9,7 +9,7 @@ import 'package:flutter_app_component/demo/component/nestedscrollview/customrefr
  */
 
 class NestedScrollViewPage2 extends StatefulWidget {
-  final String title = "nestedscrollview_2";
+  final String title = 'nestedscrollview_2';
 
   @override
   State createState() => _NestedScrollViewPage2State();
