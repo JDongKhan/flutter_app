@@ -77,12 +77,10 @@ class _DiscoverPageState extends State<DiscoverPage>
       appBar: myAppBar(
         title: const Text(
           '发现',
-          style: TextStyle(color: Colors.black),
         ),
         leading: homeButtonIcon(context, color: Colors.black),
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         elevation: 0,
-        centerTitle: true,
         actions: <Widget>[
           ///分享按钮
           shareButtonIcon(context, color: Colors.black),

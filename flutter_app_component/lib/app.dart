@@ -63,10 +63,10 @@ class MyAppState extends State<MyApp> {
           GlobalWidgetsLocalizations.delegate // 指定默认的文本排列方向, 由左到右或由右到左
         ],
         localeListResolutionCallback: (locales, supportedLocales) {
-          return Locale('zh');
+          return const Locale('zh');
         },
         localeResolutionCallback: (locales, supportedLocales) {
-          return Locale('zh');
+          return const Locale('zh');
         },
         supportedLocales: S.delegate.supportedLocales,
 //      debugShowCheckedModeBanner: false,
@@ -79,8 +79,19 @@ class MyAppState extends State<MyApp> {
           accentColor: theme.navigationBackgroundColor,
           //选项卡中选定的选项卡指示器的颜色
           indicatorColor: JDColors.text_normal,
-
           primarySwatch: Colors.blue,
+          appBarTheme: const AppBarTheme(
+            elevation: 0,
+            brightness: Brightness.light,
+            centerTitle: true,
+            textTheme: TextTheme(
+              headline6: TextStyle(
+                color: Colors.black,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
         ),
         home: SplashPage(),
 //      routes: routes,

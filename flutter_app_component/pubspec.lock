@@ -288,6 +288,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.2.0"
+  extended_list:
+    dependency: transitive
+    description:
+      name: extended_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "3.0.0"
   extended_list_library:
     dependency: transitive
     description:
@@ -302,6 +309,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "3.0.1"
+  extended_sliver:
+    dependency: transitive
+    description:
+      name: extended_sliver
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
+  extended_tabs:
+    dependency: transitive
+    description:
+      name: extended_tabs
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.3.0"
   fading_edge_scrollview:
     dependency: transitive
     description:
@@ -344,6 +365,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.3.7"
+  flex_grid:
+    dependency: "direct main"
+    description:
+      name: flex_grid
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "0.3.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -658,6 +686,20 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "0.0.5"
+  loading_more_list:
+    dependency: transitive
+    description:
+      name: loading_more_list
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.1.0"
+  loading_more_list_library:
+    dependency: transitive
+    description:
+      name: loading_more_list_library
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "2.0.1"
   localstorage:
     dependency: transitive
     description:
