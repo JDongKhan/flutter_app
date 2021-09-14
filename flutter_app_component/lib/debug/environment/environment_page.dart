@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/service/environment.dart';
-import 'package:flutter_ume/flutter_ume.dart';
-import 'package:flutter_ume/util/floating_widget.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:jd_core/utils/jd_enum_utils.dart';
 
 /// @author jd
 
-class EnvironmentPage extends StatefulWidget implements Pluggable {
+class EnvironmentPage extends StatefulWidget {
   @override
   _EnvironmentPageState createState() => _EnvironmentPageState();
-
-  @override
-  Widget buildWidget(BuildContext context) =>
-      FloatingWidget(contentWidget: this);
 
   @override
   String get displayName => 'Environment';

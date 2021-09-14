@@ -1,5 +1,6 @@
 import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app_component/demo/sports/article/page/sports_article_detail_page.dart';
 import 'package:flutter_app_component/demo/sports/home/model/sports_content.dart';
 import 'package:flutter_app_component/demo/sports/live/sports_live_detail_page.dart';
 import 'package:get/get.dart';
@@ -17,38 +18,43 @@ class SportsHomeItem extends StatelessWidget {
   final SportsContent content;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            content.title,
-            style: const TextStyle(fontSize: 16),
-          ),
-          Row(
-            children: [
-              const Text(
-                '置顶',
-                style: TextStyle(color: Colors.red, fontSize: 12),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                content.source,
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Text(
-                '${content.commentNum} 评论',
-                style: const TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-            ],
-          ),
-        ],
+    return GestureDetector(
+      onTap: () {
+        Get.to(() => SportsArticleDetailPage());
+      },
+      child: Container(
+        margin: const EdgeInsets.only(left: 10, right: 10, top: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              content.title,
+              style: const TextStyle(fontSize: 16),
+            ),
+            Row(
+              children: [
+                const Text(
+                  '置顶',
+                  style: TextStyle(color: Colors.red, fontSize: 12),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  content.source,
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                const SizedBox(
+                  width: 10,
+                ),
+                Text(
+                  '${content.commentNum} 评论',
+                  style: const TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

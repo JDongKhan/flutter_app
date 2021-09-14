@@ -6,19 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_app_component/service/environment.dart';
 import 'package:flutter_bugly/flutter_bugly.dart';
-import 'package:flutter_ume/flutter_ume.dart';
-import 'package:flutter_ume_kit_console/flutter_ume_kit_console.dart';
-import 'package:flutter_ume_kit_device/flutter_ume_kit_device.dart';
-import 'package:flutter_ume_kit_perf/flutter_ume_kit_perf.dart';
-import 'package:flutter_ume_kit_show_code/flutter_ume_kit_show_code.dart';
-import 'package:flutter_ume_kit_ui/flutter_ume_kit_ui.dart';
 import 'package:jd_core/style/jd_theme.dart';
 import 'package:jd_core/utils/jd_appinfo.dart';
 import 'package:provider/provider.dart';
 
 import 'app.dart';
-import 'debug/environment/environment_page.dart';
-import 'debug/ume_logger/logger_plugin.dart';
 import 'demo/login/second/common/user_center_view_model.dart';
 import 'global/appuserinfo.dart';
 import 'pages/error/error_page.dart';
@@ -108,21 +100,8 @@ void _initProject() async {
   //初始化
   JDAppInfo.init(() {
     if (kDebugMode) {
-      PluginManager.instance
-        ..register(WidgetInfoInspector())
-        ..register(WidgetDetailInspector())
-        ..register(ColorSucker())
-        ..register(AlignRuler())
-        ..register(Performance())
-        ..register(ShowCode())
-        ..register(MemoryInfoPage())
-        ..register(CpuInfoPage())
-        ..register(DeviceInfoPanel())
-        ..register(Console())
-        ..register(LoggerPlugin())
-        ..register(EnvironmentPage());
       runApp(
-        injectUMEWidget(child: _mainApp(), enable: false),
+        _mainApp(),
       );
     } else {
       runApp(
