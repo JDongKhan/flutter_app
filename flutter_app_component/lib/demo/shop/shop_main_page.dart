@@ -61,8 +61,24 @@ class _ShopMainPageState extends State<ShopMainPage>
     });
   }
 
+  void toCar(BuildContext context) async {
+    await Navigator.of(context).popUntil((route) => route.isFirst);
+    setState(() {
+      switchTabbarIndex(2);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    return Navigator(
+      onPopPage: (route, result) => route.didPop(result),
+      pages: [
+        MaterialPage(child: _firstPage()),
+      ],
+    );
+  }
+
+  Widget _firstPage() {
     return Scaffold(
       body: TabBarView(
         controller: _tabController,
