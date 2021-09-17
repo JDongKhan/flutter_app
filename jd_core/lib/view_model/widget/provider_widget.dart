@@ -13,6 +13,7 @@ class ProviderWidget<T extends ViewModel> extends StatefulWidget {
     @required this.builder,
     @required this.model,
     this.listener = true,
+    this.auto = true,
     this.onModelReady,
     this.errorTextStyle,
   }) : super(key: key);
@@ -24,6 +25,9 @@ class ProviderWidget<T extends ViewModel> extends StatefulWidget {
 
   //是否监听
   final bool listener;
+
+  //自动处理状态
+  final bool auto;
 
   ///model创建好后会调用此方法，根据需要传入
   final void Function(T) onModelReady;
@@ -59,6 +63,13 @@ class _ProviderWidgetState<T extends ViewModel>
             model = widget.model;
           }
           Widget child;
+          if (!widget.auto) {
+            child = widget.builder(
+              context,
+              model,
+            );
+            return child;
+          }
           if (model.idle) {
             child = Container();
           } else if (model.busy) {

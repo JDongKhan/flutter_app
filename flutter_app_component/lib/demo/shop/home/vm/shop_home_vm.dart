@@ -1,40 +1,15 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
+import 'package:flutter_app_component/service/environment.dart';
+import 'package:get/get.dart';
+import 'package:jd_core/network/jd_network_utils.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
-import 'package:jd_core/view_model/single_view_model.dart';
-import 'package:jd_core/widget/scroll/jd_primary_scroll.dart';
 
 /// @author jd
 
-class ShopHomeVM extends SingleViewModel {
+class ShopHomeVM extends GetxController {
   String searchText;
 
-  final List<Map<String, dynamic>> tabs = <Map<String, dynamic>>[
-    {
-      'title': '推荐',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '投影仪',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '家用电器',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '服装',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '冰箱',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-    {
-      'title': '其他',
-      'key': GlobalKey<PrimaryScrollContainerState>(),
-    },
-  ];
+  var tabs = <Map<String, dynamic>>[].obs;
 
   final List<ShopInfo> recommendList = [
     ShopInfo(
@@ -64,32 +39,22 @@ class ShopHomeVM extends SingleViewModel {
     ),
   ];
 
-  void onPageChange(int currentIndex) {
-    for (int i = 0; i < tabs.length; i++) {
-      GlobalKey<PrimaryScrollContainerState> key =
-          tabs[i]['key'] as GlobalKey<PrimaryScrollContainerState>;
-      if (key != null && key.currentState != null) {
-        key.currentState.onPageChange(currentIndex == i);
-      }
-    }
-  }
-
   Future<bool> onRefresh() async {
     print('开始刷新了');
     // _globalKey.currentState.show(notificationDragOffset: 200);
-    await initData();
+    await loadData();
     return true;
   }
 
-  @override
-  Future loadData() {
-    return Future.delayed(const Duration(seconds: 1), () {
-      print('请求完数据');
-    });
-  }
-
-  @override
-  void onCompleted(data) {
-    print(data);
+  Future loadData() async {
+    final JDNetworkResponse response =
+        await JDNetwork.get(environments.servicesPath.categoryList, mock: true);
+    List list = response.data;
+    tabs.value = list
+        .map((e) => {
+              'title': e['name'],
+            })
+        .toList();
+    return list;
   }
 }

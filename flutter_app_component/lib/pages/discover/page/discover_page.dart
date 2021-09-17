@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_component/component/mask/bubble_widget.dart';
 import 'package:flutter_app_component/component/mask/mask_widget.dart';
 import 'package:flutter_app_component/global/widget_config.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/style/jd_styles.dart';
 import 'package:jd_core/utils/jd_navigation_util.dart';
 
@@ -290,7 +291,11 @@ class _DiscoverPageState extends State<DiscoverPage>
   }
 
   ///跳转
-  void _pushSaved(String title, String router, Widget page) async {
+  void _pushSaved(String title, String router, dynamic page) async {
+    if (page is Function) {
+      Get.to(page);
+      return;
+    }
     if (page != null) {
       JDNavigationUtil.push(page);
       return;

@@ -2,11 +2,12 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_app_component/demo/shop/category/model/category.dart';
 import 'package:flutter_app_component/demo/shop/search/page/shop_search_page.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
-import 'package:jd_core/view_model/widget/provider_widget.dart';
 
-import 'shop_category_view_model.dart';
+import 'shop_category_vm.dart';
 
 /// @author jd
 
@@ -17,6 +18,8 @@ class ShopCategoryPage extends StatefulWidget {
 
 class _ShopCategoryPageState extends State<ShopCategoryPage>
     with AutomaticKeepAliveClientMixin {
+  final ShopCategoryVM _vm = Get.put(ShopCategoryVM());
+
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -33,11 +36,7 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
                   height: 10,
                 ),
                 Expanded(
-                  child: ProviderWidget<ShopCategoryViewModel>(
-                      model: ShopCategoryViewModel(),
-                      builder: (context, model) {
-                        return _buildSuggestions(model);
-                      }),
+                  child: Obx(() => _buildSuggestions()),
                 ),
               ],
             ),
@@ -53,7 +52,8 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
     );
   }
 
-  Widget _buildSuggestions(ShopCategoryViewModel viewModel) {
+  Widget _buildSuggestions() {
+    ShopCategoryVM viewModel = _vm;
     return Row(
       children: <Widget>[
         _buildLeft(viewModel),
@@ -64,8 +64,8 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
     );
   }
 
-  Widget _buildLeft(ShopCategoryViewModel viewModel) {
-    List allMenuInfo = viewModel.list;
+  Widget _buildLeft(ShopCategoryVM viewModel) {
+    List allMenuInfo = viewModel.list.value;
     return Container(
       width: 100,
       color: Colors.grey[100],
@@ -91,8 +91,8 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
     return null;
   }
 
-  Widget _buildRow(Map<String, dynamic> map, int index) {
-    final String text = map['name'];
+  Widget _buildRow(Category category, int index) {
+    final String text = category.name;
     return InkWell(
       child: Container(
         color: Colors.white,
@@ -121,10 +121,13 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
     );
   }
 
-  Widget _buildRightMenu(ShopCategoryViewModel viewModel) {
-    List allMenuInfo = viewModel.list;
-    Map map = allMenuInfo[_currentIndex];
-    List currentList = map['subs'];
+  Widget _buildRightMenu(ShopCategoryVM viewModel) {
+    List allMenuInfo = viewModel.list.value;
+    if (allMenuInfo.isEmpty) {
+      return Container();
+    }
+    Category category = allMenuInfo[_currentIndex];
+    List currentList = category.subCategory;
     double width = (jd_screenWidth() - 100) / 3 - 10;
     return GridView.builder(
         padding: const EdgeInsets.all(10),
@@ -138,7 +141,7 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
         ),
         itemCount: currentList.length,
         itemBuilder: (context, i) {
-          String item = currentList[i];
+          SubCategory item = currentList[i];
           return GestureDetector(
             child: Container(
               alignment: Alignment.center,
@@ -155,7 +158,7 @@ class _ShopCategoryPageState extends State<ShopCategoryPage>
                   ),
                 ),
                 child: AutoSizeText(
-                  item,
+                  item.name,
                   style: const TextStyle(fontSize: 14.0),
                 ),
               ),

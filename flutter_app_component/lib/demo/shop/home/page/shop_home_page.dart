@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_app_component/demo/shop/detail/page/shop_detail_page.dart';
 import 'package:flutter_app_component/demo/shop/home/vm/shop_home_vm.dart';
 import 'package:flutter_app_component/demo/shop/home/widget/shop_home_appbar.dart';
@@ -9,6 +7,7 @@ import 'package:flutter_app_component/demo/shop/shop_main_page.dart';
 import 'package:flutter_app_component/demo/wechat/message_list/message_list/widget/wechat_message_list_bottom_menu.dart';
 import 'package:flutter_app_component/global/widget_config.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:pull_to_refresh_notification/pull_to_refresh_notification.dart';
 
@@ -24,7 +23,7 @@ class ShopHomePage extends StatefulWidget {
 
 class _ShopHomePageState extends State<ShopHomePage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
-  final ShopHomeVM _vm = ShopHomeVM();
+  final ShopHomeVM _vm = Get.put(ShopHomeVM());
   TabController _tabController;
   double _offset = 0;
   final WeChatMessageListBottomMenuController _bottomMenuController =
@@ -32,12 +31,12 @@ class _ShopHomePageState extends State<ShopHomePage>
 
   @override
   void initState() {
-    _tabController = TabController(vsync: this, length: _vm.tabs.length);
-    //解决滚动问题
-    _tabController.addListener(() {
-      _vm.onPageChange(_tabController.index);
-    });
+    _tabController = TabController(vsync: this, length: _vm.tabs.value.length);
 
+    _vm.loadData().then((value) {
+      _tabController =
+          TabController(vsync: this, length: _vm.tabs.value.length);
+    });
     super.initState();
   }
 
@@ -56,77 +55,88 @@ class _ShopHomePageState extends State<ShopHomePage>
           curve: Curves.linear,
           transform: Matrix4.translationValues(0.0, _offset, 0.0),
           child: _refreshWidget(
-            child: NestedScrollView(
-              headerSliverBuilder:
-                  (BuildContext context, bool innerBoxIsScrolled) {
-                return <Widget>[
-                  PullToRefreshContainer(
+            child: Obx(
+              () => NestedScrollView(
+                headerSliverBuilder:
+                    (BuildContext context, bool innerBoxIsScrolled) {
+                  List<Widget> headerSlivers = [];
+
+                  //下拉刷新
+                  headerSlivers.add(PullToRefreshContainer(
                     (info) => buildPulltoRefreshImage(context, info),
-                  ),
-                  SliverOverlapAbsorber(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                        context),
+                  ));
 
-                    ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
-                    sliver: ShopHomeAppBar(
-                      backgroundColor: Colors.blue,
-                      title: const Text(
-                        '生产有限公司',
-                        style: TextStyle(color: Colors.white, fontSize: 18),
-                      ),
-                      centerTitle: false,
-                      expandedHeight: 140.0,
-                      brightness: Brightness.light,
-                      bottom: PreferredSize(
-                        preferredSize: const Size.fromHeight(60),
-                        child: _buildSearch(),
-                      ),
-                      // leading: const IconButton(
-                      //   icon: Icon(
-                      //     Icons.home,
-                      //     color: Colors.white,
-                      //   ),
-                      // ),
-                      actions: const <Widget>[
-                        IconButton(
-                          icon: Icon(
-                            Icons.business,
-                            color: Colors.white,
-                          ),
+                  //导航
+                  headerSlivers.add(
+                    SliverOverlapAbsorber(
+                      handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                          context),
+
+                      ///SliverAppBar也可以实现吸附在顶部的TabBar，但是高度不好计算，总是会有AppBar的空白高度，
+                      sliver: ShopHomeAppBar(
+                        backgroundColor: Colors.blue,
+                        title: const Text(
+                          '生产有限公司',
+                          style: TextStyle(color: Colors.white, fontSize: 18),
                         ),
-                      ],
-                    ),
-                  ),
-                  // const SliverPadding(
-                  //   padding: EdgeInsets.only(top: 80),
-                  // ),
-                  const SliverToBoxAdapter(
-                    child: SafeArea(
-                      child: SizedBox(
-                        height: 50,
+                        centerTitle: false,
+                        expandedHeight: 140.0,
+                        brightness: Brightness.light,
+                        bottom: PreferredSize(
+                          preferredSize: const Size.fromHeight(60),
+                          child: _buildSearch(),
+                        ),
+                        // leading: const IconButton(
+                        //   icon: Icon(
+                        //     Icons.home,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
+                        actions: const <Widget>[
+                          IconButton(
+                            icon: Icon(
+                              Icons.business,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  // SliverToBoxAdapter(
-                  //   child: _buildSearch(),
-                  // ),
-                  SliverToBoxAdapter(child: _buildSwiper()),
-                  SliverToBoxAdapter(child: _buildGridView()),
+                  );
 
-                  ///停留在顶部的TabBar
-                  _buildPersistentHeader(),
-                ];
-              },
-              body: TabBarView(
-                controller: _tabController,
-                physics: const NeverScrollableScrollPhysics(),
-                children: _vm.tabs
-                    .map((e) => PrimaryScrollContainer(
-                          e['key']
-                              as LabeledGlobalKey<PrimaryScrollContainerState>,
-                          _buildContentPage(e),
-                        ))
-                    .toList(),
+                  //空隙
+                  headerSlivers.add(
+                    const SliverToBoxAdapter(
+                      child: SafeArea(
+                        child: SizedBox(
+                          height: 50,
+                        ),
+                      ),
+                    ),
+                  );
+
+                  //轮播图
+                  headerSlivers.add(SliverToBoxAdapter(child: _buildSwiper()));
+
+                  //菜单
+                  headerSlivers
+                      .add(SliverToBoxAdapter(child: _buildGridView()));
+
+                  if (_vm.tabs.isNotEmpty) {
+                    //tab菜单
+                    headerSlivers.add(_buildPersistentHeader());
+                  }
+                  return headerSlivers;
+                },
+                body: TabBarView(
+                  controller: _tabController,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: _vm.tabs
+                      .map(
+                        (e) => _buildContentPage(e),
+                      )
+                      .toList(),
+                ),
               ),
             ),
           ),

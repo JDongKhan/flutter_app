@@ -11,29 +11,29 @@ abstract class Services {
 class ServicesPrd extends Services {
   //base url
   @override
-  String get baseUrl => 'https://baidu.com';
+  String get baseUrl => 'http://127.0.0.1:8080';
 
   //login
   @override
-  String get loginUrl => 'https://m.baidu.com/login';
+  String get loginUrl => 'http://127.0.0.1:8080/app/user/login';
 }
 
 class ServicesSit extends Services {
   //base url
   @override
-  String get baseUrl => 'https://baidusit.com';
+  String get baseUrl => 'http://127.0.0.1:8080';
 
   //login
   @override
-  String get loginUrl => 'https://m.baidusit.com/login';
+  String get loginUrl => 'http://127.0.0.1:8080/app/user/login';
 }
 
 class ServicesPre extends Services {
   //base url
   @override
-  String get baseUrl => 'https://baidupre.com';
+  String get baseUrl => 'http://127.0.0.1:8080';
 
   //login
   @override
-  String get loginUrl => 'https://m.baidupre.com/login';
+  String get loginUrl => 'http://localhost:8080/app/user/login';
 }

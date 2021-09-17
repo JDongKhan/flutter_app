@@ -80,7 +80,7 @@ class DiscoverController extends SingleViewModel {
         },
         {
           'title': '商城',
-          'page': ShopMainPage(),
+          'page': () => ShopMainPage(),
         },
         {
           'title': '滴滴',

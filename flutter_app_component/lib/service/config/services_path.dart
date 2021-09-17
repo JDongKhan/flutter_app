@@ -18,5 +18,8 @@ class ServicesPath {
   Services services;
 
   ///订单查询接口
-  String get orderQueryUrl => '${services.baseUrl}/order_query.do';
+  String get orderQueryUrl => '${services.baseUrl}/app/order_query.do';
+
+  //分类列表
+  String get categoryList => '${services.baseUrl}/app/category/category_list';
 }
