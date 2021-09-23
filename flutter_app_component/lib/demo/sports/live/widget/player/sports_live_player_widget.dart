@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app_component/demo/sports/live/widget/player/sports_live_barrage_widget.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:get/get.dart';
 import 'package:jd_core/widget/orientation/orientation_observer.dart';
@@ -98,6 +99,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
               // _bottomController.changeDuration(position, duration);
             },
           ),
+          SportsLiveBarrageWidget(),
           _buildTopMenuWidget(),
         ],
       ),

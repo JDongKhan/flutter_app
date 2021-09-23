@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app_component/debug/float_menu_controller.dart';
+import 'package:jd_core/jd_core.dart';
 
 import 'shake_detector.dart';
 
@@ -42,8 +43,10 @@ class _MenuConsoleOnShakeState extends State<MenuConsoleOnShake> {
   }
 
   void _init() {
-    _detector = ShakeDetector(onPhoneShake: _openLogConsole);
-    _detector.startListening();
+    if (JDAppInfo.isAndroid || JDAppInfo.isIOS) {
+      _detector = ShakeDetector(onPhoneShake: _openLogConsole);
+      _detector.startListening();
+    }
   }
 
   void _openLogConsole() {
