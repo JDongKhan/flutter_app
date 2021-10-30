@@ -23,7 +23,7 @@ class JDStarRatingWidget extends StatelessWidget {
       ),
     );
 
-    int v = value > maxValue ? 5 : value.toInt();
+    int v = value > maxValue ? maxValue : value.toInt();
 
     List<Widget> children = List.generate(
       v,
