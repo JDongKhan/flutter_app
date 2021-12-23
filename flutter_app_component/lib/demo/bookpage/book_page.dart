@@ -18,7 +18,7 @@ class _BookPageState extends State<BookPage>
   double height;
   AnimationController animationController;
   Animation cancelAnim;
-  Tween cancelValue;
+  Tween<Offset> cancelValue;
   bool needCancelAnim = true;
 
   toNormal([_]) {

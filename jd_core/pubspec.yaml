@@ -38,7 +38,7 @@ dependencies:
   #网络状态监听
   connectivity: ^0.4.9
   #toask
-  fluttertoast: ^7.0.2
+  fluttertoast: ^8.0.8
   # 屏幕适配
   flutter_screenutil: ^5.0.0+2
   #进度指示器
@@ -46,7 +46,7 @@ dependencies:
   # 状态管理
   provider: ^4.1.2
  #下拉刷新
-  pull_to_refresh: 1.6.4
+  pull_to_refresh: 2.0.0
   #闪光
   shimmer: ^1.0.0
   # 分享

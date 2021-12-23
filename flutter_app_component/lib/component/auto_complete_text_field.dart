@@ -19,14 +19,14 @@ class _AutoCompleteTextFieldState extends State<AutoCompleteTextField> {
   final FocusNode _focusNode = FocusNode();
   OverlayEntry _overlayEntry;
   final LayerLink _layerLink = LayerLink();
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   @override
   void initState() {
     _focusNode.addListener(() {
       if (widget.completeList != null) {
         if (_focusNode.hasFocus) {
           _overlayEntry = _createOverlayEntry();
-          Overlay.of(context).insert(this._overlayEntry);
+          Overlay.of(context).insert(_overlayEntry);
         } else {
           _overlayEntry?.remove();
           _overlayEntry = null;

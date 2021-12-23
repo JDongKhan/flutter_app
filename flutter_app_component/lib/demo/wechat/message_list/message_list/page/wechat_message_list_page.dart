@@ -50,7 +50,6 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
       return;
     }
     setState(() {
-      _showBackMenu = false;
       _animationController.animateTo(1);
       hiddenBottomBar(false);
     });
@@ -73,8 +72,9 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
           onNotification: (DraggableScrollableNotification notification) {
             _bottomMenuController.opacity = 1 - notification.extent;
             if (notification.extent < 0.1) {
-              _showBackMenu = true;
               hiddenBottomBar(true);
+            } else {
+              hiddenBottomBar(false);
             }
           },
           child: WechatDraggableScrollableSheet(
@@ -148,7 +148,10 @@ class _WechatMessageListPageState extends State<WechatMessageListPage>
   }
 
   void hiddenBottomBar(bool hidden) {
-    WechatMainPage.of(context).hiddenBottomNavigationBar(hidden);
+    if (_showBackMenu != hidden) {
+      _showBackMenu = hidden;
+      WechatMainPage.of(context).hiddenBottomNavigationBar(hidden);
+    }
   }
 
   ///cell布局

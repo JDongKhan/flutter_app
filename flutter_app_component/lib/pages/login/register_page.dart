@@ -64,7 +64,7 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget _buildRegester() {
     return Form(
       key: _formKey,
-      autovalidate: true,
+      autovalidateMode: AutovalidateMode.always,
       child: ListView(
         children: <Widget>[
           const SizedBox(height: 40.0), // 空出80高度

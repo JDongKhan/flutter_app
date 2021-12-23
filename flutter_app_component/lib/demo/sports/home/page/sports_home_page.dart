@@ -80,6 +80,9 @@ class _SportsHomePageState extends State<SportsHomePage>
             onRefresh: vm.refresh,
             child: ListView.separated(
               itemBuilder: (c, idx) {
+                if (idx > vm.list.length) {
+                  return Container();
+                }
                 SportsContent content = vm.list[idx];
                 if (content.flag == '1') {
                   return SportsHomeItem1(content: content);

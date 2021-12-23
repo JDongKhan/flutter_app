@@ -115,7 +115,7 @@ dependencies:
   #国际化
   #  fluintl: ^0.1.3
   #状态栏颜色更改
-  flutter_statusbarcolor: ^0.2.3
+  #flutter_statusbarcolor: ^0.2.3
   #mark down
   flutter_markdown: ^0.6.6
   #左右上下滚动

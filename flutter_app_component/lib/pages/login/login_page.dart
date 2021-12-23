@@ -71,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _buildLogin() {
     return Form(
       key: _formKey,
-      autovalidate: true, //开启自动校验
+      autovalidateMode: AutovalidateMode.always, //开启自动校验
       child: ListView(
         children: <Widget>[
           const SizedBox(height: 40.0), // 空出80高度

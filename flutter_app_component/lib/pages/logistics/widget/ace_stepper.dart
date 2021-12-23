@@ -1,5 +1,9 @@
-import 'package:flutter/material.dart';
 import 'dart:math';
+
+import 'package:flutter/material.dart';
+
+typedef ControlsWidgetBuilder = Widget Function(BuildContext context,
+    {VoidCallback onStepContinue, VoidCallback onStepCancel});
 
 class ACEStepper extends StatefulWidget {
   final List<ACEStep> steps;
