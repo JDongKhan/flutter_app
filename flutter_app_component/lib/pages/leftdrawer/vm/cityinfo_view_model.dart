@@ -8,7 +8,7 @@ class CityInfoViewModel extends SingleViewModel<Map> {
   String weather;
   @override
   Future<Map> loadData() async {
-    JDNetworkResponse r = await JDNetwork.get(
+    NetworkResponse r = await Network.get(
         "http://www.weather.com.cn/data/cityinfo/101010100.html");
     return r.data as Map;
   }

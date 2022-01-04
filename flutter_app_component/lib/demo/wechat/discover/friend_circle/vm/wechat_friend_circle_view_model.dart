@@ -6,8 +6,8 @@ import 'package:jd_core/view_model/list_view_model.dart';
 class WechatFriendCircleViewModel extends ListViewModel {
   @override
   Future<List> loadData() async {
-    JDNetworkResponse response =
-        await JDNetwork.get('http://baidu.com/friend_circle.do', mock: true);
+    NetworkResponse response =
+        await Network.get('http://baidu.com/friend_circle.do', mock: true);
     return response.data;
   }
 }

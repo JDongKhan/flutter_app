@@ -11,8 +11,8 @@ import 'package:jd_home/pages/home/model/home_model.dart';
 class HomeViewModel extends SingleViewModel {
   @override
   Future loadData() async {
-    JDNetworkResponse r =
-        await JDNetwork.get("http://baidu.com//home.do", mock: true);
+    NetworkResponse r =
+        await Network.get("http://baidu.com//home.do", mock: true);
     return HomeModel.fromJson(r.data as Map<dynamic, dynamic>);
   }
 

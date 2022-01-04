@@ -10,6 +10,7 @@ class PlayerManaer {
     try {
       if (sportsListPlayerController != null) {
         sportsListPlayerController.pause();
+        sportsListPlayerController.reset();
       }
     } catch (e) {
       print(e.toString());

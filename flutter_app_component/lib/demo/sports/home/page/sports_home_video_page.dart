@@ -21,9 +21,21 @@ class SportsHomeVideoPage extends StatefulWidget {
 class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
     with AutomaticKeepAliveClientMixin, LifecycleAware, LifecycleMixin {
   final ScrollController _scrollController = ScrollController();
+
+  Map<int, SportsListPlayerController> _playerController =
+      <int, SportsListPlayerController>{};
+
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _playerController.forEach((key, value) {
+      value.dispose();
+    });
+    super.dispose();
   }
 
   @override
@@ -63,7 +75,14 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
                     index = index % 5;
                     SportsVideo video = vm.list[index];
                     print('index:$index - isInView:$isInView');
-                    return _buildItem(vm, video, isInView);
+                    SportsListPlayerController controller =
+                        _playerController[index];
+                    if (controller == null) {
+                      controller =
+                          SportsListPlayerController(videoUrl: video.videoUrl);
+                      _playerController[index] = controller;
+                    }
+                    return _buildItem(video, isInView, controller);
                   },
                 );
               },
@@ -75,7 +94,8 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
     );
   }
 
-  Widget _buildItem(SportsHomeVideoVM vm, SportsVideo video, bool isPlaying) {
+  Widget _buildItem(SportsVideo video, bool isPlaying,
+      SportsListPlayerController controller) {
     List<Widget> columnChildren = [];
 
     ///个人信息
@@ -143,6 +163,7 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
         cover: video.cover,
         videoUrl: video.videoUrl,
         playing: isPlaying,
+        sportsListPlayerController: controller,
       ),
     ));
 
@@ -301,8 +322,10 @@ class _SportsHomeVideoPageState extends State<SportsHomeVideoPage>
       SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
       vm.changAppBarBackgroundColor(Colors.black);
     } else if (event == LifecycleEvent.invisible) {
-      SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
-      vm.changAppBarBackgroundColor(Colors.blue);
+      if (mounted) {
+        SportsTabHomeVM vm = context.read<SportsTabHomeVM>();
+        vm.changAppBarBackgroundColor(Colors.blue);
+      }
     } else if (event == LifecycleEvent.active) {
     } else if (event == LifecycleEvent.inactive) {
     } else if (event == LifecycleEvent.pop) {}

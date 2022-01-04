@@ -7,8 +7,8 @@ import 'package:jd_home/pages/home/model/home_model.dart';
 class HomeListViewModel extends RefreshListViewModel {
   @override
   Future<List> loadData({int pageNum}) async {
-    JDNetworkResponse r =
-        await JDNetwork.get("http://baidu.com//home_list.do", mock: true);
+    NetworkResponse r =
+        await Network.get("http://baidu.com//home_list.do", mock: true);
     HomeModelList model = HomeModelList.fromJson(r.data as List<dynamic>);
     return model.list;
   }

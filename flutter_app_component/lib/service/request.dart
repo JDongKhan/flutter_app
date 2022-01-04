@@ -2,7 +2,7 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter_app_component/models/image_model.dart';
 import 'package:flutter_app_component/models/models.dart';
 import 'package:flutter_app_component/models/user.dart';
-import 'package:jd_core/network/jd_network_utils.dart';
+import 'package:jd_core/network/network_utils.dart';
 
 import 'config/extension_login.dart';
 import 'environment.dart';
@@ -23,8 +23,7 @@ class Request {
   }
 
   static Future<User> login(String account, String password) async {
-    JDNetworkResponse r = await JDNetwork.post(
-        environments.servicesPath.loginUrl,
+    NetworkResponse r = await Network.post(environments.servicesPath.loginUrl,
         queryParameters: <String, dynamic>{
           'account': account,
           'password': password
@@ -56,8 +55,8 @@ class Request {
       // throw DioError(error: JDUnreachableNetworkException());
     }
 
-    JDNetworkResponse r =
-        await JDNetwork.get('http://gank.io/api/random/data/福利/100');
+    NetworkResponse r =
+        await Network.get('http://gank.io/api/random/data/福利/100');
     List list = r.data['results'];
     return list?.map((e) => JDImage.fromJson(e))?.toList();
   }

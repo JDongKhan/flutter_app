@@ -7,12 +7,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 ///请求重试
-class JDRetryOnConnectionChangeInterceptor extends Interceptor {
-  JDRetryOnConnectionChangeInterceptor({
+class RetryOnConnectionChangeInterceptor extends Interceptor {
+  RetryOnConnectionChangeInterceptor({
     @required this.requestRetrier,
   });
 
-  final JDDioConnectivityRequestRetrier requestRetrier;
+  final DioConnectivityRequestRetrier requestRetrier;
 
   @override
   Future onError(DioError err) async {
@@ -33,8 +33,8 @@ class JDRetryOnConnectionChangeInterceptor extends Interceptor {
   }
 }
 
-class JDDioConnectivityRequestRetrier {
-  JDDioConnectivityRequestRetrier({
+class DioConnectivityRequestRetrier {
+  DioConnectivityRequestRetrier({
     @required this.dio,
     @required this.connectivity,
   });

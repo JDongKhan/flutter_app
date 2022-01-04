@@ -15,8 +15,8 @@ class ShopCategoryVM extends GetxController {
   }
 
   Future loadData() async {
-    final JDNetworkResponse response =
-        await JDNetwork.get(environments.servicesPath.categoryList, mock: true);
+    final NetworkResponse response =
+        await Network.get(environments.servicesPath.categoryList, mock: true);
     List ls = response.data;
     list.value = ls.map((e) => Category.fromJson(e)).toList();
     return list;

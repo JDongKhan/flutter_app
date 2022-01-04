@@ -7,151 +7,129 @@ import 'package:video_player/video_player.dart';
 
 typedef PlayerValueChanged<T1, T2> = void Function(T1 value1, T2 value2);
 
-class PlayerController extends ChangeNotifier {
-  PlayerController({
-    bool initPlaying = false,
-    @required this.url,
-    this.loop = true,
-  }) : isPlaying = initPlaying;
-
-  bool isPlaying = false;
-  Duration seekDuration;
-  String url;
-  final bool loop;
-
-  void play() {
-    isPlaying = true;
-    notifyListeners();
-  }
-
-  void pause() {
-    isPlaying = false;
-    notifyListeners();
-  }
-
-  void seek(Duration duration) {
-    seekDuration = duration;
-    notifyListeners();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-}
-
 class Player extends StatefulWidget {
   const Player({
     Key key,
     this.onTap,
     this.onChange,
     this.playStatus,
+    this.autoPlay = false,
+    @required this.loadFuture,
     @required this.controller,
+    this.debugLabel = 'player',
   })  : assert(controller != null),
         super(key: key);
 
   final ValueChanged<bool> playStatus;
+  final Future loadFuture;
   final Function onTap;
   final PlayerValueChanged<Duration, Duration> onChange;
-  final PlayerController controller;
+  final VideoPlayerController controller;
+  final String debugLabel;
+  final bool autoPlay;
   @override
   _PlayerState createState() => _PlayerState();
 }
 
 class _PlayerState extends State<Player>
     with WidgetsBindingObserver, LifecycleAware, LifecycleMixin {
-  VideoPlayerController _videoPlayerController;
-  Future _videoPlayerFuture;
-  bool _isPlaying = false;
-  bool get isPlaying => _videoPlayerController.value.isPlaying;
+  //主动操作
+  bool _manualPlaying = false;
+  //被动状态
+  bool _passivePlaying;
+  bool get isPlaying {
+    if (_videoPlayerController == null) {
+      return false;
+    }
+    if (_videoPlayerController.value == null) {
+      return false;
+    }
+    return _videoPlayerController?.value?.isPlaying;
+  }
 
+  bool _visiable = false;
+  VideoPlayerController _videoPlayerController;
   @override
   void initState() {
     super.initState();
-    debugPrint('player[${widget.controller.url}]-initState');
+    _videoPlayerController = widget.controller;
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-initState');
     WidgetsBinding.instance.addObserver(this);
-    if (widget.controller != null) {
-      widget.controller.addListener(_outListener);
-    }
     //准备
-    _prepare(() {
-      if (widget.controller != null && widget.controller.isPlaying) {
-        _play();
-      }
-    });
-  }
-
-  void _outListener() {
-    if (!mounted) {
-      return;
-    }
-    if (widget.controller.isPlaying) {
+    if (widget.controller != null && widget.autoPlay) {
       _play();
-    } else {
-      _pause();
-    }
-
-    if (widget.controller.seekDuration != null) {
-      _videoPlayerController.seekTo(widget.controller.seekDuration);
     }
   }
 
   @override
   void dispose() {
-    debugPrint('player[${widget.controller.url}]-dispose');
-    _videoPlayerController.dispose();
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-dispose');
+    _videoPlayerController = null;
     WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 
   @override
   void reassemble() {
-    debugPrint('player[${widget.controller.url}]-reassemble');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-reassemble');
     super.reassemble();
   }
 
   @override
   void didChangeDependencies() {
-    debugPrint('player[${widget.controller.url}]-didChangeDependencies');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didChangeDependencies');
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant Player oldWidget) {
-    debugPrint('player[${widget.controller.url}]-didUpdateWidget');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didUpdateWidget');
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   void deactivate() {
-    debugPrint('player[${widget.controller.url}]-deactivate');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-deactivate');
     super.deactivate();
   }
 
   @override
   void didChangeMetrics() {
-    debugPrint('player[${widget.controller.url}]-didChangeMetrics');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didChangeMetrics');
   }
 
   @override
   Future<bool> didPushRoute(String route) {
-    debugPrint('player[${widget.controller.url}]-didPushRoute');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didPushRoute');
     return super.didPushRoute(route);
   }
 
   @override
   Future<bool> didPopRoute() {
-    debugPrint('player[${widget.controller.url}]-didPopRoute');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didPopRoute');
     return super.didPopRoute();
   }
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    debugPrint('player[${widget.controller.url}]-didChangeAppLifecycleState');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-didChangeAppLifecycleState');
   }
 
   void _listener() {
     if (!mounted) {
+      return;
+    }
+    if (!_visiable) {
       return;
     }
     if (widget.onChange != null) {
@@ -159,101 +137,58 @@ class _PlayerState extends State<Player>
           _videoPlayerController.value.duration);
     }
     final bool isPlaying = _videoPlayerController.value.isPlaying;
-    if (isPlaying != _isPlaying) {
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-listener-${_videoPlayerController.value.position}-${_videoPlayerController.value.duration}');
+    if (_passivePlaying != null && isPlaying != _passivePlaying) {
       setState(() {
-        _isPlaying = isPlaying;
         if (widget.playStatus != null) {
           widget.playStatus(isPlaying);
         }
-        ;
       });
     }
-  }
-
-  void _prepare(Function callback) {
-    _videoPlayerController = VideoPlayerController.asset(widget.controller.url);
-    _videoPlayerFuture = _videoPlayerController.initialize().then((value) {
-      callback();
-    });
-    _videoPlayerController.setLooping(widget.controller.loop);
-    _videoPlayerController.addListener(_listener);
+    _passivePlaying = isPlaying;
   }
 
   void _play() {
-    if (isPlaying || !mounted) return;
+    if (_manualPlaying || !mounted) return;
+    if (!_visiable) return;
+    if (_videoPlayerController.value.isPlaying) return;
     _videoPlayerController.play();
-    debugPrint('player[${widget.controller.url}]-play() ');
+    _manualPlaying = true;
+    _videoPlayerController.addListener(_listener);
+    setState(() {});
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-play() ');
   }
 
   void _pause() {
-    if (!isPlaying || !mounted) return;
+    if (!_manualPlaying || !mounted) return;
     _videoPlayerController.pause();
-    debugPrint('player[${widget.controller.url}]-pause() ');
+    _manualPlaying = false;
+    setState(() {});
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-pause() ');
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('player[${widget.controller.url}]-build');
+    debugPrint(
+        'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-build');
+    if (widget.controller.value.isPlaying) {
+      return _playingWidget();
+    }
     return FutureBuilder(
-      future: _videoPlayerFuture,
+      future: widget.loadFuture ?? widget.controller.initialize(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return GestureDetector(
-            behavior: HitTestBehavior.opaque,
-            onTap: () {
-              if (widget.onTap != null) {
-                widget.onTap();
-              }
-            },
-            onDoubleTap: () {
-              final bool isPlaying = _videoPlayerController.value.isPlaying;
-              if (isPlaying) {
-                widget.controller.pause();
-              } else {
-                widget.controller.play();
-              }
-            },
-            child: Stack(
-              children: [
-                Container(
-                  color: Colors.black,
-                ),
-                VideoPlayer(_videoPlayerController),
-                AnimatedOpacity(
-                  duration: const Duration(milliseconds: 300),
-                  opacity: isPlaying ? 0 : 1.0,
-                  child: Center(
-                    child: GestureDetector(
-                      onTap: () {
-                        final bool isPlaying =
-                            _videoPlayerController.value.isPlaying;
-                        if (isPlaying) {
-                          widget.controller.pause();
-                        } else {
-                          widget.controller.play();
-                        }
-                      },
-                      behavior: HitTestBehavior.opaque,
-                      child: const Icon(
-                        Icons.play_arrow,
-                        size: 50,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
+          return _playingWidget();
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return Container();
         }
         return GestureDetector(
           behavior: HitTestBehavior.opaque,
           onTap: () {
-            _prepare(() {
-              _play();
-            });
+            _play();
           },
           child: const Center(
             child: Text(
@@ -268,23 +203,82 @@ class _PlayerState extends State<Player>
     );
   }
 
+  Widget _playingWidget() {
+    return GestureDetector(
+      behavior: HitTestBehavior.opaque,
+      onTap: () {
+        if (widget.onTap != null) {
+          widget.onTap();
+        }
+      },
+      onDoubleTap: () {
+        if (isPlaying) {
+          widget.controller.pause();
+        } else {
+          widget.controller.play();
+        }
+      },
+      child: Stack(
+        children: [
+          Container(
+            color: Colors.black,
+          ),
+          VideoPlayer(_videoPlayerController),
+          AnimatedOpacity(
+            duration: const Duration(milliseconds: 300),
+            opacity: isPlaying ? 0 : 1.0,
+            child: Center(
+              child: GestureDetector(
+                onTap: () {
+                  final bool isPlaying = widget.controller.value.isPlaying;
+                  if (isPlaying) {
+                    _pause();
+                  } else {
+                    _play();
+                  }
+                },
+                behavior: HitTestBehavior.opaque,
+                child: const Icon(
+                  Icons.play_arrow,
+                  size: 50,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      debugPrint('player[${widget.controller.url}]-onLifecycleEvent push ');
-    } else if (event == LifecycleEvent.visible) {
-      debugPrint('player[${widget.controller.url}]-onLifecycleEvent visible ');
-    } else if (event == LifecycleEvent.active) {
-      widget.controller.play();
-      debugPrint('player[${widget.controller.url}]-onLifecycleEvent active ');
-    } else if (event == LifecycleEvent.inactive) {
-      widget.controller.pause();
-      debugPrint('player[${widget.controller.url}]-onLifecycleEvent inactive ');
-    } else if (event == LifecycleEvent.invisible) {
+      _visiable = true;
       debugPrint(
-          'player[${widget.controller.url}]-onLifecycleEvent invisible ');
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent push ');
+    } else if (event == LifecycleEvent.visible) {
+      _visiable = true;
+      debugPrint(
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent visible ');
+    } else if (event == LifecycleEvent.active) {
+      _visiable = true;
+      widget.controller.play();
+      debugPrint(
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent active ');
+    } else if (event == LifecycleEvent.inactive) {
+      _visiable = false;
+      widget.controller.pause();
+      debugPrint(
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent inactive ');
+    } else if (event == LifecycleEvent.invisible) {
+      _visiable = false;
+      debugPrint(
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent invisible ');
     } else if (event == LifecycleEvent.pop) {
-      debugPrint('player[${widget.controller.url}]-onLifecycleEvent pop ');
+      _visiable = false;
+      debugPrint(
+          'player[${widget.debugLabel}]-[${widget.controller.dataSource}]-onLifecycleEvent pop ');
     }
   }
 }

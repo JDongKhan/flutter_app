@@ -1,32 +1,32 @@
 import 'package:dio/dio.dart';
 
 /// 自定义异常
-class JDAppException implements Exception {
-  JDAppException([
+class AppException implements Exception {
+  AppException([
     this._code,
     this._message,
   ]);
 
-  factory JDAppException.create(DioError error) {
+  factory AppException.create(DioError error) {
     switch (error.type) {
       case DioErrorType.CANCEL:
         {
-          return JDBadRequestException(-1, '请求取消');
+          return BadRequestException(-1, '请求取消');
         }
         break;
       case DioErrorType.CONNECT_TIMEOUT:
         {
-          return JDBadRequestException(-1, '连接超时');
+          return BadRequestException(-1, '连接超时');
         }
         break;
       case DioErrorType.SEND_TIMEOUT:
         {
-          return JDBadRequestException(-1, '请求超时');
+          return BadRequestException(-1, '请求超时');
         }
         break;
       case DioErrorType.RECEIVE_TIMEOUT:
         {
-          return JDBadRequestException(-1, '响应超时');
+          return BadRequestException(-1, '响应超时');
         }
         break;
       case DioErrorType.RESPONSE:
@@ -38,63 +38,63 @@ class JDAppException implements Exception {
             switch (errCode) {
               case 400:
                 {
-                  return JDBadRequestException(errCode, '请求语法错误');
+                  return BadRequestException(errCode, '请求语法错误');
                 }
                 break;
               case 401:
                 {
-                  return JDUnauthorisedException(errCode, '没有权限');
+                  return UnauthorisedException(errCode, '没有权限');
                 }
                 break;
               case 403:
                 {
-                  return JDUnauthorisedException(errCode, '服务器拒绝执行');
+                  return UnauthorisedException(errCode, '服务器拒绝执行');
                 }
                 break;
               case 404:
                 {
-                  return JDUnauthorisedException(errCode, '无法连接服务器');
+                  return UnauthorisedException(errCode, '无法连接服务器');
                 }
                 break;
               case 405:
                 {
-                  return JDUnauthorisedException(errCode, '请求方法被禁止');
+                  return UnauthorisedException(errCode, '请求方法被禁止');
                 }
                 break;
               case 500:
                 {
-                  return JDUnauthorisedException(errCode, '服务器内部错误');
+                  return UnauthorisedException(errCode, '服务器内部错误');
                 }
                 break;
               case 502:
                 {
-                  return JDUnauthorisedException(errCode, '无效的请求');
+                  return UnauthorisedException(errCode, '无效的请求');
                 }
                 break;
               case 503:
                 {
-                  return JDUnauthorisedException(errCode, '服务器挂了');
+                  return UnauthorisedException(errCode, '服务器挂了');
                 }
                 break;
               case 505:
                 {
-                  return JDUnauthorisedException(errCode, '不支持HTTP协议请求');
+                  return UnauthorisedException(errCode, '不支持HTTP协议请求');
                 }
                 break;
               default:
                 {
                   // return ErrorEntity(code: errCode, message: "未知错误");
-                  return JDAppException(errCode, error.response.statusMessage);
+                  return AppException(errCode, error.response.statusMessage);
                 }
             }
           } on Exception catch (_) {
-            return JDAppException(-1, '未知错误');
+            return AppException(-1, '未知错误');
           }
         }
         break;
       default:
         {
-          return JDAppException(-1, error.message);
+          return AppException(-1, error.message);
         }
     }
   }
@@ -109,20 +109,20 @@ class JDAppException implements Exception {
 }
 
 /// 请求错误
-class JDBadRequestException extends JDAppException {
-  JDBadRequestException([int code, String message]) : super(code, message);
+class BadRequestException extends AppException {
+  BadRequestException([int code, String message]) : super(code, message);
 }
 
 /// 未认证异常
-class JDUnauthorisedException extends JDAppException {
-  JDUnauthorisedException([int code, String message]) : super(code, message);
+class UnauthorisedException extends AppException {
+  UnauthorisedException([int code, String message]) : super(code, message);
 }
 
 /// 网络不可达
-class JDUnreachableNetworkException extends JDAppException {
-  JDUnreachableNetworkException() : super(999, '网络连接失败');
+class UnreachableNetworkException extends AppException {
+  UnreachableNetworkException() : super(999, '网络连接失败');
 }
 
-class JDBadClientException extends JDAppException {
-  JDBadClientException() : super(-999, '客户端逻辑出错');
+class BadClientException extends AppException {
+  BadClientException() : super(-999, '客户端逻辑出错');
 }

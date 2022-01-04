@@ -1,7 +1,7 @@
 library jd_core;
 
 //network
-export 'network/jd_network_utils.dart';
+export 'network/network_utils.dart';
 //style
 export 'style/jd_colors.dart';
 export 'style/jd_dimens.dart';
@@ -27,7 +27,6 @@ export 'utils/jd_timeline_utils.dart';
 export 'utils/jd_timer_utils.dart';
 export 'utils/jd_toast_utils.dart';
 export 'utils/jd_utils.dart';
-
 //widget
 export 'widget/async/jd_futurebuilder.dart';
 export 'widget/blurrect/jd_blurrect.dart';
@@ -36,7 +35,7 @@ export 'widget/extension/jd_provider_extension.dart';
 export 'widget/footerrefresh/jd_customfooter.dart';
 export 'widget/loading/jd_loading.dart';
 export 'widget/scroll/jd_primary_scroll.dart';
-export 'widget/searchbar/jd_searchbar.dart' ;
+export 'widget/searchbar/jd_searchbar.dart';
 export 'widget/sectionview/jd_sectionview.dart';
 export 'widget/sliverpersistentheaderdelegate/jd_sliverpersistentheaderdelegate.dart';
 export 'widget/text/jd_expandable_text.dart';

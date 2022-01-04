@@ -1,7 +1,7 @@
 import 'package:flutter_app_component/demo/shop/model/shop_info.dart';
 import 'package:flutter_app_component/service/environment.dart';
 import 'package:get/get.dart';
-import 'package:jd_core/network/jd_network_utils.dart';
+import 'package:jd_core/network/network_utils.dart';
 import 'package:jd_core/utils/jd_asset_bundle.dart';
 
 /// @author jd
@@ -47,8 +47,8 @@ class ShopHomeVM extends GetxController {
   }
 
   Future loadData() async {
-    final JDNetworkResponse response =
-        await JDNetwork.get(environments.servicesPath.categoryList, mock: true);
+    final NetworkResponse response =
+        await Network.get(environments.servicesPath.categoryList, mock: true);
     List list = response.data;
     tabs.value = list
         .map((e) => {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app_component/component/drag_progress_bar.dart';
-import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:get/get.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../vm/sports_live_controller.dart';
 
@@ -12,7 +12,7 @@ class SportsLivePlayerBottomWidget extends StatefulWidget {
   const SportsLivePlayerBottomWidget({
     @required this.playerController,
   });
-  final PlayerController playerController;
+  final VideoPlayerController playerController;
   @override
   _SportsLivePlayerBottomWidgetState createState() =>
       _SportsLivePlayerBottomWidgetState();
@@ -65,7 +65,7 @@ class _SportsLivePlayerBottomWidgetState
                 onPanStart: () {},
                 onPanEnd: () {
                   widget.playerController
-                      .seek(_seek_toDuration(_tempSeekValue));
+                      .seekTo(_seek_toDuration(_tempSeekValue));
                 },
                 onPanChanged: (double value) {
                   _tempSeekValue = value;
@@ -91,7 +91,7 @@ class _SportsLivePlayerBottomWidgetState
   }
 
   Widget _buildPlayOrNotWidget() {
-    if (widget.playerController.isPlaying) {
+    if (widget.playerController.value.isPlaying) {
       return GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {

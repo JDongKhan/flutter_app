@@ -6,7 +6,7 @@ import 'package:path/path.dart' as path;
 
 /// @author jd
 
-class JDNetworkMockInterceptor extends Interceptor {
+class NetworkMockInterceptor extends Interceptor {
   @override
   Future<dynamic> onRequest(RequestOptions options) async {
     if (options.extra['mock'] == true) {

@@ -4,6 +4,7 @@ import 'package:flutter_app_component/demo/sports/live/widget/player/sports_live
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
 import 'package:get/get.dart';
 import 'package:jd_core/widget/orientation/orientation_observer.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../vm/sports_live_controller.dart';
 import 'sports_live_player_bottom_widget.dart';
@@ -23,9 +24,11 @@ class SportsLivePlayerWidget extends StatefulWidget {
 
 class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
     with TickerProviderStateMixin {
-  PlayerController _playerController;
+  VideoPlayerController _playerController;
   AnimationController _animationController;
-  Animation _slideTopAnimation, _slideBottomAnimation, _slideRightAnimation;
+  Animation<Offset> _slideTopAnimation,
+      _slideBottomAnimation,
+      _slideRightAnimation;
   bool _isShowMenuAnimal = false;
   bool _isLocked = false;
 
@@ -33,19 +36,19 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
       Get.find<SportsLiveController>();
   @override
   void initState() {
-    _playerController = PlayerController(initPlaying: true, url: widget.url);
+    _playerController = VideoPlayerController.asset(widget.url);
     _animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
-    _slideTopAnimation = Tween(
+    _slideTopAnimation = Tween<Offset>(
       begin: const Offset(0, -2),
       end: const Offset(0, 0),
     ).animate(_animationController);
-    _slideBottomAnimation = Tween(
+    _slideBottomAnimation = Tween<Offset>(
       begin: const Offset(0, 2),
       end: const Offset(0, 0),
     ).animate(_animationController);
 
-    _slideRightAnimation = Tween(
+    _slideRightAnimation = Tween<Offset>(
       begin: const Offset(2, 0),
       end: const Offset(0, 0),
     ).animate(_animationController);
@@ -90,6 +93,7 @@ class SportsLivePlayerWidgetState extends State<SportsLivePlayerWidget>
         children: [
           Player(
             controller: _playerController,
+            autoPlay: true,
             onTap: () {
               if (_isLocked) return;
               showMenu();

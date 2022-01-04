@@ -1,38 +1,50 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_app_component/demo/sports/home/page/sports_home_video_horizontal_page.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/player_manager.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
+import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:lifecycle/lifecycle.dart';
+import 'package:video_player/video_player.dart';
 
 /// @author jd
 
 class SportsListPlayerController extends ChangeNotifier {
   SportsListPlayerController({
     this.videoUrl,
-    this.playing,
-  }) : playerController = PlayerController(initPlaying: true, url: videoUrl);
+    this.looping = true,
+  });
 
-  PlayerController playerController;
   final String videoUrl;
-  bool playing;
+  bool looping;
+  VideoPlayerController videoPlayerController;
+
+  void prepare() {
+    videoPlayerController = VideoPlayerController.asset(videoUrl);
+    videoPlayerController.setLooping(looping);
+  }
 
   void play() {
-    playing = true;
+    debugPrint('$videoUrl - 主动调用了play');
     notifyListeners();
-    playerController.play();
+    videoPlayerController.play();
   }
 
   void pause() {
-    playing = false;
-    playerController.pause();
+    debugPrint('$videoUrl - 主动调用了pause');
+    videoPlayerController.pause();
     notifyListeners();
+  }
+
+  void reset() {
+    videoPlayerController.dispose();
+    videoPlayerController = null;
   }
 
   @override
   void dispose() {
-    if (playerController != null) {
-      playerController.dispose();
+    if (videoPlayerController != null) {
+      videoPlayerController.dispose();
     }
     super.dispose();
   }
@@ -43,10 +55,14 @@ class SportsListPlayer extends StatefulWidget {
     this.videoUrl,
     this.playing = false,
     this.cover,
+    this.sportsListPlayerController,
+    this.debugLabel = 'listPlayer',
   });
   final String videoUrl;
   final bool playing;
   final String cover;
+  final SportsListPlayerController sportsListPlayerController;
+  final String debugLabel;
   @override
   _SportsListPlayerState createState() => _SportsListPlayerState();
 }
@@ -55,42 +71,35 @@ class _SportsListPlayerState extends State<SportsListPlayer>
     with LifecycleAware, LifecycleMixin {
   SportsListPlayerController _sportsListPlayerController;
   bool _playing = false;
+  bool _visiable = true;
   @override
   void initState() {
-    _sportsListPlayerController = SportsListPlayerController(
-        videoUrl: widget.videoUrl, playing: widget.playing);
+    _sportsListPlayerController = widget.sportsListPlayerController;
     _sportsListPlayerController.addListener(_listener);
     _playing = widget.playing;
+    debugPrint(
+        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-init playing:$_playing');
     super.initState();
   }
 
   @override
   void dispose() {
-    _clearController();
     super.dispose();
-  }
-
-  void _clearController() {
-    if (_sportsListPlayerController != null) {
-      _sportsListPlayerController.dispose();
-      _sportsListPlayerController = null;
-    }
   }
 
   @override
   void didUpdateWidget(covariant SportsListPlayer oldWidget) {
-    _clearController();
-    _sportsListPlayerController = SportsListPlayerController(
-        videoUrl: widget.videoUrl, playing: widget.playing);
-    _sportsListPlayerController.addListener(_listener);
-    _playing = widget.playing;
     super.didUpdateWidget(oldWidget);
   }
 
   void _listener() {
-    if (_playing != _sportsListPlayerController.playing) {
+    debugPrint(
+        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-listener playing:$_playing c.playing:${_sportsListPlayerController.videoPlayerController?.value?.isPlaying}');
+    if (_playing !=
+        _sportsListPlayerController.videoPlayerController?.value?.isPlaying) {
       setState(() {
-        _playing = _sportsListPlayerController.playing;
+        _playing =
+            _sportsListPlayerController.videoPlayerController?.value?.isPlaying;
       });
     }
   }
@@ -102,15 +111,52 @@ class _SportsListPlayerState extends State<SportsListPlayer>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint('SportsListPlayer-playing:$_playing');
-    if (_playing) {
+    debugPrint(
+        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-playing:$_playing');
+    if (_playing && _visiable) {
       playerManaer.sportsListPlayerController = _sportsListPlayerController;
+      _sportsListPlayerController.prepare();
     }
-    return _playing
-        ? Container(
-            child: Player(
-              controller: _sportsListPlayerController.playerController,
-            ),
+    return _playing && _visiable
+        ? Stack(
+            children: [
+              Container(
+                child: Player(
+                  autoPlay: true,
+                  debugLabel: 'list',
+                  controller: _sportsListPlayerController.videoPlayerController,
+                  loadFuture: _sportsListPlayerController.videoPlayerController
+                      .initialize(),
+                ),
+              ),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _visiable = false;
+                    });
+                    Get.to(
+                      () => SportsHomeVideoHorizontalPage(
+                          _sportsListPlayerController.videoPlayerController),
+                      transition: Transition.noTransition,
+                    );
+                    // 不知道为啥下面的代码就导致转屏失败
+                    // Navigator.of(context).push(
+                    //   PageAnimationBuilder.noAnim(
+                    //       SportsHomeVideoHorizontalPage(
+                    //           _sportsListPlayerController
+                    //               .videoPlayerController),
+                    //       null),
+                    // );
+                  },
+                  icon: const Icon(
+                    Icons.fullscreen,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
           )
         : Container(
             child: Stack(
@@ -139,13 +185,19 @@ class _SportsListPlayerState extends State<SportsListPlayer>
   @override
   void onLifecycleEvent(LifecycleEvent event) {
     if (event == LifecycleEvent.push) {
-      SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-        playerManaer.to(_sportsListPlayerController);
-      });
+      _visiable = true;
     } else if (event == LifecycleEvent.visible) {
+      setState(() {
+        _visiable = true;
+      });
     } else if (event == LifecycleEvent.active) {
+      _visiable = true;
     } else if (event == LifecycleEvent.inactive) {
+      _visiable = false;
     } else if (event == LifecycleEvent.invisible) {
-    } else if (event == LifecycleEvent.pop) {}
+      _visiable = false;
+    } else if (event == LifecycleEvent.pop) {
+      _visiable = false;
+    }
   }
 }

@@ -6,18 +6,18 @@ import 'package:dio/dio.dart';
 import 'package:dio_cookie_manager/dio_cookie_manager.dart';
 import 'package:dio_http_cache/dio_http_cache.dart';
 import 'package:flutter/foundation.dart';
-import 'package:jd_core/network/jd_error_interceptor.dart';
-import 'package:jd_core/network/jd_mock_interceptor.dart';
+import 'package:jd_core/network/error_interceptor.dart';
+import 'package:jd_core/network/mock_interceptor.dart';
 import 'package:jd_core/utils/jd_appinfo.dart';
 import 'package:jd_core/utils/jd_toast_utils.dart';
 
-import 'jd_retry_interceptor.dart';
+import 'retry_interceptor.dart';
 
-typedef JDProgressCallback = void Function(int count, int total);
+typedef ProgressCallback = void Function(int count, int total);
 
 /// @author jd
-class JDNetworkResponse {
-  JDNetworkResponse(this.code, {this.errorMsg, this.data});
+class NetworkResponse {
+  NetworkResponse(this.code, {this.errorMsg, this.data});
   int code;
   String errorMsg;
   dynamic data;
@@ -31,8 +31,8 @@ parseJson(String text) {
   return compute(_parseAndDecode, text);
 }
 
-class JDNetwork {
-  JDNetwork._() {
+class Network {
+  Network._() {
     final BaseOptions options = BaseOptions(
       connectTimeout: 20000,
       receiveTimeout: 3000,
@@ -44,8 +44,8 @@ class JDNetwork {
     );
     _dio = Dio(options);
     _dio.interceptors
-      ..add(JDNetworkMockInterceptor())
-      ..add(JDErrorInterceptor())
+      ..add(NetworkMockInterceptor())
+      ..add(ErrorInterceptor())
       ..add(DioCacheManager(CacheConfig()).interceptor as Interceptor)
       ..add(LogInterceptor(
         requestBody: true,
@@ -62,8 +62,8 @@ class JDNetwork {
     //重试逻辑
     if (retryEnable) {
       _dio.interceptors.add(
-        JDRetryOnConnectionChangeInterceptor(
-          requestRetrier: JDDioConnectivityRequestRetrier(
+        RetryOnConnectionChangeInterceptor(
+          requestRetrier: DioConnectivityRequestRetrier(
             dio: _dio,
             connectivity: Connectivity(),
           ),
@@ -97,26 +97,26 @@ class JDNetwork {
   CancelToken cancelToken = CancelToken();
   Dio _dio;
 
-  factory JDNetwork() => _getInstance();
-  static JDNetwork _instance;
+  factory Network() => _getInstance();
+  static Network _instance;
 
   //是否是魔客
   static const bool _mock = true;
 
-  static JDNetwork _getInstance() {
-    return _instance ?? JDNetwork._();
+  static Network _getInstance() {
+    return _instance ?? Network._();
   }
 
   /// get请求
-  static Future<JDNetworkResponse> get(
+  static Future<NetworkResponse> get(
     String url, {
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       queryParameters: queryParameters,
       options: options,
@@ -127,16 +127,16 @@ class JDNetwork {
   }
 
   /// post请求
-  static Future<JDNetworkResponse> post(
+  static Future<NetworkResponse> post(
     String url, {
     dynamic data,
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       method: 'post',
       data: data,
@@ -149,16 +149,16 @@ class JDNetwork {
   }
 
   /// put请求
-  static Future<JDNetworkResponse> put(
+  static Future<NetworkResponse> put(
     String url, {
     dynamic data,
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       method: 'put',
       data: data,
@@ -171,16 +171,16 @@ class JDNetwork {
   }
 
   /// patch请求
-  static Future<JDNetworkResponse> patch(
+  static Future<NetworkResponse> patch(
     String url, {
     dynamic data,
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       method: 'patch',
       data: data,
@@ -193,16 +193,16 @@ class JDNetwork {
   }
 
   /// delete请求
-  static Future<JDNetworkResponse> delete(
+  static Future<NetworkResponse> delete(
     String url, {
     dynamic data,
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       method: 'delete',
       data: data,
@@ -215,16 +215,16 @@ class JDNetwork {
   }
 
   /// head请求
-  static Future<JDNetworkResponse> head(
+  static Future<NetworkResponse> head(
     String url, {
     dynamic data,
     Map<String, dynamic> queryParameters,
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
-    return await JDNetwork._getInstance()._fetch(
+    return await Network._getInstance()._fetch(
       url,
       method: 'head',
       data: data,
@@ -244,7 +244,7 @@ class JDNetwork {
     CancelToken cancelToken,
     dynamic data,
     Options options,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
     //进度
     ProgressCallback callback = (int count, int total) {
@@ -252,7 +252,7 @@ class JDNetwork {
         progressCallback(count, total);
       }
     };
-    Response response = await JDNetwork._getInstance()._dio.download(
+    Response response = await Network._getInstance()._dio.download(
         urlPath, savePath,
         queryParameters: queryParameters,
         cancelToken: cancelToken,
@@ -264,13 +264,13 @@ class JDNetwork {
 
   ///取消请求，会取消所有使用cancelToken的请求，慎用！！！，如需要取消某一个，可自行管理
   static void cancel() {
-    JDNetwork._getInstance().cancelToken.cancel('用户手动取消');
+    Network._getInstance().cancelToken.cancel('用户手动取消');
   }
 
   final Map<String, Function> _fetchTypes = {};
 
   ///请求处理
-  Future<JDNetworkResponse> _fetch(
+  Future<NetworkResponse> _fetch(
     String url, {
     String method = 'get',
     //data 可传FormData
@@ -279,7 +279,7 @@ class JDNetwork {
     Options options,
     bool cache = false,
     bool mock = false,
-    JDProgressCallback progressCallback,
+    ProgressCallback progressCallback,
   }) async {
     final ConnectivityResult connResult =
         await Connectivity().checkConnectivity();
@@ -316,7 +316,7 @@ class JDNetwork {
         });
         fullPath += '?' + params.join(',');
       }
-      r = await JDNetwork._getInstance()._dio.get<dynamic>(fullPath,
+      r = await Network._getInstance()._dio.get<dynamic>(fullPath,
           queryParameters: queryParameters,
           options: options,
           cancelToken: cancelToken,
@@ -334,6 +334,6 @@ class JDNetwork {
     //r.header 响应头
     //r.request 请求体
     //r.statusCode 状态码
-    return JDNetworkResponse(0, data: r.data);
+    return NetworkResponse(0, data: r.data);
   }
 }
