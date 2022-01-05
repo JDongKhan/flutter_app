@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_component/demo/sports/home/page/sports_home_video_horizontal_page.dart';
 import 'package:flutter_app_component/demo/sports/home/vm/player_manager.dart';
 import 'package:flutter_app_component/demo/thirdpary/player/player.dart';
-import 'package:get/get.dart';
 import 'package:jd_core/jd_core.dart';
 import 'package:lifecycle/lifecycle.dart';
 import 'package:video_player/video_player.dart';
 
 /// @author jd
 
-class SportsListPlayerController extends ChangeNotifier {
+class SportsListPlayerController {
   SportsListPlayerController({
     this.videoUrl,
     this.looping = true,
@@ -20,33 +18,31 @@ class SportsListPlayerController extends ChangeNotifier {
   VideoPlayerController videoPlayerController;
 
   void prepare() {
-    videoPlayerController = VideoPlayerController.asset(videoUrl);
-    videoPlayerController.setLooping(looping);
+    if (videoPlayerController == null) {
+      videoPlayerController = VideoPlayerController.asset(videoUrl);
+      videoPlayerController.setLooping(looping);
+    }
   }
 
   void play() {
     debugPrint('$videoUrl - 主动调用了play');
-    notifyListeners();
-    videoPlayerController.play();
+    videoPlayerController?.play();
   }
 
   void pause() {
     debugPrint('$videoUrl - 主动调用了pause');
-    videoPlayerController.pause();
-    notifyListeners();
+    videoPlayerController?.pause();
   }
 
   void reset() {
-    videoPlayerController.dispose();
-    videoPlayerController = null;
+    // videoPlayerController?.dispose();
+    // videoPlayerController = null;
   }
 
-  @override
   void dispose() {
     if (videoPlayerController != null) {
       videoPlayerController.dispose();
     }
-    super.dispose();
   }
 }
 
@@ -75,10 +71,10 @@ class _SportsListPlayerState extends State<SportsListPlayer>
   @override
   void initState() {
     _sportsListPlayerController = widget.sportsListPlayerController;
-    _sportsListPlayerController.addListener(_listener);
     _playing = widget.playing;
     debugPrint(
         'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-init playing:$_playing');
+    _play();
     super.initState();
   }
 
@@ -89,19 +85,44 @@ class _SportsListPlayerState extends State<SportsListPlayer>
 
   @override
   void didUpdateWidget(covariant SportsListPlayer oldWidget) {
+    _sportsListPlayerController = widget.sportsListPlayerController;
+    _playing = widget.playing;
+    debugPrint(
+        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-init playing:$_playing');
+    _play();
     super.didUpdateWidget(oldWidget);
   }
 
   void _listener() {
     debugPrint(
         'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-listener playing:$_playing c.playing:${_sportsListPlayerController.videoPlayerController?.value?.isPlaying}');
-    if (_playing !=
-        _sportsListPlayerController.videoPlayerController?.value?.isPlaying) {
+
+    bool p =
+        _sportsListPlayerController.videoPlayerController?.value?.isPlaying ??
+            false;
+
+    if (_playing != p) {
       setState(() {
         _playing =
             _sportsListPlayerController.videoPlayerController?.value?.isPlaying;
       });
     }
+  }
+
+  void _play() {
+    debugPrint(
+        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-playing:$_playing');
+    if (_playing && _visiable) {
+      _sportsListPlayerController.prepare();
+      _sportsListPlayerController.videoPlayerController.addListener(_listener);
+      playerManaer.to(_sportsListPlayerController);
+    }
+  }
+
+  void _pause() {
+    _sportsListPlayerController?.pause();
+    _sportsListPlayerController?.videoPlayerController
+        ?.removeListener(_listener);
   }
 
   @override
@@ -111,12 +132,6 @@ class _SportsListPlayerState extends State<SportsListPlayer>
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(
-        'SportsListPlayer[${widget.debugLabel}]-[${_sportsListPlayerController.videoUrl}]-playing:$_playing');
-    if (_playing && _visiable) {
-      playerManaer.sportsListPlayerController = _sportsListPlayerController;
-      _sportsListPlayerController.prepare();
-    }
     return _playing && _visiable
         ? Stack(
             children: [
@@ -129,33 +144,33 @@ class _SportsListPlayerState extends State<SportsListPlayer>
                       .initialize(),
                 ),
               ),
-              Container(
-                alignment: Alignment.bottomRight,
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _visiable = false;
-                    });
-                    Get.to(
-                      () => SportsHomeVideoHorizontalPage(
-                          _sportsListPlayerController.videoPlayerController),
-                      transition: Transition.noTransition,
-                    );
-                    // 不知道为啥下面的代码就导致转屏失败
-                    // Navigator.of(context).push(
-                    //   PageAnimationBuilder.noAnim(
-                    //       SportsHomeVideoHorizontalPage(
-                    //           _sportsListPlayerController
-                    //               .videoPlayerController),
-                    //       null),
-                    // );
-                  },
-                  icon: const Icon(
-                    Icons.fullscreen,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.bottomRight,
+              //   child: IconButton(
+              //     onPressed: () {
+              //       setState(() {
+              //         _visiable = false;
+              //       });
+              //       Get.to(
+              //         () => SportsHomeVideoHorizontalPage(
+              //             _sportsListPlayerController.videoPlayerController),
+              //         transition: Transition.noTransition,
+              //       );
+              //       // 不知道为啥下面的代码就导致转屏失败
+              //       // Navigator.of(context).push(
+              //       //   PageAnimationBuilder.noAnim(
+              //       //       SportsHomeVideoHorizontalPage(
+              //       //           _sportsListPlayerController
+              //       //               .videoPlayerController),
+              //       //       null),
+              //       // );
+              //     },
+              //     icon: const Icon(
+              //       Icons.fullscreen,
+              //       color: Colors.white,
+              //     ),
+              //   ),
+              // ),
             ],
           )
         : Container(
@@ -173,6 +188,9 @@ class _SportsListPlayerState extends State<SportsListPlayer>
                     size: 40,
                   ),
                   onPressed: () {
+                    _sportsListPlayerController.prepare();
+                    _sportsListPlayerController.videoPlayerController
+                        .addListener(_listener);
                     playerManaer.to(_sportsListPlayerController);
                     // _playerController.play();
                   },
@@ -189,6 +207,7 @@ class _SportsListPlayerState extends State<SportsListPlayer>
     } else if (event == LifecycleEvent.visible) {
       setState(() {
         _visiable = true;
+        _play();
       });
     } else if (event == LifecycleEvent.active) {
       _visiable = true;

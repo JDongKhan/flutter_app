@@ -7,15 +7,17 @@ PlayerManaer playerManaer = PlayerManaer();
 class PlayerManaer {
   SportsListPlayerController sportsListPlayerController;
   void to(SportsListPlayerController playerController) {
-    try {
-      if (sportsListPlayerController != null) {
-        sportsListPlayerController.pause();
-        sportsListPlayerController.reset();
+    if (sportsListPlayerController != playerController) {
+      try {
+        if (sportsListPlayerController != null) {
+          sportsListPlayerController.pause();
+          sportsListPlayerController.reset();
+        }
+      } catch (e) {
+        print(e.toString());
       }
-    } catch (e) {
-      print(e.toString());
+      sportsListPlayerController = playerController;
+      sportsListPlayerController.play();
     }
-    sportsListPlayerController = playerController;
-    sportsListPlayerController.play();
   }
 }
